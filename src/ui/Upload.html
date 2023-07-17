@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <!-- Open Sans Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
+    <!-- FontAweSome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- jquery -->
+    <script src="https://code.jquery.com/jquery-3.7.0.js" integrity="sha256-JlqSTELeR4TLqP0OG9dxM7yDPqX1ox/HfgiSLBj8+kM=" crossorigin="anonymous"></script>
+    <!-- Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
+    <!-- Styles.css -->
+    <link rel="stylesheet" href="css/stylesUpload.css">
+    <title>HappiNovel</title>
+</head>
+<body>
+    <!-- Navigator bar -->
+    <nav class="navbar navbar-expand-lg bg-transparent">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">
+                <img class="rounded-2" src="/Image/logo.png" alt="Bootstrap" width="50" height="50">
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <b><a class="nav-link" href="#">Quản lý user</a></b>
+                    </li>
+                    <li class="nav-item">
+                        <b><a class="nav-link" href="#">Kho sách</a></b>
+                    </li>
+                    <li class="nav-item">
+                        <b><a class="nav-link" href="#">Quản lý báo cáo</a></b>
+                    </li>
+                    <li class="nav-item">
+                        <b><a class="nav-link" href="#">Duyệt sách</a></b>
+                    </li>
+                </ul>
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#"><i class="fa-regular fa-user-circle fa-2xl"></i></a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    
+    <!-- Cover image -->
+    <div class="container"">
+        <img width="100%" src="./Image/cover.png" alt="Ảnh bìa" style="margin-bottom: 20px;">
+    </div>
+
+    <!-- Sections -->
+    <div class="container">
+        <div class="row">
+            <div class="col-md-3">
+                <div class="flex text-center rounded-2 section-title" style="margin-bottom: 20px;">
+                    <span><i class="fa-solid fa-book"></i></span> Sách của bạn</span>
+                </div>
+
+                <div id="accordion">
+                    <!-- Book 1 -->
+                    <div class="panel list-group add-bottom-space rounded-2">
+                        <a href="#book1" class="bg-book text-white list-group-item" data-bs-toggle="collapse" data-bs-parent="#accordion">Book 1<span class="float-end"><i class="fa-solid fa-caret-down"></i></span></a>
+                        <div id="book1" class="collapse">
+                            <div class="list-group">
+                            <!-- Volume 1.1 -->
+                                <a href="#volume1_1" class="bg-volume list-group-item collapsed" data-bs-toggle="collapse" data-bs-parent="#book1">Volume 1.1<span class="float-end"><i class="fa-solid fa-caret-down"></i></span></a>
+                                <div id="volume1_1" class="collapse">
+                                    <div class="list-group">
+                                    <!-- Chapter 1.1.1 -->
+                                        <a href="#chapter1_1_1" class="list-group-item collapsed" data-bs-toggle="collapse" data-bs-parent="#volume1_1">
+                                            <span class=""><i class="fa-solid fa-caret-right"></i></span> Chapter 1.1.1
+                                        </a>
+                                        <div id="chapter1_1_1" class="collapse">
+                                            <div class="list-group-item">
+                                                Lorem ipsum..
+                                            </div>
+                                        </div>
+                                    <!-- Chapter 1.1.2 -->
+                                        <a href="#chapter1_1_2" class="list-group-item collapsed" data-bs-toggle="collapse" data-bs-parent="#volume1_1">
+                                            <span class=""><i class="fa-solid fa-caret-right"></i></span> Chapter 1.1.2
+                                        </a>
+                                        <div id="chapter1_1_2" class="collapse">
+                                            <div class="list-group-item">
+                                                Lorem ipsum..
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- Volume 1.2 -->
+                                <a href="#volume1_2" class="bg-volume list-group-item collapsed" data-bs-toggle="collapse" data-bs-parent="#book1">Volume 1.2<span class="float-end"><i class="fa-solid fa-caret-down"></i></span></a>
+                                <div id="volume1_2" class="collapse">
+                                    <div class="list-group">
+                                        <!-- Chapter 1.2.1 -->
+                                        <a href="#chapter1_2_1" class="list-group-item collapsed" data-bs-toggle="collapse" data-bs-parent="#volume1_2">
+                                            <span class=""><i class="fa-solid fa-caret-right"></i></span> Chapter 1.2.1
+                                        </a>
+                                        <div id="chapter1_2_1" class="collapse">
+                                            <div class="list-group-item">
+                                                Lorem ipsum..
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                  
+                    <!-- Book 2 -->
+                    <div class="panel list-group add-bottom-space">
+                        <a href="#book2" class="bg-book text-white  list-group-item collapsed" data-bs-toggle="collapse" data-bs-parent="#accordion">
+                            Book 2<span class="float-end"><i class="fa-solid fa-caret-down"></i></span>
+                        </a>
+                        <div id="book2" class="collapse">
+                            <div class="list-group">
+                            <!-- Volume 2.1 -->
+                                <a href="#volume2_1" class="bg-volume list-group-item collapsed" data-bs-toggle="collapse" data-bs-parent="#book2">
+                                    Volume 2.1<span class="float-end"><i class="fa-solid fa-caret-down"></i></span>
+                                </a>
+                                <div id="volume2_1" class="collapse">
+                                    <div class="list-group">
+                                        <!-- Chapter 2.1.1 -->
+                                        <a href="#chapter2_1_1" class="list-group-item collapsed" data-bs-toggle="collapse" data-bs-parent="#volume2_1">
+                                            <span class=""><i class="fa-solid fa-caret-right"></i></span> Chapter 2.1.1
+                                        </a>
+                                        <div id="chapter2_1_1" class="collapse">
+                                            <div class="list-group-item">
+                                                Lorem ipsum..
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                  
+                    <!-- Book 3 -->
+                    <div class="panel list-group add-bottom-space">
+                        <a href="#book3" class="bg-book text-white list-group-item collapsed" data-bs-toggle="collapse" data-bs-parent="#accordion">
+                            Book 3<span class="float-end"><i class="fa-solid fa-caret-down"></i></span>
+                        </a>
+                        <div id="book3" class="collapse">
+                            <div class="list-group">
+                                <!-- Volume 3.1 -->
+                                <a href="#volume3_1" class="bg-volume list-group-item collapsed" data-bs-toggle="collapse" data-bs-parent="#book3">
+                                    Volume 3.1<span class="float-end"><i class="fa-solid fa-caret-down"></i></span>
+                                </a>
+                                <div id="volume3_1" class="collapse">
+                                    <div class="list-group">
+                                        <!-- Chapter 3.1.1 -->
+                                        <a href="#chapter3_1_1" class="list-group-item collapsed" data-bs-toggle="collapse" data-bs-parent="#volume3_1">
+                                            <span class=""><i class="fa-solid fa-caret-right"></i></span> Chapter 3.1.1
+                                        </a>
+                                        <div id="chapter3_1_1" class="collapse">
+                                            <div class="list-group-item">
+                                                Lorem ipsum..
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-9">
+                <div class="flex text-center rounded-2 section-title" style="margin-bottom: 20px;">
+                    <span><i class="fa-solid fa-book-open"></i></span> Thông tin sách</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="fixed-bottom" id="footer">
+        <div class="container text-center"">
+            <div class="row align-items-center">
+                <div class="col-md-6">
+                    <span>© 2023 - HappiNovel</span>
+                </div>
+                <div class="col-md-6">
+                    <span>Liên hệ: <a href="">contact@slavesteam.vn</a></span>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+</body>
+</html>
+
