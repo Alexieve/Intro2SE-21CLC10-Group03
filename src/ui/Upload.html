@@ -16,6 +16,8 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
     <!-- Styles.css -->
     <link rel="stylesheet" href="css/stylesUpload.css">
+    <!-- Tiny ediotr -->
+    <script src="https://cdn.tiny.cloud/1/czhzadznx3qb12g2i4971xbviqsshfv65cbyuvs95fsi5021/tinymce/6/tinymce.min.js" referrerpolicy="origin"></script>
     <title>HappiNovel</title>
 </head>
 <body>
@@ -30,22 +32,22 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                    <li class="nav-item">
-                        <b><a class="nav-link" href="#">Quản lý user</a></b>
+                    <li class="nav-item rounded-3">
+                        <b><a class="nav-link" href="#">Thể loại</a></b>
                     </li>
-                    <li class="nav-item">
-                        <b><a class="nav-link" href="#">Kho sách</a></b>
+                    <li class="nav-item rounded-3">
+                        <b><a class="nav-link" href="#">Sách của bạn</a></b>
                     </li>
-                    <li class="nav-item">
-                        <b><a class="nav-link" href="#">Quản lý báo cáo</a></b>
-                    </li>
-                    <li class="nav-item">
-                        <b><a class="nav-link" href="#">Duyệt sách</a></b>
+                    <li class="nav-item rounded-3">
+                        <b><a class="nav-link" href="#">Viết sách</a></b>
                     </li>
                 </ul>
+                <form class="d-flex " role="search">
+                    <input class="form-control search-form me-2" type="text" placeholder="Tìm kiếm..." aria-label="Search">
+                </form>
                 <ul class="navbar-nav">
-                    <li class="nav-item">
-                        <a class="nav-link" href="#"><i class="fa-regular fa-user-circle fa-2xl"></i></a>
+                    <li class="nav-item rounded-3">
+                        <b><a class="nav-link" href="#">Đăng nhập</a></b>
                     </li>
                 </ul>
             </div>
@@ -60,9 +62,10 @@
     <!-- Sections -->
     <div class="container">
         <div class="row">
+            <!-- Book menu -->
             <div class="col-md-3">
-                <div class="flex text-center rounded-2 section-title" style="margin-bottom: 20px;">
-                    <span><i class="fa-solid fa-book"></i></span> Sách của bạn</span>
+                <div class="d-flex justify-content-center rounded-2 section-title" style="margin-bottom: 20px;">
+                    <span><i class="fa-solid fa-book"></i> Sách của bạn</span>
                 </div>
 
                 <div id="accordion">
@@ -171,10 +174,210 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-9">
-                <div class="flex text-center rounded-2 section-title" style="margin-bottom: 20px;">
-                    <span><i class="fa-solid fa-book-open"></i></span> Thông tin sách</span>
+
+            <!-- Infor menu -->
+            <div class="col-md-9 rounded-1">
+                <div class="d-flex justify-content-center rounded-2 section-title" style="margin-bottom: 20px;">
+                    <span><i class="fa-solid fa-book-open"></i>   Thông tin sách</span>
                 </div>
+
+                <!-- Tên sách -->
+                <div class="row mb-3">
+                    <div class="col-md-2 text-end align-self-md-center">
+                        <b>Tên sách <span style="color: red;">*</span></b>
+                    </div>
+                    <div class="col-md-10">
+                        <input type="text" class="form-control" placeholder="Book name">
+                    </div>
+                </div>
+
+                <!-- Tác giả -->
+                <div class="row mb-3">
+                    <div class="col-md-2 text-end align-self-md-center">
+                        <b>Tác giả <span style="color: red;">*</span></b>
+                    </div>
+                    <div class="col-md-10">
+                        <input type="text" class="form-control" placeholder="Author name">
+                    </div>
+                </div>
+                
+                <!-- Thể loại -->
+                <div class="row mb-3">
+                    <div class="col-md-2 text-end">
+                        <b>Thể loại <span style="color: red;">*</span></b>
+                    </div>
+                    <div class="col-md-10">
+                        <div class="container">
+                            <div class="row mb-3">
+                                <div class="col-3">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" id="check1" name="option1" value="something" checked>
+                                        <label class="form-check-label" for="check1">Option 1</label>
+                                    </div>
+                                </div>
+                                <div class="col-3">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" id="check2" name="option2" value="something">
+                                        <label class="form-check-label" for="check2">Option 2</label>
+                                    </div>
+                                </div>
+                                <div class="col-3">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" id="check3" name="option3" value="something">
+                                        <label class="form-check-label" for="check3">Option 3</label>
+                                    </div>
+                                </div>
+                                <div class="col-3">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" id="check4" name="option4" value="something">
+                                        <label class="form-check-label" for="check4">Option 4</label>
+                                    </div>
+                                </div>
+                            </div>
+                          
+                            <div class="row mb-3">
+                                <div class="col-3">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" id="check1" name="option1" value="something" checked>
+                                        <label class="form-check-label" for="check1">Option 1</label>
+                                    </div>
+                                </div>
+                                <div class="col-3">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" id="check2" name="option2" value="something">
+                                        <label class="form-check-label" for="check2">Option 2</label>
+                                    </div>
+                                </div>
+                                <div class="col-3">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" id="check3" name="option3" value="something">
+                                        <label class="form-check-label" for="check3">Option 3</label>
+                                    </div>
+                                </div>
+                                <div class="col-3">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" id="check4" name="option4" value="something">
+                                        <label class="form-check-label" for="check4">Option 4</label>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="row mb-3">
+                                <div class="col-3">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" id="check1" name="option1" value="something" checked>
+                                        <label class="form-check-label" for="check1">Option 1</label>
+                                    </div>
+                                </div>
+                                <div class="col-3">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" id="check2" name="option2" value="something">
+                                        <label class="form-check-label" for="check2">Option 2</label>
+                                    </div>
+                                </div>
+                                <div class="col-3">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" id="check3" name="option3" value="something">
+                                        <label class="form-check-label" for="check3">Option 3</label>
+                                    </div>
+                                </div>
+                                <div class="col-3">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" id="check4" name="option4" value="something">
+                                        <label class="form-check-label" for="check4">Option 4</label>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="row">
+                                <div class="col-3">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" id="check1" name="option1" value="something" checked>
+                                        <label class="form-check-label" for="check1">Option 1</label>
+                                    </div>
+                                </div>
+                                <div class="col-3">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" id="check2" name="option2" value="something">
+                                        <label class="form-check-label" for="check2">Option 2</label>
+                                    </div>
+                                </div>
+                                <div class="col-3">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" id="check3" name="option3" value="something">
+                                        <label class="form-check-label" for="check3">Option 3</label>
+                                    </div>
+                                </div>
+                                <div class="col-3">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" id="check4" name="option4" value="something">
+                                        <label class="form-check-label" for="check4">Option 4</label>
+                                    </div>
+                                </div>
+                            </div>
+                          
+                            <!-- Repeat rows as needed -->
+                          </div>
+                          
+                    </div>
+                </div>
+
+                <!-- Tình trạng & Chọn ảnh -->
+                <div class="row mb-3">
+                    <div class="col-md-2 text-end mt-2">
+                        <b>Tình trạng <span style="color: red;">*</span></b>
+                    </div>
+                    <div class="col-md-3">
+                        <select class="form-select">
+                            <option>Đang tiến hành</option>
+                            <option>Tạm ngưng </option>
+                            <option>Đã hoàn thành </option>
+                        </select>
+                    </div>
+                    <div class="col-md-2 text-end mt-2">
+                        <b>Ảnh bìa <span style="color: red;">*</span></b>
+                    </div>
+                    <div class="col-md-2">
+                        <button type="button" class="btn btn-success">Chọn ảnh</button>
+                    </div>
+                    <div class="col-md-3">
+                        <img width="50%" src="./Image/book cover.jpg" alt="Ảnh bìa">
+                    </div>
+                </div>
+
+                <!-- Tóm tắt -->
+                <div class="row mb-3">
+                    <div class="col-md-2 text-end mt-2">
+                        <b>Tóm tắt <span style="color: red;">*</span></b>
+                    </div>
+                    <div class="col-md-10">
+                        <textarea>Welcome to HappiNovel!</textarea>
+                        <script>
+                            tinymce.init({
+                                selector: 'textarea'
+                            });
+                        </script>
+                    </div>
+                </div>
+
+                <!-- Chú thích thêm -->
+                <div class="row mb-3">
+                    <div class="col-md-2 text-end mt-2">
+                        <b>Chú thích thêm</b>
+                    </div>
+                    <div class="col-md-10">
+                        <textarea>Welcome to HappiNovel!</textarea>
+                        <script>
+                            tinymce.init({
+                                selector: 'textarea'
+                            });
+                        </script>
+                    </div>
+                </div>
+                <div class="row mb-3 float-end me-2">
+                    <button type="button" class="btn btn-success">Đăng sách</button>
+                </div>
+
             </div>
         </div>
     </div>

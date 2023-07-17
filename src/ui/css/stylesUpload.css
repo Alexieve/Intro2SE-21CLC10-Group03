@@ -1,8 +1,9 @@
 body {
     font-family: 'Open Sans', sans-serif;
+    background-color: #f6f7f9;
 }
 nav {
-    width: 1280px;
+    max-width: 1280px;
     margin: auto;
 }
 .nav-item {
@@ -28,9 +29,8 @@ nav {
 .navbar-nav .nav-item:hover .nav-link {
     color:#36a189;
 }
-.form-control {
+.search-form {
     background-color: lightgrey;
-    border-radius: 20;
 }
 .section-title {
     background-color: lightgray;
@@ -50,4 +50,7 @@ html {
 }
 .add-bottom-space {
     margin-bottom: 10px;
+}
+.sec-box {
+    background-color: #fff;
 }
