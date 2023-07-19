@@ -1,0 +1,20 @@
+.button-top-top {
+    display: inline;
+    white-space: nowrap;
+    height: fit-content;
+    z-index: 9999;
+    bottom: 10px; /* Adjust the top position value as needed */
+    right: 0px;
+    position: fixed;
+    padding: 10px 10px;
+    transform: translateX(-50%); /* Center the button horizontally */
+}
+.button-to-top {
+    background-color: #0000009a;
+    border-color: #00B591;
+    color: #ffffff;
+}
+
+.button-to-top:hover {
+    color: #ffffff
+}
