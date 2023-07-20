@@ -1,6 +1,14 @@
+.history{
+	display: flex;
+      justify-content: center;
+      align-items: center;
+	
+}
+
+
 .all-his{
     
-
+	
     max-width : 1280px;
     /* Nếu ông muốn max-width hoàn tòn thì dùng cái này */
     /* margin-left: calc((100% - 1280px) / 2);
@@ -35,10 +43,14 @@
 }
 
 .fixedd-button {
+	display: inline-block;
+	white-space: nowrap;
 	z-index: 9999;
 	position: absolute;
-	top: 270px;
-	right: 400px; /* Adjust the distance from the right as needed */
+    top: 290px;
+    left: calc(50% + 190px); /* 10px to the right of the main frame's center */
+    transform: translate(-50%, -50%);
+    padding: 10px 20px; /* Adjust padding as needed *//* Adjust the distance from the right as needed */
 }
 .all-his body {
 	 background-color: #fff;
@@ -441,7 +453,7 @@
 	 margin-bottom: 80px;
 	 position: relative;
 	 width: 1000px;
-	 top: -20px;
+	 top: -10px;
 	
 }
  .all-his .private-tabs header .section-name {
