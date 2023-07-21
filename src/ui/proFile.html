@@ -27,7 +27,7 @@
             href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&amp;display=swap"
             data-tag="font" />
       <link rel="stylesheet" href="./css/styleProfile.css">
-      
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css">
       <!-- Open Sans Font -->
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
     <!-- FontAweSome -->
@@ -46,11 +46,9 @@
 
 <body>
       
-      <button href=""
-            class="button-to-top button-top-top "
-            ><i class="fas fa-angle-double-up"></i>&nbsp;
-            <!-- Back to top button -->
-      </button>
+      <button class="btn btn-dark back-to-top" onclick="scrollToTop()">
+            <i class="fas fa-angle-double-up"></i>
+          </button>
       <nav class="navbar navbar-expand-lg bg-transparent">
             <div class="container-fluid inler ">
                 <a class="navbar-brand" href="#">
@@ -97,11 +95,11 @@
                                           <div class="fourone-ratio">
                                                 <!-- Ảnh bìa -->
                                                 <div class="content img-in-ratio" 
-                                                ><img src="./Image/BiaWeb.png " id="coverImage">
+                                                ><img src="./Image/941898.jpg " id="coverImage">
                                                 </div>
                                           
                                                 <button id="uploadButton" href=""
-                                                            class="button to-contact button-daden button-anh-bia "  >                                      
+                                                            class="buttonn to-contact button-daden button-anh-bia "  >                                      
                                                             <label for="imageInput" class="custom-button"><i class="fas fa-camera"></i>
                                                                   <input type="file" class="form-control" id="coverImageInput" accept="image/*" style="display: none;">
                                                                   <span>Chỉnh sửa ảnh bìa</span>
@@ -120,13 +118,12 @@
                                                       <!-- Ảnh đại diện -->
                                                       <!-- Cần cắt hình ảnh thành hình vuông -->
 
-                                                      <img src="./Image/amnesty-logo-candle-wire-01-scaled.jpg" />
+                                                      <img src="./Image/amnesty-logo-candle-wire-01-scaled.jpg" id="avaImage" />
                                                 </div>
-                                                <button href=""
-                                                            class="button to-contact button-nigga button-anh-dai-dien ">
+                                                <button href="" id="uploadButtonAva"
+                                                            class="buttonn to-contact button-nigga button-anh-dai-dien ">
                                                             <label for="imageInput" class="custom-button"><i class="fas fa-camera"></i>
-                                                                  <input type="file" id="imageInput" accept="image/*" style="display: none;">
-                                                                </label>
+                                                            <input type="file" class="form-control" id="avaImageInput" accept="image/*" style="display: none;">                                                                </label>
                                                       </button>
                                           </div>
 
@@ -161,11 +158,52 @@
                                                       </div>
                                                 </div>
                                           </div>
-                                          <div class="profile-function at-desktop none block-m">
+                                          <div class="profile-function at-desktop none block-m  ">
                                                 <button href=""
-                                                      class="button to-contact button-green big-link move-up-button"
-                                                      onclick="show('popup')">
+                                                      class="buttonn to-contact button-green big-link move-up-button" data-bs-toggle="modal" data-bs-target="#editModal"
+                                                     >
                                                       Cài đặt tài khoản</button>
+                                                      <div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="editModalLabel" aria-hidden="true">
+                                                            <div class="modal-dialog">
+                                                              <div class="modal-content">
+                                                                <div class="modal-header">
+                                                                  <h5 class="modal-title" style="font-weight: bold; font-size: 24px;" id="editModalLabel">Edit Information</h5>
+                                                                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                                </div>
+                                                                <div class="modal-body">
+                                                                  <!-- Input fields for the four rows -->
+                                                                  <div class="mb-3">
+                                                                    <label for="usernameInput" class="form-label" style="font-size: 20px;">Username</label>
+                                                                    <input type="text" class="form-control" id="usernameInput" 
+                                                                    style="margin-bottom: 20px;font-size: 20px; margin-top: 20px; height: 50px">
+                                                                  </div>
+                                                                  <div class="mb-3">
+                                                                    <label for="oldPasswordInput" class="form-label"  style="font-size: 20px;">Old Password</label>
+                                                                    <input type="password" class="form-control" id="oldPasswordInput"
+                                                                    style="margin-bottom: 20px;font-size: 20px; margin-top: 20px; height: 50px">
+                                                                    
+                                                                  </div>
+                                                                  <div class="mb-3">
+                                                                    <label for="newPasswordInput" class="form-label"  style="font-size: 20px;">New Password</label>
+                                                                    <input type="password" class="form-control" id="newPasswordInput"
+                                                                    style="margin-bottom: 20px;font-size: 20px; margin-top: 20px; height: 50px">
+                                                                  
+                                                                  </div>
+                                                                  <div class="mb-3">
+                                                                    <label for="confirmPasswordInput" class="form-label"  style="font-size: 20px;">Confirm Password</label>
+                                                                    <input type="password" class="form-control" id="confirmPasswordInput"
+                                                                    style="margin-bottom: 20px;font-size: 20px; margin-top: 20px; height: 50px">
+                                                            
+                                                                  </div>
+                                                                </div>
+                                                                <div class="modal-footer">
+                                                                  <!-- Save changes button -->
+                                                                  <button type="button" class="btn btn-primary " >Save Changes</button>
+                                                                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                                                </div>
+                                                              </div>
+                                                            </div>
+                                                          </div>
                                           </div>
                                           <!-- <button href="#" onclick="show('popup')">Button</button> -->
                                           <!-- This is what will be included inside the popup -->
@@ -220,7 +258,7 @@
                                                       </p>
                                                       <!-- Button to toggle edit mode -->
                                                       <button id="editButton" href=""
-                                                            class="button to-contact button-blu button-tieu-su "
+                                                            class="buttonn to-contact button-blu button-tieu-su "
                                                             onclick="show('popup')">
                                                             Chỉnh tiểu sử</button>                              
 
@@ -230,19 +268,19 @@
                                                       <span class="info-name"><i
                                                                   class="icon-more-contrast fas fa-calendar "></i> Ngày
                                                             sinh:
-                                                      </span><span id="frameContent2" class="info-value  ">10/11/1991</span>
+                                                      </span><span contenteditable="false" class="info-value  editable-frame ">10/11/1991</span>
                                                 </div>
                                                 <div class="profile-info-item">
                                                       <span class="info-name"><i
                                                                   class="icon-more-contrast fas fa-pencil-alt"></i> Nghề
                                                             nghiệp:
-                                                      </span><span id="frameContent2" class="info-value">Giáo viên Anh ngữ và Hoa ngữ
+                                                      </span><span contenteditable="false" class="info-value  editable-frame">Giáo viên Anh ngữ và Hoa ngữ
                                                       </span>
                                                 </div>
                                                 <div class="profile-info-item">
                                                       <span class="info-name"><i
                                                                   class="icon-more-contrast fas fa-star"></i> Sở thích:
-                                                      </span><span id="frameContent2" class="info-value">Nghiên cứu ngôn ngữ, viết lách,
+                                                      </span><span contenteditable="false" class="info-value  editable-frame">Nghiên cứu ngôn ngữ, viết lách,
                                                             chụp
                                                             ảnh, thiết kế</span>
                                                 </div>
@@ -254,7 +292,7 @@
                                                       </span><span class="info-value">18/07/2018</span>
                                                 </div>
                                                 <button id="editButton2" href=""
-                                                      class="button to-contact button-orange button-sua-thong-tin "
+                                                      class="buttonn to-contact button-orange button-sua-thong-tin "
                                                       onclick="show('popup')">
                                                       Sửa thông tin</button>
                                           </main>
@@ -670,7 +708,6 @@
             </div>
       </footer>
 
-      
       <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
       <script>
             // Function to toggle the editable state of the content
@@ -691,22 +728,29 @@
             // Add click event listener to the button
             document.getElementById("editButton").addEventListener("click", toggleEditable);
 
-            function toggleEditable2() {
-                  var frameContent2 = document.getElementById("frameContent2");
+            function toggleEditableAll() {
+                  var frames = document.getElementsByClassName("editable-frame");
                   var editButton2 = document.getElementById("editButton2");
 
-                  // Toggle the contenteditable attribute
-                  if (frameContent2.getAttribute("contenteditable") === "true") {
-                        frameContent2.setAttribute("contenteditable", "false");
-                        editButton2.textContent = "Sửa thông tin";
+                  // Toggle the contenteditable attribute for each frame
+                  for (var i = 0; i < frames.length; i++) {
+                  if (frames[i].getAttribute("contenteditable") === "true") {
+                  frames[i].setAttribute("contenteditable", "false");
                   } else {
-                        frameContent2.setAttribute("contenteditable", "true");
-                        editButton2.textContent = "Lưu thông tin";
+                  frames[i].setAttribute("contenteditable", "true");
+                  }
+                  }
+
+                  // Toggle the text of the button
+                  if (editButton2.textContent === "Lưu thông tin") {
+                  editButton2.textContent = "Sửa thông tin";
+                  } else {
+                  editButton2.textContent = "Lưu thông tin";
                   }
             }
 
             // Add click event listener to the button
-            document.getElementById("editButton2").addEventListener("click", toggleEditable2);
+            document.getElementById("editButton2").addEventListener("click", toggleEditableAll);
 
             // Function to handle the image upload
             function handleImageUpload(event) {
@@ -730,7 +774,51 @@
 
             // Add change event listener to the image input
             document.getElementById("coverImageInput").addEventListener("change", handleImageUpload);
+
+            function handleImageUpload2(event) {
+                  const file = event.target.files[0];
+                  const reader = new FileReader();
+
+                  reader.onload = function() {
+                  const avaImage = document.getElementById("avaImage");
+                  avaImage.src = reader.result;
+                  };
+
+                  if (file) {
+                  reader.readAsDataURL(file);
+                  }
+            }
+
+            // Add click event listener to the upload button
+            document.getElementById("uploadButtonAva").addEventListener("click", function() {
+                  document.getElementById("avaImageInput").click();
+            });
+
+            // Add change event listener to the image input
+            document.getElementById("avaImageInput").addEventListener("change", handleImageUpload2);
+            
+            
       </script>
+      <script>
+            // Function to scroll to the top of the page smoothly
+            function scrollToTop() {
+              window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+              });
+            }
+        
+            // Show the back-to-top button when the user scrolls down
+            window.addEventListener('scroll', function() {
+              var button = document.querySelector('.back-to-top');
+              if (window.scrollY > 300) {
+                button.style.display = 'block';
+              } else {
+                button.style.display = 'none';
+              }
+            });
+          </script>
+      
 </body>
 
 
