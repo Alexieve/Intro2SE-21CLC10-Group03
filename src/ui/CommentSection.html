@@ -1,137 +1,167 @@
 <!DOCTYPE html>
 <html lang="vi">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <!-- OpenSans Font -->
-    <link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
-    <!-- FontAweSome -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <!-- jquery -->
-    <script src="https://code.jquery.com/jquery-3.7.0.js" integrity="sha256-JlqSTELeR4TLqP0OG9dxM7yDPqX1ox/HfgiSLBj8+kM=" crossorigin="anonymous"></script>
-    <!-- Bootstrap -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
-    <!-- Styles.css -->
-    <link rel="stylesheet" href="./css/stylesUpload.css">
-    <!-- Tiny ediotr -->
-    <script src="https://cdn.tiny.cloud/1/czhzadznx3qb12g2i4971xbviqsshfv65cbyuvs95fsi5021/tinymce/6/tinymce.min.js" referrerpolicy="origin"></script>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
+	<title>Bootstrap Comment Design</title>
+	<!-- Bootstrap CSS -->
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.3/css/bootstrap.min.css">
 
-    <title>Full Page Background</title>
-    <!-- Link Bootstrap CSS -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css">
+	<style>
+    body {
+      font-family: 'Open Sans', sans-serif;
+      font-size: 16px;
+      font-weight: 400;
+    }
+		.comment {
+			margin-bottom: 20px;
+		}
+		.comment-avatar {
+			width: 60px;
+			height: 60px;
+			border-radius: 50%;
+			margin-right: 10px;
+		}
+		.comment-info {
+			margin-bottom: 5px;
+		}
+		.comment-user {
+			font-weight: bold;
+			margin-right: 5px;
+		}
+		.comment-role {
+			font-size: 12px;
+			color: #999;
+		}
+		.comment-date {
+			font-size: 12px;
+			color: #999;
+			margin-left: 5px;
+		}
+		.comment-content {
+			margin-top: 5px;
+		}
+		.reply-link {
+			font-size: 12px;
+			color: #999;
+			margin-left: 10px;
+		}
+		.report-link {
+			font-size: 12px;
+			color: #999;
+			margin-left: 10px;
+		}
+		.nested-comments {
+			margin-left: 50px;
+		}
+		.comment-form {
+			margin-top: 50px;
+			border-top: 1px solid #ddd;
+			padding-top: 20px;
+		}
+		.comment-form textarea {
+			height: 100px;
+			resize: none;
+		}
+		.comment-form button {
+			background-color: transparent;
+			border: 1px solid #007bff;
+			color: #007bff;
+			padding: 5px 10px;
+			border-radius: 5px;
+			transition: all 0.3s ease-in-out;
+		}
+		.comment-form button:hover {
+			background-color: #007bff;
+			color: #fff;
+			cursor: pointer;
+		}
+	</style>
 </head>
 <body>
-    <style>
-        /* Custom styles for the comment section */
-        .comment-container {
-          max-width: 600px;
-          margin: 0 auto;
-          border: 2px solid #ccc; /* Custom border for the comment container */
-          padding: 10px;
-        }
-    
-        .comment-title {
-          font-size: 24px;
-          border-bottom: 2px solid #000;
-          padding: 10px;
-        }
-    
-        .user-avatar {
-          width: 50px;
-          height: 50px;
-          border-radius: 50%;
-          /* Add any additional custom styling for the avatar */
-        }
-    
-        .user-info {
-          font-size: 14px;
-          border: 1px solid #ccc;
-          padding: 5px 10px;
-          margin-top: 5px;
-          /* Add any additional custom styling for the user info */
-        }
-    
-        .comment-input {
-          resize: vertical;
-        }
-    
-        .comment-button {
-          font-size: 16px;
-          /* Add any additional custom styling for the comment button */
-        }
-    
-        .options-button {
-          cursor: pointer;
-          float: right;
-          margin-top: 5px;
-        }
-    
-        .options-menu {
-          display: none;
-          position: absolute;
-          top: 30px;
-          right: 60px; /* Adjust the position to show the options menu next to the options-button */
-          background-color: #fff;
-          border: 1px solid #ccc;
-          padding: 5px;
-        }
-    
-        .options-menu li {
-          cursor: pointer;
-        }
-    
-        .comment-group:hover .options-menu {
-          display: block;
-        }
-    
-        .comment-group {
-          position: relative;
-          margin-bottom: 15px;
-        }
-    
-        /* Custom styles for the comment button */
-        .comment-button {
-          position: absolute;
-          bottom: 5px;
-          right: 10px;
-          /* Add any additional custom styling for the comment button */
-        }
-      </style>
-    </head>
-    <body>
-      <div class="container comment-container">
-        <div class="comment-title">Comments (20)</div>
-        <div class="comment-group">
-          <div class="user-avatar bg-primary"></div>
-          <div>
-            <div class="user-info">John Doe - Moderator</div>
-            <textarea class="form-control comment-input" rows="2"></textarea>
-            <button class="btn btn-primary mt-2 comment-button">Post Comment</button>
-          </div>
-          <div class="options-button">...</div>
-          <ul class="options-menu">
-            <li>Edit</li>
-            <li>Delete</li>
-            <li>Report</li>
-          </ul>
-        </div>
-        <!-- Example Comment -->
-        <div class="comment-group">
-          <div class="user-avatar bg-secondary"></div>
-          <div>
-            <div class="user-info">Jane Smith - User</div>
-            <div class="comment-text">This is an example comment by Jane Smith.</div>
-          </div>
-          <div class="options-button">...</div>
-          <ul class="options-menu">
-            <li>Edit</li>
-            <li>Delete</li>
-            <li>Report</li>
-          </ul>
-        </div>
-      </div>
+	<div class="container">
+		<div class="row">
+			<div class="col-md-12">
+				<h2>Comments (4)</h2>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-12">
+				<div class="card">
+					<div class="card-body">
+						<div class="comment">
+							<img src="./Image/ava1.png" alt="Avatar" class="comment-avatar float-left">
+							<div class="comment-info">
+								<span class="comment-user">User 1</span>
+								<span class="comment-role">Admin</span>
+								<span class="comment-date">1 hour ago</span>
+							</div>
+							<div class="comment-content">
+								<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed fermentum velit vel quam fringilla, in gravida enim posuere. Nullam a bibendum justo. Sed ac sagittis mi.</p>
+								<a href="#" class="reply-link">Reply</a>
+								<a href="#" class="report-link">Report</a>
+								<div class="nested-comments">
+									<div class="comment">
+										<img src="./Image/ava1.png" alt="Avatar" class="comment-avatar float-left">
+										<div class="comment-info">
+											<span class="comment-user">User 2</span>
+											<span class="comment-role">User</span>
+											<span class="comment-date">30 minutes ago</span>
+										</div>
+										<div class="comment-content">
+											<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed fermentum velit vel quam fringilla, in gravida enim posuere.</p>
+											<a href="#" class="reply-link">Reply</a>
+											<a href="#" class="report-link">Report</a>
+										</div>
+									</div>
+									<div class="comment">
+										<img src="./Image/ava1.png" alt="Avatar" class="comment-avatar float-left">
+										<div class="comment-info">
+											<span class="comment-user">User 3</span>
+											<span class="comment-role">User</span>
+											<span class="comment-date">15 minutes ago</span>
+										</div>
+										<div class="comment-content">
+											<p>Lorem ipsum dolor sit amet, consectetur adipiscingelit. Sed fermentum velit vel quam fringilla, in gravida enim posuere.</p>
+											<a href="#" class="reply-link">Reply</a>
+											<a href="#" class="report-link">Report</a>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+
+						<div class="comment">
+							<img src="./Image/ava1.png" alt="Avatar" class="comment-avatar float-left">
+							<div class="comment-info">
+								<span class="comment-user">User 4</span>
+								<span class="comment-role">User</span>
+								<span class="comment-date">10 minutes ago</span>
+							</div>
+							<div class="comment-content">
+								<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed fermentum velit vel quam fringilla, in gravida enim posuere.</p>
+								<a href="#" class="reply-link">Reply</a>
+								<a href="#" class="report-link">Report</a>
+							</div>
+						</div>
+
+						<div class="comment-form">
+							<img src="./Image/ava1.png" alt="Avatar" class="comment-avatar float-left">
+              <div class="comment-info" style="display: flex; align-items: center">
+								<span class="comment-user">User 4</span>
+								<span class="comment-role">User</span>
+							</div>
+							<div class="form-group">
+								<textarea name="comment" id="comment" class="form-control"></textarea>
+							</div>
+							<button type="submit" class="btn btn-primary">Post Comment</button>
+						</div>
+            
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
 </body>
 </html>
