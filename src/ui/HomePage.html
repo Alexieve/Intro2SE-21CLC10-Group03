@@ -106,6 +106,17 @@
             font-size: 12px;
             text-align: center;
         }
+        .carousel .carousel-indicators button {
+            width: 10px;
+           height: 10px;
+           border-radius: 100%;
+         }
+         .carousel-indicators {
+            bottom: -5rem;
+        }
+        .carousel-indicators li {
+            background-color: #9e1515;
+        }
     </style>
     <title>HappiNovel</title>
 </head>
@@ -152,359 +163,782 @@
         <img width="100%" src="./Image/cover.png" alt="Ảnh bìa" style="margin-bottom: 20px;">
     </div>
     <!-- Nổi bật -->
-    <div class = "row">
-        <div class="col-12">
-            <div class="container">
-                <header class="title">
-                    <span class="container-view">
-                        <i class="fas fa-trophy" style = "padding-left: 15px; color: #f0bc00;"></i> Nổi bật
-                    </span>
-                </header>
-            </div>
-            <div class ="row">
-                <div class = "col-1"></div>
-                <div class = "col-2">
-                    <div class = "img-container">
-                        <img src = "./Image/Stalin.jpg" class="text-center" alt="Ảnh bìa" style="margin-bottom: 10px; margin-right: 10px;height: 250px; width: 200px; right: 20px">
-                        <div class = "bottom-left" style = "margin-bottom: 15px;margin-right: 22px;font-weight: 1000;height: 30px;font-size: 12px ;color: rgb(255, 255, 255)">
-                            <p>Quyền lực và chính trị: Chủ nghĩa Mác LêNindasdsad</p>
-                        </div>
-                    </div>
+    <div class = "container">
+        <div class = "row">
+            <div class="col-12">
+                <div class="container">
+                    <header class="title">
+                        <span class="container-view">
+                            <i class="fas fa-trophy" style = "padding-left: 15px; color: #f0bc00;"></i> Nổi bật
+                        </span>
+                    </header>
                 </div>
-                <div class = "col-2">
-                    <div class = "img-container">
-                        <img src = "./Image/Stalin.jpg" class="text-center" alt="Ảnh bìa" style="margin-bottom: 10px; margin-right: 10px;height: 250px; width: 200px; right: 20px">
-                        <div class = "bottom-left" style = "margin-bottom: 15px;margin-right: 22px;font-weight: 1000;height: 30px;font-size: 12px ;color: rgb(255, 255, 255)">
-                            <p>Quyền lực và chính trị: Chủ nghĩa Mác LêNindasdsad</p>
-                        </div>
-                    </div>
-                </div>
-                <div class = "col-2">
-                    <div class = "img-container">
-                        <img src = "./Image/Stalin.jpg" class="text-center" alt="Ảnh bìa" style="margin-bottom: 10px; margin-right: 10px;height: 250px; width: 200px; right: 20px">
-                        <div class = "bottom-left" style = "margin-bottom: 15px;margin-right: 22px;font-weight: 1000;height: 30px;font-size: 12px ;color: rgb(255, 255, 255)">
-                            <p>Quyền lực và chính trị: Chủ nghĩa Mác LêNindasdsad</p>
-                        </div>
-                    </div>
-                </div>
-                <div class = "col-2">
-                    <div class = "img-container">
-                        <img src = "./Image/Stalin.jpg" class="text-center" alt="Ảnh bìa" style="margin-bottom: 10px; margin-right: 10px;height: 250px; width: 200px; right: 20px">
-                        <div class = "bottom-left" style = "margin-bottom: 15px;margin-right: 22px;font-weight: 1000;height: 30px;font-size: 12px ;color: rgb(255, 255, 255)">
-                            <p>Quyền lực và chính trị: Chủ nghĩa Mác LêNindasdsad</p>
-                        </div>
-                    </div>
-                </div>             
-                <div class = "col-3" >
-                    <div class = "container">
-                        <header>
-                            <a href = "https://www.youtube.com/watch?v=tSBWmxwT8So" style = "text-decoration: none;">
-                                <span class = "sts-bold">Truyện</span>
-                                <span class = "sts-empty">Vừa Đọc</span>
-                            </a>
-                        </header>
-                        <main>
-                            <div class = "row">
-                                <div class = "col-1 " style="margin-top: 20px;">
-                                    <img src = "./Image/Stalin.jpg" class="text-center" style = "height: 100px; width: 80px;">
+                <div class ="row">
+                    <div class = "col-9">
+                        <div class = "container" style ="margin-bottom:10px">
+                            <div id="demo" class="carousel slide" data-bs-ride="carousel">
+                                <!-- Indicators/dots -->
+                                <ol class="carousel-indicators">
+                                    <button type="button" data-bs-target="#demo" data-bs-slide-to="0" class="active" style = "background-color:black"></button>
+                                    <button type="button" data-bs-target="#demo" data-bs-slide-to="1" style = "background-color:black"></button>
+                                    <button type="button" data-bs-target="#demo" data-bs-slide-to="2" style = "background-color:black"></button>
+                                </ol>
+                                <!-- The slideshow/carousel -->
+                                <div class="carousel-inner">
+                                <div class="carousel-item active">
+                                    <div class = "row">
+                                        <div class = "col-2">
+                                            <div class="card" style="height: 250px; width: 200px">
+                                                <img class="card-img-top" src="./Image/Stalin.jpg" alt="Card image">
+                                                <div class="card-img-overlay">
+                                                    <div class="card-img-overlay d-flex align-items-end">
+                                                        <div class = "card-title" style = "margin-bottom: -5px; text-align: center">
+                                                            <a href = "https://www.youtube.com/watch?v=tSBWmxwT8So" style = "text-decoration: none; color: white">Quyền lực và chính trị: Chủ nghĩa Mác LêNindasdsad</a>
+                                                        </div>
+                                                     </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class = "col-2">
+                                            <div class="card" style="height: 250px; width: 200px; margin-left: 67px">
+                                                <img class="card-img-top" src="./Image/Stalin.jpg" alt="Card image">
+                                                <div class="card-img-overlay">
+                                                    <div class="card-img-overlay d-flex align-items-end">
+                                                        <div class = "card-title" style = "margin-bottom: -5px; text-align: center">
+                                                            <a href = "https://www.youtube.com/watch?v=tSBWmxwT8So" style = "text-decoration: none; color: white">Quyền lực và chính trị: Chủ nghĩa Mác LêNindasdsad</a>
+                                                        </div>
+                                                     </div>
+                                                </div>
+                                              </div>
+                                        </div>
+                                        <div class = "col-2">
+                                            <div class="card" style="height: 250px; width: 200px; margin-left: 130px">
+                                                <img class="card-img-top" src="./Image/Stalin.jpg" alt="Card image">
+                                                <div class="card-img-overlay">
+                                                    <div class="card-img-overlay d-flex align-items-end">
+                                                        <div class = "card-title" style = "margin-bottom: -5px; text-align: center">
+                                                            <a href = "https://www.youtube.com/watch?v=tSBWmxwT8So" style = "text-decoration: none; color: white">Quyền lực và chính trị: Chủ nghĩa Mác LêNindasdsad</a>
+                                                        </div>
+                                                     </div>
+                                                </div>
+                                              </div>
+                                        </div>
+                                        <div class = "col-2">
+                                            <div class="card" style="height: 250px; width: 200px; margin-left: 200px">
+                                                <img class="card-img-top" src="./Image/Stalin.jpg" alt="Card image">
+                                                <div class="card-img-overlay">
+                                                    <div class="card-img-overlay d-flex align-items-end">
+                                                        <div class = "card-title" style = "margin-bottom: -5px; text-align: center">
+                                                            <a href = "https://www.youtube.com/watch?v=tSBWmxwT8So" style = "text-decoration: none; color: white">Quyền lực và chính trị: Chủ nghĩa Mác LêNindasdsad</a>
+                                                        </div>
+                                                     </div>
+                                                </div>
+                                              </div>
+                                        </div>
+                                    </div>
                                 </div>
-                                <div class = "col-4" style = "margin-left: 65px; margin-top: 12px">
-                                    <a href = "https://www.youtube.com/watch?v=tSBWmxwT8So" style = "text-decoration: none;">
-                                        <span style = "text-overflow: ellipsis; font-size: 10px; color:black; font-weight:1000px">Quyền lực và chính trị: Chủ nghĩa Mác LêNindasdsad</span>
-                                    </a>
-                                </div>                                
+                                <div class="carousel-item">
+                                    <div class = "row">
+                                        <div class = "col-2">
+                                            <div class="card" style="height: 250px; width: 200px">
+                                                <img class="card-img-top" src="./Image/Stalin.jpg" alt="Card image">
+                                                <div class="card-img-overlay">
+                                                    <div class="card-img-overlay d-flex align-items-end">
+                                                        <div class = "card-title" style = "margin-bottom: -5px; text-align: center">
+                                                            <a href = "https://www.youtube.com/watch?v=tSBWmxwT8So" style = "text-decoration: none; color: white">Quyền lực và chính trị: Chủ nghĩa Mác LêNindasdsad</a>
+                                                        </div>
+                                                     </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class = "col-2">
+                                            <div class="card" style="height: 250px; width: 200px; margin-left: 67px">
+                                                <img class="card-img-top" src="./Image/Stalin.jpg" alt="Card image">
+                                                <div class="card-img-overlay">
+                                                    <div class="card-img-overlay d-flex align-items-end">
+                                                        <div class = "card-title" style = "margin-bottom: -5px; text-align: center">
+                                                            <a href = "https://www.youtube.com/watch?v=tSBWmxwT8So" style = "text-decoration: none; color: white">Quyền lực và chính trị: Chủ nghĩa Mác LêNindasdsad</a>
+                                                        </div>
+                                                     </div>
+                                                </div>
+                                              </div>
+                                        </div>
+                                        <div class = "col-2">
+                                            <div class="card" style="height: 250px; width: 200px; margin-left: 130px">
+                                                <img class="card-img-top" src="./Image/Stalin.jpg" alt="Card image">
+                                                <div class="card-img-overlay">
+                                                    <div class="card-img-overlay d-flex align-items-end">
+                                                        <div class = "card-title" style = "margin-bottom: -5px; text-align: center">
+                                                            <a href = "https://www.youtube.com/watch?v=tSBWmxwT8So" style = "text-decoration: none; color: white">Quyền lực và chính trị: Chủ nghĩa Mác LêNindasdsad</a>
+                                                        </div>
+                                                     </div>
+                                                </div>
+                                              </div>
+                                        </div>
+                                        <div class = "col-2">
+                                            <div class="card" style="height: 250px; width: 200px; margin-left: 200px">
+                                                <img class="card-img-top" src="./Image/Stalin.jpg" alt="Card image">
+                                                <div class="card-img-overlay">
+                                                    <div class="card-img-overlay d-flex align-items-end">
+                                                        <div class = "card-title" style = "margin-bottom: -5px; text-align: center">
+                                                            <a href = "https://www.youtube.com/watch?v=tSBWmxwT8So" style = "text-decoration: none; color: white">Quyền lực và chính trị: Chủ nghĩa Mác LêNindasdsad</a>
+                                                        </div>
+                                                     </div>
+                                                </div>
+                                              </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="carousel-item">
+                                    <div class = "row">
+                                        <div class = "col-2">
+                                            <div class="card" style="height: 250px; width: 200px">
+                                                <img class="card-img-top" src="./Image/Stalin.jpg" alt="Card image">
+                                                <div class="card-img-overlay">
+                                                    <div class="card-img-overlay d-flex align-items-end">
+                                                        <div class = "card-title" style = "margin-bottom: -5px; text-align: center">
+                                                            <a href = "https://www.youtube.com/watch?v=tSBWmxwT8So" style = "text-decoration: none; color: white">Quyền lực và chính trị: Chủ nghĩa Mác LêNindasdsad</a>
+                                                        </div>
+                                                     </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class = "col-2">
+                                            <div class="card" style="height: 250px; width: 200px; margin-left: 67px">
+                                                <img class="card-img-top" src="./Image/Stalin.jpg" alt="Card image">
+                                                <div class="card-img-overlay">
+                                                    <div class="card-img-overlay d-flex align-items-end">
+                                                        <div class = "card-title" style = "margin-bottom: -5px; text-align: center">
+                                                            <a href = "https://www.youtube.com/watch?v=tSBWmxwT8So" style = "text-decoration: none; color: white">Quyền lực và chính trị: Chủ nghĩa Mác LêNindasdsad</a>
+                                                        </div>
+                                                     </div>
+                                                </div>
+                                              </div>
+                                        </div>
+                                        <div class = "col-2">
+                                            <div class="card" style="height: 250px; width: 200px; margin-left: 130px">
+                                                <img class="card-img-top" src="./Image/Stalin.jpg" alt="Card image">
+                                                <div class="card-img-overlay">
+                                                    <div class="card-img-overlay d-flex align-items-end">
+                                                        <div class = "card-title" style = "margin-bottom: -5px; text-align: center">
+                                                            <a href = "https://www.youtube.com/watch?v=tSBWmxwT8So" style = "text-decoration: none; color: white">Quyền lực và chính trị: Chủ nghĩa Mác LêNindasdsad</a>
+                                                        </div>
+                                                     </div>
+                                                </div>
+                                              </div>
+                                        </div>
+                                        <div class = "col-2">
+                                            <div class="card" style="height: 250px; width: 200px; margin-left: 200px">
+                                                <img class="card-img-top" src="./Image/Stalin.jpg" alt="Card image">
+                                                <div class="card-img-overlay">
+                                                    <div class="card-img-overlay d-flex align-items-end">
+                                                        <div class = "card-title" style = "margin-bottom: -5px; text-align: center">
+                                                            <a href = "https://www.youtube.com/watch?v=tSBWmxwT8So" style = "text-decoration: none; color: white">Quyền lực và chính trị: Chủ nghĩa Mác LêNindasdsad</a>
+                                                        </div>
+                                                     </div>
+                                                </div>
+                                              </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
-                        </main>
+                          </div>
+                        </div>
                     </div>
-                </div>                             
-            </div>
-            <div class = "row">
-                <div class = "col-9">
-                    <div class = "text-center">
-                        <button type="button" class="btn btn-primary btn-circle btn-sm"></button>
-                        <button type="button" class="btn btn-secondary btn-circle btn-sm"></button>
+                    <div class = "col-3">
+                        <div class = "container">
+                            <header>
+                                <a href = "https://www.youtube.com/watch?v=tSBWmxwT8So" style = "text-decoration: none;">
+                                    <span class = "sts-bold">Truyện</span>
+                                    <span class = "sts-empty">Vừa đọc</span>
+                                </a>
+                            </header>
+                            <main>
+                                <div class = "row">
+                                    <div class = "col-1 " style="margin-top: 20px;">
+                                        <div class="card" style="height: 100px; width: 80px;">
+                                            <img class="card-img-top" src="./Image/Stalin.jpg" alt="Card image">
+                                            <div class="card-img-overlay">
+                                                <div class="card-img-overlay d-flex align-items-end">
+                                                    <div class = "card-title" style = "margin-bottom: -5px; text-align: center">
+                                                        <a href = "https://www.youtube.com/watch?v=tSBWmxwT8So" style = "text-decoration: none; color: white"></a>
+                                                    </div>
+                                                 </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class = "col-4" style = "margin-left: 65px; margin-top: 12px">
+                                        <a href = "https://www.youtube.com/watch?v=tSBWmxwT8So" style = "text-decoration: none;">
+                                            <span style = "text-overflow: ellipsis; font-size: 10px; color:black; font-weight:1000px">Quyền lực và chính trị: Chủ nghĩa Mác LêNindasdsad</span>
+                                        </a>
+                                    </div>                                
+                                </div>
+                                <div class = "row">
+                                    <div class = "col-1 " style="margin-top: 20px;">
+                                        <div class="card" style="height: 100px; width: 80px;">
+                                            <img class="card-img-top" src="./Image/Stalin.jpg" alt="Card image">
+                                            <div class="card-img-overlay">
+                                                <div class="card-img-overlay d-flex align-items-end">
+                                                    <div class = "card-title" style = "margin-bottom: -5px; text-align: center">
+                                                        <a href = "https://www.youtube.com/watch?v=tSBWmxwT8So" style = "text-decoration: none; color: white"></a>
+                                                    </div>
+                                                 </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class = "col-4" style = "margin-left: 65px; margin-top: 12px">
+                                        <a href = "https://www.youtube.com/watch?v=tSBWmxwT8So" style = "text-decoration: none;">
+                                            <span style = "text-overflow: ellipsis; font-size: 10px; color:black; font-weight:1000px">Quyền lực và chính trị: Chủ nghĩa Mác LêNindasdsad</span>
+                                        </a>
+                                    </div>                                
+                                </div>    
+                                <div class = "row">
+                                    <div class = "col-1 " style="margin-top: 20px;">
+                                        <div class="card" style="height: 100px; width: 80px;">
+                                            <img class="card-img-top" src="./Image/Stalin.jpg" alt="Card image">
+                                            <div class="card-img-overlay">
+                                                <div class="card-img-overlay d-flex align-items-end">
+                                                    <div class = "card-title" style = "margin-bottom: -5px; text-align: center">
+                                                        <a href = "https://www.youtube.com/watch?v=tSBWmxwT8So" style = "text-decoration: none; color: white"></a>
+                                                    </div>
+                                                 </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class = "col-4" style = "margin-left: 65px; margin-top: 12px">
+                                        <a href = "https://www.youtube.com/watch?v=tSBWmxwT8So" style = "text-decoration: none;">
+                                            <span style = "text-overflow: ellipsis; font-size: 10px; color:black; font-weight:1000px">Quyền lực và chính trị: Chủ nghĩa Mác LêNindasdsad</span>
+                                        </a>
+                                    </div>                                
+                                </div>                                                    
+                            </main>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
     <!-- Sáng tác mới nhất -->
-    <div class = "row">
-        <div class="col-12">
-            <div class="container">
-                <header class="title">
-                    <span class="container-view">
-                        <a href = "https://www.youtube.com/watch?v=tSBWmxwT8So" style = "text-decoration: none; padding-left: 18px">
-                            <span class = "sts-bold">Sáng tác</span>
-                            <span class = "sts-empty">Mới nhất</span>
-                        </a>
-                    </span>
-                </header>
-            </div>
-            <div class ="row">
-                <div class = "col-1"></div>
-                <div class = "col-2">
-                    <div class = "img-container">
-                        <img src = "./Image/Stalin.jpg" class="text-center" alt="Ảnh bìa" style="margin-bottom: 10px; margin-right: 10px;height: 250px; width: 200px; right: 20px">
-                        <div class = "bottom-left" style = "margin-bottom: 15px;margin-right: 22px;font-weight: 1000;height: 30px;font-size: 12px ;color: rgb(255, 255, 255)">
-                            <p>Quyền lực và chính trị: Chủ nghĩa Mác LêNindasdsad</p>
-                        </div>
-                    </div>
-                </div>
-                <div class = "col-2">
-                    <div class = "img-container">
-                        <img src = "./Image/Stalin.jpg" class="text-center" alt="Ảnh bìa" style="margin-bottom: 10px; margin-right: 10px;height: 250px; width: 200px; right: 20px">
-                        <div class = "bottom-left" style = "margin-bottom: 15px;margin-right: 22px;font-weight: 1000;height: 30px;font-size: 12px ;color: rgb(255, 255, 255)">
-                            <p>Quyền lực và chính trị: Chủ nghĩa Mác LêNindasdsad</p>
-                        </div>
-                    </div>
-                </div>
-                <div class = "col-2">
-                    <div class = "img-container">
-                        <img src = "./Image/Stalin.jpg" class="text-center" alt="Ảnh bìa" style="margin-bottom: 10px; margin-right: 10px;height: 250px; width: 200px; right: 20px">
-                        <div class = "bottom-left" style = "margin-bottom: 15px;margin-right: 22px;font-weight: 1000;height: 30px;font-size: 12px ;color: rgb(255, 255, 255)">
-                            <p>Quyền lực và chính trị: Chủ nghĩa Mác LêNindasdsad</p>
-                        </div>
-                    </div>
-                </div>             
-                <div class = "col-2">
-                    <div class = "img-container">
-                        <img src = "./Image/Stalin.jpg" class="text-center" alt="Ảnh bìa" style="margin-bottom: 20px;margin-right: 60px;height: 250px; width: 200px; right: 20px">
-                        <div class = "centered">
-                            <button type="button">
-                                <i class="fa-solid fa-arrow-right"></i>
-                            </button>
-                            <p>Xem thêm</p>
-                        </div>
-                    </div>
-                </div>                 
-                <div class = "col-3" >
-                    <div class = "container">
-                        <header>
-                            <a href = "https://www.youtube.com/watch?v=tSBWmxwT8So" style = "text-decoration: none;">
-                                <span class = "sts-bold">Theo dõi</span>
-                                <span class = "sts-empty">Nhiều</span>
+    <div class = "container">
+        <div class = "row">
+            <div class="col-12">
+                <div class="container">
+                    <header class="title">
+                        <span class="container-view">
+                            <a href = "https://www.youtube.com/watch?v=tSBWmxwT8So" style = "text-decoration: none; padding-left: 18px">
+                                <span class = "sts-bold">Sáng tác</span>
+                                <span class = "sts-empty">Mới nhất</span>
                             </a>
-                        </header>
-                        <main>
-                            <div class = "row">
-                                <div class = "col-1 " style="margin-top: 20px;">
-                                    <img src = "./Image/Stalin.jpg" class="text-center" style = "height: 100px; width: 80px;">
+                        </span>
+                    </header>
+                </div>
+                <div class ="row">
+                    <div class = "col-9">
+                        <div class = "container" style ="margin-bottom:10px">
+                            <div id="demo" class="carousel slide" data-bs-ride="carousel">
+                                <!-- The slideshow/carousel -->
+                                <div class="carousel-inner">
+                                <div class="carousel-item active">
+                                    <div class = "row">
+                                        <div class = "col-2">
+                                            <div class="card" style="height: 250px; width: 200px">
+                                                <img class="card-img-top" src="./Image/Stalin.jpg" alt="Card image">
+                                                <div class="card-img-overlay">
+                                                    <div class="card-img-overlay d-flex align-items-end">
+                                                        <div class = "card-title" style = "margin-bottom: -5px; text-align: center">
+                                                            <a href = "https://www.youtube.com/watch?v=tSBWmxwT8So" style = "text-decoration: none; color: white">Quyền lực và chính trị: Chủ nghĩa Mác LêNindasdsad</a>
+                                                        </div>
+                                                     </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class = "col-2">
+                                            <div class="card" style="height: 250px; width: 200px; margin-left: 67px">
+                                                <img class="card-img-top" src="./Image/Stalin.jpg" alt="Card image">
+                                                <div class="card-img-overlay">
+                                                    <div class="card-img-overlay d-flex align-items-end">
+                                                        <div class = "card-title" style = "margin-bottom: -5px; text-align: center">
+                                                            <a href = "https://www.youtube.com/watch?v=tSBWmxwT8So" style = "text-decoration: none; color: white">Quyền lực và chính trị: Chủ nghĩa Mác LêNindasdsad</a>
+                                                        </div>
+                                                     </div>
+                                                </div>
+                                              </div>
+                                        </div>
+                                        <div class = "col-2">
+                                            <div class="card" style="height: 250px; width: 200px; margin-left: 130px">
+                                                <img class="card-img-top" src="./Image/Stalin.jpg" alt="Card image">
+                                                <div class="card-img-overlay">
+                                                    <div class="card-img-overlay d-flex align-items-end">
+                                                        <div class = "card-title" style = "margin-bottom: -5px; text-align: center">
+                                                            <a href = "https://www.youtube.com/watch?v=tSBWmxwT8So" style = "text-decoration: none; color: white">Quyền lực và chính trị: Chủ nghĩa Mác LêNindasdsad</a>
+                                                        </div>
+                                                     </div>
+                                                </div>
+                                              </div>
+                                        </div>
+                                        <div class = "col-2">
+                                            <div class="card" style="height: 250px; width: 200px; margin-left: 200px">
+                                                <img class="card-img-top" src="./Image/Stalin.jpg" alt="Card image">
+                                                <div class="card-img-overlay">
+                                                    <div class="card-img-overlay d-flex align-items-end">
+                                                        <div class = "card-title" style = "margin-bottom: 80px; margin-left:50px">
+                                                            <a href = "https://www.youtube.com/watch?v=tSBWmxwT8So" style = "text-decoration: none; color: black; font-weight:800px">
+                                                                <i class="fa-solid fa-arrow-right fa-4x" ></i>
+                                                            </a>
+                                                        </div>
+                                                     </div>
+                                                </div>
+                                              </div>
+                                        </div>
+                                    </div>
                                 </div>
-                                <div class = "col-4" style = "margin-left: 65px; margin-top: 12px">
-                                    <a href = "https://www.youtube.com/watch?v=tSBWmxwT8So" style = "text-decoration: none;">
-                                        <span style = "text-overflow: ellipsis; font-size: 10px; color:black; font-weight:1000px">Quyền lực và chính trị: Chủ nghĩa Mác LêNindasdsad</span>
-                                    </a>
-                                </div>                                
                             </div>
-                            <div class = "row">
-                                <div class = "col-1 " style="margin-top: 20px;">
-                                    <img src = "./Image/Stalin.jpg" class="text-center" style = "height: 100px; width: 80px;">
-                                </div>
-                                <div class = "col-4" style = "margin-left: 65px; margin-top: 12px">
-                                    <a href = "https://www.youtube.com/watch?v=tSBWmxwT8So" style = "text-decoration: none;">
-                                        <span style = "text-overflow: ellipsis; font-size: 10px; color:black; font-weight:1000px">Quyền lực và chính trị: Chủ nghĩa Mác LêNindasdsad</span>
-                                    </a>
-                                </div>                                
-                            </div>    
-                            <div class = "row">
-                                <div class = "col-1 " style="margin-top: 20px;">
-                                    <img src = "./Image/Stalin.jpg" class="text-center" style = "height: 100px; width: 80px;">
-                                </div>
-                                <div class = "col-4" style = "margin-left: 65px; margin-top: 12px">
-                                    <a href = "https://www.youtube.com/watch?v=tSBWmxwT8So" style = "text-decoration: none;">
-                                        <span style = "text-overflow: ellipsis; font-size: 10px; color:black; font-weight:1000px">Quyền lực và chính trị: Chủ nghĩa Mác LêNindasdsad</span>
-                                    </a>
-                                </div>                                
-                            </div>                                                    
-                        </main>
+                          </div>
+                        </div>
                     </div>
-                </div>                             
+                    <div class = "col-3">
+                        <div class = "container">
+                            <header>
+                                <a href = "https://www.youtube.com/watch?v=tSBWmxwT8So" style = "text-decoration: none;">
+                                    <span class = "sts-bold">Truyện</span>
+                                    <span class = "sts-empty">Vừa đọc</span>
+                                </a>
+                            </header>
+                            <main>
+                                <div class = "row">
+                                    <div class = "col-1 " style="margin-top: 20px;">
+                                        <div class="card" style="height: 100px; width: 80px;">
+                                            <img class="card-img-top" src="./Image/Stalin.jpg" alt="Card image">
+                                            <div class="card-img-overlay">
+                                                <div class="card-img-overlay d-flex align-items-end">
+                                                    <div class = "card-title" style = "margin-bottom: -5px; text-align: center">
+                                                        <a href = "https://www.youtube.com/watch?v=tSBWmxwT8So" style = "text-decoration: none; color: white"></a>
+                                                    </div>
+                                                 </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class = "col-4" style = "margin-left: 65px; margin-top: 12px">
+                                        <a href = "https://www.youtube.com/watch?v=tSBWmxwT8So" style = "text-decoration: none;">
+                                            <span style = "text-overflow: ellipsis; font-size: 10px; color:black; font-weight:1000px">Quyền lực và chính trị: Chủ nghĩa Mác LêNindasdsad</span>
+                                        </a>
+                                    </div>                                
+                                </div>
+                                <div class = "row">
+                                    <div class = "col-1 " style="margin-top: 20px;">
+                                        <div class="card" style="height: 100px; width: 80px;">
+                                            <img class="card-img-top" src="./Image/Stalin.jpg" alt="Card image">
+                                            <div class="card-img-overlay">
+                                                <div class="card-img-overlay d-flex align-items-end">
+                                                    <div class = "card-title" style = "margin-bottom: -5px; text-align: center">
+                                                        <a href = "https://www.youtube.com/watch?v=tSBWmxwT8So" style = "text-decoration: none; color: white"></a>
+                                                    </div>
+                                                 </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class = "col-4" style = "margin-left: 65px; margin-top: 12px">
+                                        <a href = "https://www.youtube.com/watch?v=tSBWmxwT8So" style = "text-decoration: none;">
+                                            <span style = "text-overflow: ellipsis; font-size: 10px; color:black; font-weight:1000px">Quyền lực và chính trị: Chủ nghĩa Mác LêNindasdsad</span>
+                                        </a>
+                                    </div>                                
+                                </div>    
+                                <div class = "row">
+                                    <div class = "col-1 " style="margin-top: 20px;">
+                                        <div class="card" style="height: 100px; width: 80px;">
+                                            <img class="card-img-top" src="./Image/Stalin.jpg" alt="Card image">
+                                            <div class="card-img-overlay">
+                                                <div class="card-img-overlay d-flex align-items-end">
+                                                    <div class = "card-title" style = "margin-bottom: -5px; text-align: center">
+                                                        <a href = "https://www.youtube.com/watch?v=tSBWmxwT8So" style = "text-decoration: none; color: white"></a>
+                                                    </div>
+                                                 </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class = "col-4" style = "margin-left: 65px; margin-top: 12px">
+                                        <a href = "https://www.youtube.com/watch?v=tSBWmxwT8So" style = "text-decoration: none;">
+                                            <span style = "text-overflow: ellipsis; font-size: 10px; color:black; font-weight:1000px">Quyền lực và chính trị: Chủ nghĩa Mác LêNindasdsad</span>
+                                        </a>
+                                    </div>                                
+                                </div>                                                    
+                            </main>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
     <!-- Chương mới nhất -->
-    <div class = "row">
-        <div class="col-12">
-            <div class="container">
-                <header class="title">
-                    <span class="container-view">
-                        <a href = "https://www.youtube.com/watch?v=tSBWmxwT8So" style = "text-decoration: none; padding-left: 18px">
-                            <span class = "sts-bold">Chương</span>
-                            <span class = "sts-empty">Mới nhất</span>
-                        </a>
-                    </span>
-                </header>
+    <div class = "container">
+        <div class = "row">
+            <div class="col-12">
+                <div class="container">
+                    <header class="title">
+                        <span class="container-view">
+                            <a href = "https://www.youtube.com/watch?v=tSBWmxwT8So" style = "text-decoration: none; padding-left: 18px">
+                                <span class = "sts-bold">Chương</span>
+                                <span class = "sts-empty">Mới nhất</span>
+                            </a>
+                        </span>
+                    </header>
+                </div>
+                <div class ="row">
+                    <div class = "col-9">
+                        <div class = "container" style ="margin-bottom:10px">
+                            <div id="demo" class="carousel slide" data-bs-ride="carousel">
+                                <!-- The slideshow/carousel -->
+                                <div class="carousel-inner">
+                                <div class="carousel-item active">
+                                    <div class = "row" style = "margin-bottom:50px">
+                                        <div class = "col-2">
+                                            <div class="card" style="height: 250px; width: 200px">
+                                                <img class="card-img-top" src="./Image/Stalin.jpg" alt="Card image">
+                                                <div class="card-img-overlay">
+                                                    <div class="card-img-overlay d-flex align-items-end">
+                                                        <div class = "card-title" style = "margin-bottom: -5px; text-align: center">
+                                                            <a href = "https://www.youtube.com/watch?v=tSBWmxwT8So" style = "text-decoration: none; color: white">Quyền lực và chính trị: Chủ nghĩa Mác LêNindasdsad</a>
+                                                        </div>
+                                                     </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class = "col-2">
+                                            <div class="card" style="height: 250px; width: 200px; margin-left: 67px">
+                                                <img class="card-img-top" src="./Image/Stalin.jpg" alt="Card image">
+                                                <div class="card-img-overlay">
+                                                    <div class="card-img-overlay d-flex align-items-end">
+                                                        <div class = "card-title" style = "margin-bottom: -5px; text-align: center">
+                                                            <a href = "https://www.youtube.com/watch?v=tSBWmxwT8So" style = "text-decoration: none; color: white">Quyền lực và chính trị: Chủ nghĩa Mác LêNindasdsad</a>
+                                                        </div>
+                                                     </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class = "col-2">
+                                            <div class="card" style="height: 250px; width: 200px; margin-left: 130px">
+                                                <img class="card-img-top" src="./Image/Stalin.jpg" alt="Card image">
+                                                <div class="card-img-overlay">
+                                                    <div class="card-img-overlay d-flex align-items-end">
+                                                        <div class = "card-title" style = "margin-bottom: -5px; text-align: center">
+                                                            <a href = "https://www.youtube.com/watch?v=tSBWmxwT8So" style = "text-decoration: none; color: white">Quyền lực và chính trị: Chủ nghĩa Mác LêNindasdsad</a>
+                                                        </div>
+                                                     </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class = "col-2">
+                                            <div class="card" style="height: 250px; width: 200px; margin-left: 200px">
+                                                <img class="card-img-top" src="./Image/Stalin.jpg" alt="Card image">
+                                                <div class="card-img-overlay">
+                                                    <div class="card-img-overlay d-flex align-items-end">
+                                                        <div class = "card-title" style = "margin-bottom: -5px; text-align: center">
+                                                            <a href = "https://www.youtube.com/watch?v=tSBWmxwT8So" style = "text-decoration: none; color: white">Quyền lực và chính trị: Chủ nghĩa Mác LêNindasdsad</a>
+                                                        </div>
+                                                     </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class = "row" style = "margin-bottom:50px">
+                                        <div class = "col-2">
+                                            <div class="card" style="height: 250px; width: 200px">
+                                                <img class="card-img-top" src="./Image/Stalin.jpg" alt="Card image">
+                                                <div class="card-img-overlay">
+                                                    <div class="card-img-overlay d-flex align-items-end">
+                                                        <div class = "card-title" style = "margin-bottom: -5px; text-align: center">
+                                                            <a href = "https://www.youtube.com/watch?v=tSBWmxwT8So" style = "text-decoration: none; color: white">Quyền lực và chính trị: Chủ nghĩa Mác LêNindasdsad</a>
+                                                        </div>
+                                                     </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class = "col-2">
+                                            <div class="card" style="height: 250px; width: 200px; margin-left: 67px">
+                                                <img class="card-img-top" src="./Image/Stalin.jpg" alt="Card image">
+                                                <div class="card-img-overlay">
+                                                    <div class="card-img-overlay d-flex align-items-end">
+                                                        <div class = "card-title" style = "margin-bottom: -5px; text-align: center">
+                                                            <a href = "https://www.youtube.com/watch?v=tSBWmxwT8So" style = "text-decoration: none; color: white">Quyền lực và chính trị: Chủ nghĩa Mác LêNindasdsad</a>
+                                                        </div>
+                                                     </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class = "col-2">
+                                            <div class="card" style="height: 250px; width: 200px; margin-left: 130px">
+                                                <img class="card-img-top" src="./Image/Stalin.jpg" alt="Card image">
+                                                <div class="card-img-overlay">
+                                                    <div class="card-img-overlay d-flex align-items-end">
+                                                        <div class = "card-title" style = "margin-bottom: -5px; text-align: center">
+                                                            <a href = "https://www.youtube.com/watch?v=tSBWmxwT8So" style = "text-decoration: none; color: white">Quyền lực và chính trị: Chủ nghĩa Mác LêNindasdsad</a>
+                                                        </div>
+                                                     </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class = "col-2">
+                                            <div class="card" style="height: 250px; width: 200px; margin-left: 200px">
+                                                <img class="card-img-top" src="./Image/Stalin.jpg" alt="Card image">
+                                                <div class="card-img-overlay">
+                                                    <div class="card-img-overlay d-flex align-items-end">
+                                                        <div class = "card-title" style = "margin-bottom: -5px; text-align: center">
+                                                            <a href = "https://www.youtube.com/watch?v=tSBWmxwT8So" style = "text-decoration: none; color: white">Quyền lực và chính trị: Chủ nghĩa Mác LêNindasdsad</a>
+                                                        </div>
+                                                     </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class = "row">
+                                        <div class = "col-2">
+                                            <div class="card" style="height: 250px; width: 200px">
+                                                <img class="card-img-top" src="./Image/Stalin.jpg" alt="Card image">
+                                                <div class="card-img-overlay">
+                                                    <div class="card-img-overlay d-flex align-items-end">
+                                                        <div class = "card-title" style = "margin-bottom: -5px; text-align: center">
+                                                            <a href = "https://www.youtube.com/watch?v=tSBWmxwT8So" style = "text-decoration: none; color: white">Quyền lực và chính trị: Chủ nghĩa Mác LêNindasdsad</a>
+                                                        </div>
+                                                     </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class = "col-2">
+                                            <div class="card" style="height: 250px; width: 200px; margin-left: 67px">
+                                                <img class="card-img-top" src="./Image/Stalin.jpg" alt="Card image">
+                                                <div class="card-img-overlay">
+                                                    <div class="card-img-overlay d-flex align-items-end">
+                                                        <div class = "card-title" style = "margin-bottom: -5px; text-align: center">
+                                                            <a href = "https://www.youtube.com/watch?v=tSBWmxwT8So" style = "text-decoration: none; color: white">Quyền lực và chính trị: Chủ nghĩa Mác LêNindasdsad</a>
+                                                        </div>
+                                                     </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class = "col-2">
+                                            <div class="card" style="height: 250px; width: 200px; margin-left: 130px">
+                                                <img class="card-img-top" src="./Image/Stalin.jpg" alt="Card image">
+                                                <div class="card-img-overlay">
+                                                    <div class="card-img-overlay d-flex align-items-end">
+                                                        <div class = "card-title" style = "margin-bottom: -5px; text-align: center">
+                                                            <a href = "https://www.youtube.com/watch?v=tSBWmxwT8So" style = "text-decoration: none; color: white">Quyền lực và chính trị: Chủ nghĩa Mác LêNindasdsad</a>
+                                                        </div>
+                                                     </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class = "col-2">
+                                            <div class="card" style="height: 250px; width: 200px; margin-left: 200px">
+                                                <img class="card-img-top" src="./Image/Stalin.jpg" alt="Card image">
+                                                <div class="card-img-overlay">
+                                                    <div class="card-img-overlay d-flex align-items-end">
+                                                        <div class = "card-title" style = "margin-bottom: -5px; text-align: center">
+                                                            <a href = "https://www.youtube.com/watch?v=tSBWmxwT8So" style = "text-decoration: none; color: white">Quyền lực và chính trị: Chủ nghĩa Mác LêNindasdsad</a>
+                                                        </div>
+                                                     </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                          </div>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <div class ="row">
-                <div class = "col-1"></div>
-                <div class = "col-2">
-                    <div class = "img-container">
-                        <img src = "./Image/Stalin.jpg" class="text-center" alt="Ảnh bìa" style="margin-bottom: 10px; margin-right: 10px;height: 250px; width: 200px; right: 20px">
-                        <div class = "bottom-left" style = "margin-bottom: 15px;margin-right: 22px;font-weight: 1000;height: 30px;font-size: 12px ;color: rgb(255, 255, 255)">
-                            <p>Quyền lực và chính trị: Chủ nghĩa Mác LêNindasdsad</p>
-                        </div>
-                    </div>
-                </div>
-                <div class = "col-2">
-                    <div class = "img-container">
-                        <img src = "./Image/Stalin.jpg" class="text-center" alt="Ảnh bìa" style="margin-bottom: 10px; margin-right: 10px;height: 250px; width: 200px; right: 20px">
-                        <div class = "bottom-left" style = "margin-bottom: 15px;margin-right: 22px;font-weight: 1000;height: 30px;font-size: 12px ;color: rgb(255, 255, 255)">
-                            <p>Quyền lực và chính trị: Chủ nghĩa Mác LêNindasdsad</p>
-                        </div>
-                    </div>
-                </div>
-                <div class = "col-2">
-                    <div class = "img-container">
-                        <img src = "./Image/Stalin.jpg" class="text-center" alt="Ảnh bìa" style="margin-bottom: 10px; margin-right: 10px;height: 250px; width: 200px; right: 20px">
-                        <div class = "bottom-left" style = "margin-bottom: 15px;margin-right: 22px;font-weight: 1000;height: 30px;font-size: 12px ;color: rgb(255, 255, 255)">
-                            <p>Quyền lực và chính trị: Chủ nghĩa Mác LêNindasdsad</p>
-                        </div>
-                    </div>
-                </div>
-                <div class = "col-2">
-                    <div class = "img-container">
-                        <img src = "./Image/Stalin.jpg" class="text-center" alt="Ảnh bìa" style="margin-bottom: 10px; margin-right: 10px;height: 250px; width: 200px; right: 20px">
-                        <div class = "bottom-left" style = "margin-bottom: 15px;margin-right: 22px;font-weight: 1000;height: 30px;font-size: 12px ;color: rgb(255, 255, 255)">
-                            <p>Quyền lực và chính trị: Chủ nghĩa Mác LêNindasdsad</p>
-                        </div>
-                    </div>
-                </div>             
-            </div>    
-            <div class ="row">
-                <div class = "col-1"></div>
-                <div class = "col-2">
-                    <div class = "img-container">
-                        <img src = "./Image/Stalin.jpg" class="text-center" alt="Ảnh bìa" style="margin-bottom: 10px; margin-right: 10px;height: 250px; width: 200px; right: 20px">
-                        <div class = "bottom-left" style = "margin-bottom: 15px;margin-right: 22px;font-weight: 1000;height: 30px;font-size: 12px ;color: rgb(255, 255, 255)">
-                            <p>Quyền lực và chính trị: Chủ nghĩa Mác LêNindasdsad</p>
-                        </div>
-                    </div>
-                </div>
-                <div class = "col-2">
-                    <div class = "img-container">
-                        <img src = "./Image/Stalin.jpg" class="text-center" alt="Ảnh bìa" style="margin-bottom: 10px; margin-right: 10px;height: 250px; width: 200px; right: 20px">
-                        <div class = "bottom-left" style = "margin-bottom: 15px;margin-right: 22px;font-weight: 1000;height: 30px;font-size: 12px ;color: rgb(255, 255, 255)">
-                            <p>Quyền lực và chính trị: Chủ nghĩa Mác LêNindasdsad</p>
-                        </div>
-                    </div>
-                </div>
-                <div class = "col-2">
-                    <div class = "img-container">
-                        <img src = "./Image/Stalin.jpg" class="text-center" alt="Ảnh bìa" style="margin-bottom: 10px; margin-right: 10px;height: 250px; width: 200px; right: 20px">
-                        <div class = "bottom-left" style = "margin-bottom: 15px;margin-right: 22px;font-weight: 1000;height: 30px;font-size: 12px ;color: rgb(255, 255, 255)">
-                            <p>Quyền lực và chính trị: Chủ nghĩa Mác LêNindasdsad</p>
-                        </div>
-                    </div>
-                </div>
-                <div class = "col-2">
-                    <div class = "img-container">
-                        <img src = "./Image/Stalin.jpg" class="text-center" alt="Ảnh bìa" style="margin-bottom: 10px; margin-right: 10px;height: 250px; width: 200px; right: 20px">
-                        <div class = "bottom-left" style = "margin-bottom: 15px;margin-right: 22px;font-weight: 1000;height: 30px;font-size: 12px ;color: rgb(255, 255, 255)">
-                            <p>Quyền lực và chính trị: Chủ nghĩa Mác LêNindasdsad</p>
-                        </div>
-                    </div>
-                </div>             
-                </div>                                                                      
-            <div class ="row">
-                <div class = "col-1"></div>
-                <div class = "col-2">
-                    <div class = "img-container">
-                        <img src = "./Image/Stalin.jpg" class="text-center" alt="Ảnh bìa" style="margin-bottom: 10px; margin-right: 10px;height: 250px; width: 200px; right: 20px">
-                        <div class = "bottom-left" style = "margin-bottom: 15px;margin-right: 22px;font-weight: 1000;height: 30px;font-size: 12px ;color: rgb(255, 255, 255)">
-                            <p>Quyền lực và chính trị: Chủ nghĩa Mác LêNindasdsad</p>
-                        </div>
-                    </div>
-                </div>
-                <div class = "col-2">
-                    <div class = "img-container">
-                        <img src = "./Image/Stalin.jpg" class="text-center" alt="Ảnh bìa" style="margin-bottom: 10px; margin-right: 10px;height: 250px; width: 200px; right: 20px">
-                        <div class = "bottom-left" style = "margin-bottom: 15px;margin-right: 22px;font-weight: 1000;height: 30px;font-size: 12px ;color: rgb(255, 255, 255)">
-                            <p>Quyền lực và chính trị: Chủ nghĩa Mác LêNindasdsad</p>
-                        </div>
-                    </div>
-                </div>
-                <div class = "col-2">
-                    <div class = "img-container">
-                        <img src = "./Image/Stalin.jpg" class="text-center" alt="Ảnh bìa" style="margin-bottom: 10px; margin-right: 10px;height: 250px; width: 200px; right: 20px">
-                        <div class = "bottom-left" style = "margin-bottom: 15px;margin-right: 22px;font-weight: 1000;height: 30px;font-size: 12px ;color: rgb(255, 255, 255)">
-                            <p>Quyền lực và chính trị: Chủ nghĩa Mác LêNindasdsad</p>
-                        </div>
-                    </div>
-                </div>  
-                <div class = "col-2">
-                    <div class = "img-container">
-                        <img src = "./Image/Stalin.jpg" class="text-center" alt="Ảnh bìa" style="margin-bottom: 20px;margin-right: 60px;height: 250px; width: 200px; right: 20px">
-                        <div class = "centered">
-                            <button type="button">
-                                <i class="fa-solid fa-arrow-right"></i>
-                            </button>
-                            <p>Xem thêm</p>
-                        </div>
-                        </div>
-                    </div>
-                </div>                           
         </div>
     </div>
     <!-- Truyện đã hoàn thành -->
-    <div class = "row">
-        <div class="col-12">
-            <div class="container">
-                <header class="title">
-                    <span class="container-view">
-                        <a href = "https://www.youtube.com/watch?v=tSBWmxwT8So" style = "text-decoration: none; padding-left: 18px">
-                            <span class = "sts-bold">Truyện</span>
-                            <span class = "sts-empty">Đã hoàn thành</span>
-                        </a>
-                    </span>
-                </header>
+    <div class = "container">
+        <div class = "row">
+            <div class="col-12">
+                <div class="container">
+                    <header class="title">
+                        <span class="container-view">
+                            <a href = "https://www.youtube.com/watch?v=tSBWmxwT8So" style = "text-decoration: none; padding-left: 18px">
+                                <span class = "sts-bold">Truyện</span>
+                                <span class = "sts-empty">Đã hoàn thành</span>
+                            </a>
+                        </span>
+                    </header>
+                </div>
+                <div class ="row">
+                    <div class = "col-9">
+                        <div class = "container" style ="margin-bottom:10px">
+                            <div id="demo" class="carousel slide" data-bs-ride="carousel">
+                                <!-- Indicators/dots -->
+                                <ol class="carousel-indicators">
+                                    <button type="button" data-bs-target="#demo" data-bs-slide-to="0" class="active" style = "background-color:black"></button>
+                                    <button type="button" data-bs-target="#demo" data-bs-slide-to="1" style = "background-color:black"></button>
+                                    <button type="button" data-bs-target="#demo" data-bs-slide-to="2" style = "background-color:black"></button>
+                                </ol>
+                                <!-- The slideshow/carousel -->
+                                <div class="carousel-inner">
+                                <div class="carousel-item active">
+                                    <div class = "row">
+                                        <div class = "col-2">
+                                            <div class="card" style="height: 250px; width: 200px">
+                                                <img class="card-img-top" src="./Image/Stalin.jpg" alt="Card image">
+                                                <div class="card-img-overlay">
+                                                    <div class="card-img-overlay d-flex align-items-end">
+                                                        <div class = "card-title" style = "margin-bottom: -5px; text-align: center">
+                                                            <a href = "https://www.youtube.com/watch?v=tSBWmxwT8So" style = "text-decoration: none; color: white">Quyền lực và chính trị: Chủ nghĩa Mác LêNindasdsad</a>
+                                                        </div>
+                                                     </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class = "col-2">
+                                            <div class="card" style="height: 250px; width: 200px; margin-left: 67px">
+                                                <img class="card-img-top" src="./Image/Stalin.jpg" alt="Card image">
+                                                <div class="card-img-overlay">
+                                                    <div class="card-img-overlay d-flex align-items-end">
+                                                        <div class = "card-title" style = "margin-bottom: -5px; text-align: center">
+                                                            <a href = "https://www.youtube.com/watch?v=tSBWmxwT8So" style = "text-decoration: none; color: white">Quyền lực và chính trị: Chủ nghĩa Mác LêNindasdsad</a>
+                                                        </div>
+                                                     </div>
+                                                </div>
+                                              </div>
+                                        </div>
+                                        <div class = "col-2">
+                                            <div class="card" style="height: 250px; width: 200px; margin-left: 130px">
+                                                <img class="card-img-top" src="./Image/Stalin.jpg" alt="Card image">
+                                                <div class="card-img-overlay">
+                                                    <div class="card-img-overlay d-flex align-items-end">
+                                                        <div class = "card-title" style = "margin-bottom: -5px; text-align: center">
+                                                            <a href = "https://www.youtube.com/watch?v=tSBWmxwT8So" style = "text-decoration: none; color: white">Quyền lực và chính trị: Chủ nghĩa Mác LêNindasdsad</a>
+                                                        </div>
+                                                     </div>
+                                                </div>
+                                              </div>
+                                        </div>
+                                        <div class = "col-2">
+                                            <div class="card" style="height: 250px; width: 200px; margin-left: 200px">
+                                                <img class="card-img-top" src="./Image/Stalin.jpg" alt="Card image">
+                                                <div class="card-img-overlay">
+                                                    <div class="card-img-overlay d-flex align-items-end">
+                                                        <div class = "card-title" style = "margin-bottom: -5px; text-align: center">
+                                                            <a href = "https://www.youtube.com/watch?v=tSBWmxwT8So" style = "text-decoration: none; color: white">Quyền lực và chính trị: Chủ nghĩa Mác LêNindasdsad</a>
+                                                        </div>
+                                                     </div>
+                                                </div>
+                                              </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="carousel-item">
+                                    <div class = "row">
+                                        <div class = "col-2">
+                                            <div class="card" style="height: 250px; width: 200px">
+                                                <img class="card-img-top" src="./Image/Stalin.jpg" alt="Card image">
+                                                <div class="card-img-overlay">
+                                                    <div class="card-img-overlay d-flex align-items-end">
+                                                        <div class = "card-title" style = "margin-bottom: -5px; text-align: center">
+                                                            <a href = "https://www.youtube.com/watch?v=tSBWmxwT8So" style = "text-decoration: none; color: white">Quyền lực và chính trị: Chủ nghĩa Mác LêNindasdsad</a>
+                                                        </div>
+                                                     </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class = "col-2">
+                                            <div class="card" style="height: 250px; width: 200px; margin-left: 67px">
+                                                <img class="card-img-top" src="./Image/Stalin.jpg" alt="Card image">
+                                                <div class="card-img-overlay">
+                                                    <div class="card-img-overlay d-flex align-items-end">
+                                                        <div class = "card-title" style = "margin-bottom: -5px; text-align: center">
+                                                            <a href = "https://www.youtube.com/watch?v=tSBWmxwT8So" style = "text-decoration: none; color: white">Quyền lực và chính trị: Chủ nghĩa Mác LêNindasdsad</a>
+                                                        </div>
+                                                     </div>
+                                                </div>
+                                              </div>
+                                        </div>
+                                        <div class = "col-2">
+                                            <div class="card" style="height: 250px; width: 200px; margin-left: 130px">
+                                                <img class="card-img-top" src="./Image/Stalin.jpg" alt="Card image">
+                                                <div class="card-img-overlay">
+                                                    <div class="card-img-overlay d-flex align-items-end">
+                                                        <div class = "card-title" style = "margin-bottom: -5px; text-align: center">
+                                                            <a href = "https://www.youtube.com/watch?v=tSBWmxwT8So" style = "text-decoration: none; color: white">Quyền lực và chính trị: Chủ nghĩa Mác LêNindasdsad</a>
+                                                        </div>
+                                                     </div>
+                                                </div>
+                                              </div>
+                                        </div>
+                                        <div class = "col-2">
+                                            <div class="card" style="height: 250px; width: 200px; margin-left: 200px">
+                                                <img class="card-img-top" src="./Image/Stalin.jpg" alt="Card image">
+                                                <div class="card-img-overlay">
+                                                    <div class="card-img-overlay d-flex align-items-end">
+                                                        <div class = "card-title" style = "margin-bottom: -5px; text-align: center">
+                                                            <a href = "https://www.youtube.com/watch?v=tSBWmxwT8So" style = "text-decoration: none; color: white">Quyền lực và chính trị: Chủ nghĩa Mác LêNindasdsad</a>
+                                                        </div>
+                                                     </div>
+                                                </div>
+                                              </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="carousel-item">
+                                    <div class = "row">
+                                        <div class = "col-2">
+                                            <div class="card" style="height: 250px; width: 200px">
+                                                <img class="card-img-top" src="./Image/Stalin.jpg" alt="Card image">
+                                                <div class="card-img-overlay">
+                                                    <div class="card-img-overlay d-flex align-items-end">
+                                                        <div class = "card-title" style = "margin-bottom: -5px; text-align: center">
+                                                            <a href = "https://www.youtube.com/watch?v=tSBWmxwT8So" style = "text-decoration: none; color: white">Quyền lực và chính trị: Chủ nghĩa Mác LêNindasdsad</a>
+                                                        </div>
+                                                     </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class = "col-2">
+                                            <div class="card" style="height: 250px; width: 200px; margin-left: 67px">
+                                                <img class="card-img-top" src="./Image/Stalin.jpg" alt="Card image">
+                                                <div class="card-img-overlay">
+                                                    <div class="card-img-overlay d-flex align-items-end">
+                                                        <div class = "card-title" style = "margin-bottom: -5px; text-align: center">
+                                                            <a href = "https://www.youtube.com/watch?v=tSBWmxwT8So" style = "text-decoration: none; color: white">Quyền lực và chính trị: Chủ nghĩa Mác LêNindasdsad</a>
+                                                        </div>
+                                                     </div>
+                                                </div>
+                                              </div>
+                                        </div>
+                                        <div class = "col-2">
+                                            <div class="card" style="height: 250px; width: 200px; margin-left: 130px">
+                                                <img class="card-img-top" src="./Image/Stalin.jpg" alt="Card image">
+                                                <div class="card-img-overlay">
+                                                    <div class="card-img-overlay d-flex align-items-end">
+                                                        <div class = "card-title" style = "margin-bottom: -5px; text-align: center">
+                                                            <a href = "https://www.youtube.com/watch?v=tSBWmxwT8So" style = "text-decoration: none; color: white">Quyền lực và chính trị: Chủ nghĩa Mác LêNindasdsad</a>
+                                                        </div>
+                                                     </div>
+                                                </div>
+                                              </div>
+                                        </div>
+                                        <div class = "col-2">
+                                            <div class="card" style="height: 250px; width: 200px; margin-left: 200px">
+                                                <img class="card-img-top" src="./Image/Stalin.jpg" alt="Card image">
+                                                <div class="card-img-overlay">
+                                                    <div class="card-img-overlay d-flex align-items-end">
+                                                        <div class = "card-title" style = "margin-bottom: -5px; text-align: center">
+                                                            <a href = "https://www.youtube.com/watch?v=tSBWmxwT8So" style = "text-decoration: none; color: white">Quyền lực và chính trị: Chủ nghĩa Mác LêNindasdsad</a>
+                                                        </div>
+                                                     </div>
+                                                </div>
+                                              </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                          </div>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <div class ="row">
-                <div class = "col-1"></div>
-                <div class = "col-2">
-                    <div class = "img-container">
-                        <img src = "./Image/Stalin.jpg" class="text-center" alt="Ảnh bìa" style="margin-bottom: 10px; margin-right: 10px;height: 250px; width: 200px; right: 20px">
-                        <div class = "bottom-left" style = "margin-bottom: 15px;margin-right: 22px;font-weight: 1000;height: 30px;font-size: 12px ;color: rgb(255, 255, 255)">
-                            <p>Quyền lực và chính trị: Chủ nghĩa Mác LêNindasdsad</p>
-                        </div>
-                    </div>
-                </div>
-                <div class = "col-2">
-                    <div class = "img-container">
-                        <img src = "./Image/Stalin.jpg" class="text-center" alt="Ảnh bìa" style="margin-bottom: 10px; margin-right: 10px;height: 250px; width: 200px; right: 20px">
-                        <div class = "bottom-left" style = "margin-bottom: 15px;margin-right: 22px;font-weight: 1000;height: 30px;font-size: 12px ;color: rgb(255, 255, 255)">
-                            <p>Quyền lực và chính trị: Chủ nghĩa Mác LêNindasdsad</p>
-                        </div>
-                    </div>
-                </div>
-                <div class = "col-2">
-                    <div class = "img-container">
-                        <img src = "./Image/Stalin.jpg" class="text-center" alt="Ảnh bìa" style="margin-bottom: 10px; margin-right: 10px;height: 250px; width: 200px; right: 20px">
-                        <div class = "bottom-left" style = "margin-bottom: 15px;margin-right: 22px;font-weight: 1000;height: 30px;font-size: 12px ;color: rgb(255, 255, 255)">
-                            <p>Quyền lực và chính trị: Chủ nghĩa Mác LêNindasdsad</p>
-                        </div>
-                    </div>
-                </div>       
-                <div class = "col-2">
-                    <div class = "img-container">
-                        <img src = "./Image/Stalin.jpg" class="text-center" alt="Ảnh bìa" style="margin-bottom: 20px;margin-right: 60px;height: 250px; width: 200px; right: 20px">
-                        <div class = "centered">
-                            <button type="button">
-                                <i class="fa-solid fa-arrow-right"></i>
-                            </button>
-                            <p>Xem thêm</p>
-                        </div>
-                    </div>
-                </div>                 
-            <div class = "row">
-                <div class = "col-9">
-                    <div class = "text-center">
-                        <button type="button" class="btn btn-primary btn-circle btn-sm"></button>
-                        <button type="button" class="btn btn-secondary btn-circle btn-sm"></button>
-                    </div>
-                </div>
-            </div>                
-            
+        </div>
+    </div>
     <!-- Footer -->
     <footer class="fixed-bottom" id="footer">
         <div class="container text-center">
