@@ -84,7 +84,8 @@
           <select class="form-select" style="max-width: 110px;background-color: #D9D9D9;">
                     <option>Tất cả</option>
                     <option>Deleted </option>
-                    <option>Pass </option>
+                    <option>In Process </option>
+                    <option>Completed </option>
                     <option>Pending </option>
                     </select>
       </div>
