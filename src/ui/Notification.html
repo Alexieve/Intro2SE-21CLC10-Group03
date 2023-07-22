@@ -83,6 +83,11 @@
                 </form>
                 <ul class="navbar-nav">
                     <li class="nav-item rounded-3">
+                        <i class="fas fa-bell" id="bell-icon"></i>
+                    </li>
+                </ul>
+                <ul class="navbar-nav">
+                    <li class="nav-item rounded-3">
                         <b><a class="nav-link" href="#">Đăng nhập</a></b>
                     </li>
                 </ul>
@@ -92,10 +97,197 @@
     <button class="btn btn-dark back-to-top" onclick="scrollToTop()">
         <i class="fas fa-angle-double-up"></i>
     </button>
+    <div class="noti">
+
+        <div class="notification-popup" id="notification-popup">
+            <!-- Content of the notification pop-up -->
+            <div class="border-tablen">
+                <table class="table table-hover border-table2n table-warp ">
+                    <!-- Header -->
+
+                    <tbody>
+                        <!-- Dòng 1 -->
+                        <!-- Thông báo có chương mới -->
+                        <tr class="thong-bao-chuong-moi ">
+                            <!-- clickable -->
+                            <!-- onclick="window.location.href='https://example.com/link2';" -->
+
+                            <td class="image-cell">
+                                <img src="./Image/Hirohito.jpg" alt="Small Image " width="40" height="60">
+                                <div class="text-container">
+                                    <div class="text1 "><a href="https://example.com/inner_link4" style="color: rgb(39, 39, 39);
+                                                    text-decoration: none;">
+                                            Thiên hoàng Minh Trị</a></div>
+                                    <div class="text2">Truyện bi kịch</div>
+                                    <div class="text3">Sách đã có chương mới nhất</div>
+                                </div>
+                            </td>
+
+
+                            <td class="small-column">
+                                <div class="inline-imagess " style="z-index: -1;">
+                                    <img id="myImage" src="./Image/—Pngtree—circle clipart gray circle_5553146.png"
+                                        class="moved-image clickable-image" alt="Small Image " width="20" height="20">
+
+                                    <img src="./Image/pngegg (5).png" onclick="deleteRowAndImage(this)"
+                                        class="moved-image" alt="Small Image " width="20" height="20">
+                                </div>
+                            </td>
+                        </tr>
+
+                        <!-- Dòng 2 -->
+                        <tr class="thong-bao-chuong-moi ">
+                            <!-- clickable -->
+                            <!-- onclick="window.location.href='https://example.com/link2';" -->
+
+                            <td class="image-cell">
+                                <img src="./Image/Hirohito.jpg" alt="Small Image " width="40" height="60">
+                                <div class="text-container">
+                                    <div class="text1 "><a href="https://example.com/inner_link4" style="color: rgb(39, 39, 39);
+                                                    text-decoration: none;">
+                                            Thiên hoàng Minh Trị</a></div>
+                                    <div class="text2">Truyện bi kịch</div>
+                                    <div class="text3">Tác giả muốn xóa toàn bộ cuốn này</div>
+                                </div>
+                            </td>
+
+
+                            <td class="small-column">
+                                <div class="inline-imagess " style="z-index: -1;">
+                                    <img id="myImage" src="./Image/—Pngtree—circle clipart gray circle_5553146.png"
+                                        class="moved-image clickable-image" alt="Small Image " width="20" height="20">
+
+                                    <img src="./Image/pngegg (5).png" onclick="deleteRowAndImage(this)"
+                                        class="moved-image" alt="Small Image " width="20" height="20">
+                                </div>
+                            </td>
+                        </tr>
+
+                        <tr class="thong-bao-chuong-moi ">
+                            <!-- clickable -->
+                            <!-- onclick="window.location.href='https://example.com/link2';" -->
+
+                            <td class="image-cell">
+                                <img src="./Image/Hirohito.jpg" alt="Small Image " width="40" height="60">
+                                <div class="text-container">
+                                    <div class="text1 "><a href="https://example.com/inner_link4" style="color: rgb(39, 39, 39);
+                                                    text-decoration: none;">
+                                            Thiên hoàng Minh Trị</a></div>
+                                    <div class="text2">Truyện bi kịch</div>
+                                    <div class="text3">Sách đã được chấp thuận</div>
+                                </div>
+                            </td>
+
+
+                            <td class="small-column">
+                                <div class="inline-imagess " style="z-index: -1;">
+                                    <img id="myImage" src="./Image/—Pngtree—circle clipart gray circle_5553146.png"
+                                        class="moved-image clickable-image" alt="Small Image " width="20" height="20">
+
+                                    <img src="./Image/pngegg (5).png" onclick="deleteRowAndImage(this)"
+                                        class="moved-image" alt="Small Image " width="20" height="20">
+                                </div>
+                            </td>
+                        </tr>
+                        <tr class="thong-bao-sach-tu-choi ">
+                            <!-- clickable -->
+                            <!-- onclick="window.location.href='https://example.com/link2';" -->
+
+                            <td class="image-cell">
+                                <img src="./Image/Hirohito.jpg" alt="Small Image " width="40" height="60">
+                                <div class="text-container">
+                                    <div class="text1 "><a href="https://example.com/inner_link4" style="color: rgb(39, 39, 39);
+                                                    text-decoration: none;">
+                                            Thiên hoàng Minh Trị</a></div>
+                                    <div class="text2">Truyện bi kịch</div>
+                                    <div class="text3">Sách đã bị từ chối</div>
+                                </div>
+                            </td>
+
+
+                            <td class="small-column">
+                                <div class="inline-imagess " style="z-index: -1;">
+                                    <img id="myImage" src="./Image/—Pngtree—circle clipart gray circle_5553146.png"
+                                        class="moved-image clickable-image" alt="Small Image " width="20" height="20">
+
+                                    <img src="./Image/pngegg (5).png" onclick="deleteRowAndImage(this)"
+                                        class="moved-image" alt="Small Image " width="20" height="20">
+                                </div>
+                            </td>
+                        </tr>
+
+                        <tr class="thong-bao-binh-luan-report ">
+
+                            <td class="image-cell">
+                                <img src="./Image/many-user.png" alt="Small Image " width="40" height="40">
+                                <div class="text-container">
+                                    <div class="text1"><a href="https://example.com/inner_link4" style="color: rgb(39, 39, 39);
+                                        text-decoration: none;">Có một bình
+                                            luận đã bị report !</a></div>
+
+                                </div>
+
+                            </td>
+
+
+                            <td class="small-column">
+                                <div class="inline-imagess " style="z-index: -1;">
+                                    <img id="myImage" src="./Image/—Pngtree—circle clipart gray circle_5553146.png"
+                                        class="moved-image clickable-image" alt="Small Image " width="20" height="20">
+
+                                    <img src="./Image/pngegg (5).png" onclick="deleteRowAndImage(this)"
+                                        class="moved-image" alt="Small Image " width="20" height="20">
+                                </div>
+                            </td>
+
+                        </tr>
+                        <tr class="thong-bao-sach-muon-dang ">
+                            <!-- clickable -->
+                            <!-- onclick="window.location.href='https://example.com/link2';" -->
+
+                            <td class="image-cell">
+                                <img src="./Image/Hirohito.jpg" alt="Small Image " width="40" height="60">
+                                <div class="text-container">
+                                    <div class="text1 "><a href="https://example.com/inner_link4" style="color: rgb(39, 39, 39);
+                                                    text-decoration: none;">
+                                            Thiên hoàng Minh Trị</a></div>
+                                    <div class="text2">Truyện bi kịch</div>
+                                    <div class="text3">Tác giả muốn đăng sách này</div>
+                                </div>
+                            </td>
+
+
+                            <td class="small-column">
+                                <div class="inline-imagess " style="z-index: -1;">
+                                    <img id="myImage" src="./Image/—Pngtree—circle clipart gray circle_5553146.png"
+                                        class="moved-image clickable-image" alt="Small Image " width="20" height="20">
+
+                                    <img src="./Image/pngegg (5).png" onclick="deleteRowAndImage(this)"
+                                        class="moved-image" alt="Small Image " width="20" height="20">
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                    <tfoot>
+
+                        <tr>
+                            <td colspan="2" class="text-center"><a href="https://example.com/inner_link55" style="color: rgb(39, 39, 39);
+                                text-decoration: none;">Xem tất cả</a></td>
+                        </tr>
+
+
+
+                    </tfoot>
+                </table>
+            </div>
+        </div>
+
+    </div>
     <div class="history">
 
 
         <div class="all-his">
+            
 
             <div class="page-top-group">
                 <a href="">
@@ -108,7 +300,7 @@
             </div>
 
 
-            <main id="mainpart" class="user-page ">
+            <main id="mainpart" class=" ">
                 <div class="container test">
                     <div class="row d-block clearfix ">
                         <!-- Navigator board -->
@@ -444,6 +636,12 @@
             // Remove the row from the table
             tbody.removeChild(row);
         }
+    </script>
+    <script>
+        document.getElementById('bell-icon').addEventListener('click', function () {
+            var popup = document.getElementById('notification-popup');
+            popup.classList.toggle('show');
+        });
     </script>
 
 </body>
