@@ -24,14 +24,14 @@
 
     <!-- The website JavaScript file -->
     <script src="/script.js" defer></script>
-   
+
 </head>
 <body>
     <!-- Navigator bar -->
     <nav class="navbar navbar-expand-lg bg-transparent">
         <div class="container-fluid">
             <a class="navbar-brand" href="#">
-                <img class="rounded-2" src="./Image/logo.png" alt="Bootstrap" width="50" height="50">
+                <img class="rounded-2" src="https://cdn.glitch.global/76a490c3-bb13-446e-8d33-6af1a3245371/logo.png?v=1689760035112" alt="Bootstrap" width="50" height="50">
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -61,86 +61,199 @@
     </nav>
 
     <!-- Cover image -->
+  
     <div class="container">
         <img width="100%" src="https://cdn.glitch.global/76a490c3-bb13-446e-8d33-6af1a3245371/cover.png?v=1689760029077" alt="Ảnh bìa" style="margin-bottom: 20px;">
     </div>
-    <div class="container border rounded p-3">
+    <div class="container border rounded p-3" style="margin-bottom: 50px;">
     <!-- Tiêu đề -->
-    <h2>Quản lí Reported Comment</h2>
-
-    <!-- Thanh tùy chọn -->
-    <div class="d-flex justify-content-between align-items-center my-3">
-        <div class="d-flex">
-    <!-- Các tùy chọn tìm kiếm, sắp xếp, xoá sửa -->
-            <div class="input-group mb-3">
-            <span class="input-group-text" id="search-icon" style="background-color: #D9D9D9; color: #fff; ">&#128269;</span>
-            <input type="text" class="form-control text-dark" style="background-color: #D9D9D9; color: #fff;" 
-                   placeholder="Tìm kiếm theo tên, id, etc." aria-label="Search" aria-describedby="search-icon">
-            </div>
-            <! nut sort>
-            <div class="input-group" >
-              <div class="input-group-prepend" >
-                <button type="button"style="background-color: #D9D9D9; color: #fff; margin-left : 160px;" class="btn btn-secondary dropdown-toggle text-dark" data-bs-toggle="dropdown" aria-expanded="false">
-                <i class="fas fa-sort"></i> Tất cả         
-                </button>
-                <ul class="dropdown-menu">
-                <li><a class="dropdown-item" href="#" onclick="sortAZ()">A-Z</a></li>
-                <li><a class="dropdown-item" href="#" onclick="sortZA()">Z-A</a></li>
-                </ul>
-              </div>
-            </div>
-          
-            <div class="input-group">
-              <div class="input-group-prepend" >
-                <button type="button" class="btn btn-secondary text-dark" style= "margin-left : 20px;background-color: #D9D9D9; color: #fff;"  onclick="functionXoa()">Xóa Comment </button>
-              </div>
-            </div>
-            
-            <div class="input-group">
-              <div class="input-group-prepend" >
-                <button type="button" class="btn btn-secondary text-dark" style=" margin-left : 20px;background-color: #D9D9D9; color: #fff;" onclick="functionPASS()">Bỏ qua </button>
-              </div>
-            </div>
-    </div>
-        
-
-        <!-- Phân trang -->
-      <div class="d-flex align-items-center">
-      <span class="mx-2">1 of 7</span>
-      <button type="button" class="btn btn-link" disabled><i class="fas fa-chevron-left"></i></button>
-      
-      <button type="button" class="btn btn-link"><i class="fas fa-chevron-right"></i></button>
+    <h2><i class="fa-solid fa-users"></i> <strong> Quản lý Reported Comment</strong></h2>
+      <div class="row">
+      <div class="col-md-4 mt-2 ">
+        <div class="input-group "  style="max-width: 260px;"  >
+          <span class="input-group-text" id="search-icon" style="background-color: #D9D9D9;"><i class="fa-solid fa-magnifying-glass"></i></span>
+          <input type="text" class="form-control" style="background-color: #D9D9D9;" 
+                 id="search-input" placeholder="Tìm kiếm theo tên,id,etc.">
+        </div>
       </div>
+      <div class="col-md-2 mt-2  d-flex align-items-center">
+          <span class="me-3">
+          <!-- Thêm biểu tượng vào đây, ví dụ: Font Awesome icon -->
+          <i class="fa-solid fa-filter"></i>
+          </span>
+          <select class="form-select" style="max-width: 110px;background-color: #D9D9D9;">
+                    <option>Tất cả</option>
+                    <option>Deleted </option>
+                    <option>Pass </option>
+                    <option>Pending </option>
+                    </select>
+      </div>
+      <div class="col-md-2 mt-2 d-flex justify-content-center ">
+        <button class="btn btn-outline " style="background-color: #D9D9D9;">Xóa comment</button>
+      </div>
+      <div class="col-md-2 mt-2 d-flex justify-content-center">
+        <button class="btn btn-outline " style="background-color: #D9D9D9;">Bỏ qua</button>
+      </div>
+      <div class="col-md-2 mt-2 ">
+        <div class=" d-flex justify-content-between align-items-center">
+        <span class="ms-4"> 1 of 7</span>
+        <div>
+        <button class="btn btn-link" aria-label="Trang trước">
+        <i class="fa-solid fa-chevron-left"></i>
+        </button>
+        <button class="btn btn-link" aria-label="Trang sau">
+        <i class="fa-solid fa-chevron-right"></i>
+        </button>
+    </div>
   </div>
-    
-
-    <!-- Bảng dữ liệu -->
-    <table class="table table-bordered">
-        <thead>
-            <tr>
-                <th scope="col">Thuộc tính 1</th>
-                <th scope="col">Thuộc tính 2</th>
-                <th scope="col">Thuộc tính 3</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td>Giá trị 1</td>
-                <td>Giá trị 2</td>
-                <td>Giá trị 3</td>
-            </tr>
-            <!-- Thêm các dòng dữ liệu tương tự ở đây -->
-        </tbody>
+      </div>
+      
+      <!-- Bảng -->
+        
+  <div class="table-responsive mt-2">
+    <table class="table table-hover table-borderless ">
+      <thead>
+        <tr>
+          <th class="border-bottom " >
+            <input type="checkbox" id="checkAll">
+          </th>
+          <th class="border-bottom" >STT <i class="fa-solid fa-sort"></i> </th>
+          <th class="border-bottom" >Username <i class="fa-solid fa-sort"></i></th>
+          <th class="border-bottom" >Tên sách <i class="fa-solid fa-sort"></i></th>
+          <th class="border-bottom" >UserReport <i class="fa-solid fa-sort"></i></th>
+          <th class="border-bottom" >Nội dung <i class="fa-solid fa-sort"></i></th>
+          <th class="border-bottom text-center"  >Tình trạng <i class="fa-solid fa-sort"></i></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><input type="checkbox"></td>
+          <td>1</td>
+          <td>quynh2004</td>
+          <td>Tự kỉ 1</td>
+          <td>quynh2005</td>
+          <td>aaaaaaaaaaaaaaaaaaaaaa</td>
+          <td class="d-flex justify-content-center">
+            <span class="p-1 rounded" style="background-color: #FF6767;">Deleted</span>
+          </td>
+        </tr>
+        <tr>
+          <td><input type="checkbox"></td>
+          <td>2</td>
+          <td>quynh2004</td>
+          <td>Tự kỉ 1</td>
+          <td>quynh2005</td>
+          <td>aaaaaaaaaaaaaaaaaaaaaa</td>
+          <td class="d-flex justify-content-center">
+            <span class="p-1 rounded" style="background-color: #67FF88;">Deleted</span>
+          </td>
+        </tr>
+        <tr>
+          <td><input type="checkbox"></td>
+          <td>3</td>
+          <td>quynh2004</td>
+          <td>Tự kỉ 1</td>
+          <td>quynh2005</td>
+          <td>aaaaaaaaaaaaaaaaaaaaaa</td>
+          <td class="d-flex justify-content-center">
+            <span class="p-1 rounded" style="background-color: #FDE9B5;">Deleted</span>
+          </td>
+        </tr>
+        <tr>
+          <td><input type="checkbox"></td>
+          <td>4</td>
+          <td>quynh2004</td>
+          <td>Tự kỉ 1</td>
+          <td>quynh2005</td>
+          <td> aaaaaaaaaaaaaaaaaaaaaa</td>
+          <td class="d-flex justify-content-center">
+            <span class="p-1 rounded" style="background-color: #FDE9B5;">Deleted</span>
+          </td>
+        </tr>
+        <tr>
+          <td><input type="checkbox"></td>
+          <td>5</td>
+          <td>quynh2004</td>
+          <td>Tự kỉ 1</td>
+          <td>quynh2005</td>
+          <td >aaaaaaaaaaaaaaaaaaaaaa</td>
+          <td class="d-flex justify-content-center">
+            <span class="p-1 rounded" style="background-color: #FF6767;">Deleted</span>
+          </td>
+        </tr>
+        <tr>
+          <td><input type="checkbox"></td>
+          <td>6</td>
+          <td>quynh2004</td>
+          <td>Tự kỉ 1</td>
+          <td>quynh2005</td>
+          <td>aaaaaaaaaaaaaaaaaaaaaa</td>
+          <td class="d-flex justify-content-center">
+            <span class="p-1 rounded" style="background-color: #FF6767;">Deleted</span>
+          </td>
+        </tr>
+        <tr>
+          <td><input type="checkbox"></td>
+          <td>7</td>
+          <td>quynh2004</td>
+          <td>Tự kỉ 1</td>
+          <td>quynh2005</td>
+          <td>aaaaaaaaaaaaaaaaaaaaaa</td>
+          <td class="d-flex justify-content-center">
+            <span class="p-1 rounded" style="background-color: #FF6767;">Deleted</span>
+          </td>
+        </tr>
+        <tr>
+          <td><input type="checkbox"></td>
+          <td>8</td>
+          <td>quynh2004</td>
+          <td>Tự kỉ 1</td>
+          <td>quynh2005</td>
+          <td>aaaaaaaaaaaaaaaaaaaaaa</td>
+          <td class="d-flex justify-content-center">
+            <span class="p-1 rounded" style="background-color: #FF6767;">Deleted</span>
+          </td>
+        </tr>
+        <tr>
+          <td><input type="checkbox"></td>
+          <td>9</td>
+          <td>quynh2004</td>
+          <td>Tự kỉ 1</td>
+          <td>quynh2005</td>
+          <td>aaaaaaaaaaaaaaaaaaaaaa</td>
+          <td class="d-flex justify-content-center">
+            <span class="p-1 rounded" style="background-color: #FF6767;">Deleted</span>
+          </td>
+        </tr>
+        <tr>
+          <td><input type="checkbox"></td>
+          <td>10</td>
+          <td>quynh2004</td>
+          <td>Tự kỉ 1</td>
+          <td>quynh2005</td>
+          <td>aaaaaaaaaaaaaaaaaaaaaa</td>
+          <td class="d-flex justify-content-center">
+            <span class="p-1 rounded" style="background-color: #FF6767;">Deleted</span>
+          </td>
+        </tr>
+        
+      </tbody>
     </table>
-</div>
-  
-</div>
+  </div>
+
+    </div> 
+      </div>
+      <!-- Dòng container với 6 cột -->
     
+      
+    
+      
+  </body>    
     
     
     <!-- Footer -->
     <footer class="fixed-bottom" id="footer">
-        <div class="container text-center"">
+        <div class="container text-center">
             <div class="row align-items-center">
                 <div class="col-md-6">
                     <span>© 2023 - HappiNovel</span>
@@ -152,5 +265,6 @@
         </div>
     </footer>
 
-</body>
+
 </html>
+
