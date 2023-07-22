@@ -83,9 +83,9 @@
           </span>
           <select class="form-select" style="max-width: 110px;background-color: #D9D9D9;">
                     <option>Tất cả</option>
-                    <option>Deleted </option>
-                    <option>Pass </option>
-                    <option>Pending </option>
+                    <option>Active </option>
+                    <option>Banned </option>
+                    
                     </select>
       </div>
       <div class="col-md-2 mt-2 d-flex align-items-center ">
