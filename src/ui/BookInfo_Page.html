@@ -1,1 +1,237 @@
-still ded 
+<!DOCTYPE html>
+<html>
+<head>
+	<title>View Book Information Page</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</head>
+<body>
+
+	<div class="container">
+		<div class="row">
+
+			<!-- First Section -->
+			<div class="col-md-8">
+				<div class="row">
+					<div class="col-md-4">
+						<img src="book-cover.jpg" class="img-fluid" alt="Book Cover">
+					</div>
+					<div class="col-md-8">
+						<h2>Book Title</h2>
+						<div class="mb-2">
+							<span class="badge badge-primary">Category 1</span>
+							<span class="badge badge-secondary">Category 2</span>
+							<span class="badge badge-success">Category 3</span>
+						</div>
+						<p>Author: John Doe</p>
+						<p>Artist: Jane Doe</p>
+						<p>Status: In progress</p>
+						<div class="d-flex">
+							<a href="#"><i class="far fa-heart mr-2"></i></a>
+							<a href="#"><i class="far fa-star mr-2"></i></a>
+							<a href="#chapter-list"><i class="fas fa-list mr-2"></i></a>
+							<a href="#comments"><i class="far fa-comments"></i></a>
+						</div>
+						<p class="mt-3">Brief description of the book.</p>
+					</div>
+				</div>
+			</div>
+
+			<!-- Second Section -->
+			<div class="col-md-4">
+				<img src="author-avatar.jpg" class="img-fluid rounded-circle" alt="Author Avatar" width="150" height="150">
+				<p class="mt-3">Author Name</p>
+				<p>Author Bio.</p>
+			</div>
+
+		</div>
+
+		<!-- Third Section -->
+		<div class="row mt-5" id="chapter-list">
+			<div class="col-md-12">
+				<h3>Chapter List</h3>
+				<div class="row">
+					<div class="col-md-3">
+						<img src="chapter-cover-1.jpg" class="img-fluid" alt="Chapter Cover 1">
+						<p>Chapter 1 Title</p>
+					</div>
+					<div class="col-md-3">
+						<img src="chapter-cover-2.jpg" class="img-fluid" alt="Chapter Cover 2">
+						<p>Chapter 2 Title</p>
+					</div>
+					<div class="col-md-3">
+						<img src="chapter-cover-3.jpg" class="img-fluid" alt="Chapter Cover 3">
+						<p>Chapter 3 Title</p>
+					</div>
+					<div class="col-md-3">
+						<img src="chapter-cover-4.jpg" class="img-fluid" alt="Chapter Cover 4">
+						<p>Chapter 4 Title</p>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<!-- Fourth Section -->
+
+	</div>
+    <style>
+        body {
+          font-family: 'Open Sans', sans-serif;
+          font-size: 16px;
+          font-weight: 400;
+        }
+            .comment {
+                margin-bottom: 20px;
+            }
+            .comment-avatar {
+                width: 60px;
+                height: 60px;
+                border-radius: 50%;
+                margin-right: 10px;
+            }
+            .comment-info {
+                margin-bottom: 5px;
+            }
+            .comment-user {
+                font-weight: bold;
+                margin-right: 5px;
+            }
+            .comment-role {
+                font-size: 12px;
+                color: #999;
+            }
+            .comment-date {
+                font-size: 12px;
+                color: #999;
+                margin-left: 5px;
+            }
+            .comment-content {
+                margin-top: 5px;
+            }
+            .reply-link {
+                font-size: 12px;
+                color: #999;
+                margin-left: 10px;
+            }
+            .report-link {
+                font-size: 12px;
+                color: #999;
+                margin-left: 10px;
+            }
+            .nested-comments {
+                margin-left: 50px;
+            }
+            .comment-form {
+                margin-top: 50px;
+                border-top: 1px solid #ddd;
+                padding-top: 20px;
+            }
+            .comment-form textarea {
+                height: 100px;
+                resize: none;
+            }
+            .comment-form button {
+                background-color: transparent;
+                border: 1px solid #007bff;
+                color: #007bff;
+                padding: 5px 10px;
+                border-radius: 5px;
+                transition: all 0.3s ease-in-out;
+            }
+            .comment-form button:hover {
+                background-color: #007bff;
+                color: #fff;
+                cursor: pointer;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <h2>Comments (4)</h2>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="comment">
+                                <img src="./Image/ava1.png" alt="Avatar" class="comment-avatar float-left">
+                                <div class="comment-info">
+                                    <span class="comment-user">User 1</span>
+                                    <span class="comment-role">Admin</span>
+                                    <span class="comment-date">1 hour ago</span>
+                                </div>
+                                <div class="comment-content">
+                                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed fermentum velit vel quam fringilla, in gravida enim posuere. Nullam a bibendum justo. Sed ac sagittis mi.</p>
+                                    <a href="#" class="reply-link">Reply</a>
+                                    <a href="#" class="report-link">Report</a>
+                                    <div class="nested-comments">
+                                        <div class="comment">
+                                            <img src="./Image/ava1.png" alt="Avatar" class="comment-avatar float-left">
+                                            <div class="comment-info">
+                                                <span class="comment-user">User 2</span>
+                                                <span class="comment-role">User</span>
+                                                <span class="comment-date">30 minutes ago</span>
+                                            </div>
+                                            <div class="comment-content">
+                                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed fermentum velit vel quam fringilla, in gravida enim posuere.</p>
+                                                <a href="#" class="reply-link">Reply</a>
+                                                <a href="#" class="report-link">Report</a>
+                                            </div>
+                                        </div>
+                                        <div class="comment">
+                                            <img src="./Image/ava1.png" alt="Avatar" class="comment-avatar float-left">
+                                            <div class="comment-info">
+                                                <span class="comment-user">User 3</span>
+                                                <span class="comment-role">User</span>
+                                                <span class="comment-date">15 minutes ago</span>
+                                            </div>
+                                            <div class="comment-content">
+                                                <p>Lorem ipsum dolor sit amet, consectetur adipiscingelit. Sed fermentum velit vel quam fringilla, in gravida enim posuere.</p>
+                                                <a href="#" class="reply-link">Reply</a>
+                                                <a href="#" class="report-link">Report</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+    
+                            <div class="comment">
+                                <img src="./Image/ava1.png" alt="Avatar" class="comment-avatar float-left">
+                                <div class="comment-info">
+                                    <span class="comment-user">User 4</span>
+                                    <span class="comment-role">User</span>
+                                    <span class="comment-date">10 minutes ago</span>
+                                </div>
+                                <div class="comment-content">
+                                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed fermentum velit vel quam fringilla, in gravida enim posuere.</p>
+                                    <a href="#" class="reply-link">Reply</a>
+                                    <a href="#" class="report-link">Report</a>
+                                </div>
+                            </div>
+    
+                            <div class="comment-form">
+                                <img src="./Image/ava1.png" alt="Avatar" class="comment-avatar float-left">
+                  <div class="comment-info" style="display: flex; align-items: center">
+                                    <span class="comment-user">User 4</span>
+                                    <span class="comment-role">User</span>
+                                </div>
+                                <div class="form-group">
+                                    <textarea name="comment" id="comment" class="form-control"></textarea>
+                                </div>
+                                <button type="submit" class="btn btn-primary">Post Comment</button>
+                            </div>
+                
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+</body>
+</html>
