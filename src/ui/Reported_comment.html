@@ -69,7 +69,7 @@
     <!-- Tiêu đề -->
     <h2><i class="fa-solid fa-users"></i> <strong> Quản lý Reported Comment</strong></h2>
       <div class="row">
-      <div class="col-md-4 mt-2 ">
+      <div class="col-md-4 mt-2  d-flex align-items-center ">
         <div class="input-group "  style="max-width: 260px;"  >
           <span class="input-group-text" id="search-icon" style="background-color: #D9D9D9;"><i class="fa-solid fa-magnifying-glass"></i></span>
           <input type="text" class="form-control" style="background-color: #D9D9D9;" 
@@ -88,24 +88,32 @@
                     <option>Pending </option>
                     </select>
       </div>
-      <div class="col-md-2 mt-2 d-flex justify-content-center ">
+      <div class="col-md-2 mt-2 d-flex align-items-center ">
         <button class="btn btn-outline " style="background-color: #D9D9D9;">Xóa comment</button>
       </div>
-      <div class="col-md-2 mt-2 d-flex justify-content-center">
+      <div class="col-md-2 mt-2 d-flex align-items-center">
         <button class="btn btn-outline " style="background-color: #D9D9D9;">Bỏ qua</button>
       </div>
-      <div class="col-md-2 mt-2 ">
-        <div class=" d-flex justify-content-between align-items-center">
-        <span class="ms-4"> 1 of 7</span>
-        <div>
-        <button class="btn btn-link" aria-label="Trang trước">
-        <i class="fa-solid fa-chevron-left"></i>
-        </button>
-        <button class="btn btn-link" aria-label="Trang sau">
-        <i class="fa-solid fa-chevron-right"></i>
-        </button>
-    </div>
-  </div>
+      <div class="col-md-2 mt-4 d-flex justify-content-center">
+      
+         <ul class="pagination ">
+            <li >
+          <div class="btn btn-outline btn-lg btn-text">1 of 7</div>
+          </li>
+           <li >
+          <a href="#" aria-label="Trang trước" class="btn btn-outline btn-lg">
+          <i class="fas fa-chevron-left"></i>
+          </a>
+          </li>
+           
+          <li class="page-item">
+            <a href="#" aria-label="Trang sau" class="btn btn-outline btn-lg">
+              <i class="fas fa-chevron-right"></i>
+            </a>
+          </li>
+  <!-- Các nút điều hướng khác ở đây -->
+          </ul>
+        </div>
       </div>
       
       <!-- Bảng -->
@@ -145,7 +153,7 @@
           <td>quynh2005</td>
           <td>aaaaaaaaaaaaaaaaaaaaaa</td>
           <td class="d-flex justify-content-center">
-            <span class="p-1 rounded" style="background-color: #67FF88;">Deleted</span>
+            <span class="p-1 rounded" style="background-color: #67FF88;">Pass</span>
           </td>
         </tr>
         <tr>
@@ -156,7 +164,7 @@
           <td>quynh2005</td>
           <td>aaaaaaaaaaaaaaaaaaaaaa</td>
           <td class="d-flex justify-content-center">
-            <span class="p-1 rounded" style="background-color: #FDE9B5;">Deleted</span>
+            <span class="p-1 rounded" style="background-color: #FDE9B5;">Pending</span>
           </td>
         </tr>
         <tr>
@@ -167,12 +175,12 @@
           <td>quynh2005</td>
           <td> aaaaaaaaaaaaaaaaaaaaaa</td>
           <td class="d-flex justify-content-center">
-            <span class="p-1 rounded" style="background-color: #FDE9B5;">Deleted</span>
+            <span class="p-1 rounded" style="background-color: #FDE9B5;">Pending</span>
           </td>
         </tr>
         <tr>
           <td><input type="checkbox"></td>
-          <td>5</td>
+          <td >5</td>
           <td>quynh2004</td>
           <td>Tự kỉ 1</td>
           <td>quynh2005</td>
@@ -242,7 +250,8 @@
   </div>
 
     </div> 
-      </div>
+      
+  
       <!-- Dòng container với 6 cột -->
     
       
@@ -250,7 +259,20 @@
       
   </body>    
     
-    
+<style>
+  .btn-text {
+    cursor: default; /* Không thay đổi con trỏ chuột khi di chuột vào */
+    pointer-events: none; /* Vô hiệu hóa sự kiện chuột cho thẻ */
+    color: #6c757d; /* Màu chữ khi vô hiệu hóa */
+    text-decoration: none; /* Bỏ gạch chân */
+  }
+</style>
+<style>
+  .p-1 {
+    width: 90px; /* Đặt chiều rộng cố định cho các khung */
+    text-align: center; /* Căn giữa nội dung trong khung */
+  }
+</style>
     <!-- Footer -->
     <footer class="fixed-bottom" id="footer">
         <div class="container text-center">
