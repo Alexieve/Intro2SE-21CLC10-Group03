@@ -8,17 +8,89 @@
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    <meta charset="UTF-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+      <meta name="description" content="Đọc HappiNovel, trang web tốt nhất HCMUS" />
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+      <style data-tag="reset-style-sheet">
+      </style>
+      <style>
+            /* Custom CSS to remove the outline when content is editable */
+            [contenteditable="true"] {
+              outline: none;
+            }
+      </style>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <link rel="preconnect" href="https://fonts.googleapis.com">
+      <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+      <link rel="stylesheet"
+            href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,300;1,400;1,500;1,600;1,700;1,800&amp;display=swap"
+            data-tag="font" />
+      <link rel="stylesheet"
+            href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&amp;display=swap"
+            data-tag="font" />
+      <link rel="stylesheet" href="./css/styleProfile.css">
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css">
+      <!-- Open Sans Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
+    <!-- FontAweSome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- jquery -->
+    <script src="https://code.jquery.com/jquery-3.7.0.js" integrity="sha256-JlqSTELeR4TLqP0OG9dxM7yDPqX1ox/HfgiSLBj8+kM=" crossorigin="anonymous"></script>
+    <!-- Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
+    <!-- Styles.css -->
+    <link rel="stylesheet" href="css/stylesUpload.css">
+    <!-- Tiny ediotr -->
+    <script src="https://cdn.tiny.cloud/1/czhzadznx3qb12g2i4971xbviqsshfv65cbyuvs95fsi5021/tinymce/6/tinymce.min.js" referrerpolicy="origin"></script>
+    <script src="https://cdn.tiny.cloud/1/czhzadznx3qb12g2i4971xbviqsshfv65cbyuvs95fsi5021/tinymce/6/tinymce.min.js" referrerpolicy="origin"></script>
 </head>
 <body>
-
-	<div class="container">
-		<div class="row">
-
+    <div class="navbar-container">
+        <nav class="navbar navbar-expand-lg bg-transparent" style="max-width: 1280px;">
+          <div class="container-fluid">
+            <a class="navbar-brand" href="#">
+              <img class="rounded-2" src="./Image/logo.png" alt="Bootstrap" width="50" height="50">
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+              <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item rounded-3">
+                  <b><a class="nav-link" href="#">Thể loại</a></b>
+                </li>
+                <li class="nav-item rounded-3">
+                  <b><a class="nav-link" href="#">Sách của bạn</a></b>
+                </li>
+                <li class="nav-item rounded-3">
+                  <b><a class="nav-link" href="#">Viết sách</a></b>
+                </li>
+              </ul>
+              <form class="d-flex " role="search">
+                <input class="form-control search-form me-2" type="text" placeholder="Tìm kiếm..." aria-label="Search">
+              </form>
+              <ul class="navbar-nav">
+                <li class="nav-item rounded-3">
+                  <b><a class="nav-link" href="#">Đăng nhập</a></b>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </nav>
+      
+        <div class="container">
+          <div class="row">
 			<!-- First Section -->
 			<div class="col-md-8">
 				<div class="row">
 					<div class="col-md-4">
-						<img src="book-cover.jpg" class="img-fluid" alt="Book Cover">
+						<img src="./Image/R.png" class="img-fluid" alt="Book Cover">
 					</div>
 					<div class="col-md-8">
 						<h2>Book Title</h2>
@@ -40,198 +112,55 @@
 					</div>
 				</div>
 			</div>
-
+        
 			<!-- Second Section -->
 			<div class="col-md-4">
-				<img src="author-avatar.jpg" class="img-fluid rounded-circle" alt="Author Avatar" width="150" height="150">
+				<img src="./Image/Stalin.jpg" class="img-fluid rounded-circle" alt="Author Avatar" width="150" height="150">
 				<p class="mt-3">Author Name</p>
 				<p>Author Bio.</p>
 			</div>
 
-		</div>
-
 		<!-- Third Section -->
-		<div class="row mt-5" id="chapter-list">
-			<div class="col-md-12">
-				<h3>Chapter List</h3>
-				<div class="row">
-					<div class="col-md-3">
-						<img src="chapter-cover-1.jpg" class="img-fluid" alt="Chapter Cover 1">
-						<p>Chapter 1 Title</p>
-					</div>
-					<div class="col-md-3">
-						<img src="chapter-cover-2.jpg" class="img-fluid" alt="Chapter Cover 2">
-						<p>Chapter 2 Title</p>
-					</div>
-					<div class="col-md-3">
-						<img src="chapter-cover-3.jpg" class="img-fluid" alt="Chapter Cover 3">
-						<p>Chapter 3 Title</p>
-					</div>
-					<div class="col-md-3">
-						<img src="chapter-cover-4.jpg" class="img-fluid" alt="Chapter Cover 4">
-						<p>Chapter 4 Title</p>
-					</div>
-				</div>
-			</div>
-		</div>
-
-		<!-- Fourth Section -->
-
-	</div>
-    <style>
-        body {
-          font-family: 'Open Sans', sans-serif;
-          font-size: 16px;
-          font-weight: 400;
-        }
-            .comment {
-                margin-bottom: 20px;
-            }
-            .comment-avatar {
-                width: 60px;
-                height: 60px;
-                border-radius: 50%;
-                margin-right: 10px;
-            }
-            .comment-info {
-                margin-bottom: 5px;
-            }
-            .comment-user {
-                font-weight: bold;
-                margin-right: 5px;
-            }
-            .comment-role {
-                font-size: 12px;
-                color: #999;
-            }
-            .comment-date {
-                font-size: 12px;
-                color: #999;
-                margin-left: 5px;
-            }
-            .comment-content {
-                margin-top: 5px;
-            }
-            .reply-link {
-                font-size: 12px;
-                color: #999;
-                margin-left: 10px;
-            }
-            .report-link {
-                font-size: 12px;
-                color: #999;
-                margin-left: 10px;
-            }
-            .nested-comments {
-                margin-left: 50px;
-            }
-            .comment-form {
-                margin-top: 50px;
-                border-top: 1px solid #ddd;
-                padding-top: 20px;
-            }
-            .comment-form textarea {
-                height: 100px;
-                resize: none;
-            }
-            .comment-form button {
-                background-color: transparent;
-                border: 1px solid #007bff;
-                color: #007bff;
-                padding: 5px 10px;
-                border-radius: 5px;
-                transition: all 0.3s ease-in-out;
-            }
-            .comment-form button:hover {
-                background-color: #007bff;
-                color: #fff;
-                cursor: pointer;
-            }
-        </style>
-    </head>
-    <body>
-        <div class="container">
-            <div class="row">
-                <div class="col-md-12">
-                    <h2>Comments (4)</h2>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="card">
-                        <div class="card-body">
-                            <div class="comment">
-                                <img src="./Image/ava1.png" alt="Avatar" class="comment-avatar float-left">
-                                <div class="comment-info">
-                                    <span class="comment-user">User 1</span>
-                                    <span class="comment-role">Admin</span>
-                                    <span class="comment-date">1 hour ago</span>
-                                </div>
-                                <div class="comment-content">
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed fermentum velit vel quam fringilla, in gravida enim posuere. Nullam a bibendum justo. Sed ac sagittis mi.</p>
-                                    <a href="#" class="reply-link">Reply</a>
-                                    <a href="#" class="report-link">Report</a>
-                                    <div class="nested-comments">
-                                        <div class="comment">
-                                            <img src="./Image/ava1.png" alt="Avatar" class="comment-avatar float-left">
-                                            <div class="comment-info">
-                                                <span class="comment-user">User 2</span>
-                                                <span class="comment-role">User</span>
-                                                <span class="comment-date">30 minutes ago</span>
-                                            </div>
-                                            <div class="comment-content">
-                                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed fermentum velit vel quam fringilla, in gravida enim posuere.</p>
-                                                <a href="#" class="reply-link">Reply</a>
-                                                <a href="#" class="report-link">Report</a>
-                                            </div>
-                                        </div>
-                                        <div class="comment">
-                                            <img src="./Image/ava1.png" alt="Avatar" class="comment-avatar float-left">
-                                            <div class="comment-info">
-                                                <span class="comment-user">User 3</span>
-                                                <span class="comment-role">User</span>
-                                                <span class="comment-date">15 minutes ago</span>
-                                            </div>
-                                            <div class="comment-content">
-                                                <p>Lorem ipsum dolor sit amet, consectetur adipiscingelit. Sed fermentum velit vel quam fringilla, in gravida enim posuere.</p>
-                                                <a href="#" class="reply-link">Reply</a>
-                                                <a href="#" class="report-link">Report</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-    
-                            <div class="comment">
-                                <img src="./Image/ava1.png" alt="Avatar" class="comment-avatar float-left">
-                                <div class="comment-info">
-                                    <span class="comment-user">User 4</span>
-                                    <span class="comment-role">User</span>
-                                    <span class="comment-date">10 minutes ago</span>
-                                </div>
-                                <div class="comment-content">
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed fermentum velit vel quam fringilla, in gravida enim posuere.</p>
-                                    <a href="#" class="reply-link">Reply</a>
-                                    <a href="#" class="report-link">Report</a>
-                                </div>
-                            </div>
-    
-                            <div class="comment-form">
-                                <img src="./Image/ava1.png" alt="Avatar" class="comment-avatar float-left">
-                  <div class="comment-info" style="display: flex; align-items: center">
-                                    <span class="comment-user">User 4</span>
-                                    <span class="comment-role">User</span>
-                                </div>
-                                <div class="form-group">
-                                    <textarea name="comment" id="comment" class="form-control"></textarea>
-                                </div>
-                                <button type="submit" class="btn btn-primary">Post Comment</button>
-                            </div>
-                
-                        </div>
+        <div class="row mt-5" id="book-volumes">
+            <div class="col-md-12">
+              <div class="row">
+                <div class="col-md-6">
+                  <div class="row">
+                    <div class="col-md-4">
+                      <img src="./Image/R.png" class="img-fluid" alt="Volume 1 Cover">
                     </div>
+                    <div class="col-md-8">
+                      <h3>Volume 1</h3>
+                      <ul class="list-group">
+                        <li class="list-group-item">Chapter 1 Title</li>
+                        <li class="list-group-item">Chapter 2 Title</li>
+                        <li class="list-group-item">Chapter 3 Title</li>
+                        <li class="list-group-item">Chapter 4 Title</li>
+                      </ul>
+                    </div>
+                  </div>
                 </div>
+              </div>
+              <div class="row">
+                <div class="col-md-6">
+                  <div class="row">
+                    <div class="col-md-4">
+                      <img src="./Image/R.png" class="img-fluid" alt="Volume 2 Cover">
+                    </div>
+                    <div class="col-md-8">
+                      <h3>Volume 2</h3>
+                      <ul class="list-group">
+                        <li class="list-group-item">Chapter 1 Title</li>
+                        <li class="list-group-item">Chapter 2 Title</li>
+                        <li class="list-group-item">Chapter 3 Title</li>
+                        <li class="list-group-item">Chapter 4 Title</li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
-        </div>
+          </div>
+        </div>  
 </body>
 </html>
