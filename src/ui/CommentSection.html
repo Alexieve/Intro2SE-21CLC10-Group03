@@ -77,6 +77,7 @@
 			color: #fff;
 			cursor: pointer;
 		}
+		
 	</style>
 </head>
 <body>
@@ -90,12 +91,11 @@
 			<div class="col-md-12">
 				<div class="card">
 					<div class="card-body">
-						<div class="comment">
+						<div class="comment border">
 							<img src="./Image/ava1.png" alt="Avatar" class="comment-avatar float-left">
 							<div class="comment-info">
 								<span class="comment-user">User 1</span>
 								<span class="comment-role">Admin</span>
-								<span class="comment-date">1 hour ago</span>
 							</div>
 							<div class="comment-content">
 								<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed fermentum velit vel quam fringilla, in gravida enim posuere. Nullam a bibendum justo. Sed ac sagittis mi.</p>
@@ -107,7 +107,6 @@
 										<div class="comment-info">
 											<span class="comment-user">User 2</span>
 											<span class="comment-role">User</span>
-											<span class="comment-date">30 minutes ago</span>
 										</div>
 										<div class="comment-content">
 											<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed fermentum velit vel quam fringilla, in gravida enim posuere.</p>
@@ -120,7 +119,6 @@
 										<div class="comment-info">
 											<span class="comment-user">User 3</span>
 											<span class="comment-role">User</span>
-											<span class="comment-date">15 minutes ago</span>
 										</div>
 										<div class="comment-content">
 											<p>Lorem ipsum dolor sit amet, consectetur adipiscingelit. Sed fermentum velit vel quam fringilla, in gravida enim posuere.</p>
@@ -132,12 +130,11 @@
 							</div>
 						</div>
 
-						<div class="comment">
+						<div class="comment border">
 							<img src="./Image/ava1.png" alt="Avatar" class="comment-avatar float-left">
 							<div class="comment-info">
 								<span class="comment-user">User 4</span>
 								<span class="comment-role">User</span>
-								<span class="comment-date">10 minutes ago</span>
 							</div>
 							<div class="comment-content">
 								<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed fermentum velit vel quam fringilla, in gravida enim posuere.</p>
@@ -146,9 +143,66 @@
 							</div>
 						</div>
 
+						<div class="comment border">
+							<img src="./Image/ava1.png" alt="Avatar" class="comment-avatar float-left">
+							<div class="comment-info">
+							  <span class="comment-user">User 1</span>
+							  <span class="comment-role">Admin</span>
+							</div>
+							<div class="comment-content">
+							  <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed fermentum velit vel quam fringilla, in gravida enim posuere. Nullam a bibendum justo. Sed ac sagittis mi.</p>
+							  <a href="#" class="reply-link">Reply</a>
+							  <a href="#" class="report-link" data-toggle="modal" data-target="#report-modal">Report</a>
+							</div>
+						  </div>
+						  <!-- Report Modal -->
+						  <div class="modal" id="report-modal">
+							<div class="modal-dialog">
+							  <div class="modal-content">
+								<div class="modal-header">
+								  <h5 class="modal-title">Report Comment</h5>
+								  <button type="button" class="close" data-dismiss="modal">&times;</button>
+								</div>
+								<div class="modal-body">
+								  <form>
+									<div class="form-group">
+									  <div class="custom-control custom-radio">
+										<input type="radio" id="report-reason-offensive" name="report-reason" value="offensive" class="custom-control-input">
+										<label class="custom-control-label" for="report-reason-offensive">Báo cáo</label>
+									  </div>
+									  <div class="custom-control custom-radio">
+										<input type="radio" id="report-reason-delete" name="report-reason" value="delete" class="custom-control-input">
+										<label class="custom-control-label" for="report-reason-delete">Xóa bình luận</label>
+									  </div>
+									  <div class="custom-control custom-radio">
+										<input type="radio" id="report-reason-ban" name="report-reason" value="ban" class="custom-control-input">
+										<label class="custom-control-label" for="report-reason-ban">Cấm người dùng</label>
+									  </div>
+									</div>
+									<button type="submit" class="btn btn-primary">Submit</button>
+								  </form>
+								</div>
+							  </div>
+							</div>
+						  </div>
+
+						  <div class="form-group">
+							<div class="custom-control custom-radio">
+							  <input type="radio" id="report-reason-offensive" name="report-reason" value="offensive" class="custom-control-input">
+							  <label class="custom-control-label" for="report-reason-offensive">Báo cáo</label>
+							</div>
+							<div class="custom-control custom-radio">
+							  <input type="radio" id="report-reason-delete" name="report-reason" value="delete" class="custom-control-input">
+							  <label class="custom-control-label" for="report-reason-delete">Xóa bình luận</label>
+							</div>
+							<div class="custom-control custom-radio">
+							  <input type="radio" id="report-reason-ban" name="report-reason" value="ban" class="custom-control-input">
+							  <label class="custom-control-label" for="report-reason-ban">Cấm người dùng</label>
+							</div>
+
 						<div class="comment-form">
 							<img src="./Image/ava1.png" alt="Avatar" class="comment-avatar float-left">
-              <div class="comment-info" style="display: flex; align-items: center">
+                         <div class="comment-info" style="display: flex; align-items: center">
 								<span class="comment-user">User 4</span>
 								<span class="comment-role">User</span>
 							</div>
@@ -157,7 +211,6 @@
 							</div>
 							<button type="submit" class="btn btn-primary">Post Comment</button>
 						</div>
-            
 					</div>
 				</div>
 			</div>
@@ -165,3 +218,4 @@
 	</div>
 </body>
 </html>
+
