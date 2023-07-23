@@ -15,15 +15,10 @@
     <!-- Bootstrap -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
-    <!-- Styles.css -->
-    <link rel="stylesheet" href="css/stylesUpload.css">
     <!-- Tiny ediotr -->
     <script src="https://cdn.tiny.cloud/1/czhzadznx3qb12g2i4971xbviqsshfv65cbyuvs95fsi5021/tinymce/6/tinymce.min.js" referrerpolicy="origin"></script>
     <title>HappiNovel</title>
-    <link rel="stylesheet" href="/style.css" />
 
-    <!-- The website JavaScript file -->
-    <script src="/script.js" defer></script>
 
 </head>
 <body>
@@ -31,7 +26,7 @@
     <nav class="navbar navbar-expand-lg bg-transparent">
         <div class="container-fluid">
             <a class="navbar-brand" href="#">
-                <img class="rounded-2" src="https://cdn.glitch.global/76a490c3-bb13-446e-8d33-6af1a3245371/logo.png?v=1689760035112" alt="Bootstrap" width="50" height="50">
+                <img class="rounded-2" src="/Image/logo.png" alt="Bootstrap" width="50" height="50">
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -63,7 +58,7 @@
     <!-- Cover image -->
   
     <div class="container">
-        <img width="100%" src="https://cdn.glitch.global/76a490c3-bb13-446e-8d33-6af1a3245371/cover.png?v=1689760029077" alt="Ảnh bìa" style="margin-bottom: 20px;">
+        <img width="100%" src="./Image/cover.png" alt="Ảnh bìa" style="margin-bottom: 20px;">
     </div>
     <div class="container border rounded p-3" style="margin-bottom: 50px;">
     <!-- Tiêu đề -->
@@ -123,6 +118,7 @@
       <thead>
         <tr>
           <th class="border-bottom " >
+            
             <input type="checkbox" id="checkAll">
           </th>
           <th class="border-bottom" >STT <i class="fa-solid fa-sort"></i> </th>
@@ -159,7 +155,7 @@
         <tr>
           <td><input type="checkbox"></td>
           <td>3</td>
-          <td>quynh2004</td>
+          <td>quynh2003</td>
           <td>Tự kỉ 1</td>
           <td>quynh2005</td>
           <td>aaaaaaaaaaaaaaaaaaaaaa</td>
@@ -273,6 +269,19 @@
     text-align: center; /* Căn giữa nội dung trong khung */
   }
 </style>
+
+<script>
+  $(document).ready(function() {
+    // Add a click event listener to the "checkAll" checkbox in the table header
+    $('#checkAll').on('click', function() {
+      // Get the state of the "checkAll" checkbox
+      const isChecked = $(this).prop('checked');
+
+      // Set all checkboxes in the table body to the same state as the "checkAll" checkbox
+      $('tbody input[type="checkbox"]').prop('checked', isChecked);
+    });
+  });
+</script>
     <!-- Footer -->
     <footer class="fixed-bottom" id="footer">
         <div class="container text-center">
