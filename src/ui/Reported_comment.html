@@ -282,6 +282,18 @@
     });
   });
 </script>
+<script>
+    // jQuery code to check/uncheck checkboxes when clicking on the row
+    $(document).ready(function() {
+      // Find all table rows within the tbody
+      $("tbody tr").click(function() {
+        // Find the checkbox within the clicked row
+        var checkbox = $(this).find('input[type="checkbox"]');
+        // Toggle the checkbox's checked state
+        checkbox.prop("checked", !checkbox.prop("checked"));
+      });
+    });
+</script>
     <!-- Footer -->
     <footer class="fixed-bottom" id="footer">
         <div class="container text-center">
