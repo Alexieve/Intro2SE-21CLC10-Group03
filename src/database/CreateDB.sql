@@ -16,7 +16,7 @@ CREATE TABLE ACCOUNT (
 	ACCOUNTSTATUS			BIT DEFAULT 0, -- 0 = active, 1 = banned
 	REGDATE					DATE,
 	PERMISSION				CHAR(1), -- 0 = user, 1 = mod, 2 = admin
-	SDT						CHAR(10),
+	SDT					CHAR(10),
 	UNIQUE (USERNAME),
 	PRIMARY KEY (USERID),
 );
