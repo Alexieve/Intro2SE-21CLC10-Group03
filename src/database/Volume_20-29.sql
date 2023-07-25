@@ -1,0 +1,22 @@
+INSERT INTO VOLUME (BOOKID, VOLID, VOLNAME)
+VALUES
+    ('20', '1', 'Volume 1'),
+    ('20', '2', 'Volume 2'),
+    ('21', '1', 'Volume 1'),
+    ('21', '2', 'Volume 2'),
+    ('22', '1', 'Volume 1'),
+    ('22', '2', 'Volume 2'),
+    ('23', '1', 'Volume 1'),
+    ('23', '2', 'Volume 2'),
+    ('24', '1', 'Volume 1'),
+    ('24', '2', 'Volume 2'),
+    ('25', '1', 'Volume 1'),
+    ('25', '2', 'Volume 2'),
+    ('26', '1', 'Volume 1'),
+    ('26', '2', 'Volume 2'),
+    ('27', '1', 'Volume 1'),
+    ('27', '2', 'Volume 2'),
+    ('28', '1', 'Volume 1'),
+    ('28', '2', 'Volume 2'),
+    ('29', '1', 'Volume 1'),
+    ('29', '2', 'Volume 2');
