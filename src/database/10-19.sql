@@ -1,11 +1,11 @@
 ﻿use HappiNovel
 set DATEFORMAT DMY;
 
-Insert into ACCOUNT values('10','solo10',N'BacHuyenTienTon10','yahsure10','What is love?',N'Quý bửu 10',N'hen......suyển','21/12/2012','img10.jpg','0','1/1/2022','0','6663628')--User không có viết sách--
-Insert into ACCOUNT values('11','solo11',N'BacHuyenTienTon11','yahsure11','Baby dont hurt me',N'Quý bửu 11',N'hen......suyển','21/12/2012','img11.jpg','1','1/1/2022','0','6663628') --User bị ban--
-Insert into ACCOUNT values('12','solo12',N'BacHuyenTienTon12','yahsure12','Dont hurt me',N'Quý bửu 12',N'hen......suyển','21/12/2012','img12.jpg','0','1/1/2022','0','6663628') --User có viết sách--
-Insert into ACCOUNT values('13','solo13',N'BacHuyenTienTon13','yahsure13','No more',N'Quý bửu 13',N'hen......suyển','21/12/2012','img13.jpg','0','1/1/2022','1','6663628') --Mod--
-Insert into ACCOUNT values('14','solo14',N'BacHuyenTienTon14','yahsure14','What is love? Baby dont hurt me, dont hurt me, no more',N'Quý bửu 14',N'hen......suyển','21/12/2012','img14.jpg','0','1/1/2022','2','6663628') --Admin--
+Insert into ACCOUNT values('10','solo10',N'BacHuyenTienTon10','yahsure10','What is love?',N'Quý bửu 10',N'hen......suyển','21/12/2012','img10.jpg','pcover10.jpg','0','1/1/2022','0','6663628')--User không có viết sách--
+Insert into ACCOUNT values('11','solo11',N'BacHuyenTienTon11','yahsure11','Baby dont hurt me',N'Quý bửu 11',N'hen......suyển','21/12/2012','img11.jpg','pcover11.jpg','1','1/1/2022','0','6663628') --User bị ban--
+Insert into ACCOUNT values('12','solo12',N'BacHuyenTienTon12','yahsure12','Dont hurt me',N'Quý bửu 12',N'hen......suyển','21/12/2012','img12.jpg','pcover12.jpg','0','1/1/2022','0','6663628') --User có viết sách--
+Insert into ACCOUNT values('13','solo13',N'BacHuyenTienTon13','yahsure13','No more',N'Quý bửu 13',N'hen......suyển','21/12/2012','img13.jpg','pcover13.jpg','0','1/1/2022','1','6663628') --Mod--
+Insert into ACCOUNT values('14','solo14',N'BacHuyenTienTon14','yahsure14','What is love? Baby dont hurt me, dont hurt me, no more',N'Quý bửu 14',N'hen......suyển','21/12/2012','img14.jpg','pcover14.jpg','0','1/1/2022','2','6663628') --Admin--
 
 Insert into BOOK values('10','Kimi to Boku', '12', 'note10.docx','summary10.docx','3/5/2022','coverImg10.jpg','1', 0)
 Insert into BOOK values('11','Fake Holy Sword Story', '12', 'note11.docx','summary11.docx','3/5/2022','coverImg11.jpg','1', 0)
