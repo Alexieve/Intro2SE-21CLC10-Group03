@@ -17,3 +17,7 @@ INSERT INTO VOLUME VALUES('5','2',N'Đế Quốc liên thiên hà!')
 
 INSERT INTO VOLUME VALUES('6','1',N'Cô gái đáng yêu thứ hai lớp')
 INSERT INTO VOLUME VALUES('6','2',N'Giáng sinh')
+
+INSERT INTO VOLUME VALUES('7','1',N'Chuyện kể về một nam sinh')
+
+INSERT INTO VOLUME VALUES('8','1',N'Cuộc sống bình thường và sự cố không mong muốn')
