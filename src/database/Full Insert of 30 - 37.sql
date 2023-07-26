@@ -1,4 +1,4 @@
-﻿SET DATEFORMAT DMY;
+SET DATEFORMAT DMY;
 USE HappiNovel
 
 --Account 
@@ -57,105 +57,147 @@ INSERT INTO ACCOUNT VALUES('38',N'NTT9',N'Thịnh bjp','bjp'
 INSERT INTO BOOK VALUES('30',N'Nữ Thần Lớp Tôi Có Gì Đó Lạ Lắm.','30'
 ,'note30.docx'
 ,'summary30.docx'
-,'25-07-2023','coverImg30.png','1','25072003')
+,'25-07-2023','coverImg30.png','1','25072003','0')
 --Book1 của user 30 
 
 INSERT INTO BOOK VALUES('31',N'Khi bắt đầu làm công việc nhà bán thời gian, tôi được gia đình của Idol trường học để ý lúc nào không hay','30'
 ,'note31.docx'
 ,'summary31.docx'
-,'25-07-2023','coverImg31.png','2','20250')
+,'25-07-2023','coverImg31.png','2','20250','0')
 --Book2 của user 30 
 
 INSERT INTO BOOK VALUES('32',N'Làm bạn với cô gái đáng yêu thứ hai lớp','34'
 ,'note32.docx'
 ,'summary32.docx'
-,'25-07-2023','coverImg32.png','0','29250')
+,'25-07-2023','coverImg32.png','0','29250','0')
 --Book3 của user 34 
 
 INSERT INTO BOOK VALUES('33',N'"Cậu không thể hôn được, phải chứ?" Khi tôi khiến cô bạn thuở nhỏ luôn trêu chọc mình hiểu chuyện, cô ấy đột nhiên trở nên dễ thương hơn nhiều','35'
 ,'note33.docx'
 ,'summary33.docx'
-,'25-07-2023','coverImg33.png','0','1250')
+,'25-07-2023','coverImg33.png','0','1250','0')
 --Book4 của user 35 
 
-INSERT INTO BOOK VALUES('34',N'Tôi là Tác giả, phải không?','36'
+INSERT INTO BOOK VALUES('34',N'Tôi là Tác giả, phải không?','31'
 ,'note34.docx'
 ,'summary34.docx'
-,'25-07-2023','coverImg34.png','0','1250')
---Book5 của user 36 
+,'25-07-2023','coverImg34.png','0','1250','0')
+--Book5 của user 31 
 
-INSERT INTO BOOK VALUES('35',N'Bức Thư Tình Đến Từ Tương Lai','36'
+INSERT INTO BOOK VALUES('35',N'Bức Thư Tình Đến Từ Tương Lai','31'
 ,'note35.docx'
 ,'summary35.docx'
-,'25-07-2023','coverImg35.png','0','1250')
---Book6 của user 36
+,'25-07-2023','coverImg35.png','0','1250','0')
+--Book6 của user 31
 
 --Volume/Chapter
 --30
 INSERT INTO VOLUME VALUES('30','1',N'Cuộc sống học đường bất ổn.')
-INSERT INTO CHAPTER VALUES('30','1','1',N'Chương 01: Chỉ bởi vì thua cuộc.','26/07/2023','chap1_1_30.docx')
-INSERT INTO CHAPTER VALUES('30','1','2',N'Chương 02: Tình huống bất ngờ.','26/07/2023','chap2_1_30.docx')
-INSERT INTO CHAPTER VALUES('30','1','3',N'Chương 03: Ra đây mới là cô sao.','26/07/2023','chap3_1_30.docx')
+INSERT INTO CHAPTER VALUES('30','1','1',N'Chương 01: Chỉ bởi vì thua cuộc.','26/07/2023','chap1_1_30.docx','0')
+INSERT INTO CHAPTER VALUES('30','1','2',N'Chương 02: Tình huống bất ngờ.','26/07/2023','chap2_1_30.docx','0')
+INSERT INTO CHAPTER VALUES('30','1','3',N'Chương 03: Ra đây mới là cô sao.','26/07/2023','chap3_1_30.docx','0')
 
 INSERT INTO VOLUME VALUES('30','2',N'Kế hoạch, tiến triển đi chứ.	')
-INSERT INTO CHAPTER VALUES('30','2','1',N'Chương 01: Theo chân Nữ Thần (1).','26/07/2023','chap1_2_30.docx')
-INSERT INTO CHAPTER VALUES('30','2','2',N'Chương 02: Theo chân Nữ Thần (2).','26/07/2023','chap2_2_30.docx')
-INSERT INTO CHAPTER VALUES('30','2','3',N'Chương 03: Theo chân Nữ Thần (3).','26/07/2023','chap3_2_30.docx')
+INSERT INTO CHAPTER VALUES('30','2','1',N'Chương 01: Theo chân Nữ Thần (1).','26/07/2023','chap1_2_30.docx','0')
+INSERT INTO CHAPTER VALUES('30','2','2',N'Chương 02: Theo chân Nữ Thần (2).','26/07/2023','chap2_2_30.docx','0')
+INSERT INTO CHAPTER VALUES('30','2','3',N'Chương 03: Theo chân Nữ Thần (3).','26/07/2023','chap3_2_30.docx','0')
 
 --31
 INSERT INTO VOLUME VALUES('31','1',N'Tập 1')
-INSERT INTO CHAPTER VALUES('31','1','1',N'Chương 01','26/07/2023','chap1_1_31.docx')
-INSERT INTO CHAPTER VALUES('31','1','2',N'Chương 02','26/07/2023','chap2_1_31.docx')
-INSERT INTO CHAPTER VALUES('31','1','3',N'Chương 03','26/07/2023','chap3_1_31.docx')
+INSERT INTO CHAPTER VALUES('31','1','1',N'Chương 01','26/07/2023','chap1_1_31.docx','0')
+INSERT INTO CHAPTER VALUES('31','1','2',N'Chương 02','26/07/2023','chap2_1_31.docx','0')
+INSERT INTO CHAPTER VALUES('31','1','3',N'Chương 03','26/07/2023','chap3_1_31.docx','0')
 
 INSERT INTO VOLUME VALUES('31','2',N'Tập 2')
-INSERT INTO CHAPTER VALUES('31','2','1',N'Chương 01','26/07/2023','chap1_2_31.docx')
-INSERT INTO CHAPTER VALUES('31','2','2',N'Chương 02','26/07/2023','chap2_2_31.docx')
-INSERT INTO CHAPTER VALUES('31','2','3',N'Chương 03','26/07/2023','chap3_2_31.docx')
+INSERT INTO CHAPTER VALUES('31','2','1',N'Chương 01','26/07/2023','chap1_2_31.docx','0')
+INSERT INTO CHAPTER VALUES('31','2','2',N'Chương 02','26/07/2023','chap2_2_31.docx','0')
+INSERT INTO CHAPTER VALUES('31','2','3',N'Chương 03','26/07/2023','chap3_2_31.docx','0')
 
 --32
 INSERT INTO VOLUME VALUES('32','1',N'WN Vol.1: Cô gái đáng yêu thứ hai lớp (ĐÃ HOÀN THÀNH)')
-INSERT INTO CHAPTER VALUES('32','1','1',N'Chap 1: Cô gái đáng yêu thứ hai trong lớp','26/07/2023','chap1_1_32.docx')
-INSERT INTO CHAPTER VALUES('32','1','2',N'Chap 2: Khởi đầu của cuộc gặp gỡ (1)','26/07/2023','chap2_1_32.docx')
-INSERT INTO CHAPTER VALUES('32','1','3',N'Chap 3: Khởi đầu của cuộc gặp gỡ (2)','26/07/2023','chap3_1_32.docx')
+INSERT INTO CHAPTER VALUES('32','1','1',N'Chap 1: Cô gái đáng yêu thứ hai trong lớp','26/07/2023','chap1_1_32.docx','0')
+INSERT INTO CHAPTER VALUES('32','1','2',N'Chap 2: Khởi đầu của cuộc gặp gỡ (1)','26/07/2023','chap2_1_32.docx','0')
+INSERT INTO CHAPTER VALUES('32','1','3',N'Chap 3: Khởi đầu của cuộc gặp gỡ (2)','26/07/2023','chap3_1_32.docx','0')
 
 INSERT INTO VOLUME VALUES('32','2',N'WN Vol.2: Giáng sinh (ĐÃ HOÀN THÀNH)')
-INSERT INTO CHAPTER VALUES('32','2','1',N'Chương 64 - Một khởi đầu mới','26/07/2023','chap1_2_32.docx')
-INSERT INTO CHAPTER VALUES('32','2','2',N'Chương 65 - Lời mời','26/07/2023','chap2_2_32.docx')
-INSERT INTO CHAPTER VALUES('32','2','3',N'Chương 66 - Cuộc nói chuyện ngượng ngùng','26/07/2023','chap3_2_32.docx')
+INSERT INTO CHAPTER VALUES('32','2','1',N'Chương 64 - Một khởi đầu mới','26/07/2023','chap1_2_32.docx','0')
+INSERT INTO CHAPTER VALUES('32','2','2',N'Chương 65 - Lời mời','26/07/2023','chap2_2_32.docx','0')
+INSERT INTO CHAPTER VALUES('32','2','3',N'Chương 66 - Cuộc nói chuyện ngượng ngùng','26/07/2023','chap3_2_32.docx','0')
 
 --33
 INSERT INTO VOLUME VALUES('33','1',N'Vol 1')
-INSERT INTO CHAPTER VALUES('33','1','1',N'Chương mở đầu','26/07/2023','chap1_1_33.docx')
-INSERT INTO CHAPTER VALUES('33','1','2',N'Chương 01: Dạy một bài học từ nụ hôn đầu (Phần 1)','26/07/2023','chap2_1_33.docx')
-INSERT INTO CHAPTER VALUES('33','1','3',N'Chương 01 (Phần 2)','26/07/2023','chap3_1_33.docx')
+INSERT INTO CHAPTER VALUES('33','1','1',N'Chương mở đầu','26/07/2023','chap1_1_33.docx','0')
+INSERT INTO CHAPTER VALUES('33','1','2',N'Chương 01: Dạy một bài học từ nụ hôn đầu (Phần 1)','26/07/2023','chap2_1_33.docx','0')
+INSERT INTO CHAPTER VALUES('33','1','3',N'Chương 01 (Phần 2)','26/07/2023','chap3_1_33.docx','0')
 
 INSERT INTO VOLUME VALUES('33','2',N'Vol 2')
-INSERT INTO CHAPTER VALUES('33','2','1',N'Chương 02: Màn Kabedon khiến tim loạn nhịp (Phần 1)','26/07/2023','chap1_2_33.docx')
-INSERT INTO CHAPTER VALUES('33','2','2',N'Chương 02 (Phần 2)','26/07/2023','chap2_2_33.docx')
-INSERT INTO CHAPTER VALUES('33','2','3',N'Chương 03: Bài học từ một trò đùa (Phần 1)','26/07/2023','chap3_2_33.docx')
+INSERT INTO CHAPTER VALUES('33','2','1',N'Chương 02: Màn Kabedon khiến tim loạn nhịp (Phần 1)','26/07/2023','chap1_2_33.docx','0')
+INSERT INTO CHAPTER VALUES('33','2','2',N'Chương 02 (Phần 2)','26/07/2023','chap2_2_33.docx','0')
+INSERT INTO CHAPTER VALUES('33','2','3',N'Chương 03: Bài học từ một trò đùa (Phần 1)','26/07/2023','chap3_2_33.docx','0')
 
 --34
 INSERT INTO VOLUME VALUES('34','1',N'Khởi đầu')
-INSERT INTO CHAPTER VALUES('34','1','1',N'Chương 01: Bình Minh','26/07/2023','chap1_1_34.docx')
-INSERT INTO CHAPTER VALUES('34','1','2',N'Chương 02 : Bình Minh (2)','26/07/2023','chap2_1_34.docx')
-INSERT INTO CHAPTER VALUES('34','1','3',N'Chương 03 : Khởi động','26/07/2023','chap3_1_34.docx')
+INSERT INTO CHAPTER VALUES('34','1','1',N'Chương 01: Bình Minh','26/07/2023','chap1_1_34.docx','0')
+INSERT INTO CHAPTER VALUES('34','1','2',N'Chương 02 : Bình Minh (2)','26/07/2023','chap2_1_34.docx','0')
+INSERT INTO CHAPTER VALUES('34','1','3',N'Chương 03 : Khởi động','26/07/2023','chap3_1_34.docx','0')
 
 INSERT INTO VOLUME VALUES('34','2',N'Kết thúc')
-INSERT INTO CHAPTER VALUES('34','2','1',N'Chương 04 : Khởi động (2)','26/07/2023','chap1_2_34.docx')
-INSERT INTO CHAPTER VALUES('34','2','2',N'Chương 05 : Khởi Động (3)','26/07/2023','chap2_2_34.docx')
-INSERT INTO CHAPTER VALUES('34','2','3',N'Chương 06 : Chạm mặt','26/07/2023','chap3_2_34.docx')
+INSERT INTO CHAPTER VALUES('34','2','1',N'Chương 04 : Khởi động (2)','26/07/2023','chap1_2_34.docx','0')
+INSERT INTO CHAPTER VALUES('34','2','2',N'Chương 05 : Khởi Động (3)','26/07/2023','chap2_2_34.docx','0')
+INSERT INTO CHAPTER VALUES('34','2','3',N'Chương 06 : Chạm mặt','26/07/2023','chap3_2_34.docx','0')
 
 --35
 INSERT INTO VOLUME VALUES('35','1',N'Vol 1. Bức Thư Đầu Tiên*')
-INSERT INTO CHAPTER VALUES('35','1','1',N'Chương 01','chap1_1_35.docx')
-INSERT INTO CHAPTER VALUES('35','1','2',N'Chương 02','26/07/2023','chap2_1_35.docx')
-INSERT INTO CHAPTER VALUES('35','1','3',N'Chương 03','26/07/2023','chap3_1_35.docx')
+INSERT INTO CHAPTER VALUES('35','1','1',N'Chương 01','chap1_1_35.docx','0')
+INSERT INTO CHAPTER VALUES('35','1','2',N'Chương 02','26/07/2023','chap2_1_35.docx','0')
+INSERT INTO CHAPTER VALUES('35','1','3',N'Chương 03','26/07/2023','chap3_1_35.docx','0')
 
 INSERT INTO VOLUME VALUES('35','2',N'Vol 2. BỨc thư thứ hai')
-INSERT INTO CHAPTER VALUES('35','2','1',N'Chương 01','26/07/2023','chap1_2_35.docx')
-INSERT INTO CHAPTER VALUES('35','2','2',N'Chương 02','26/07/2023','chap2_2_35.docx')
-INSERT INTO CHAPTER VALUES('35','2','3',N'Chương 03','26/07/2023','chap3_2_35.docx')
+INSERT INTO CHAPTER VALUES('35','2','1',N'Chương 01','26/07/2023','chap1_2_35.docx','0')
+INSERT INTO CHAPTER VALUES('35','2','2',N'Chương 02','26/07/2023','chap2_2_35.docx','0')
+INSERT INTO CHAPTER VALUES('35','2','3',N'Chương 03','26/07/2023','chap3_2_35.docx','0')
+
+--hai sach pending
+--36
+INSERT INTO BOOK VALUES('36',N'Anh tưởng tái sinh là thoát được sao, Nii-san?','32'
+,'note36.docx'
+,'summary36.docx'
+,'25-07-2023','coverImg36.png','0','0','1')
+--Book36 của user 32
+
+INSERT INTO VOLUME VALUES('36','1',N'Arc 1: Quyết định của đứa bé sơ sinh - Sự chuyển sinh của 2 anh em')
+INSERT INTO CHAPTER VALUES('36','1','1',N'Chương 1: Nữ Thần nói','chap1_1_36.docx','1')
+INSERT INTO CHAPTER VALUES('36','1','2',N'Chương 2: Gia đình, khả năng, quyết tâm','26/07/2023','chap2_1_36.docx','1')
+INSERT INTO CHAPTER VALUES('36','1','3',N'Chương 3: Ác Mộng','26/07/2023','chap3_1_36.docx','1')
+
+INSERT INTO BOOKGENRES VALUES('36','30')
+INSERT INTO BOOKGENRES VALUES('36','31')
+INSERT INTO BOOKGENRES VALUES('36','39')
+INSERT INTO BOOKGENRES VALUES('36','35')
+INSERT INTO BOOKGENRES VALUES('36','84')
+
+--37
+INSERT INTO BOOK VALUES('37',N'Nắng hạ cứ vậy tan mất','32'
+,'note37.docx'
+,'summary37.docx'
+,'25-07-2023','coverImg37.png','0','0','1')
+--Book37 của user 32
+
+INSERT INTO VOLUME VALUES('37','1',N'Tập 01: Mối quan hệ kì lạ với một cậu trai không quen biết.')
+INSERT INTO CHAPTER VALUES('37','1','1',N'Chương 01','chap1_1_37.docx','1')
+INSERT INTO CHAPTER VALUES('37','1','2',N'Chương 02','26/07/2023','chap2_1_37.docx','1')
+INSERT INTO CHAPTER VALUES('37','1','3',N'Chương 03','26/07/2023','chap3_1_37.docx','1')
+
+INSERT INTO VOLUME VALUES('37','2',N'Tập 02 Ngọn gió lạ thoảng qua giữa mùa thu. *')
+INSERT INTO CHAPTER VALUES('37','2','1',N'Chương 01','26/07/2023','chap1_2_37.docx','1')
+INSERT INTO CHAPTER VALUES('37','2','2',N'Chương 02','26/07/2023','chap2_2_37.docx','1')
+INSERT INTO CHAPTER VALUES('37','2','3',N'Chương 03','26/07/2023','chap3_2_37.docx','1')
+
+INSERT INTO BOOKGENRES VALUES('37','30')
+INSERT INTO BOOKGENRES VALUES('37','31')
+INSERT INTO BOOKGENRES VALUES('37','32')
+INSERT INTO BOOKGENRES VALUES('37','34')
+INSERT INTO BOOKGENRES VALUES('37','81')
 
 --total the loai 
 INSERT INTO GENRE (GENREID, GENRENAME)
@@ -322,14 +364,9 @@ INSERT INTO COMMENT VALUES ('81','31','30','cmt30_1.docx','21-07-2023','0')
 INSERT INTO COMMENT VALUES ('82','32','34','cmt34_3.docx','21-07-2023','0')
 
 --rating
-INSERT INTO RATING
-VALUES
-    ('30', '32', 'rating30.docx', 5.0),
-    ('31', '31', 'rating31.docx', 5.0),
-    ('32', '30', 'rating32.docx', 5.0),
-    ('33', '33', 'rating33.docx', 5.0),
-    ('34', '34', 'rating34.docx', 5.0),
-    ('35', '35', 'rating35.docx', 5.0),
-
-
-
+INSERT INTO RATING VALUES ('30', '32', 'rating30.docx', 5.0),
+						  ('31', '31', 'rating31.docx', 5.0),
+						  ('32', '30', 'rating32.docx', 5.0),
+						  ('33', '33', 'rating33.docx', 5.0),
+						  ('34', '34', 'rating34.docx', 5.0),
+						  ('35', '35', 'rating35.docx', 5.0),
