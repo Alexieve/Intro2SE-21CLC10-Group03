@@ -29,5 +29,7 @@ INSERT INTO NOTIFY VALUES('5','5','Noti5.txt')
 INSERT INTO NOTIFY VALUES('6','2','Noti6.txt')
 INSERT INTO NOTIFY VALUES('7','4','Noti7.txt')
 INSERT INTO NOTIFY VALUES('8','3','Noti8.txt')
+--thử nghiệm sách bị từ chối
+
 INSERT INTO NOTIFY VALUES('9','2','Noti9.txt')
 INSERT INTO NOTIFY VALUES('40','1','Noti40.txt')
