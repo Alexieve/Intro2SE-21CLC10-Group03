@@ -359,8 +359,16 @@ Insert into RATING values('17','12','rating17_1.docx',5)
 Insert into RATING values('18','13','rating18_1.docx',5)
 Insert into RATING values('19','14','rating19_1.docx',5)
 
-Insert into NOTIFYOFUSER values('1','10')
-Insert into NOTIFYOFUSER values('2','11')
-Insert into NOTIFYOFUSER values('3','12')
-Insert into NOTIFYOFUSER values('4','13')
-Insert into NOTIFYOFUSER values('5','14')
+
+INSERT INTO NOTIFY values('10','0','Noti10.txt')
+INSERT INTO NOTIFY values('11','1','Noti11.txt')
+INSERT INTO NOTIFY values('12','2','Noti12.txt')
+INSERT INTO NOTIFY values('13','3','Noti13.txt')
+INSERT INTO NOTIFY values('14','4','Noti14.txt')
+
+
+Insert into NOTIFYOFUSER values('10','10')
+Insert into NOTIFYOFUSER values('12','11')
+Insert into NOTIFYOFUSER values('13','12')
+Insert into NOTIFYOFUSER values('14','13')
+Insert into NOTIFYOFUSER values('11','14')
