@@ -26,10 +26,10 @@ INSERT INTO NOTIFY VALUES('4','4','Noti4.txt')
 
 INSERT INTO NOTIFY VALUES('5','5','Noti5.txt')
 --dòng 1: id sách
---dòng 2: id vol
+--không cần id người dùng bởi khi ấn vào đó, nó sẽ direct mình đến peding list
 
 INSERT INTO NOTIFY VALUES('6','5','Noti6.txt')
 INSERT INTO NOTIFY VALUES('7','4','Noti7.txt')
 INSERT INTO NOTIFY VALUES('8','3','Noti8.txt')
 INSERT INTO NOTIFY VALUES('9','2','Noti9.txt')
-INSERT INTO NOTIFY VALUES('10','1','Noti10.txt')
+INSERT INTO NOTIFY VALUES('40','1','Noti40.txt')
