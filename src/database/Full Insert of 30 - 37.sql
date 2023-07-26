@@ -359,7 +359,7 @@ INSERT INTO COMMENT VALUES ('36','30','34','cmt34_1.docx','21-07-2023','0')
 INSERT INTO COMMENT VALUES ('37','31','33','cmt33_5.docx','21-07-2023','1')
 INSERT INTO COMMENT VALUES ('38','32','32','cmt32_1.docx','21-07-2023','0')
 INSERT INTO COMMENT VALUES ('39','33','31','cmt31_1.docx','21-07-2023','0')
-INSERT INTO COMMENT VALUES ('80','32','32','cmt32_5.docx','21-07-2023','0')
+INSERT INTO COMMENT VALUES ('80','32','32','cmt32_5.docx','21-07-2023','1')
 INSERT INTO COMMENT VALUES ('81','31','30','cmt30_1.docx','21-07-2023','0')
 INSERT INTO COMMENT VALUES ('82','32','34','cmt34_3.docx','21-07-2023','0')
 
@@ -370,3 +370,37 @@ INSERT INTO RATING VALUES ('30', '32', 'rating30.docx', 5.0),
 						  ('33', '33', 'rating33.docx', 5.0),
 						  ('34', '34', 'rating34.docx', 5.0),
 						  ('35', '35', 'rating35.docx', 5.0),
+
+﻿use HappiNovel
+
+--1 là thông báo chương mới nhất
+--nhớ là thông báo cho tất cả user
+--2 là thông báo đồng ý đăng sách
+--3 là thông báo từ chối sách
+--4 là thông báo có bình luận bị report
+--5 là tác giả muốn đăng sách lên
+
+INSERT INTO NOTIFY VALUES('30','1','Noti30.txt')
+--dòng 1: id sách
+--dòng 2: id vol
+--dòng 3:id chương mới
+
+INSERT INTO NOTIFY VALUES('31','2','Noti31.txt')
+--dòng 1: id sách
+
+INSERT INTO NOTIFY VALUES('32','3','Noti32.txt')
+--dòng 1: id sách
+
+INSERT INTO NOTIFY VALUES('33','4','Noti33.txt')
+--dòng 1: id người dùng
+--dòng 2: id comment
+
+INSERT INTO NOTIFY VALUES('34','5','Noti34.txt')
+--dòng 1: id sách
+--không cần id người dùng bởi khi ấn vào đó, nó sẽ direct mình đến peding list
+
+INSERT INTO NOTIFY VALUES('35','4','Noti35.txt')
+INSERT INTO NOTIFY VALUES('36','1','Noti36.txt')
+INSERT INTO NOTIFY VALUES('37','1','Noti37.txt')
+INSERT INTO NOTIFY VALUES('38','1','Noti38.txt')
+INSERT INTO NOTIFY VALUES('39','1','Noti39.txt')
