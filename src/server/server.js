@@ -4,7 +4,10 @@ const bodyParser = require('body-parser');
 const path = require('path');
 const app = express();
 
-mongoose.connect('mongodb://0.0.0.0:27017/HappiNovel', {
+// mongoose.connect('mongodb://0.0.0.0:27017/HappiNovel', {
+//     useNewUrlParser: true,
+// });
+mongoose.connect('mongodb+srv://admin:123@happinovel.4zvtpnj.mongodb.net/HappiNovel?retryWrites=true&w=majority', {
     useNewUrlParser: true,
 });
 
@@ -14,7 +17,7 @@ app.use(bodyParser.urlencoded({extended: true}))
 app.set('view engin', 'ejs');
 
 const db = mongoose.connection;
-db.on("error", console.error.bind(console, "connection error: "));
+db.on("error", console.error.bind(console, "Connection error: "));
 db.once("open", function () {
     console.log("Connected successfully");
 });
