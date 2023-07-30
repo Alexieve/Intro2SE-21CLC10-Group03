@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <!-- Open Sans Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
+    <!-- FontAweSome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- jquery -->
+    <script src="https://code.jquery.com/jquery-3.7.0.js" integrity="sha256-JlqSTELeR4TLqP0OG9dxM7yDPqX1ox/HfgiSLBj8+kM=" crossorigin="anonymous"></script>
+    <!-- Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
+    <!-- Styles.css -->
+    <link rel="stylesheet" href="css/stylesNavigator.css">
+    <title>HappiNovel</title>
+    <style>
+        .btn.btn-outline-primary{
+            color:green
+        }
+        .hover-effect:hover {
+            color:#36a189;
+          }
+    </style>
+</head>
+<body style = "height: 2600px;background-color:whitesmoke">
+    <!-- Navigator -->
+    <nav class="navbar navbar-expand-lg bg-transparent">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">
+                <img class="rounded-2" src="./Image/logo.png" alt="Bootstrap" width="50" height="50">
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item rounded-3">
+                        <b><a class="nav-link" href="#">Thể loại</a></b>
+                    </li>
+                    <li class="nav-item rounded-3">
+                        <b><a class="nav-link" href="#">Sách của bạn</a></b>
+                    </li>
+                    <li class="nav-item rounded-3">
+                        <b><a class="nav-link" href="#">Viết sách</a></b>
+                    </li>
+                </ul>
+                <form class="d-flex " role="search">
+                    <input class="form-control me-2" type="text" placeholder="Tìm kiếm..." aria-label="Search">
+                </form>
+                <ul class="navbar-nav">
+                    <li class="nav-item rounded-3">
+                        <b><a class="nav-link" href="#">Đăng nhập</a></b>
+                    </li>
+                </ul>
+                <ul class="navbar-nav">
+                    <li class="nav-item rounded-3">
+                        <b><a class="nav-link" href="#">Đăng ký</a></b>
+                    </li>
+                </ul>                
+            </div>
+        </div>
+    </nav>
+
+    <!-- Cover image -->
+    <div class="container">
+        <img width="100%" src="./Image/BiaWeb.png" alt="Ảnh bìa" style="margin-bottom: 20px;">
+    </div>
+
+    <div class = "container">
+        <div class = "row">
+            <div class = "col-2">
+                <div class = "container" style = "position: relative">
+                    <i class="fas fa-circle" style = "color: rgb(28, 59, 28)"></i>
+                    Tìm kiếm
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class = "container">
+        <div class = "row">
+            <div class = "col-12" style = "margin-top: 10px">
+                <div class="input-group">
+                    <input type="search" class="form-control rounded" placeholder="Ít nhất 2 kí tự" aria-label="Search" aria-describedby="search-addon" />
+                    <button type="button" class="btn btn-outline-primary" style = "color: white; background-color:green">Tìm kiếm</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class = "container">
+        <div class = "row">
+            <a class = "container text-end" href ="https://www.youtube.com/watch?v=SFU1GeGFpzY" style = "text-decoration: none; color:black">
+                <i class="fas fa-filter" style = "color:black; margin-right:0px;margin-top:30px"></i>
+                <span style = "margin-right: 10px;">Tìm kiếm nâng cao</span>
+            </a>
+        </div>
+    </div>
+    <div class = "container" style = "margin-top: 50px;">
+        <div class = "row">
+            <div class="col-12">
+                <div class ="row">
+                    <div class = "col-12">
+                        <div class = "container" style ="margin-bottom:10px">
+                            <div id="demo" class="carousel slide" data-bs-ride="carousel">
+                                <!-- The slideshow/carousel -->
+                                <div class="carousel-inner">
+                                    <div class = "row" style = "margin-bottom:50px">
+                                        <div class = "col-2">
+                                            <div class="card" style="height: 250px; width: 200px">
+                                                <img class="card-img-top" src="./Image/Stalin.jpg" alt="Card image">
+                                                <div class="card-img-overlay">
+                                                    <div class="card-img-overlay d-flex align-items-end">
+                                                        <div class = "card-title" style = "margin-bottom: -30px; text-align: center">
+                                                            <a href = "https://www.youtube.com/watch?v=tSBWmxwT8So" class = "hover-effect" style = "text-decoration: none;font-weight:bolder; color: rgb(255, 255, 255)">
+                                                                <span class = "hover-effect">Quyền lực và chính trị: Chủ nghĩa Mác LêNindasdsad</span>
+                                                            </a>                                                        </div>
+                                                     </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class = "col-2">
+                                            <div class="card" style="height: 250px; width: 200px; margin-left: 50px">
+                                                <img class="card-img-top" src="./Image/Stalin.jpg" alt="Card image">
+                                                <div class="card-img-overlay">
+                                                    <div class="card-img-overlay d-flex align-items-end">
+                                                        <div class = "card-title" style = "margin-bottom: -30px; text-align: center">
+                                                            <a href = "https://www.youtube.com/watch?v=tSBWmxwT8So" class = "hover-effect" style = "text-decoration: none;font-weight:bolder; color: rgb(255, 255, 255)">
+                                                                <span class = "hover-effect">Quyền lực và chính trị: Chủ nghĩa Mác LêNindasdsad</span>
+                                                            </a>                                                        </div>
+                                                     </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class = "col-2">
+                                            <div class="card" style="height: 250px; width: 200px; margin-left: 100px">
+                                                <img class="card-img-top" src="./Image/Stalin.jpg" alt="Card image">
+                                                <div class="card-img-overlay">
+                                                    <div class="card-img-overlay d-flex align-items-end">
+                                                        <div class = "card-title" style = "margin-bottom: -30px; text-align: center">
+                                                            <a href = "https://www.youtube.com/watch?v=tSBWmxwT8So" class = "hover-effect" style = "text-decoration: none;font-weight:bolder; color: rgb(255, 255, 255)">
+                                                                <span class = "hover-effect">Quyền lực và chính trị: Chủ nghĩa Mác LêNindasdsad</span>
+                                                            </a>                                                        </div>
+                                                     </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class = "col-2">
+                                            <div class="card" style="height: 250px; width: 200px; margin-left: 150px">
+                                                <img class="card-img-top" src="./Image/Stalin.jpg" alt="Card image">
+                                                <div class="card-img-overlay">
+                                                    <div class="card-img-overlay d-flex align-items-end">
+                                                        <div class = "card-title" style = "margin-bottom: -30px; text-align: center">
+                                                            <a href = "https://www.youtube.com/watch?v=tSBWmxwT8So" class = "hover-effect" style = "text-decoration: none;font-weight:bolder; color: rgb(255, 255, 255)">
+                                                                <span class = "hover-effect">Quyền lực và chính trị: Chủ nghĩa Mác LêNindasdsad</span>
+                                                            </a>                                                        </div>
+                                                     </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class = "col-2">
+                                            <div class="card" style="height: 250px; width: 200px; margin-left: 200px">
+                                                <img class="card-img-top" src="./Image/Stalin.jpg" alt="Card image">
+                                                <div class="card-img-overlay">
+                                                    <div class="card-img-overlay d-flex align-items-end">
+                                                        <div class = "card-title" style = "margin-bottom: -30px; text-align: center">
+                                                            <a href = "https://www.youtube.com/watch?v=tSBWmxwT8So" class = "hover-effect" style = "text-decoration: none;font-weight:bolder; color: rgb(255, 255, 255)">
+                                                                <span class = "hover-effect">Quyền lực và chính trị: Chủ nghĩa Mác LêNindasdsad</span>
+                                                            </a>                                                        </div>
+                                                     </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class = "col-2">
+                                            <div class="card" style="height: 250px; width: 200px; margin-left: 250px">
+                                                <img class="card-img-top" src="./Image/Stalin.jpg" alt="Card image">
+                                                <div class="card-img-overlay">
+                                                    <div class="card-img-overlay d-flex align-items-end">
+                                                        <div class = "card-title" style = "margin-bottom: -30px; text-align: center">
+                                                            <a href = "https://www.youtube.com/watch?v=tSBWmxwT8So" class = "hover-effect" style = "text-decoration: none;font-weight:bolder; color: rgb(255, 255, 255)">
+                                                                <span class = "hover-effect">Quyền lực và chính trị: Chủ nghĩa Mác LêNindasdsad</span>
+                                                            </a>                                                        </div>
+                                                     </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class = "row" style = "margin-bottom:50px">
+                                        <div class = "col-2">
+                                            <div class="card" style="height: 250px; width: 200px">
+                                                <img class="card-img-top" src="./Image/Stalin.jpg" alt="Card image">
+                                                <div class="card-img-overlay">
+                                                    <div class="card-img-overlay d-flex align-items-end">
+                                                        <div class = "card-title" style = "margin-bottom: -30px; text-align: center">
+                                                            <a href = "https://www.youtube.com/watch?v=tSBWmxwT8So" class = "hover-effect" style = "text-decoration: none;font-weight:bolder; color: rgb(255, 255, 255)">
+                                                                <span class = "hover-effect">Quyền lực và chính trị: Chủ nghĩa Mác LêNindasdsad</span>
+                                                            </a>                                                        </div>
+                                                     </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class = "col-2">
+                                            <div class="card" style="height: 250px; width: 200px; margin-left: 50px">
+                                                <img class="card-img-top" src="./Image/Stalin.jpg" alt="Card image">
+                                                <div class="card-img-overlay">
+                                                    <div class="card-img-overlay d-flex align-items-end">
+                                                        <div class = "card-title" style = "margin-bottom: -30px; text-align: center">
+                                                            <a href = "https://www.youtube.com/watch?v=tSBWmxwT8So" class = "hover-effect" style = "text-decoration: none;font-weight:bolder; color: rgb(255, 255, 255)">
+                                                                <span class = "hover-effect">Quyền lực và chính trị: Chủ nghĩa Mác LêNindasdsad</span>
+                                                            </a>                                                        </div>
+                                                     </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class = "col-2">
+                                            <div class="card" style="height: 250px; width: 200px; margin-left: 100px">
+                                                <img class="card-img-top" src="./Image/Stalin.jpg" alt="Card image">
+                                                <div class="card-img-overlay">
+                                                    <div class="card-img-overlay d-flex align-items-end">
+                                                        <div class = "card-title" style = "margin-bottom: -30px; text-align: center">
+                                                            <a href = "https://www.youtube.com/watch?v=tSBWmxwT8So" class = "hover-effect" style = "text-decoration: none;font-weight:bolder; color: rgb(255, 255, 255)">
+                                                                <span class = "hover-effect">Quyền lực và chính trị: Chủ nghĩa Mác LêNindasdsad</span>
+                                                            </a>                                                        </div>
+                                                     </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class = "col-2">
+                                            <div class="card" style="height: 250px; width: 200px; margin-left: 150px">
+                                                <img class="card-img-top" src="./Image/Stalin.jpg" alt="Card image">
+                                                <div class="card-img-overlay">
+                                                    <div class="card-img-overlay d-flex align-items-end">
+                                                        <div class = "card-title" style = "margin-bottom: -30px; text-align: center">
+                                                            <a href = "https://www.youtube.com/watch?v=tSBWmxwT8So" class = "hover-effect" style = "text-decoration: none;font-weight:bolder; color: rgb(255, 255, 255)">
+                                                                <span class = "hover-effect">Quyền lực và chính trị: Chủ nghĩa Mác LêNindasdsad</span>
+                                                            </a>                                                        </div>
+                                                     </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class = "col-2">
+                                            <div class="card" style="height: 250px; width: 200px; margin-left: 200px">
+                                                <img class="card-img-top" src="./Image/Stalin.jpg" alt="Card image">
+                                                <div class="card-img-overlay">
+                                                    <div class="card-img-overlay d-flex align-items-end">
+                                                        <div class = "card-title" style = "margin-bottom: -30px; text-align: center">
+                                                            <a href = "https://www.youtube.com/watch?v=tSBWmxwT8So" class = "hover-effect" style = "text-decoration: none;font-weight:bolder; color: rgb(255, 255, 255)">
+                                                                <span class = "hover-effect">Quyền lực và chính trị: Chủ nghĩa Mác LêNindasdsad</span>
+                                                            </a>                                                        </div>
+                                                     </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class = "col-2">
+                                            <div class="card" style="height: 250px; width: 200px; margin-left: 250x">
+                                                <img class="card-img-top" src="./Image/Stalin.jpg" alt="Card image">
+                                                <div class="card-img-overlay">
+                                                    <div class="card-img-overlay d-flex align-items-end">
+                                                        <div class = "card-title" style = "margin-bottom: -30px; text-align: center">
+                                                            <a href = "https://www.youtube.com/watch?v=tSBWmxwT8So" class = "hover-effect" style = "text-decoration: none;font-weight:bolder; color: rgb(255, 255, 255)">
+                                                                <span class = "hover-effect">Quyền lực và chính trị: Chủ nghĩa Mác LêNindasdsad</span>
+                                                            </a>                                                        </div>
+                                                     </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class = "row">
+                                        <div class = "col-2">
+                                            <div class="card" style="height: 250px; width: 200px">
+                                                <img class="card-img-top" src="./Image/Stalin.jpg" alt="Card image">
+                                                <div class="card-img-overlay">
+                                                    <div class="card-img-overlay d-flex align-items-end">
+                                                        <div class = "card-title" style = "margin-bottom: -5px; text-align: center">
+                                                            <a href = "https://www.youtube.com/watch?v=tSBWmxwT8So" class = "hover-effect" style = "text-decoration: none;font-weight:bolder; color: rgb(255, 255, 255)">
+                                                                <span class = "hover-effect">Quyền lực và chính trị: Chủ nghĩa Mác LêNindasdsad</span>
+                                                            </a>                                                        </div>
+                                                     </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class = "col-2">
+                                            <div class="card" style="height: 250px; width: 200px; margin-left: 50px">
+                                                <img class="card-img-top" src="./Image/Stalin.jpg" alt="Card image">
+                                                <div class="card-img-overlay">
+                                                    <div class="card-img-overlay d-flex align-items-end">
+                                                        <div class = "card-title" style = "margin-bottom: -5px; text-align: center">
+                                                            <a href = "https://www.youtube.com/watch?v=tSBWmxwT8So" class = "hover-effect" style = "text-decoration: none;font-weight:bolder; color: rgb(255, 255, 255)">
+                                                                <span class = "hover-effect">Quyền lực và chính trị: Chủ nghĩa Mác LêNindasdsad</span>
+                                                            </a>                                                        </div>
+                                                     </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class = "col-2">
+                                            <div class="card" style="height: 250px; width: 200px; margin-left: 100px">
+                                                <img class="card-img-top" src="./Image/Stalin.jpg" alt="Card image">
+                                                <div class="card-img-overlay">
+                                                    <div class="card-img-overlay d-flex align-items-end">
+                                                        <div class = "card-title" style = "margin-bottom: -5px; text-align: center">
+                                                            <a href = "https://www.youtube.com/watch?v=tSBWmxwT8So" class = "hover-effect" style = "text-decoration: none;font-weight:bolder; color: rgb(255, 255, 255)">
+                                                                <span class = "hover-effect">Quyền lực và chính trị: Chủ nghĩa Mác LêNindasdsad</span>
+                                                            </a>                                                        </div>
+                                                     </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class = "col-2">
+                                            <div class="card" style="height: 250px; width: 200px; margin-left: 150px">
+                                                <img class="card-img-top" src="./Image/Stalin.jpg" alt="Card image">
+                                                <div class="card-img-overlay">
+                                                    <div class="card-img-overlay d-flex align-items-end">
+                                                        <div class = "card-title" style = "margin-bottom: -5px; text-align: center">
+                                                            <a href = "https://www.youtube.com/watch?v=tSBWmxwT8So" class = "hover-effect" style = "text-decoration: none;font-weight:bolder; color: rgb(255, 255, 255)">
+                                                                <span class = "hover-effect">Quyền lực và chính trị: Chủ nghĩa Mác LêNindasdsad</span>
+                                                            </a>                                                        </div>
+                                                     </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class = "col-2">
+                                            <div class="card" style="height: 250px; width: 200px; margin-left: 200px">
+                                                <img class="card-img-top" src="./Image/Stalin.jpg" alt="Card image">
+                                                <div class="card-img-overlay">
+                                                    <div class="card-img-overlay d-flex align-items-end">
+                                                        <div class = "card-title" style = "margin-bottom: -5px; text-align: center">
+                                                            <a href = "https://www.youtube.com/watch?v=tSBWmxwT8So" class = "hover-effect" style = "text-decoration: none;font-weight:bolder; color: rgb(255, 255, 255)">
+                                                                <span class = "hover-effect">Quyền lực và chính trị: Chủ nghĩa Mác LêNindasdsad</span>
+                                                            </a>                                                        </div>
+                                                     </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class = "col-2">
+                                            <div class="card" style="height: 250px; width: 200px; margin-left: 250px">
+                                                <img class="card-img-top" src="./Image/Stalin.jpg" alt="Card image">
+                                                <div class="card-img-overlay">
+                                                    <div class="card-img-overlay d-flex align-items-end">
+                                                        <div class = "card-title" style = "margin-bottom: -5px; text-align: center">
+                                                            <a href = "https://www.youtube.com/watch?v=tSBWmxwT8So" class = "hover-effect" style = "text-decoration: none;font-weight:bolder; color: rgb(255, 255, 255)">
+                                                                <span class = "hover-effect">Quyền lực và chính trị: Chủ nghĩa Mác LêNindasdsad</span>
+                                                            </a>                                                        </div>
+                                                     </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class = "container">
+        <ul class="pagination justify-content-end" style="margin:20px 0">
+            <li class="page-item"><a class="page-link" href="#">Previous</a></li>
+            <li class="page-item"><a class="page-link" href="#">1</a></li>
+            <li class="page-item"><a class="page-link" href="#">2</a></li>
+            <li class="page-item"><a class="page-link" href="#">3</a></li>
+            <li class="page-item"><a class="page-link" href="#">Next</a></li>
+          </ul>
+    </div>
+    <!-- Footer -->
+    <footer class="fixed-bottom" id="footer">
+        <div class="container text-center">
+            <div class="row align-items-center">
+                <div class="col-md-6">
+                    <span>© 2023 - HappiNovel</span>
+                </div>
+                <div class="col-md-6">
+                    <span>Liên hệ: <a href="">contact@slavesteam.vn</a></span>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+</body>
+</html>
+

@@ -1,0 +1,326 @@
+<%- include("./partials/header") -%>
+
+    <!-- Sections -->
+    <div class="container">
+        <div class="row">
+            <!-- Book menu -->
+            <div class="col-md-3">
+                <div class="d-flex justify-content-center rounded-2 section-title" style="margin-bottom: 20px;">
+                    <span><i class="fa-solid fa-book"></i> Sách của bạn</span>
+                </div>
+
+                <div id="accordion">
+                    <!-- Book 1 -->
+                    <div class="panel list-group rounded-2" style="margin-bottom: 10px;">
+                        <a href="#book1" class="bg-book text-white list-group-item" data-bs-toggle="collapse" data-bs-parent="#accordion">Book 1<span class="float-end"><i class="fa-solid fa-caret-down"></i></span></a>
+                        <div id="book1" class="collapse">
+                            <div class="list-group">
+                            <!-- Volume 1.1 -->
+                                <a href="#volume1_1" class="bg-volume list-group-item collapsed" data-bs-toggle="collapse" data-bs-parent="#book1">Volume 1.1<span class="float-end"><i class="fa-solid fa-caret-down"></i></span></a>
+                                <div id="volume1_1" class="collapse">
+                                    <div class="list-group">
+                                    <!-- Chapter 1.1.1 -->
+                                        <a href="#chapter1_1_1" class="list-group-item collapsed" data-bs-toggle="collapse" data-bs-parent="#volume1_1">
+                                            <span class=""><i class="fa-solid fa-caret-right"></i></span> Chapter 1.1.1
+                                        </a>
+                                        <div id="chapter1_1_1" class="collapse">
+                                            <div class="list-group-item">
+                                                Lorem ipsum..
+                                            </div>
+                                        </div>
+                                    <!-- Chapter 1.1.2 -->
+                                        <a href="#chapter1_1_2" class="list-group-item collapsed" data-bs-toggle="collapse" data-bs-parent="#volume1_1">
+                                            <span class=""><i class="fa-solid fa-caret-right"></i></span> Chapter 1.1.2
+                                        </a>
+                                        <div id="chapter1_1_2" class="collapse">
+                                            <div class="list-group-item">
+                                                Lorem ipsum..
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- Volume 1.2 -->
+                                <a href="#volume1_2" class="bg-volume list-group-item collapsed" data-bs-toggle="collapse" data-bs-parent="#book1">Volume 1.2<span class="float-end"><i class="fa-solid fa-caret-down"></i></span></a>
+                                <div id="volume1_2" class="collapse">
+                                    <div class="list-group">
+                                        <!-- Chapter 1.2.1 -->
+                                        <a href="#chapter1_2_1" class="list-group-item collapsed" data-bs-toggle="collapse" data-bs-parent="#volume1_2">
+                                            <span class=""><i class="fa-solid fa-caret-right"></i></span> Chapter 1.2.1
+                                        </a>
+                                        <div id="chapter1_2_1" class="collapse">
+                                            <div class="list-group-item">
+                                                Lorem ipsum..
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                  
+                    <!-- Book 2 -->
+                    <div class="panel list-group" style="margin-bottom: 10px;">
+                        <a href="#book2" class="bg-book text-white  list-group-item collapsed" data-bs-toggle="collapse" data-bs-parent="#accordion">
+                            Book 2<span class="float-end"><i class="fa-solid fa-caret-down"></i></span>
+                        </a>
+                        <div id="book2" class="collapse">
+                            <div class="list-group">
+                            <!-- Volume 2.1 -->
+                                <a href="#volume2_1" class="bg-volume list-group-item collapsed" data-bs-toggle="collapse" data-bs-parent="#book2">
+                                    Volume 2.1<span class="float-end"><i class="fa-solid fa-caret-down"></i></span>
+                                </a>
+                                <div id="volume2_1" class="collapse">
+                                    <div class="list-group">
+                                        <!-- Chapter 2.1.1 -->
+                                        <a href="#chapter2_1_1" class="list-group-item collapsed" data-bs-toggle="collapse" data-bs-parent="#volume2_1">
+                                            <span class=""><i class="fa-solid fa-caret-right"></i></span> Chapter 2.1.1
+                                        </a>
+                                        <div id="chapter2_1_1" class="collapse">
+                                            <div class="list-group-item">
+                                                Lorem ipsum..
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                  
+                    <!-- Book 3 -->
+                    <div class="panel list-group" style="margin-bottom: 10px;">
+                        <a href="#book3" class="bg-book text-white list-group-item collapsed" data-bs-toggle="collapse" data-bs-parent="#accordion">
+                            Book 3<span class="float-end"><i class="fa-solid fa-caret-down"></i></span>
+                        </a>
+                        <div id="book3" class="collapse">
+                            <div class="list-group">
+                                <!-- Volume 3.1 -->
+                                <a href="#volume3_1" class="bg-volume list-group-item collapsed" data-bs-toggle="collapse" data-bs-parent="#book3">
+                                    Volume 3.1<span class="float-end"><i class="fa-solid fa-caret-down"></i></span>
+                                </a>
+                                <div id="volume3_1" class="collapse">
+                                    <div class="list-group">
+                                        <!-- Chapter 3.1.1 -->
+                                        <a href="#chapter3_1_1" class="list-group-item collapsed" data-bs-toggle="collapse" data-bs-parent="#volume3_1">
+                                            <span class=""><i class="fa-solid fa-caret-right"></i></span> Chapter 3.1.1
+                                        </a>
+                                        <div id="chapter3_1_1" class="collapse">
+                                            <div class="list-group-item">
+                                                Lorem ipsum..
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Infor menu -->
+            <div class="col-md-9 rounded-1 border" style="padding-left: 0; padding-right: 0;">
+                <div class="d-flex justify-content-center rounded-2 section-title" style="margin-bottom: 20px;">
+                    <span><i class="fa-solid fa-book-open"></i>   Thông tin sách</span>
+                </div>
+
+                <!-- Tên sách -->
+                <div class="row mb-3 me-3">
+                    <div class="col-md-2 text-end align-self-md-center">
+                        <b>Tên sách <span style="color: red;">*</span></b>
+                    </div>
+                    <div class="col-md-10">
+                        <input type="text" class="form-control" placeholder="Book name">
+                    </div>
+                </div>
+
+                <!-- Tác giả -->
+                <div class="row mb-3 me-3">
+                    <div class="col-md-2 text-end align-self-md-center">
+                        <b>Tác giả <span style="color: red;">*</span></b>
+                    </div>
+                    <div class="col-md-10">
+                        <input type="text" class="form-control" placeholder="Author name">
+                    </div>
+                </div>
+                
+                <!-- Thể loại -->
+                <div class="row mb-3 me-3">
+                    <div class="col-md-2 text-end">
+                        <b>Thể loại <span style="color: red;">*</span></b>
+                    </div>
+                    <div class="col-md-10">
+                        <div class="container">
+                            <div class="row mb-3">
+                                <div class="col-3">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" id="check1" name="option1" value="something" checked>
+                                        <label class="form-check-label" for="check1">Option 1</label>
+                                    </div>
+                                </div>
+                                <div class="col-3">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" id="check2" name="option2" value="something">
+                                        <label class="form-check-label" for="check2">Option 2</label>
+                                    </div>
+                                </div>
+                                <div class="col-3">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" id="check3" name="option3" value="something">
+                                        <label class="form-check-label" for="check3">Option 3</label>
+                                    </div>
+                                </div>
+                                <div class="col-3">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" id="check4" name="option4" value="something">
+                                        <label class="form-check-label" for="check4">Option 4</label>
+                                    </div>
+                                </div>
+                            </div>
+                          
+                            <div class="row mb-3">
+                                <div class="col-3">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" id="check5" name="option1" value="something" checked>
+                                        <label class="form-check-label" for="check5">Option 1</label>
+                                    </div>
+                                </div>
+                                <div class="col-3">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" id="check6" name="option2" value="something">
+                                        <label class="form-check-label" for="check6">Option 2</label>
+                                    </div>
+                                </div>
+                                <div class="col-3">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" id="check7" name="option3" value="something">
+                                        <label class="form-check-label" for="check7">Option 3</label>
+                                    </div>
+                                </div>
+                                <div class="col-3">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" id="check8" name="option4" value="something">
+                                        <label class="form-check-label" for="check8">Option 4</label>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="row mb-3">
+                                <div class="col-3">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" id="check9" name="option1" value="something" checked>
+                                        <label class="form-check-label" for="check9">Option 1</label>
+                                    </div>
+                                </div>
+                                <div class="col-3">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" id="check10" name="option2" value="something">
+                                        <label class="form-check-label" for="check10">Option 2</label>
+                                    </div>
+                                </div>
+                                <div class="col-3">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" id="check11" name="option3" value="something">
+                                        <label class="form-check-label" for="check11">Option 3</label>
+                                    </div>
+                                </div>
+                                <div class="col-3">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" id="check12" name="option4" value="something">
+                                        <label class="form-check-label" for="check12">Option 4</label>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="row">
+                                <div class="col-3">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" id="check13" name="option1" value="something" checked>
+                                        <label class="form-check-label" for="check13">Option 1</label>
+                                    </div>
+                                </div>
+                                <div class="col-3">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" id="check14" name="option2" value="something">
+                                        <label class="form-check-label" for="check14">Option 2</label>
+                                    </div>
+                                </div>
+                                <div class="col-3">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" id="check15" name="option3" value="something">
+                                        <label class="form-check-label" for="check15">Option 3</label>
+                                    </div>
+                                </div>
+                                <div class="col-3">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" id="check16" name="option4" value="something">
+                                        <label class="form-check-label" for="check16">Option 4</label>
+                                    </div>
+                                </div>
+                            </div>
+                          
+                            <!-- Repeat rows as needed -->
+                          </div>
+                          
+                    </div>
+                </div>
+
+                <!-- Tình trạng & Chọn ảnh -->
+                <div class="row mb-3 me-3">
+                    <div class="col-md-2 text-end mt-2">
+                        <b>Tình trạng <span style="color: red;">*</span></b>
+                    </div>
+                    <div class="col-md-3">
+                        <select class="form-select">
+                            <option>Đang tiến hành</option>
+                            <option>Tạm ngưng </option>
+                            <option>Đã hoàn thành </option>
+                        </select>
+                    </div>
+                    <div class="col-md-2 text-end mt-2">
+                        <b>Ảnh bìa <span style="color: red;">*</span></b>
+                    </div>
+                    <div class="col-md-2">
+                        <button type="button" class="btn btn-success">Chọn ảnh</button>
+                    </div>
+                    <div class="col-md-3">
+                        <img width="50%" src="./Image/book cover.jpg" alt="Ảnh bìa">
+                    </div>
+                </div>
+
+                <!-- Tóm tắt -->
+                <div class="row mb-3 me-3">
+                    <div class="col-md-2 text-end mt-2">
+                        <b>Tóm tắt <span style="color: red;">*</span></b>
+                    </div>
+                    <div class="col-md-10">
+                        <textarea>Welcome to HappiNovel!</textarea>
+                        <script>
+                            tinymce.init({
+                                selector: 'textarea'
+                            });
+                        </script>
+                    </div>
+                </div>
+
+                <!-- Chú thích thêm -->
+                <div class="row mb-3 me-3">
+                    <div class="col-md-2 text-end mt-2">
+                        <b>Chú thích thêm</b>
+                    </div>
+                    <div class="col-md-10">
+                        <textarea>Welcome to HappiNovel!</textarea>
+                        <script>
+                            tinymce.init({
+                                selector: 'textarea'
+                            });
+                        </script>
+                    </div>
+                </div>
+                <div class="row mb-3 float-end me-5">
+                    <button type="button" class="btn btn-success">Đăng sách</button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+<%- include("./partials/footer") -%>
