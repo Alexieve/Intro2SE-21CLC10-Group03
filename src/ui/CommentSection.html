@@ -1,222 +1,48 @@
-<!DOCTYPE html>
-<html lang="vi">
-<head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
-	<title>Bootstrap Comment Design</title>
-	<!-- Bootstrap CSS -->
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.3/css/bootstrap.min.css">
-
-	<style>
-    body {
-      font-family: 'Open Sans', sans-serif;
-      font-size: 16px;
-      font-weight: 400;
-    }
-		.comment {
-			margin-bottom: 20px;
-		}
-		.comment-avatar {
-			width: 60px;
-			height: 60px;
-			border-radius: 50%;
-			margin-right: 10px;
-		}
-		.comment-info {
-			margin-bottom: 5px;
-		}
-		.comment-user {
-			font-weight: bold;
-			margin-right: 5px;
-		}
-		.comment-role {
-			font-size: 12px;
-			color: #999;
-		}
-		.comment-date {
-			font-size: 12px;
-			color: #999;
-			margin-left: 5px;
-		}
-		.comment-content {
-			margin-top: 5px;
-		}
-		.reply-link {
-			font-size: 12px;
-			color: #999;
-			margin-left: 10px;
-		}
-		.report-link {
-			font-size: 12px;
-			color: #999;
-			margin-left: 10px;
-		}
-		.nested-comments {
-			margin-left: 50px;
-		}
-		.comment-form {
-			margin-top: 50px;
-			border-top: 1px solid #ddd;
-			padding-top: 20px;
-		}
-		.comment-form textarea {
-			height: 100px;
-			resize: none;
-		}
-		.comment-form button {
-			background-color: transparent;
-			border: 1px solid #007bff;
-			color: #007bff;
-			padding: 5px 10px;
-			border-radius: 5px;
-			transition: all 0.3s ease-in-out;
-		}
-		.comment-form button:hover {
-			background-color: #007bff;
-			color: #fff;
-			cursor: pointer;
-		}
-		
-	</style>
-</head>
-<body>
-	<div class="container">
-		<div class="row">
-			<div class="col-md-12">
-				<h2>Comments (4)</h2>
-			</div>
-		</div>
-		<div class="row">
-			<div class="col-md-12">
-				<div class="card">
-					<div class="card-body">
-						<div class="comment border">
-							<img src="./Image/ava1.png" alt="Avatar" class="comment-avatar float-left">
-							<div class="comment-info">
-								<span class="comment-user">User 1</span>
-								<span class="comment-role">Admin</span>
+<div class="row mt-5">
+					<div class="col-md-12">
+					  <h3>Comments</h3>
+					  <div class="media mt-3" id="comments">
+						<img src="./Image/avatar.png" class="mr-3 rounded-circle" alt="User Avatar" width="64" height="64">
+						<div class="media-body">
+						  <div class="d-flex align-items-start justify-content-between">
+							<div>
+							  <h5 class="mt-0">User Name</h5>
+							  <p>Comment about the book.</p>
 							</div>
-							<div class="comment-content">
-								<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed fermentum velit vel quam fringilla, in gravida enim posuere. Nullam a bibendum justo. Sed ac sagittis mi.</p>
-								<a href="#" class="reply-link">Reply</a>
-								<a href="#" class="report-link">Report</a>
-								<div class="nested-comments">
-									<div class="comment">
-										<img src="./Image/ava1.png" alt="Avatar" class="comment-avatar float-left">
-										<div class="comment-info">
-											<span class="comment-user">User 2</span>
-											<span class="comment-role">User</span>
-										</div>
-										<div class="comment-content">
-											<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed fermentum velit vel quam fringilla, in gravida enim posuere.</p>
-											<a href="#" class="reply-link">Reply</a>
-											<a href="#" class="report-link">Report</a>
-										</div>
-									</div>
-									<div class="comment">
-										<img src="./Image/ava1.png" alt="Avatar" class="comment-avatar float-left">
-										<div class="comment-info">
-											<span class="comment-user">User 3</span>
-											<span class="comment-role">User</span>
-										</div>
-										<div class="comment-content">
-											<p>Lorem ipsum dolor sit amet, consectetur adipiscingelit. Sed fermentum velit vel quam fringilla, in gravida enim posuere.</p>
-											<a href="#" class="reply-link">Reply</a>
-											<a href="#" class="report-link">Report</a>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
-
-						<div class="comment border">
-							<img src="./Image/ava1.png" alt="Avatar" class="comment-avatar float-left">
-							<div class="comment-info">
-								<span class="comment-user">User 4</span>
-								<span class="comment-role">User</span>
-							</div>
-							<div class="comment-content">
-								<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed fermentum velit vel quam fringilla, in gravida enim posuere.</p>
-								<a href="#" class="reply-link">Reply</a>
-								<a href="#" class="report-link">Report</a>
-							</div>
-						</div>
-
-						<div class="comment border">
-							<img src="./Image/ava1.png" alt="Avatar" class="comment-avatar float-left">
-							<div class="comment-info">
-							  <span class="comment-user">User 1</span>
-							  <span class="comment-role">Admin</span>
-							</div>
-							<div class="comment-content">
-							  <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed fermentum velit vel quam fringilla, in gravida enim posuere. Nullam a bibendum justo. Sed ac sagittis mi.</p>
-							  <a href="#" class="reply-link">Reply</a>
-							  <a href="#" class="report-link" data-toggle="modal" data-target="#report-modal">Report</a>
-							</div>
+							<button type="button" class="btn btn-link report-btn">
+							  <i class="fas fa-ellipsis-v"></i> <!-- Font Awesome icon for three dots -->
+							</button>
 						  </div>
-						  <!-- Report Modal -->
-						  <div class="modal" id="report-modal">
-							<div class="modal-dialog">
-							  <div class="modal-content">
-								<div class="modal-header">
-								  <h5 class="modal-title">Report Comment</h5>
-								  <button type="button" class="close" data-dismiss="modal">&times;</button>
-								</div>
-								<div class="modal-body">
-								  <form>
-									<div class="form-group">
-									  <div class="custom-control custom-radio">
-										<input type="radio" id="report-reason-offensive" name="report-reason" value="offensive" class="custom-control-input">
-										<label class="custom-control-label" for="report-reason-offensive">Báo cáo</label>
-									  </div>
-									  <div class="custom-control custom-radio">
-										<input type="radio" id="report-reason-delete" name="report-reason" value="delete" class="custom-control-input">
-										<label class="custom-control-label" for="report-reason-delete">Xóa bình luận</label>
-									  </div>
-									  <div class="custom-control custom-radio">
-										<input type="radio" id="report-reason-ban" name="report-reason" value="ban" class="custom-control-input">
-										<label class="custom-control-label" for="report-reason-ban">Cấm người dùng</label>
-									  </div>
-									</div>
-									<button type="submit" class="btn btn-primary">Submit</button>
-								  </form>
-								</div>
-							  </div>
-							</div>
-						  </div>
-
-						  <div class="form-group">
-							<div class="custom-control custom-radio">
-							  <input type="radio" id="report-reason-offensive" name="report-reason" value="offensive" class="custom-control-input">
-							  <label class="custom-control-label" for="report-reason-offensive">Báo cáo</label>
-							</div>
-							<div class="custom-control custom-radio">
-							  <input type="radio" id="report-reason-delete" name="report-reason" value="delete" class="custom-control-input">
-							  <label class="custom-control-label" for="report-reason-delete">Xóa bình luận</label>
-							</div>
-							<div class="custom-control custom-radio">
-							  <input type="radio" id="report-reason-ban" name="report-reason" value="ban" class="custom-control-input">
-							  <label class="custom-control-label" for="report-reason-ban">Cấm người dùng</label>
-							</div>
-
-						<div class="comment-form">
-							<img src="./Image/ava1.png" alt="Avatar" class="comment-avatar float-left">
-                         <div class="comment-info" style="display: flex; align-items: center">
-								<span class="comment-user">User 4</span>
-								<span class="comment-role">User</span>
-							</div>
-							<div class="form-group">
-								<textarea name="comment" id="comment" class="form-control"></textarea>
-							</div>
-							<button type="submit" class="btn btn-primary">Post Comment</button>
 						</div>
+					  </div>
+					  <div class="media mt-3">
+						<img src="./Image/avatar.png" class="mr-3 rounded-circle" alt="User Avatar" width="64" height="64">
+						<div class="media-body">
+						  <div class="d-flex align-items-start justify-content-between">
+							<div>
+							  <h5 class="mt-0">User Name</h5>
+							  <p>Comment about the book.</p>
+							</div>
+							<button type="button" class="btn btn-link report-btn">
+							  <i class="fas fa-ellipsis-v"></i> <!-- Font Awesome icon for three dots -->
+							</button>
+						  </div>
+						</div>
+					  </div>
+					  
+					<!-- Add a comment form -->
+					  <form class="mt-5">
+						<div class="d-flex align-items-start justify-content-between">
+						  <h5>Add a comment</h5>
+						  <button type="submit" class="btn btn-primary">Submit</button>
+						</div>
+						<div class="form-group">
+						  <label for="comment">Your comment:</label>
+						  <textarea class="form-control" id="comment" rows="3"></textarea>
+						</div>
+					  </form>
 					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-</body>
-</html>
+				  </div>
+				</div>	
 
 
