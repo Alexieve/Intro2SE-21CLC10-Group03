@@ -103,10 +103,6 @@
   list-style: none;
 }
 
-/* .menu ul li:hover {
-  background: #eee;
-  color: #36a189;
-} */
 .menu ul li a:hover {
     background: #eee;
     color: #36a189;

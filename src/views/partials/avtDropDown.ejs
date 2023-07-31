@@ -1,7 +1,7 @@
-<div class="profile">
-  <div class="user">
-    <p>Vũ Minh Quỳnh</p>
-    <!-- <p>@probablykat66</p> -->
+<% if (user) { %>
+<div class="profile" onmouseover="hoverOn(this)" onmouseout="hoverOff(this)">
+  <div class="user-profile">
+      <p><%= user.profileName%></p>
   </div>
   <div class="img-box">
     <img
@@ -36,8 +36,28 @@
 <script>
   let profile = document.querySelector(".profile");
   let menu = document.querySelector(".menu");
+  let userProfile = document.querySelector(".user-profile");
 
-  profile.onclick = function () {
+  document.onclick = function (e) {
+    if (!profile.contains(e.target) && !menu.contains(e.target)) {
+      menu.classList.remove("active");
+    }
+  };
+
+  profile.onclick = function (e) {
     menu.classList.toggle("active");
   };
+
+  function hoverOn(e){
+    e.style.color = "#36a189";
+  }
+  function hoverOff(e){
+    e.style.color = "rgb(72, 72, 72)";
+  }
+
 </script>
+<% } else { %>
+  <li class="nav-item rounded-3">
+    <b><a class="nav-link" href="/login">Đăng nhập</a></b>
+  </li>
+<% } %>
