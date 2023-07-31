@@ -1,12 +1,18 @@
-<%- include("./partials/header") -%>
-
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <%- include("./partials/head") -%>
+</head>
+<body>
+    <%- include("./partials/navigation") -%>
+    <%- include("./partials/coverImg") -%>
     <!-- Sections -->
     <div class="container">
         <div class="row">
             <!-- Book menu -->
             <div class="col-md-3">
                 <div class="d-flex justify-content-center rounded-2 section-title" style="margin-bottom: 20px;">
-                    <span><i class="fa-solid fa-book"></i> Sách của bạn</span>
+                    <span><i class="fa-solid fa-book"></i> SÁCH CỦA BẠN</span>
                 </div>
 
                 <div id="accordion">
@@ -119,7 +125,7 @@
             <!-- Infor menu -->
             <div class="col-md-9 rounded-1 border" style="padding-left: 0; padding-right: 0;">
                 <div class="d-flex justify-content-center rounded-2 section-title" style="margin-bottom: 20px;">
-                    <span><i class="fa-solid fa-book-open"></i>   Thông tin sách</span>
+                    <span><i class="fa-solid fa-book-open"></i>   THÔNG TIN SÁCH</span>
                 </div>
 
                 <!-- Tên sách -->
@@ -322,5 +328,10 @@
             </div>
         </div>
     </div>
+    <%- include("./partials/footer") -%>
+</body>
+</html>
 
-<%- include("./partials/footer") -%>
+    
+
+

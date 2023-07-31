@@ -34,7 +34,7 @@ nav {
 .section-title {
     background-color: lightgray;
     font-weight: bold;
-    font-size: 28px;
+    font-size: 18px;
 }
 .bg-book {
     background-color: #1d5167;
@@ -43,7 +43,4 @@ nav {
 .bg-volume {
     background-color: #36a189;
     font-weight: bold;
-}
-.demo1 {
-    
 }
