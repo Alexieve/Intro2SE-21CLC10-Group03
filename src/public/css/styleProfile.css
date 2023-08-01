@@ -620,7 +620,7 @@
 
 .allll .button-sua-thong-tin {
 	width: 190px;
-	position: absolute;
+	position: relative;
 	bottom: 30px;
 	left: 50%;
 	transform: translateX(-50%);
