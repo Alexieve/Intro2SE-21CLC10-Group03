@@ -21,6 +21,28 @@ const requireAuth = (req, res, next) => {
     }
 }
 
+// prevent login again
+const preventLoginAgain = (req, res, next) => {
+    const token = req.cookies.jwt;
+
+    if (token) {
+        jwt.verify(token, 'information of user', (err, decodedToken) => {
+            if (err) {
+                console.log(err.message);
+                // res.redirect('/login');
+                next();
+            }
+            else {
+                // console.log(decodedToken);
+                res.redirect('/');
+            }
+        })
+    }
+    else {
+        next();
+    }
+}
+
 // check current user
 const checkUser = (req, res, next) => {
     const token = req.cookies.jwt;
@@ -46,4 +68,4 @@ const checkUser = (req, res, next) => {
     }
 }
 
-module.exports = {requireAuth, checkUser}
+module.exports = {requireAuth, checkUser, preventLoginAgain}

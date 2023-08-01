@@ -7,7 +7,7 @@
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <div class="collapse navbar-collapse col-12" id="navbarSupportedContent">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                 <li class="nav-item rounded-3">
                     <b><a class="nav-link" href="#">Thể loại</a></b>
@@ -19,12 +19,9 @@
                     <b><a class="nav-link" href="/upload">Viết sách</a></b>
                 </li>
             </ul>
-            <form class="d-flex" role="search">
-                <input class="form-control search-form me-2" type="text" placeholder="Tìm kiếm..." aria-label="Search">
+            <form class="d-flex w-auto" role="search">
+                <input class="form-control search-form me-4 " type="text" placeholder="Tìm kiếm..." aria-label="Search">
             </form>
-            <!-- <ul class="navbar-nav">
-                
-            </ul> -->
             <ul class="navbar-nav">
                 <%- include("./avtDropDown") -%>
             </ul>
