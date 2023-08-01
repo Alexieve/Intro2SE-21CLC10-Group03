@@ -68,6 +68,7 @@
   transform: translateY(-10px);
   visibility: hidden;
   transition: 300ms;
+  z-index:  99999;
 }
 
 .menu::before {
