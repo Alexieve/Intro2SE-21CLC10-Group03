@@ -8,6 +8,7 @@ const app = express()
 
 // Require Routes
 const authRoutes = require('./routes/authRoutes')
+const profileRoutes = require('./routes/profileRoutes');
 const { requireAuth, checkUser} = require('./middleware/authMiddleware')
 
 // Database connection
@@ -32,6 +33,8 @@ app.use(express.json())
 app.use(cookieParser())
 app.use(bodyParser.urlencoded({extended: true}))
 app.use(authRoutes)
+app.use(profileRoutes)
+
 
 // Routes
 app.get('*', checkUser);
