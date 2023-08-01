@@ -24,6 +24,9 @@ db.once("open", function () {
 //     useNewUrlParser: true,
 // });
 
+// Serve images from the Image folder
+app.use('/images', express.static(path.join(__dirname, 'database/ProfileCover')));
+app.use('/imagesAvatar', express.static(path.join(__dirname, 'database/Avatar')));
 
 // Use and Set Module
 app.use(express.static(path.join(__dirname, './public')))
@@ -40,6 +43,7 @@ app.use(profileRoutes)
 app.get('*', checkUser);
 app.get("/", (req, res) => res.render('home'));
 app.get("/upload", requireAuth, (req, res) => res.render('upload'));
+app.get("/profile", requireAuth, (req, res) => res.render('profile'));
 
 
 // Listen
