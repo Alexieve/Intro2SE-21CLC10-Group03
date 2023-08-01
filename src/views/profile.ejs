@@ -39,6 +39,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
     <!-- Styles.css -->
     <link rel="stylesheet" href="css/stylesUpload.css">
+    <script src="/utils/dateHelpers.js"></script>
     <!-- Tiny ediotr -->
     <script src="https://cdn.tiny.cloud/1/czhzadznx3qb12g2i4971xbviqsshfv65cbyuvs95fsi5021/tinymce/6/tinymce.min.js" referrerpolicy="origin"></script>
     <script src="https://cdn.tiny.cloud/1/czhzadznx3qb12g2i4971xbviqsshfv65cbyuvs95fsi5021/tinymce/6/tinymce.min.js" referrerpolicy="origin"></script>
@@ -97,11 +98,11 @@
                                                 <div class="content img-in-ratio" >
                                                       <div class="content img-in-ratio">
                                                             <% if (user.coverURL) { %>
-                                                              <img src="<%= coverImagePath %>" id="coverImage">
-                                                            <% } else { %>
-                                                              <!-- Default cover picture if the user doesn't have one -->
-                                                              <img src="/Image/941898.jpg" id="coverImage">
-                                                            <% } %>
+                                                                  <img src="/images/<%= user.coverURL %>" id="coverImage">
+                                                                <% } else { %>
+                                                                  <!-- Default cover picture if the user doesn't have one -->
+                                                                  <img src="../public/Image/941898.jpg" id="coverImage">
+                                                                <% } %>
                                                           </div>
                                                           
                                                 </div>
@@ -126,7 +127,13 @@
                                                       <!-- Ảnh đại diện -->
                                                       <!-- Cần cắt hình ảnh thành hình vuông -->
 
-                                                      <img src="./Image/amnesty-logo-candle-wire-01-scaled.jpg" id="avaImage" />
+                                                      
+                                                      <% if (user.avatarURL) { %>
+                                                            <img src="/imagesAvatar/<%= user.avatarURL %>" id="avaImage">
+                                                          <% } else { %>
+                                                            <!-- Default cover picture if the user doesn't have one -->
+                                                            <img src="/Image/amnesty-lo-wire-01-scaled.jpg" id="avaImage" />
+                                                          <% } %>
                                                 </div>
                                                 <button href="" id="uploadButtonAva"
                                                             class="buttonn to-contact button-nigga button-anh-dai-dien ">
@@ -157,24 +164,24 @@
                                                                 <div class="modal-body">
                                                                   <!-- Input fields for the four rows -->
                                                                   <div class="mb-3">
-                                                                    <label for="usernameInput" class="form-label" style="font-size: 20px;">Username</label>
+                                                                    <label for="usernameInput" class="form-label" style="font-size: 20px;color:black">Username</label>
                                                                     <input type="text" class="form-control" id="usernameInput" 
                                                                     style="margin-bottom: 20px;font-size: 20px; margin-top: 20px; height: 50px">
                                                                   </div>
                                                                   <div class="mb-3">
-                                                                    <label for="oldPasswordInput" class="form-label"  style="font-size: 20px;">Old Password</label>
+                                                                    <label for="oldPasswordInput" class="form-label"  style="font-size: 20px;color:black">Old Password</label>
                                                                     <input type="password" class="form-control" id="oldPasswordInput"
                                                                     style="margin-bottom: 20px;font-size: 20px; margin-top: 20px; height: 50px">
                                                                     
                                                                   </div>
                                                                   <div class="mb-3">
-                                                                    <label for="newPasswordInput" class="form-label"  style="font-size: 20px;">New Password</label>
+                                                                    <label for="newPasswordInput" class="form-label"  style="font-size: 20px;color:black">New Password</label>
                                                                     <input type="password" class="form-control" id="newPasswordInput"
                                                                     style="margin-bottom: 20px;font-size: 20px; margin-top: 20px; height: 50px">
                                                                   
                                                                   </div>
                                                                   <div class="mb-3">
-                                                                    <label for="confirmPasswordInput" class="form-label"  style="font-size: 20px;">Confirm Password</label>
+                                                                    <label for="confirmPasswordInput" class="form-label"  style="font-size: 20px;color:black">Confirm Password</label>
                                                                     <input type="password" class="form-control" id="confirmPasswordInput"
                                                                     style="margin-bottom: 20px;font-size: 20px; margin-top: 20px; height: 50px">
                                                             
@@ -222,23 +229,8 @@
                                           </ul>
                                           <main class="sect-body">
                                                 <div class="p-s_i-bio font-semibold " id="frameContent">
-                                                      <p>Dùng thế giới Fantasy để phản ánh thế giới Reality.Dùng thế
-                                                            giới Fantasy để phản ánh thế giới Reality.Dùng thế giới
-                                                            Fantasy để phản ánh thế giới Reality.Dùng thế giới Fantasy
-                                                            để phản ánh thế giới Reality.Dùng thế giới Fantasy để phản
-                                                            ánh thế giới Reality.Dùng thế giới Fantasy để phản ánh thế
-                                                            giới Reality.Dùng thế giới Fantasy để phản ánh thế giới
-                                                            Reality.Dùng thế giới Fantasy để phản ánh thế giới
-                                                            Reality.Dùng thế giới Fantasy để phản ánh thế giới
-                                                            Reality.Dùng thế giới Fantasy để phản ánh thế giới
-                                                            Reality.Dùng thế giới Fantasy để phản ánh thế giới
-                                                            Reality.Dùng thế giới Fantasy để phản ánh thế giới
-                                                            RealityDùng thế giới Fantasy để phản ánh thế giới
-                                                            RealityDùng thế giới Fantasy để phản ánh thế giới
-                                                            RealityDùng thế giới Fantasy để phản ánh thế giới
-                                                            RealityDùng thế giới Fantasy để phản ánh thế giới
-                                                            RealityDùng thế giới Fantasy để phản ánh thế giới
-                                                            RealityDùng thế giới Fantasy để phản ánh thế giới Reality
+                                                      <p>
+                                                            <%= user.bio%>
                                                       </p>
                                                       <!-- Button to toggle edit mode -->
                                                       <button id="editButton" href=""
@@ -252,29 +244,28 @@
                                                       <span class="info-name"><i
                                                                   class="icon-more-contrast fas fa-calendar "></i> Ngày
                                                             sinh:
-                                                      </span><span contenteditable="false" class="info-value  editable-frame ">10/11/1991</span>
+                                                      </span><span contenteditable="false" class="info-value  editable-frame "><%=formatDate( user.dob)%></span>
                                                 </div>
                                                 <div class="profile-info-item">
                                                       <span class="info-name"><i
                                                                   class="icon-more-contrast fas fa-pencil-alt"></i> Nghề
                                                             nghiệp:
-                                                      </span><span contenteditable="false" class="info-value  editable-frame">Giáo viên Anh ngữ và Hoa ngữ
+                                                      </span><span contenteditable="false" class="info-value  editable-frame"><%= user.jobs%>
                                                       </span>
                                                 </div>
                                                 <div class="profile-info-item">
                                                       <span class="info-name"><i
                                                                   class="icon-more-contrast fas fa-star"></i> Sở thích:
-                                                      </span><span contenteditable="false" class="info-value  editable-frame">Nghiên cứu ngôn ngữ, viết lách,
-                                                            chụp
-                                                            ảnh, thiết kế</span>
+                                                      </span><span contenteditable="false" class="info-value  editable-frame"><%= user.favorites%></span>
                                                 </div>
                                                 <!-- Chỗ này tạo khoảng trống giữa content và cái đáy của frame, ở đó ta nhét một nút vào -->
                                                 <div class="profile-info-item place-for-button-chinh-thong-tin">
                                                       <span class="info-name"><i
                                                                   class="icon-more-contrast fas fa-calendar"></i> Tham
                                                             gia:
-                                                      </span><span class="info-value">18/07/2018</span>
-                                                </div>
+                                                      </span>
+                                                      <span class="info-value"><%= formatDate( user.regdate)%></span>
+                                                      </div>
                                                 <button id="editButton2" href=""
                                                       class="buttonn to-contact button-orange button-sua-thong-tin "
                                                       onclick="show('popup')">
@@ -283,6 +274,7 @@
                                     </section>
                               </div>
                               <!-- Show truyện -->
+                              
                               <div class="col-12 col-md-12 col-lg-9 col-xl-9">
                                     <section class="profile-showcase">
                                           <header>
@@ -805,6 +797,15 @@
              let menu = document.querySelector(".menu");
             let userProfile = document.querySelector(".user-profile");
 
+          </script>
+          <script>
+            function formatDate(dateString) {
+              const date = new Date(dateString);
+              const day = date.getDate().toString().padStart(2, '0');
+              const month = (date.getMonth() + 1).toString().padStart(2, '0');
+              const year = date.getFullYear().toString();
+              return `${day}/${month}/${year}`;
+            }
           </script>
       
 </body>
