@@ -1,6 +1,5 @@
 const {Router} = require('express')
 const authController = require('../controllers/authControllers')
-const profileController = require('./profileController');
 
 
 
@@ -11,7 +10,6 @@ router.post('/login', authController.login_post)
 router.get('/register', authController.register_get)
 router.post('/register', authController.register_post)
 router.get('/logout', authController.logout_get)
-router.get('/profile', profileController.profilePage);
 
 
 
