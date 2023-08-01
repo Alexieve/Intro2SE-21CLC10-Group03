@@ -8,6 +8,7 @@ const app = express()
 
 // Require Routes
 const authRoutes = require('./routes/authRoutes')
+const profileRoutes = require('./routes/profileRoutes');
 const { requireAuth, checkUser} = require('./middleware/authMiddleware')
 const Account = require('./models/Account')
 
@@ -24,6 +25,9 @@ db.once("open", function () {
 //     useNewUrlParser: true,
 // });
 
+// Serve images from the Image folder
+app.use('/images', express.static(path.join(__dirname, 'database/ProfileCover')));
+app.use('/imagesAvatar', express.static(path.join(__dirname, 'database/Avatar')));
 
 // Use and Set Module
 app.use(express.static(path.join(__dirname, './public')))
@@ -33,11 +37,14 @@ app.use(express.json())
 app.use(cookieParser())
 app.use(bodyParser.urlencoded({extended: true}))
 app.use(authRoutes)
+app.use(profileRoutes)
+
 
 // Routes
 app.get('*', checkUser);
 app.get("/", (req, res) => res.render('home'));
 app.get("/upload", requireAuth, (req, res) => res.render('upload'));
+app.get("/profile", requireAuth, (req, res) => res.render('profile'));
 
 
 // Listen
