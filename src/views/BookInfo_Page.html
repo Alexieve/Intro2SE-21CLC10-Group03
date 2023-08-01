@@ -6,9 +6,11 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<!-- Bootstrap CSS -->
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 	<!-- Custom CSS -->
 	<link rel="stylesheet" href="./css/styleProfile.css">
 	<link rel="stylesheet" href="css/stylesUpload.css">
+	<link rel="stylesheet" href="./css/avtDropDown.css">
 	<!-- Google Fonts -->
 	<link rel="preconnect" href="https://fonts.googleapis.com">
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -18,39 +20,40 @@
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
-	<!-- Navbar -->
-	<div class="navbar-container">
-		<nav class="navbar navbar-expand-lg bg-transparent" style="max-width: 1280px;">
-			<div class="container-fluid">
-				<a class="navbar-brand" href="#">
-					<img class="rounded-2" src="./Image/logo.png" alt="Bootstrap" width="50" height="50">
-				</a>
-				<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-					<span class="navbar-toggler-icon"></span>
-				</button>
-				<div class="collapse navbar-collapse" id="navbarSupportedContent">
-					<ul class="navbar-nav me-auto mb-2 mb-lg-0">
-						<li class="nav-item rounded-3">
-							<b><a class="nav-link" href="#">Thể loại</a></b>
-						</li>
-						<li class="nav-item rounded-3">
-							<b><a class="nav-link" href="#">Sách của bạn</a></b>
-						</li>
-						<li class="nav-item rounded-3">
-							<b><a class="nav-link" href="#">Viết sách</a></b>
-						</li>
-					</ul>
-					<form class="d-flex " role="search">
-						<input class="form-control search-form me-2" type="text" placeholder="Tìm kiếm..." aria-label="Search">
-					</form>
-					<ul class="navbar-nav">
-						<li class="nav-item rounded-3">
-							<b><a class="nav-link" href="#">Đăng nhập</a></b>
-						</li>
-					</ul>
-				</div>
-			</div>
-		</nav>
+<!-- Navigator bar -->
+<nav class="navbar navbar-expand-lg bg-transparent">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="#">
+            <img class="rounded-2" src="./Image/logo.png" alt="Bootstrap" width="50" height="50">
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item rounded-3">
+                    <b><a class="nav-link" href="#">Thể loại</a></b>
+                </li>
+                <li class="nav-item rounded-3">
+                    <b><a class="nav-link" href="/upload">Sách của bạn</a></b>
+                </li>
+                <li class="nav-item rounded-3">
+                    <b><a class="nav-link" href="/upload">Viết sách</a></b>
+                </li>
+            </ul>
+            <form class="d-flex" role="search">
+                <input class="form-control search-form me-2" type="text" placeholder="Tìm kiếm..." aria-label="Search">
+            </form>
+            <!-- <ul class="navbar-nav">
+                
+            </ul> -->
+            <ul class="navbar-nav">
+                <%- include("./avtDropDown") -%>
+            </ul>
+        </div>
+    </div>
+</nav>	
+
 		<!-- Book Info -->
 		<div class="container">
 			<div class="row">
@@ -149,12 +152,20 @@
 							  <h5 class="mt-0">User Name</h5>
 							  <p>Comment about the book.</p>
 							</div>
-							<button type="button" class="btn btn-link report-btn">
-							  <i class="fas fa-ellipsis-v"></i> <!-- Font Awesome icon for three dots -->
-							</button>
+							<div class="dropdown">
+							  <button class="btn btn-link" type="button" id="commentOptionsDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+								<i class="fas fa-ellipsis-v"></i> <!-- Font Awesome icon for three dots -->
+							  </button>
+							  <ul class="dropdown-menu">
+								<li><button class="dropdown-item" type="button">Báo cáo</button></li>
+								<li><button class="dropdown-item" type="button">Xóa bình luận</button></li>
+								<li><button class="dropdown-item" type="button">Cấm người dùng</button></li>
+							  </ul>
+							</div>
 						  </div>
 						</div>
 					  </div>
+
 					  <div class="media mt-3">
 						<img src="./Image/avatar.png" class="mr-3 rounded-circle" alt="User Avatar" width="64" height="64">
 						<div class="media-body">
@@ -163,26 +174,38 @@
 							  <h5 class="mt-0">User Name</h5>
 							  <p>Comment about the book.</p>
 							</div>
-							<button type="button" class="btn btn-link report-btn">
-							  <i class="fas fa-ellipsis-v"></i> <!-- Font Awesome icon for three dots -->
-							</button>
+							<div class="dropdown">
+								<button class="btn btn-link" type="button" id="commentOptionsDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+								  <i class="fas fa-ellipsis-v"></i> <!-- Font Awesome icon for three dots -->
+								</button>
+								<ul class="dropdown-menu">
+								  <li><button class="dropdown-item" type="button">Báo cáo</button></li>
+								  <li><button class="dropdown-item" type="button">Xóa bình luận</button></li>
+								  <li><button class="dropdown-item" type="button">Cấm người dùng</button></li>
+								</ul>
+							</div>
 						  </div>
 						</div>
-					  </div>
-					  
-					<!-- Add a comment form -->
+					</div>
+					  <!-- Add a comment form -->
 					  <form class="mt-5">
-						<div class="d-flex align-items-start justify-content-between">
-						  <h5>Add a comment</h5>
-						  <button type="submit" class="btn btn-primary">Submit</button>
-						</div>
 						<div class="form-group">
-						  <label for="comment">Your comment:</label>
+						  <div class="media">
+							<img src="./Image/avatar.png" class="mr-3 rounded-circle" alt="User Avatar" width="64" height="64">
+							<div class="media-body d-flex align-items-start">
+							  <h5 class="mt-0">User Name</h5>
+							</div>
+						  </div>
+						  <label for="comment" class="sr-only">Comment</label>
 						  <textarea class="form-control" id="comment" rows="3"></textarea>
+						  <div class="text-end">
+							<button type="submit" class="btn btn-primary mt-3">Xác nhận</button>
+						  </div>
 						</div>
 					  </form>
-					</div>
-				  </div>
+					</div> 
+				</div>
+
 				</div>	
 				<!-- Sidebar -->
 				<div class="col-md-4">
@@ -194,21 +217,30 @@
 							<img src="./Image/avatar.png" alt="Author Avatar" class="img-fluid rounded-circle" width="128" height="128">
 							<h5 class="mt-3">Author Name</h5>
 							<p class="mt-2">Author bio.</p>
-							<div class="mb-3">
-								<span class="badge badge-primary">Category 1</span>
-								<span class="badge badge-secondary">Category 2</span>
-								<span class="badge badge-success">Category 3</span>
-							</div>
 						</div>
 					</div>
 				</div>
 			</div>
 		</div>
 	</div>
+	<!-- Footer -->
+<footer class="mt-3" id="footer">
+    <div class="container text-center"">
+        <div class="row align-items-center">
+            <div class="col-md-6 text-start">
+                <span>© 2023 - HappiNovel</span>
+            </div>
+            <div class="col-md-6 text-end">
+                <span>Liên hệ: <a href="">contact@slavesteam.vn</a></span>
+            </div>
+        </div>
+    </div>
+</footer>
 	<!-- Bootstrap JS -->
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.9.3/umd/popper.min.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 	<!-- Custom JS -->
 	<script src="./js/scriptProfile.js"></script>
 	<script src="./js/scriptUpload.js"></script>
