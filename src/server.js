@@ -9,6 +9,7 @@ const app = express()
 // Require Routes
 const authRoutes = require('./routes/authRoutes')
 const { requireAuth, checkUser} = require('./middleware/authMiddleware')
+const Account = require('./models/Account')
 
 // Database connection
 mongoose.connect('mongodb+srv://admin:123@happinovel.4zvtpnj.mongodb.net/HappiNovel?retryWrites=true&w=majority', {

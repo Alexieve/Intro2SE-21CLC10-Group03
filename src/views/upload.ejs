@@ -2,22 +2,23 @@
 <html lang="en">
 <head>
     <%- include("./partials/head") -%>
-    <link rel="stylesheet"  href="./css/contextMenu.css">
-    <script src="./js/contextMenu.js"></script>
+
+    <link rel="stylesheet" href="./css/ContextMenu.css"/>
+
+
 </head>
 <body>
     <%- include("./partials/navigation") -%>
     
     <%- include("./partials/coverImg") -%>
 
-    <%- include("./partials/contextMenu") -%>
-    <script src="./js/contextMenu.js"></script>
+
 
     <!-- Sections -->
     <div class="container">
         <div class="row">
             <!-- Book menu -->
-            <div class="col-md-3">
+            <div class="col-md-3 target-light">
                 <div class="d-flex justify-content-center rounded-2 section-title" style="margin-bottom: 20px;">
                     <span><i class="fa-solid fa-book"></i> SÁCH CỦA BẠN</span>
                 </div>
@@ -335,6 +336,9 @@
             </div>
         </div>
     </div>
+
+    <script src="./js/ContextMenu.js"></script>
+    <script src="./js/initContext.js"></script>
     <%- include("./partials/footer") -%>
 </body>
 </html>

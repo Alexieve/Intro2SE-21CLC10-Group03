@@ -1,21 +1,28 @@
 const mongoose = require("mongoose")
 const bcrypt = require('bcrypt')
+const {isAlphanumeric} = require('validator')
 
 const accountSchema = new mongoose.Schema ({
+    userID: {
+        type: Number,
+        unique: true,
+        require: true,
+    },
     profileName: {
         type: String,
         required: [true, 'Vui lòng nhập tên của bạn!'],
     },
     username: {
         type: String,
-        unique: true,
         required: [true, 'Vui lòng nhập tài khoản!'],
         unique: true,
+        validate: [isAlphanumeric, 'Tên đăng nhập chỉ chứa các kí tự "a-z, A-Z và 0-9"!'],
     },
     password: {
         type: String,
         required: [true, 'Vui lòng nhập mật khẩu!'],
-        minLength: [6, 'Mật khẩu cần tối thiểu 6 ký tự!']
+        minLength: [6, 'Mật khẩu cần tối thiểu 6 ký tự!'],
+        validate: [isAlphanumeric, 'Mật khẩu chỉ chứa các kí tự "a-z, A-Z và 0-9"!'],
     },
     sdt: {
         type: String,
@@ -29,25 +36,30 @@ const accountSchema = new mongoose.Schema ({
     bio: {
         type: String,
         required: false,
-        minLength: [255, 'Giới hạn tối đa là 255 từ']
+        maxLength: [255, 'Giới hạn tối đa là 255 từ'],
+        default: "",
     },
     jobs: {
         type: String,
         required: false,
-        minLength: [255, 'Giới hạn tối đa là 255 từ']
+        maxLength: [255, 'Giới hạn tối đa là 255 từ'],
+        default: "",
     },
     favorites: {
         type: String,
         required: false,
-        minLength: [255, 'Giới hạn tối đa là 255 từ']
+        maxLength: [255, 'Giới hạn tối đa là 255 từ'],
+        default: "",
     },
     avatarURL: {
         type: String,
         required: false,
+        default: "defaultAvt.png"
     },
     coverURL: {
         type: String,
         required: false,
+        default: "defaultBg.png"
     },
     status: {
         type: Number,

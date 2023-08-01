@@ -70,9 +70,11 @@ module.exports.register_post = async (req, res) => {
     const profileName = req.body.profileName
     const sdt = req.body.sdt
     const dob = req.body.dob
-
+    const userID = 100 + await Account.find().count();
+    
     try {
         const user = await Account.create({
+            userID: userID,
             profileName: profileName,
             username: username,
             password: password,

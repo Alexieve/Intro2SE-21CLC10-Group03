@@ -108,11 +108,13 @@
         </div>  
 
           <div class="mt-3 mb-3" style="text-align: center;">
-            <button class="btn btn-primary" >Đăng ký</button>
+            <button class="btn btn-primary">Đăng ký</button>
           </div>
         </div>
       </div>
     </form>
+
+    <%- include("./partials/modal2btn") -%>
 
     <!-- Add script file -->
     <script>
@@ -155,6 +157,17 @@
             dobError.innerHTML = data.errors.dob;
           }
           if (data.user) {
+            // function attachModal(title, content, button){
+            //     document.getElementById("modal2btnLabel").innerHTML = title;
+            //     document.querySelector(".modal-body").innerHTML = content;
+            //     document.getElementById("modalbtn2").innerHTML = button;
+            //     document.getElementById("modal2btn").collapse
+            // }
+            
+            // attachModal("Thông báo", "Đăng ký tài khoản thành công, chuyển đến trang đăng nhập.", "Xác nhận")
+            // await document.getElementById("modalbtn1").addEventListener("click", function(){
+            //   location.assign('/login')
+            // })
             location.assign('/login')
           }
         }
