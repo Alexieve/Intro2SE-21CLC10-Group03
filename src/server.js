@@ -28,6 +28,7 @@ db.once("open", function () {
 // Serve images from the Image folder
 app.use('/images', express.static(path.join(__dirname, 'database/ProfileCover')));
 app.use('/imagesAvatar', express.static(path.join(__dirname, 'database/Avatar')));
+app.use('/imagesBook', express.static(path.join(__dirname, 'database/Book/Bookcover')));
 
 // Use and Set Module
 app.use(express.static(path.join(__dirname, './public')))
