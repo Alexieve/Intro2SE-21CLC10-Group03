@@ -3,6 +3,9 @@
 const Account = require('../models/Account');
 const jwt = require('jsonwebtoken');
 const path = require('path');
+const Book = require('../models/Book');
+const bcrypt = require('bcrypt');
+const fs = require('fs');
 
 
 // Import the formatDate function from dateHelpers.js
@@ -17,6 +20,7 @@ exports.profilePage = async (req, res) => {
 
     const decodedToken = jwt.verify(token, 'information of user');
     const user = await Account.findById(decodedToken.id);
+    const matchedBooks = await Book.find({ author: user.userID });
 
     if (!user) {
       throw new Error('User not found');
@@ -26,7 +30,8 @@ exports.profilePage = async (req, res) => {
     const coverImagePath = getCoverImagePath(user.coverURL);
 
     // Assuming you have a 'profile' view to render the profile page
-    res.render('profile', { user, coverImagePath, formatDate });
+    const chaptersCount = await countChapters(user.userID);
+    res.render('profile', { user, coverImagePath, formatDate, matchedBooks, checkOldPassword, chaptersCount });
   } catch (err) {
     console.error(err.message);
     res.status(500).send('Internal Server Error');
@@ -39,3 +44,76 @@ const getCoverImagePath = (coverURL) => {
   const databaseDir = path.join(__dirname, '../database');
   return path.join(databaseDir, 'ProfileCover', coverURL);
 };
+
+const checkOldPassword = async (user, oldPassword) => {
+  try {
+    // Check if the old password matches the hashed password stored in the user object
+    const isPasswordMatch = await bcrypt.compare(oldPassword, user.password);
+    return isPasswordMatch;
+  } catch (err) {
+    console.error('Error checking old password:', err);
+    return false; // Return false in case of an error
+  }
+};
+
+// Function to count the total number of chapter files posted by an author in their books
+async function countChapters(authorID) {
+  const bookDirectory = path.join(__dirname, '../database/Book');
+
+  // Read the contents of the 'Book' directory
+  const bookFolders = await fs.promises.readdir(bookDirectory);
+
+  let chaptersCount = 0;
+
+  // Iterate over each book folder
+  for (const bookFolder of bookFolders) {
+    const bookPath = path.join(bookDirectory, bookFolder);
+
+    try {
+      // Check if the book folder is a directory
+      const isBookFolder = (await fs.promises.stat(bookPath)).isDirectory();
+
+      if (isBookFolder) {
+        // Read the contents of the book directory
+        const volumeFolders = await fs.promises.readdir(bookPath);
+
+        // Check if the book belongs to the specified author (by comparing the authorID with the folder name)
+        const bookBelongsToAuthor = bookFolder === `Book${authorID}`;
+
+        if (bookBelongsToAuthor) {
+          // Iterate over each volume folder
+          for (const volumeFolder of volumeFolders) {
+            const volumePath = path.join(bookPath, volumeFolder);
+
+            try {
+              // Check if the volume folder is a directory
+              const isVolumeFolder = (await fs.promises.stat(volumePath)).isDirectory();
+
+              if (isVolumeFolder) {
+                // Read the contents of the volume directory
+                const chapterFiles = await fs.promises.readdir(volumePath);
+
+                // Increment the chaptersCount with the number of chapter files in the volume directory
+                chaptersCount += chapterFiles.length;
+              }
+            } catch (err) {
+              // Handle the error when the volume folder does not exist
+              console.error(`Error reading volume folder: ${volumePath}`);
+            }
+          }
+        }
+      }
+    } catch (err) {
+      // Handle the error when the book folder does not exist
+      console.error(`Error reading book folder: ${bookPath}`);
+    }
+  }
+
+  return chaptersCount;
+}
+
+
+
+
+
+
