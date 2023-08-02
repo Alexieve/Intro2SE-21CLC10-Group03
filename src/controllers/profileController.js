@@ -1,5 +1,5 @@
 // profileController.js
-
+const mongoose = require('mongoose')
 const Account = require('../models/Account');
 const jwt = require('jsonwebtoken');
 const path = require('path');
@@ -10,6 +10,7 @@ const fs = require('fs');
 
 // Import the formatDate function from dateHelpers.js
 const formatDate = require('../public/js/dateHelpers');
+const formatStatus = require('../public/js/statusBook');
 
 exports.profilePage = async (req, res) => {
   try {
@@ -30,8 +31,8 @@ exports.profilePage = async (req, res) => {
     const coverImagePath = getCoverImagePath(user.coverURL);
 
     // Assuming you have a 'profile' view to render the profile page
-    const chaptersCount = await countChapters(user.userID);
-    res.render('profile', { user, coverImagePath, formatDate, matchedBooks, checkOldPassword, chaptersCount });
+    const chaptersCount = await countChapters(matchedBooks);
+    res.render('profile', { user, coverImagePath, formatDate, matchedBooks, checkOldPassword, chaptersCount ,formatStatus});
   } catch (err) {
     console.error(err.message);
     res.status(500).send('Internal Server Error');
@@ -57,18 +58,22 @@ const checkOldPassword = async (user, oldPassword) => {
 };
 
 // Function to count the total number of chapter files posted by an author in their books
-async function countChapters(authorID) {
+async function countChapters(matchedBooks) {
+ 
+  // Ensure matchedBooks is an array of plain JavaScript objects with bookID field
+  const books = Array.isArray(matchedBooks)
+    ? matchedBooks.filter((book) => book && book.bookID)
+    : [];
+
   const bookDirectory = path.join(__dirname, '../database/Book');
-
-  // Read the contents of the 'Book' directory
-  const bookFolders = await fs.promises.readdir(bookDirectory);
-
   let chaptersCount = 0;
 
-  // Iterate over each book folder
-  for (const bookFolder of bookFolders) {
-    const bookPath = path.join(bookDirectory, bookFolder);
-
+  // Iterate over each book in the books array
+  for (const book of books) {
+    const bookID = book.bookID;
+    const bookFolderName = `Book${bookID}`;
+    const bookPath = path.join(bookDirectory, bookFolderName);
+    console.log(bookPath)
     try {
       // Check if the book folder is a directory
       const isBookFolder = (await fs.promises.stat(bookPath)).isDirectory();
@@ -111,6 +116,15 @@ async function countChapters(authorID) {
 
   return chaptersCount;
 }
+
+
+
+
+
+
+
+
+
 
 
 
