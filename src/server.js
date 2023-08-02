@@ -21,9 +21,6 @@ db.on("error", console.error.bind(console, "Connection error: "));
 db.once("open", function () {
     console.log("Connected successfully");
 });
-// mongoose.connect('mongodb://0.0.0.0:27017/HappiNovel', {
-//     useNewUrlParser: true,
-// });
 
 // Serve images from the Image folder
 app.use('/images', express.static(path.join(__dirname, 'database/ProfileCover')));

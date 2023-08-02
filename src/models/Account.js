@@ -84,6 +84,7 @@ accountSchema.pre('save', async function(next){
     next();
 })
 
+
 // static method to login
 accountSchema.statics.login = async function(username, password) {
     const user = await this.findOne({username});
@@ -94,6 +95,19 @@ accountSchema.statics.login = async function(username, password) {
         }
     }
     throw Error('Tên đăng nhập hoặc mật khẩu không chính xác')
+}
+
+// static method to find password
+accountSchema.statics.forgetPassword = async function(username, sdt, password) {
+    const user = await Account.findOne({username: username, sdt: sdt})
+    if (user) {
+        console.log(user)
+        const salt = await bcrypt.genSalt();
+        password = await bcrypt.hash(password, salt);
+        await Account.updateOne({username: username, sdt: sdt}, {password: password})
+        return user
+    }
+    throw Error('Tên đăng nhập hoặc số điện thoại không chính xác')
 }
 
 const Account = mongoose.model("accounts", accountSchema);
