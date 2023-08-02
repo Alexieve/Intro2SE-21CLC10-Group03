@@ -49,8 +49,9 @@
 </head>
 
 <body>
+      <div style = "z-index: 0;">
       <%- include("./partials/navigation") -%>
-    
+      </div>
 
       
       <button class="btn btn-dark back-to-top" onclick="scrollToTop()">
@@ -140,7 +141,7 @@
                                                                 <div class="modal-body">
                                                                   <!-- Input fields for the four rows -->
                                                                   <div class="mb-3">
-                                                                    <label for="usernameInput" class="form-label" style="font-size: 20px;color:black"Profilename</label>
+                                                                    <label for="usernameInput" class="form-label" style="font-size: 20px;color:black">Profilename</label>
                                                                     <input type="text" class="form-control" id="usernameInput" 
                                                                     style="margin-bottom: 20px;font-size: 20px; margin-top: 20px; height: 50px">
                                                                   </div>
@@ -190,7 +191,7 @@
                                     <section class="basic-section clear">
                                           <ul class="statistic-top row">
                                                 <li class="col-6">
-                                                      <div class="statistic-value">196</div>
+                                                      <div class="statistic-value"><%= chaptersCount %></div>
                                                       <div class="statistic-name">Chương đã đăng</div>
                                                 </li>
                                                 <li class="col-6">
@@ -254,11 +255,14 @@
                               <div class="col-12 col-md-12 col-lg-9 col-xl-9">
                                     <section class="profile-showcase">
                                           <header>
-                                                <span class="number">8</span><span class="showcase-title">Truyện đã
+                                                <span class="number"> <%= matchedBooks.length %></span><span class="showcase-title">Truyện đã
                                                       đăng</span>
                                           </header>
+
+                                          
                                           <div class="row">
                                                 <!-- Truyện 1 bắt đầu từ đây -->
+                                                <% matchedBooks.forEach(book => { %>
                                                 <div class="col-12 col-md-6">
                                                       <div class="showcase-item">
                                                             <div class="row">
@@ -282,10 +286,9 @@
                                                                               <h5
                                                                                     class="series-name text-base font-bold">
                                                                                     <!-- Ấn vào link bê dưới là sẽ dẫn đến trang sách -->
+                                                                                    <!-- Vá lỗi thủ công :))))) -->
                                                                                     <a class="no-underline"
-                                                                                          href="https://docln.net/sang-tac/2980-huyen-thoai-co-ngoc">Huyền
-                                                                                          Thoại trong Đệ Tam Đế Chế
-                                                                                          1933</a>
+                                                                                          href="https://docln.net/sang-tac/2980-huyen-thoai-co-ngoc"><%= book.title %>ㅤㅤㅤㅤㅤㅤㅤㅤ</a>
                                                                               </h5>
                                                                         </div>
                                                                         <!-- Thông tin về tiến độ -->
@@ -297,12 +300,10 @@
                                                                                           hành</span>
                                                                               </div>
                                                                               <div class="status-item">
-                                                                                    <span class="status-name">Lần
-                                                                                          cuối:</span>
+                                                                                    <span class="status-name">Ngày đăng: </span>
                                                                                     <span class="status-value"><time
                                                                                                 class="timeago"
-                                                                                                datetime="2023-07-05T12:25:01+07:00">7
-                                                                                                ngày</time>
+                                                                                                datetime="2023-07-05T12:25:01+07:00"><%=formatDate( book.publishDate)%></time>
                                                                                     </span>
                                                                               </div>
                                                                         </div>
@@ -310,337 +311,12 @@
                                                             </div>
                                                       </div>
                                                 </div>
+                                                <% }) %>
                                                 <!-- Truyện 2 -->
-                                                <div class="col-12 col-md-6">
-                                                      <div class="showcase-item">
-                                                            <div class="row">
-                                                                  <div class="series-cover col-4">
-                                                                        <div class="a6-ratio">
-                                                                              <div class="content img-in-ratio" style="
-                        background-image: url(&#39;https://i.docln.net/lightnovel/covers/s10389-c60e3e33-99e5-4e65-8693-d73ade367e84-m.jpg&#39;);
-                      "></div>
-                                                                        </div>
-                                                                  </div>
-                                                                  <div class="col-8">
-                                                                        <div class="series-info">
-                                                                              <!-- phần này về thông tin cơ bản -->
-                                                                              <div class="series-type-wrapper">
-                                                                                    <small
-                                                                                          class="series-type type-orinovel large-button-type-novel">Truyện
-                                                                                          sáng tác</small>
-                                                                              </div>
-                                                                              <h5
-                                                                                    class="series-name text-base font-bold">
-                                                                                    <a href="" class="no-underline">Cậu Là Leon</a>
-                                                                              </h5>
-                                                                        </div>
-                                                                        <div class="series-status">
-                                                                              <!-- Thông tin về tiến độ -->
-                                                                              <div class="status-item">
-                                                                                    <span class="status-name">Tình
-                                                                                          trạng:</span>
-                                                                                    <span class="status-value">Tạm
-                                                                                          ngưng</span>
-                                                                              </div>
-                                                                              <div class="status-item">
-                                                                                    <span class="status-name">Lần
-                                                                                          cuối:</span>
-                                                                                    <span class="status-value"><time
-                                                                                                class="timeago"
-                                                                                                datetime="2021-10-27T23:02:40+07:00">2
-                                                                                                năm</time>
-                                                                                    </span>
-                                                                              </div>
-                                                                        </div>
-                                                                  </div>
-                                                            </div>
-                                                      </div>
-                                                </div>
-                                                <div class="col-12 col-md-6">
-                                                      <div class="showcase-item">
-                                                            <div class="row">
-                                                                  <div class="series-cover col-4">
-                                                                        <div class="a6-ratio">
-                                                                              <!-- Nếu là hỉnh ảnh qua link thì là: url(&#39; Đương link &#39;) -->
-                                                                              <!-- bìa sách -->
-                                                                              <div class="content img-in-ratio"
-                                                                                    style="background-image: url('./Image/Ho_Chi_Minh_1946.jpg');">
-                                                                              </div>
-                                                                        </div>
-                                                                  </div>
-                                                                  <div class="col-8">
-                                                                        <!-- phần này về thông tin cơ bản -->
-                                                                        <div class="series-info">
-                                                                              <div class="series-type-wrapper">
-                                                                                    <small
-                                                                                          class="series-type type-orinovel large-button-type-novel">Truyện
-                                                                                          sáng tác</small>
-                                                                              </div>
-                                                                              <h5
-                                                                                    class="series-name text-base font-bold">
-                                                                                    <a href="" class="no-underline">Huyền Thoại trong Việt
-                                                                                          Nam Đế Chế Cộng Sản (1890 -
-                                                                                          1969)</a>
-                                                                              </h5>
-                                                                        </div>
-                                                                        <!-- Thông tin về tiến độ -->
-                                                                        <div class="series-status">
-                                                                              <div class="status-item">
-                                                                                    <span class="status-name">Tình
-                                                                                          trạng:</span>
-                                                                                    <span class="status-value">Đã tiến
-                                                                                          hành</span>
-                                                                              </div>
-                                                                              <div class="status-item">
-                                                                                    <span class="status-name">Lần
-                                                                                          cuối:</span>
-                                                                                    <span class="status-value"><time
-                                                                                                class="timeago"
-                                                                                                datetime="2023-07-05T12:25:01+07:00">7
-                                                                                                ngày</time>
-                                                                                    </span>
-                                                                              </div>
-                                                                        </div>
-                                                                  </div>
-                                                            </div>
-                                                      </div>
-                                                </div>
-                                                <div class="col-12 col-md-6">
-                                                      <div class="showcase-item">
-                                                            <div class="row">
-                                                                  <div class="series-cover col-4">
-                                                                        <div class="a6-ratio">
-                                                                              <div class="content img-in-ratio" style="
-                        background-image: url(&#39;https://i.docln.net/lightnovel/covers/s9737-ee1e081f-3c70-4780-8b9a-977b09fdf783-m.jpg&#39;);
-                      "></div>
-                                                                        </div>
-                                                                  </div>
-                                                                  <div class="col-8">
-                                                                        <div class="series-info">
-                                                                              <div class="series-type-wrapper">
-                                                                                    <small
-                                                                                          class="series-type type-orinovel large-button-type-novel">Truyện
-                                                                                          sáng tác</small>
-                                                                              </div>
-                                                                              <h5
-                                                                                    class="series-name text-base font-bold">
-                                                                                    <a href="" class="no-underline">Đưa
-                                                                                          Người Đến Gặp Sao Đêm</a>
-                                                                              </h5>
-                                                                        </div>
-                                                                        <div class="series-status">
-                                                                              <div class="status-item">
-                                                                                    <span class="status-name">Tình
-                                                                                          trạng:</span>
-                                                                                    <span class="status-value">Đã hoàn
-                                                                                          thành</span>
-                                                                              </div>
-                                                                              <div class="status-item">
-                                                                                    <span class="status-name">Lần
-                                                                                          cuối:</span>
-                                                                                    <span class="status-value"><time
-                                                                                                class="timeago"
-                                                                                                datetime="2021-09-06T00:06:57+07:00">2
-                                                                                                năm</time>
-                                                                                    </span>
-                                                                              </div>
-                                                                        </div>
-                                                                  </div>
-                                                            </div>
-                                                      </div>
-                                                </div>
+                                            </div>
+                                            
+                                          
 
-                                                <div class="col-12 col-md-6">
-                                                      <div class="showcase-item">
-                                                            <div class="row">
-                                                                  <div class="series-cover col-4">
-                                                                        <div class="a6-ratio">
-                                                                              <div class="content img-in-ratio" style="
-                        background-image: url(&#39;https://i.docln.net/lightnovel/covers/s3998-6cb6e82d-61a6-49ad-a3e2-f27b61dadc7d-m.png&#39;);
-                      "></div>
-                                                                        </div>
-                                                                  </div>
-                                                                  <div class="col-8">
-                                                                        <div class="series-info">
-                                                                              <div class="series-type-wrapper">
-                                                                                    <small
-                                                                                          class="series-type type-orinovel large-button-type-novel">Truyện
-                                                                                          sáng tác</small>
-                                                                              </div>
-                                                                              <h5
-                                                                                    class="series-name text-base font-bold">
-                                                                                    <a href="" class="no-underline">Ragnarok</a>
-                                                                              </h5>
-                                                                        </div>
-                                                                        <div class="series-status">
-                                                                              <div class="status-item">
-                                                                                    <span class="status-name">Tình
-                                                                                          trạng:</span>
-                                                                                    <span class="status-value">Đã hoàn
-                                                                                          thành</span>
-                                                                              </div>
-                                                                              <div class="status-item">
-                                                                                    <span class="status-name">Lần
-                                                                                          cuối:</span>
-                                                                                    <span class="status-value"><time
-                                                                                                class="timeago"
-                                                                                                datetime="2019-03-11T19:56:17+07:00">4
-                                                                                                năm</time>
-                                                                                    </span>
-                                                                              </div>
-                                                                        </div>
-                                                                  </div>
-                                                            </div>
-                                                      </div>
-                                                </div>
-                                                <div class="col-12 col-md-6">
-                                                      <div class="showcase-item">
-                                                            <div class="row">
-                                                                  <div class="series-cover col-4">
-                                                                        <div class="a6-ratio">
-                                                                              <!-- Nếu là hỉnh ảnh qua link thì là: url(&#39; Đương link &#39;) -->
-                                                                              <!-- bìa sách -->
-                                                                              <div class="content img-in-ratio"
-                                                                                    style="background-image: url('./Image/Stalin.jpg');">
-                                                                              </div>
-                                                                        </div>
-                                                                  </div>
-                                                                  <div class="col-8">
-                                                                        <!-- phần này về thông tin cơ bản -->
-                                                                        <div class="series-info">
-                                                                              <div class="series-type-wrapper">
-                                                                                    <small
-                                                                                          class="series-type type-orinovel large-button-type-novel">Truyện
-                                                                                          sáng tác</small>
-                                                                              </div>
-                                                                              <h5
-                                                                                    class="series-name text-base font-bold">
-                                                                                    <a href="" class="no-underline">Khủng bố Trắng và nhà
-                                                                                          nước Liên Xô</a>
-                                                                              </h5>
-                                                                        </div>
-                                                                        <!-- Thông tin về tiến độ -->
-                                                                        <div class="series-status">
-                                                                              <div class="status-item">
-                                                                                    <span class="status-name">Tình
-                                                                                          trạng:</span>
-                                                                                    <span class="status-value">Đã hoàn
-                                                                                          hành</span>
-                                                                              </div>
-                                                                              <div class="status-item">
-                                                                                    <span class="status-name">Lần
-                                                                                          cuối:</span>
-                                                                                    <span class="status-value"><time
-                                                                                                class="timeago"
-                                                                                                datetime="2023-07-05T12:25:01+07:00">1
-                                                                                                ngày</time>
-                                                                                    </span>
-                                                                              </div>
-                                                                        </div>
-                                                                  </div>
-                                                            </div>
-                                                      </div>
-                                                </div>
-                                                <div class="col-12 col-md-6">
-                                                      <div class="showcase-item">
-                                                            <div class="row">
-                                                                  <div class="series-cover col-4">
-                                                                        <div class="a6-ratio">
-                                                                              <!-- Nếu là hỉnh ảnh qua link thì là: url(&#39; Đương link &#39;) -->
-                                                                              <!-- bìa sách -->
-                                                                              <div class="content img-in-ratio"
-                                                                                    style="background-image: url('./Image/Stalin.jpg');">
-                                                                              </div>
-                                                                        </div>
-                                                                  </div>
-                                                                  <div class="col-8">
-                                                                        <!-- phần này về thông tin cơ bản -->
-                                                                        <div class="series-info">
-                                                                              <div class="series-type-wrapper">
-                                                                                    <small
-                                                                                          class="series-type type-orinovel large-button-type-novel">Truyện
-                                                                                          sáng tác</small>
-                                                                              </div>
-                                                                              <h5
-                                                                                    class="series-name text-base font-bold">
-                                                                                    <a href="" class="no-underline">Giai đoạn thứ Tám: Khi
-                                                                                          Chủ Nghĩa Xã Hội lên ngôi</a>
-                                                                              </h5>
-                                                                        </div>
-                                                                        <!-- Thông tin về tiến độ -->
-                                                                        <div class="series-status">
-                                                                              <div class="status-item">
-                                                                                    <span class="status-name">Tình
-                                                                                          trạng:</span>
-                                                                                    <span class="status-value">Đã hoàn
-                                                                                          hành</span>
-                                                                              </div>
-                                                                              <div class="status-item">
-                                                                                    <span class="status-name">Lần
-                                                                                          cuối:</span>
-                                                                                    <span class="status-value"><time
-                                                                                                class="timeago
-                                                                                    datetime="
-                                                                                                2023-07-05T12:25:01+07:00">1
-                                                                                                năm</time>
-                                                                                    </span>
-                                                                              </div>
-                                                                        </div>
-                                                                  </div>
-                                                            </div>
-                                                      </div>
-                                                </div>
-                                                <div class="col-12 col-md-6">
-                                                      <div class="showcase-item">
-                                                            <div class="row">
-                                                                  <div class="series-cover col-4">
-                                                                        <div class="a6-ratio">
-                                                                              <!-- Nếu là hỉnh ảnh qua link thì là: url(&#39; Đương link &#39;) -->
-                                                                              <!-- bìa sách -->
-                                                                              <div class="content img-in-ratio"
-                                                                                    style="background-image: url('./Image/Stalin.jpg');">
-                                                                              </div>
-                                                                        </div>
-                                                                  </div>
-                                                                  <div class="col-8">
-                                                                        <!-- phần này về thông tin cơ bản -->
-                                                                        <div class="series-info">
-                                                                              <div class="series-type-wrapper">
-                                                                                    <small
-                                                                                          class="series-type type-orinovel large-button-type-novel">Truyện
-                                                                                          sáng tác</small>
-                                                                              </div>
-                                                                              <h5
-                                                                                    class="series-name text-base font-bold">
-                                                                                    <a href="" class="no-underline">Quyền lực và chính trị:
-                                                                                          Chủ nghĩa Mác LêNin</a>
-                                                                              </h5>
-                                                                        </div>
-                                                                        <!-- Thông tin về tiến độ -->
-                                                                        <div class="series-status">
-                                                                              <div class="status-item">
-                                                                                    <span class="status-name">Tình
-                                                                                          trạng:</span>
-                                                                                    <span class="status-value">Tạm
-                                                                                          ngưng</span>
-                                                                              </div>
-                                                                              <div class="status-item">
-                                                                                    <span class="status-name">Lần
-                                                                                          cuối:</span>
-                                                                                    <span class="status-value"><time
-                                                                                                class="timeago"
-                                                                                                datetime="2023-07-05T12:25:01+07:00">5
-                                                                                                tháng</time>
-                                                                                    </span>
-                                                                              </div>
-                                                                        </div>
-                                                                  </div>
-                                                            </div>
-                                                      </div>
-                                                </div>
-
-
-                                          </div>
 
                                     </section>
                               </div>
@@ -783,6 +459,8 @@
               return `${day}/${month}/${year}`;
             }
           </script>
+
+          <script>
       
 </body>
 
