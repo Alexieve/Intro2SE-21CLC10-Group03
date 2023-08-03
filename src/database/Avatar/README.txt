@@ -1,1 +1,0 @@
-Tên file là "img+id" của user
