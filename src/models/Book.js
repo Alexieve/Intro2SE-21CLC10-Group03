@@ -44,12 +44,11 @@ const bookSchema = new mongoose.Schema ({
     },
     isPending: {
         type: Number,
-        defualt: 1,
+        default: 1,
         require: true,
     },
 });
 
-// static method to login
 
 const Book = mongoose.model("books", bookSchema);
 module.exports = Book

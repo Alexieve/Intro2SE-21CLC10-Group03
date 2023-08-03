@@ -8,11 +8,11 @@ const requireAuth = (req, res, next) => {
     if (token) {
         jwt.verify(token, 'information of user', (err, decodedToken) => {
             if (err) {
-                console.log(err.message);
+                // console.log(err.message);
                 res.redirect('/login');
             }
             else {
-                console.log(decodedToken);
+                // console.log("Deny Guest's Access");
                 next();
             }
         })
@@ -30,11 +30,10 @@ const preventLoginAgain = (req, res, next) => {
         jwt.verify(token, 'information of user', (err, decodedToken) => {
             if (err) {
                 console.log(err.message);
-                // res.redirect('/login');
                 next();
             }
             else {
-                // console.log(decodedToken);
+                console.log('Prevent Login Success');
                 res.redirect('/');
             }
         })
@@ -56,7 +55,7 @@ const checkUser = (req, res, next) => {
                 next();
             }
             else {
-                console.log(decodedToken);
+                console.log('Current User: ' + decodedToken.id);
                 let user = await Account.findById(decodedToken.id);
                 user.avatarURL = avatarContainer.getBlobClient(user.avatarURL).url
                 user.coverURL = profilecoverContainer.getBlobClient(user.coverURL).url
