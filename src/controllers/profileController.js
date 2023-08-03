@@ -77,17 +77,18 @@ async function countChapters(matchedBooks) {
     try {
       // Check if the book folder is a directory
       const isBookFolder = (await fs.promises.stat(bookPath)).isDirectory();
-
+      
       if (isBookFolder) {
         // Read the contents of the book directory
         const volumeFolders = await fs.promises.readdir(bookPath);
-
+        
         // Check if the book belongs to the specified author (by comparing the authorID with the folder name)
-        const bookBelongsToAuthor = bookFolder === `Book${authorID}`;
-
-        if (bookBelongsToAuthor) {
+        
+        
+        
           // Iterate over each volume folder
           for (const volumeFolder of volumeFolders) {
+            console.log(volumeFolders)
             const volumePath = path.join(bookPath, volumeFolder);
 
             try {
@@ -106,7 +107,7 @@ async function countChapters(matchedBooks) {
               console.error(`Error reading volume folder: ${volumePath}`);
             }
           }
-        }
+        
       }
     } catch (err) {
       // Handle the error when the book folder does not exist
