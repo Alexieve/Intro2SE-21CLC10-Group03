@@ -12,6 +12,7 @@ const authRoutes = require('./routes/authRoutes')
 const profileRoutes = require('./routes/profileRoutes');
 const bookMarkRoutes = require('./routes/bookMarkRoutes');
 const uploadRoutes = require('./routes/uploadRoutes');
+const bookInfoRoutes = require('./routes/bookInfoRoutes'); // Add the bookInfoRoutes
 const { requireAuth, checkUser} = require('./middleware/authMiddleware')
 
 // Database connection
@@ -55,6 +56,7 @@ app.use(cookieParser())
 app.use(bodyParser.urlencoded({extended: true}))
 
 
+
 // Routes
 app.get('*', checkUser);
 app.use(authRoutes)
@@ -64,6 +66,7 @@ app.use(uploadRoutes)
 app.get("/", (req, res) => res.render('home'));
 app.get("/profile", requireAuth, (req, res) => res.render('profile'));
 app.get("/bookmark", requireAuth, (req, res) => res.render('bookmark'));
+app.use('/book_info', bookInfoRoutes); // Add the bookInfoRoutes
 
 
 // Listen
