@@ -9,6 +9,7 @@ const app = express()
 // Require Routes
 const authRoutes = require('./routes/authRoutes')
 const profileRoutes = require('./routes/profileRoutes');
+const bookMarkRoutes = require('./routes/bookMarkRoutes');
 const { requireAuth, checkUser} = require('./middleware/authMiddleware')
 const Account = require('./models/Account')
 
@@ -36,6 +37,8 @@ app.use(cookieParser())
 app.use(bodyParser.urlencoded({extended: true}))
 app.use(authRoutes)
 app.use(profileRoutes)
+app.use(bookMarkRoutes)
+
 
 
 // Routes
@@ -43,6 +46,7 @@ app.get('*', checkUser);
 app.get("/", (req, res) => res.render('home'));
 app.get("/upload", requireAuth, (req, res) => res.render('upload'));
 app.get("/profile", requireAuth, (req, res) => res.render('profile'));
+app.get("/bookmark", requireAuth, (req, res) => res.render('bookmark'));
 
 
 // Listen
