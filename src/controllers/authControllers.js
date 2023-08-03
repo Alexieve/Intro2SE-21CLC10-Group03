@@ -1,6 +1,5 @@
 const Account = require('../models/Account')
 const jwt = require('jsonwebtoken')
-const {preventLoginAgain} = require('../middleware/authMiddleware')
 
 
 const handleErrors = (err) => {
@@ -43,17 +42,17 @@ const createToken = (id) => {
     })
 }
 
-module.exports.login_get =(preventLoginAgain, (req, res) => {
+module.exports.login_get = (req, res) => {
     res.render('login')
-})
+}
 
-module.exports.register_get = (preventLoginAgain, (req, res) => {
+module.exports.register_get = (req, res) => {
     res.render('register')
-})
+}
 
-module.exports.forgetPassword_get = (preventLoginAgain, (req, res) => {
+module.exports.forgetPassword_get = (req, res) => {
     res.render('forgetPassword')
-})
+}
 
 module.exports.login_post = async (req, res) => {
     console.log(req.body)

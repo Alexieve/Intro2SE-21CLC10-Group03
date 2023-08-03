@@ -9,8 +9,8 @@ const app = express()
 // Require Routes
 const authRoutes = require('./routes/authRoutes')
 const profileRoutes = require('./routes/profileRoutes');
+const uploadRoutes = require('./routes/uploadRoutes');
 const { requireAuth, checkUser} = require('./middleware/authMiddleware')
-const Account = require('./models/Account')
 
 // Database connection
 mongoose.connect('mongodb+srv://admin:123@happinovel.4zvtpnj.mongodb.net/HappiNovel?retryWrites=true&w=majority', {
@@ -34,14 +34,14 @@ app.set('view engine', 'ejs');
 app.use(express.json())
 app.use(cookieParser())
 app.use(bodyParser.urlencoded({extended: true}))
-app.use(authRoutes)
-app.use(profileRoutes)
 
 
 // Routes
 app.get('*', checkUser);
+app.use(authRoutes)
+app.use(profileRoutes)
+app.use(uploadRoutes)
 app.get("/", (req, res) => res.render('home'));
-app.get("/upload", requireAuth, (req, res) => res.render('upload'));
 app.get("/profile", requireAuth, (req, res) => res.render('profile'));
 
 
