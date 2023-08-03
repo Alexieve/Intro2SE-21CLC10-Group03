@@ -1,5 +1,6 @@
 const jwt = require('jsonwebtoken');
 const Account = require('../models/Account');
+const {avatarContainer, profilecoverContainer} = require("./database")
 
 const requireAuth = (req, res, next) => {
     const token = req.cookies.jwt;
@@ -57,6 +58,8 @@ const checkUser = (req, res, next) => {
             else {
                 console.log(decodedToken);
                 let user = await Account.findById(decodedToken.id);
+                user.avatarURL = avatarContainer.getBlobClient(user.avatarURL).url
+                user.coverURL = profilecoverContainer.getBlobClient(user.coverURL).url
                 res.locals.user = user;
                 next();
             }
