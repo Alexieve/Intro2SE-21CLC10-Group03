@@ -83,14 +83,13 @@
                                                       <!-- Ảnh bìa -->
                                                       <div class="content img-in-ratio">
                                                             <div class="content img-in-ratio">
-                                                                  <% if (user.coverURL) { %>
-                                                                        <img src="/images/<%= user.coverURL %>"
+                                                                 
+                                                                        <img src="<%= user.coverURL %>"
                                                                               id="coverImage">
-                                                                        <% } else { %>
+                                                                   
                                                                               <!-- Default cover picture if the user doesn't have one -->
-                                                                              <img src="../public/Image/941898.jpg"
-                                                                                    id="coverImage">
-                                                                              <% } %>
+                                                            
+                                                                     
                                                             </div>
 
                                                       </div>
@@ -119,14 +118,10 @@
                                                             <!-- Cần cắt hình ảnh thành hình vuông -->
 
 
-                                                            <% if (user.avatarURL) { %>
-                                                                  <img src="/imagesAvatar/<%= user.avatarURL %>"
+                                                            
+                                                                  <img src="<%= user.avatarURL %>"
                                                                         id="avaImage">
-                                                                  <% } else { %>
-                                                                        <!-- Default cover picture if the user doesn't have one -->
-                                                                        <img src="/Image/amnesty-lo-wire-01-scaled.jpg"
-                                                                              id="avaImage" />
-                                                                        <% } %>
+                                                                 
                                                       </div>
                                                       <button href="" id="uploadButtonAva"
                                                             class="buttonn to-contact button-nigga button-anh-dai-dien ">
@@ -246,7 +241,7 @@
                                                                   <div class="statistic-name">Chương đã đăng</div>
                                                             </li>
                                                             <li class="col-6">
-                                                                  <div class="statistic-value">14</div>
+                                                                  <div class="statistic-value"><%=Makedbook.length%></div>
                                                                   <div class="statistic-name">Đang theo dõi</div>
                                                             </li>
                                                             <li class="col-12 mt-2">
@@ -329,8 +324,11 @@
 
 
                                                       <div class="row">
+                                                            
                                                             <!-- Truyện 1 bắt đầu từ đây -->
+                                                            
                                                             <% matchedBooks.forEach(book=> { %>
+                                                                  <% const azureBlobBaseUrl = 'https://happinovel.blob.core.windows.net/bookcover'; %>
                                                                   <div class="col-12 col-md-6">
                                                                         <div class="showcase-item">
                                                                               <div class="row">
@@ -338,8 +336,11 @@
                                                                                           <div class="a6-ratio">
                                                                                                 <!-- Nếu là hỉnh ảnh qua link thì là: url(&#39; Đương link &#39;) -->
                                                                                                 <!-- bìa sách -->
+                                                                                                 <% const fullImageUrl = `${azureBlobBaseUrl}/${book.coverImg}`; %>
+                                                                                                 
                                                                                                 <div class="content img-in-ratio"
-                                                                                                      style="background-image: url(/imagesBook/<%= book.coverImg %>);">
+                                                                                                style="background-image: url('<%= fullImageUrl %>')">
+                                                                                                      
                                                                                                 </div>
                                                                                           </div>
                                                                                     </div>
@@ -398,6 +399,7 @@
                                                                               </div>
                                                                         </div>
                                                                   </div>
+                                                                  
                                                                   <% }) %>
                                                                         <div class="col-12 col-md-6">
                                                                               <div class="showcase-item"
@@ -563,25 +565,21 @@
       <script>
             // Function to scroll to the top of the page smoothly
             function scrollToTop() {
-                  window.scrollTo({
-                        top: 0,
-                        behavior: 'smooth'
-                  });
-            }
-
-            // Show the back-to-top button when the user scrolls down
-            window.addEventListener('scroll', function () {
-                  var button = document.querySelector('.back-to-top');
-                  if (window.scrollY > 300) {
-                        button.style.display = 'block';
-                  } else {
-                        button.style.display = 'none';
-                  }
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
             });
-            let profile = document.querySelector(".profile");
-            let menu = document.querySelector(".menu");
-            let userProfile = document.querySelector(".user-profile");
+        }
 
+        // Show the back-to-top button when the user scrolls down
+        window.addEventListener('scroll', function () {
+            var button = document.querySelector('.back-to-top');
+            if (window.scrollY > 300) {
+                button.style.display = 'block';
+            } else {
+                button.style.display = 'none';
+            }
+        });
       </script>
       <script>
             function formatDate(dateString) {
