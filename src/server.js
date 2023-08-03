@@ -9,6 +9,7 @@ const app = express()
 // Require Routes
 const authRoutes = require('./routes/authRoutes')
 const profileRoutes = require('./routes/profileRoutes');
+const bookMarkRoutes = require('./routes/bookMarkRoutes');
 const uploadRoutes = require('./routes/uploadRoutes');
 const { requireAuth, checkUser} = require('./middleware/authMiddleware')
 
@@ -40,9 +41,11 @@ app.use(bodyParser.urlencoded({extended: true}))
 app.get('*', checkUser);
 app.use(authRoutes)
 app.use(profileRoutes)
+app.use(bookMarkRoutes)
 app.use(uploadRoutes)
 app.get("/", (req, res) => res.render('home'));
 app.get("/profile", requireAuth, (req, res) => res.render('profile'));
+app.get("/bookmark", requireAuth, (req, res) => res.render('bookmark'));
 
 
 // Listen
