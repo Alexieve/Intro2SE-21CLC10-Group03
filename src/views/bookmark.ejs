@@ -132,142 +132,31 @@
 
                                 <tbody>
                                     <!-- Dòng 1 -->
+                                    <% function truncateTitle(title, maxTitleLength) {
+                                        if (title.length > maxTitleLength) {
+                                          return title.slice(0, maxTitleLength) + '...';
+                                        }
+                                        return title;
+                                      } %>
+                                    <% matchedBooks.forEach(book=> { %>
                                     <tr class="">
                                         <td class="image-cell">
-                                            <img src="./Image/Hirohito.jpg" alt="Small Image "width="60" height="80">
+                                            <img src="./Image/Hirohito.jpg" alt="Small Image" width="60" height="80">
                                             <div class="text-container">
-                                                <div class="text1"><a href="#">Thiên hoàng Minh Trị</a></div>
-                                                <div class="text2">Truyện bi kịch</div>
+                                              <div class="text1">
+                                                <a href="#" title="<%= book.title %>">
+                                                  <%= truncateTitle(book.title, 30) %>
+                                                </a>
+                                              </div>
+                                              <div class="text2">Truyện sáng tác</div>
                                             </div>
-                                        </td>
+                                          </td>
                                         
                                         <td class="text-right" style="direction: rtl; "><a href="#" >Chương 157 – Họp chiến lược</a>
                                         <p>WN Vol.4</p></td>
                                     </tr>
-
-                                    <!-- Dòng 2 -->
-                                    <tr class="">
-                                        <td class="image-cell">
-                                            <img src="./Image/Hirohito.jpg" alt="Small Image "width="60" height="80">
-                                            <div class="text-container">
-                                                <div class="text1"><a href="#">Thiên hoàng Minh Trị</a></div>
-                                                <div class="text2">Truyện bi kịch</div>
-                                            </div>
-                                        </td>
-                                        
-                                        <td class="text-right" style="direction: rtl; "><a href="#" >Chương 157 – Họp chiến lược</a>
-                                        <p>WN Vol.4</p></td>
-                                    </tr>
-                                    <tr class="">
-                                        <td class="image-cell">
-                                            <img src="./Image/Hirohito.jpg" alt="Small Image "width="60" height="80">
-                                            <div class="text-container">
-                                                <!-- Dài vượt quá sẽ khiến lỗi, cần function rút ngắn -->
-                                                <div class="text1"><a href="#">Thiên hoàng Minh Trị đi  i i i i i i i i i i i i</a></div>
-                                                <div class="text2">Truyện bi kịch</div>
-                                            </div>
-                                        </td>
-                                        
-                                        <td class="text-right" style="direction: rtl; "><a href="#" >Chương 157 – Họp chiến lược</a>
-                                        <p>WN Vol.4</p></td>
-                                    </tr>
-                                    <tr class="">
-                                        <td class="image-cell">
-                                            <img src="./Image/Hirohito.jpg" alt="Small Image "width="60" height="80">
-                                            <div class="text-container">
-                                                <div class="text1"><a href="#">Thiên hoàng Minh Trị</a></div>
-                                                <div class="text2">Truyện bi kịch</div>
-                                            </div>
-                                        </td>
-                                        
-                                        <td class="text-right" style="direction: rtl; "><a href="#" >Chương 157 – Họp chiến lược </a>
-                                        <p>WN Vol.4</p></td>
-                                    </tr>
-                                    <tr class="">
-                                        <td class="image-cell">
-                                            <img src="./Image/Hirohito.jpg" alt="Small Image "width="60" height="80">
-                                            <div class="text-container">
-                                                <div class="text1"><a href="#">Thiên hoàng Minh Trị</a></div>
-                                                <div class="text2">Truyện bi kịch</div>
-                                            </div>
-                                        </td>
-                                        
-                                        <td class="text-right" style="direction: rtl; "><a href="#" >Chương 157 – Họp chiến lược</a>
-                                        <p>WN Vol.4</p></td>
-                                    </tr>
-                                    <tr class="">
-                                        <td class="image-cell">
-                                            <img src="./Image/Hirohito.jpg" alt="Small Image "width="60" height="80">
-                                            <div class="text-container">
-                                                <div class="text1"><a href="#">Thiên hoàng Minh Trị</a></div>
-                                                <div class="text2">Truyện bi kịch</div>
-                                            </div>
-                                        </td>
-                                        
-                                        <td class="text-right" style="direction: rtl; "><a href="#" >Chương 157 – Họp chiến lược</a>
-                                        <p>WN Vol.4</p></td>
-                                    </tr>
-                                    <tr class="">
-                                        <td class="image-cell">
-                                            <img src="./Image/Hirohito.jpg" alt="Small Image "width="60" height="80">
-                                            <div class="text-container">
-                                                <div class="text1"><a href="#">Thiên hoàng Minh Trị</a></div>
-                                                <div class="text2">Truyện bi kịch</div>
-                                            </div>
-                                        </td>
-                                        
-                                        <td class="text-right" style="direction: rtl; "><a href="#" >Chương 157 – Họp chiến lược</a>
-                                        <p>WN Vol.4</p></td>
-                                    </tr>
-                                    <tr class="">
-                                        <td class="image-cell">
-                                            <img src="./Image/Hirohito.jpg" alt="Small Image "width="60" height="80">
-                                            <div class="text-container">
-                                                <div class="text1"><a href="#">Thiên hoàng Minh Trị</a></div>
-                                                <div class="text2">Truyện bi kịch</div>
-                                            </div>
-                                        </td>
-                                        
-                                        <td class="text-right" style="direction: rtl; "><a href="#" >Chương 157 – Họp chiến lược</a>
-                                        <p>WN Vol.4</p></td>
-                                    </tr>
-                                    <tr class="">
-                                        <td class="image-cell">
-                                            <img src="./Image/Hirohito.jpg" alt="Small Image "width="60" height="80">
-                                            <div class="text-container">
-                                                <div class="text1"><a href="#">Thiên hoàng Minh Trị</a></div>
-                                                <div class="text2">Truyện bi kịch</div>
-                                            </div>
-                                        </td>
-                                        
-                                        <td class="text-right" style="direction: rtl; "><a href="#" >Chương 157 – Họp chiến lược</a>
-                                        <p>WN Vol.4</p></td>
-                                    </tr>
+                                    <% }) %>
                                     
-                                    <tr class="">
-                                        <td class="image-cell">
-                                            <img src="./Image/Hirohito.jpg" alt="Small Image "width="60" height="80">
-                                            <div class="text-container">
-                                                <div class="text1"><a href="#">Thiên hoàng Minh Trị</a></div>
-                                                <div class="text2">Truyện bi kịch</div>
-                                            </div>
-                                        </td>
-                                        
-                                        <td class="text-right" style="direction: rtl; "><a href="#" >Chương 157 – Họp chiến lược</a>
-                                        <p>WN Vol.4</p></td>
-                                    </tr>
-                                    <tr class="">
-                                        <td class="image-cell">
-                                            <img src="./Image/Hirohito.jpg" alt="Small Image "width="60" height="80">
-                                            <div class="text-container">
-                                                <div class="text1"><a href="#">Thiên hoàng Minh Trị</a></div>
-                                                <div class="text2">Truyện bi kịch</div>
-                                            </div>
-                                        </td>
-                                        
-                                        <td class="text-right" style="direction: rtl; "><a href="#" >Chương 157 – Họp chiến lược</a>
-                                        <p>WN Vol.4</p></td>
-                                    </tr>
                                     
                                 </tbody>
                             </table>
