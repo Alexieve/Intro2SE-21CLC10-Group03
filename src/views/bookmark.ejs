@@ -130,38 +130,61 @@
                                         <th class="text-right-header">Chương mới nhất</th>
                                     </tr>
                                 </thead>
-
+                                <% function truncateTitle(title, maxTitleLength) {
+                                    if (title.length > maxTitleLength) {
+                                        return title.slice(0, maxTitleLength) + '...';
+                                    }
+                                    return title;
+                                } %>
                                 <tbody>
                                     <!-- Dòng 1 -->
-                                    <% function truncateTitle(title, maxTitleLength) {
-                                        if (title.length > maxTitleLength) {
-                                          return title.slice(0, maxTitleLength) + '...';
-                                        }
-                                        return title;
-                                      } %>
-                                    <% matchedBooks.forEach(book=> { %>
-                                        <% const azureBlobBaseUrl = 'https://happinovel.blob.core.windows.net/bookcover'; %>
-                                        <% const fullImageUrl = `${azureBlobBaseUrl}/${book.coverImg}`; %>
-                                    <tr class="">
+                                    <% function truncateTitle(title, maxTitleLength) { %>
+                                      <% if (title.length > maxTitleLength) { %>
+                                        <%= title.slice(0, maxTitleLength) + '...' %>
+                                      <% } else { %>
+                                        <%= title %>
+                                      <% } %>
+                                    <% } %>
+                                    <% matchedBooks.forEach((book, index) => { %>
+                                      <% const azureBlobBaseUrl = 'https://happinovel.blob.core.windows.net/bookcover'; %>
+                                      <% const fullImageUrl = `${azureBlobBaseUrl}/${book.coverImg}`; %>
+                                      <tr class="">
                                         <td class="image-cell">
-                                            <img src="<%=fullImageUrl %>" alt="Small Image" width="60" height="80">
-                                            <div class="text-container">
-                                              <div class="text1">
-                                                <a href="#" title="<%= book.title %>">
-                                                  <%= truncateTitle(book.title, 30) %>
-                                                </a>
-                                              </div>
-                                              <div class="text2">Truyện sáng tác</div>
+                                          <img src="<%= fullImageUrl %>" alt="Small Image" width="60" height="80">
+                                          <div class="text-container">
+                                            <div class="text1">
+                                              <a href="#" title="<%= book.title %>">
+                                                <%= truncateTitle(book.title, 30) %>
+                                              </a>
                                             </div>
-                                          </td>
-                                        
-                                        <td class="text-right" style="direction: rtl; "><a href="#" >Chương 157 – Họp chiến lược</a>
-                                        <p>WN Vol.4</p></td>
-                                    </tr>
+                                            <div class="text2">Latest chap here</div>
+                                          </div>
+                                        </td>
+                                        <% const latestVolumeUrl = latestVolumeUrls[index]; %>
+                                            <% if (latestVolumeUrl) { %>
+                                              <% const urlObject = new URL(latestVolumeUrl); %>
+                                              <%console.log(latestVolumeUrl);%>
+                                              <% const folderName = urlObject.pathname.split('/').filter(Boolean).pop(); %>
+                                              <% const volumeNumber = folderName.match(/\d+$/)[0]; %>
+                                              <% const volume = volumes.find(vol => vol.bookID === book.bookID && vol.volID === parseInt(volumeNumber, 10)); %>
+                                        <td class="text-right" style="direction: rtl; ">
+                                          <a href="#">Chương 157 – Họp chiến lược</a>
+                                          <p>                                            
+                                              <% if (volume) { %>
+                                                <a href="#"><%= volume.volName %></a>
+                                              <% } else { %>
+                                                Latest volume not found for book <%= book.bookID %>
+                                              <% } %>
+                                            <% } else { %>
+                                              Latest volume not found for book <%= book.bookID %>
+                                            <% } %>
+                                          </p>
+                                        </td>
+                                      </tr>
                                     <% }) %>
-                                    
-                                    
-                                </tbody>
+                                  </tbody>
+                                  
+                                  
                             </table>
                         </div>
                     </div>
