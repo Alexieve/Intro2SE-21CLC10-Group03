@@ -1,17 +1,28 @@
 const menuItems = [
   {
-    content: `Item 1`,
+    content: `Thêm sách`,
     events: {
-      click: (e) => console.log(e, "Copy Button Click"),
+      click: (e) => console.log(e),
+      // click: (e) => console.log(e, "Copy Button Click"),
       // You can use any event listener from here
     },
   },
-  { content: `Item 2` },
-  { content: `Item 3` },
-  { content: `Item 4` },
   {
-    content: `Item 5`,
-    divider: "top", // top, bottom, top-bottom
+    content: `Thêm chương`,
+    divider: "top-bottom", // top, bottom, top-bottom
+    events: {
+      click: (e) => console.log(e),
+      // click: (e) => console.log(e, "Copy Button Click"),
+      // You can use any event listener from here
+    },
+  },
+  {
+    content: `Thêm tập`,
+    events: {
+      click: (e) => console.log(e),
+      // click: (e) => console.log(e, "Copy Button Click"),
+      // You can use any event listener from here
+    },
   },
 ];
 

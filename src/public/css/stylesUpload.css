@@ -44,3 +44,13 @@ nav {
     background-color: #36a189;
     font-weight: bold;
 }
+
+.border-book-menu-top {
+    border-top-left-radius: 6px;
+    border-top-right-radius: 6px;
+}
+
+.border-book-menu-mid {
+    margin-top: -1px;
+    --bs-list-group-border-radius: none;
+}

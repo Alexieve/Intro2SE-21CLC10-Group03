@@ -2,6 +2,7 @@ const Account = require('../models/Account')
 const Book = require('../models/Book')
 const Volume = require('../models/Volume')
 const Chapter = require('../models/Chapter')
+const Genre = require('../models/Genre')
 const jwt = require('jsonwebtoken')
 
 
@@ -57,70 +58,57 @@ module.exports.upload_get = (req, res) => {
                 user = await Account.findById(decodedToken.id);
                 console.log(user)
                 let books = []
-                // books = await Book.aggregate([
-                //     {
-                //         $match: {author: user.userID},
-                //     },
-                //     {
-                //       $lookup: {
-                //         from: 'volumes',
-                //         localField: 'bookID',
-                //         foreignField: 'bookID',
-                //         as: 'volumes',
-                //       },
-                //     },
-                // ]);
 
                 books = await Book.aggregate([
-                    {
-                        $match: {author: user.userID, isPending: 0,},
+                  {
+                      $match: {author: user.userID, isPending: 0,},
+                  },
+                  {
+                    $lookup: {
+                      from: 'volumes', // Replace 'volumes' with the name of the volumes collection
+                      localField: 'bookID',
+                      foreignField: 'bookID',
+                      as: 'volumes',
                     },
-                    {
-                      $lookup: {
-                        from: 'volumes', // Replace 'volumes' with the name of the volumes collection
-                        localField: 'bookID',
-                        foreignField: 'bookID',
-                        as: 'volumes',
-                      },
-                    },
-                    {
-                      $unwind: '$volumes', // Unwind the volumes array
-                    },
-                    {
-                      $lookup: {
-                        from: 'chapters', // Replace 'chapters' with the name of the chapters collection
-                        let: { bookID: '$bookID', volID: '$volumes.volID' }, // Use 'bookID' and 'volID' as local fields
-                        pipeline: [
-                          {
-                            $match: {
-                              $expr: {
-                                $and: [
-                                  { $eq: ['$bookID', '$$bookID'] },
-                                  { $eq: ['$volID', '$$volID'] },
-                                  { $eq: ['$isPending', 0] },
-                                ],
-                              },
+                  },
+                  {
+                    $unwind: '$volumes', // Unwind the volumes array
+                  },
+                  {
+                    $lookup: {
+                      from: 'chapters', // Replace 'chapters' with the name of the chapters collection
+                      let: { bookID: '$bookID', volID: '$volumes.volID' }, // Use 'bookID' and 'volID' as local fields
+                      pipeline: [
+                        {
+                          $match: {
+                            $expr: {
+                              $and: [
+                                { $eq: ['$bookID', '$$bookID'] },
+                                { $eq: ['$volID', '$$volID'] },
+                                { $eq: ['$isPending', 0] },
+                              ],
                             },
                           },
-                        ],
-                        as: 'volumes.chapters', // The matched chapters will be placed in the 'chapters' array within 'volumes'
-                      },
+                        },
+                      ],
+                      as: 'volumes.chapters', // The matched chapters will be placed in the 'chapters' array within 'volumes'
                     },
-                    {
-                      $group: {
-                        _id: '$_id', // Group back by the book's original _id
-                        bookID: { $first: '$bookID' }, // Preserve the book's fields
-                        title: { $first: '$title' },
-                        author: { $first: '$author' },
-                        // Add other book fields here if needed
-                        volumes: { $push: '$volumes' }, // Group volumes back into an array
-                      },
+                  },
+                  {
+                    $group: {
+                      _id: '$_id', // Group back by the book's original _id
+                      bookID: { $first: '$bookID' }, // Preserve the book's fields
+                      title: { $first: '$title' },
+                      author: { $first: '$author' },
+                      // Add other book fields here if needed
+                      volumes: { $push: '$volumes' }, // Group volumes back into an array
                     },
-                  ]);      
-                console.log(books)
-
-
-                // console.log(books)
+                  },
+                ]).sort('bookID');
+                
+                genres = await Genre.find({}).sort('genreName');
+                res.locals.genres = genres;
+                // console.log(genres)
                 res.render('upload', {books})
             }
         })
