@@ -9,6 +9,7 @@ const app = express()
 
 // Require Routes
 const authRoutes = require('./routes/authRoutes')
+const bookRoutes = require('./routes/bookRoutes')
 const profileRoutes = require('./routes/profileRoutes');
 const bookMarkRoutes = require('./routes/bookMarkRoutes');
 const uploadRoutes = require('./routes/uploadRoutes');
@@ -42,6 +43,7 @@ app.use(bodyParser.urlencoded({extended: true}))
 
 // Routes
 app.get('*', checkUser);
+app.use(bookRoutes)
 app.use(authRoutes)
 app.use(profileRoutes)
 app.use(bookMarkRoutes)
