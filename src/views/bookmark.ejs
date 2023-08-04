@@ -145,6 +145,24 @@
                                         <%= title %>
                                       <% } %>
                                     <% } %>
+
+                                    <% function getChapterName(latestChapterID, volumeID, bookID) { %>                                   
+                                
+                                        <% const chap = chapters.find(chap =>
+                                          chap.bookID === bookID && chap.volID === volumeID && chap.chapID === parseInt(latestChapterID, 10)
+                                        );
+                                        
+                                        if (chap) {
+                                         
+                                          return chap.chapName;
+                                        } else {
+                                          console.log('Chap not found');
+                                          return 'Chương mới nhất';
+                                        }
+                                      } %>
+                                      
+                                      
+
                                     <% matchedBooks.forEach((book, index) => { %>
                                       <% const azureBlobBaseUrl = 'https://happinovel.blob.core.windows.net/bookcover'; %>
                                       <% const fullImageUrl = `${azureBlobBaseUrl}/${book.coverImg}`; %>
@@ -157,32 +175,34 @@
                                                 <%= truncateTitle(book.title, 30) %>
                                               </a>
                                             </div>
-                                            <div class="text2">Latest chap here</div>
+                                            <div class="text2">Truyện sáng tác</div>
                                           </div>
                                         </td>
                                         <% const latestVolumeUrl = latestVolumeUrls[index]; %>
-                                            <% if (latestVolumeUrl) { %>
-                                              <% const urlObject = new URL(latestVolumeUrl); %>
-                                              <%console.log(latestVolumeUrl);%>
-                                              <% const folderName = urlObject.pathname.split('/').filter(Boolean).pop(); %>
-                                              <% const volumeNumber = folderName.match(/\d+$/)[0]; %>
-                                              <% const volume = volumes.find(vol => vol.bookID === book.bookID && vol.volID === parseInt(volumeNumber, 10)); %>
-                                        <td class="text-right" style="direction: rtl; ">
-                                          <a href="#">Chương 157 – Họp chiến lược</a>
-                                          <p>                                            
+                                        <% if (latestVolumeUrl) { %>
+                                          <% const urlObject = new URL(latestVolumeUrl); %>
+                                          <% const folderName = urlObject.pathname.split('/').filter(Boolean).pop(); %>
+                                          <% const volumeNumber = folderName.match(/\d+$/)[0]; %>
+                                          <% const volume = volumes.find(vol => vol.bookID === book.bookID && vol.volID === parseInt(volumeNumber, 10)); %>
+                                          <td class="text-right" style="direction: rtl; ">
+                                            <% if (volume) { %>
+                                            <%= getChapterName(latestChapterID, volume.volID, book.bookID) %>
+                                            <% } %>
+                                            <p>
                                               <% if (volume) { %>
                                                 <a href="#"><%= volume.volName %></a>
                                               <% } else { %>
-                                                Latest volume not found for book <%= book.bookID %>
+                                                Không tìm thấy volume mới
                                               <% } %>
-                                            <% } else { %>
-                                              Latest volume not found for book <%= book.bookID %>
-                                            <% } %>
-                                          </p>
-                                        </td>
+                                            </p>
+                                          </td>
+                                        <% } else { %>
+                                          <!-- Handle case when latestVolumeUrl is not available -->
+                                        <% } %>
                                       </tr>
                                     <% }) %>
                                   </tbody>
+                                  
                                   
                                   
                             </table>
