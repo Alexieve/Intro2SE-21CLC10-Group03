@@ -7,7 +7,7 @@ const path = require('path');
 const Book = require('../models/Book');
 const bcrypt = require('bcrypt');
 const fs = require('fs');
-const { BlobServiceClient, StorageSharedKeyCredential } = require('@azure/storage-blob');
+const {bookContainer} = require("../middleware/database");
 
 // Import the formatDate function from dateHelpers.js
 const formatDate = require('../public/js/dateHelpers');
@@ -66,20 +66,10 @@ const checkOldPassword = async (user, oldPassword) => {
   }
 };
 
-// Storage connection
 
-// Storage connection
-const storageAccount = 'happinovel';
-const accountKey = 'I/AGF1f1XZdujaEiRdZ6IO+/zrbUsqTojIj9ozR1cydxVVt3T0VctGDWr46Gb6ZWrnwtGvbdRv6/+ASt45Rmew==';
-const sharedKeyCredential = new StorageSharedKeyCredential(storageAccount, accountKey);
-const blobServiceClient = new BlobServiceClient(`https://${storageAccount}.blob.core.windows.net`, sharedKeyCredential);
-
-
-// Function to count the total number of chapter files posted by an author in their books
-// Function to count the total number of chapter files posted by an author in their books
 async function countChapters(matchedBooks) {
   let chaptersCount = 0;
-  const bookContainer = blobServiceClient.getContainerClient('book');
+  
 
   for (const book of matchedBooks) {
     const bookDirectory = `Book${book.bookID}`;
