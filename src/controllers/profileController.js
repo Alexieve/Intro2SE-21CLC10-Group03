@@ -44,7 +44,6 @@ exports.profilePage = async (req, res) => {
     }
 
     // Helper function to get the full cover image path
-    console.log(user.avatarURL)
     // Assuming you have a 'profile' view to render the profile page
     const chaptersCount = await countChapters(matchedBooks);
     res.render('profile', {formatDate, matchedBooks, checkOldPassword, chaptersCount ,formatStatus, Makedbook});
@@ -73,7 +72,6 @@ async function countChapters(matchedBooks) {
 
   for (const book of matchedBooks) {
     const bookDirectory = `Book${book.bookID}`;
-    console.log('Accessing book directory:', bookContainer.url + '/' + bookDirectory);
 
     try {
       // Get the list of blobs (chapter files) in the book's directory
@@ -90,7 +88,6 @@ async function countChapters(matchedBooks) {
         }
       }
 
-      console.log('Accessing volume directories:', volumeDirectories);
     } catch (err) {
       console.error(`Error reading book directory: ${bookDirectory}`);
     }

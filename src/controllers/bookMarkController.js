@@ -82,7 +82,6 @@ exports.bookmark = async (req, res) => {
 };
 
 async function findLatestChapter(latestVolumeUrl) {
-  console.log(latestVolumeUrl);
   try {
     const urlObject = new URL(latestVolumeUrl);
     const urlPathname = urlObject.pathname;
@@ -119,7 +118,6 @@ async function findLatestChapter(latestVolumeUrl) {
 
     if (chapIDMatch) {
       const chapID = chapIDMatch[1];
-      console.log("Latest chapID:", chapID);
       return chapID;
     } else {
       console.error(
