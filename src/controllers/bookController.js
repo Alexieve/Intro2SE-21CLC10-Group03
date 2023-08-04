@@ -125,7 +125,6 @@ const getBooksAndReadingHistory = async (req, res) => {
       bookHashMap[book.bookID] = book;
       bookCoverURL[book.bookID] = bookcoverContainer.getBlobClient(book.coverImg).url
     });
-    console.log(bookCoverURL)
     const token = req.cookies.jwt;
     let readingHistory = [];
     if (token) {
