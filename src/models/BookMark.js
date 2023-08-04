@@ -12,6 +12,6 @@ const bookMarkSchema = new mongoose.Schema({
   },
 });
 
-const BookMark = mongoose.model("BookMark", bookMarkSchema); // Use singular "BookMark" as the model name
+const BookMark = mongoose.model("bookmarks", bookMarkSchema); // Use singular "BookMark" as the model name
 
 module.exports = BookMark;
