@@ -15,6 +15,7 @@ const bookMarkRoutes = require('./routes/bookMarkRoutes');
 const uploadRoutes = require('./routes/uploadRoutes');
 const bookInfoRoutes = require('./routes/bookInfoRoutes'); // Add the bookInfoRoutes
 const readingHistoryRoutes = require('./routes/readingHistoryRoutes');
+const notificationRoutes = require('./routes/notificationRoutes');
 const { requireAuth, checkUser} = require('./middleware/authMiddleware')
 
 // Database connection
@@ -45,11 +46,13 @@ app.use(profileRoutes)
 app.use(bookMarkRoutes)
 app.use(uploadRoutes)
 app.use(readingHistoryRoutes)
+app.use(notificationRoutes)
 app.get("/", (req, res) => res.render('home'));
 app.get("/profile", requireAuth, (req, res) => res.render('profile'));
 app.get("/bookmark", requireAuth, (req, res) => res.render('bookmark'));
 app.use('/book_info', bookInfoRoutes); // Add the bookInfoRoutes
 app.get("/readinghistory", requireAuth, (req, res) => res.render('readinghistory'));
+app.get("/notification", requireAuth, (req, res) => res.render('notification'));
 
 
 // Listen
