@@ -1,5 +1,4 @@
 const mongoose = require("mongoose")
-const {isAlphanumeric} = require('validator')
 
 const bookSchema = new mongoose.Schema ({
     bookID: {
@@ -37,7 +36,7 @@ const bookSchema = new mongoose.Schema ({
         default: 1,
         required: true,
     },
-    totalView: {
+    totalview: {
         type: Number,
         default: 0,
         require: true,
@@ -45,6 +44,10 @@ const bookSchema = new mongoose.Schema ({
     isPending: {
         type: Number,
         default: 1,
+        require: true,
+    },
+    authorName: {
+        type: String,
         require: true,
     },
 });

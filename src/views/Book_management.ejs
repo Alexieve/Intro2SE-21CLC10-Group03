@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <!-- Open Sans Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
+    <!-- FontAweSome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- jquery -->
+    <script src="https://code.jquery.com/jquery-3.7.0.js" integrity="sha256-JlqSTELeR4TLqP0OG9dxM7yDPqX1ox/HfgiSLBj8+kM=" crossorigin="anonymous"></script>
+    <!-- Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
+ 
+    <!-- Tiny ediotr -->
+    <script src="https://cdn.tiny.cloud/1/czhzadznx3qb12g2i4971xbviqsshfv65cbyuvs95fsi5021/tinymce/6/tinymce.min.js" referrerpolicy="origin"></script>
+    <title>HappiNovel</title>
+ 
+</head>
+<body>
+    <!-- Navigator bar -->
+    <nav class="navbar navbar-expand-lg bg-transparent">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">
+                <img class="rounded-2" src="./Image/logo.png" alt="Bootstrap" width="50" height="50">
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <b><a class="nav-link" href="#">Quản lý user</a></b>
+                    </li>
+                    <li class="nav-item">
+                        <b><a class="nav-link" href="#">Kho sách</a></b>
+                    </li>
+                    <li class="nav-item">
+                        <b><a class="nav-link" href="#">Quản lý báo cáo</a></b>
+                    </li>
+                    <li class="nav-item">
+                        <b><a class="nav-link" href="#">Duyệt sách</a></b>
+                    </li>
+                </ul>
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#"><i class="fa-regular fa-user-circle fa-2xl"></i></a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Cover image -->
+  
+    <div class="container">
+        <img width="100%" src="./Image/BiaWeb.png" alt="Ảnh bìa" style="margin-bottom: 20px;">
+    </div>
+    <div class="container border rounded p-3" style="margin-bottom: 50px;">
+    <!-- Tiêu đề -->
+    <h2><i class="fa-solid fa-book"></i> <strong> Danh sách sách trong hệ thống</strong></h2>
+      <div class="row">
+      <div class="col-md-4 mt-2  d-flex align-items-center ">
+        <div class="input-group "  style="max-width: 260px;"  >
+          <span class="input-group-text" id="search-icon" style="background-color: #D9D9D9;"><i class="fa-solid fa-magnifying-glass"></i></span>
+          <input type="text" class="form-control" style="background-color: #D9D9D9;" 
+                 id="search-input" placeholder="Tìm kiếm theo tên,id,etc.">
+        </div>
+      </div>
+      <div class="col-md-2 mt-2  d-flex align-items-center">
+          <span class="me-3">
+          <!-- Thêm biểu tượng vào đây, ví dụ: Font Awesome icon -->
+          <i class="fa-solid fa-filter"></i>
+          </span>
+          <select id="filter-select" class="form-select" style="max-width: 130px;background-color: #D9D9D9;">
+                    <option>Tất cả</option>
+                    <option>Stopped </option>
+                    <option>In Process </option>
+                    <option>Completed </option>
+                    <option>Pending </option>
+                    <option>Deleted </option>
+                    </select>
+      </div>
+      <div class="col-md-2 mt-2 d-flex align-items-center ">
+        <button id="button-delete" class="btn btn-outline " style="background-color: #D9D9D9; margin-left: 40px;">Xóa </button>
+      </div>
+      <div class="col-md-2 mt-2 d-flex align-items-center">
+        <button  id="button-approve" class="btn btn-outline" style="background-color: #D9D9D9;">Duyệt</button>
+      </div>
+      <div class="col-md-2 mt-4 d-flex justify-content-center">
+      
+         <ul class="pagination ">
+            <li >
+          <div class="btn btn-outline btn-lg btn-text">1 of 7</div>
+          </li>
+           <li >
+          <a href="#" aria-label="Trang trước" class="btn btn-outline btn-lg">
+          <i class="fas fa-chevron-left"></i>
+          </a>
+          </li>
+           
+          <li class="page-item">
+            <a href="#" aria-label="Trang sau" class="btn btn-outline btn-lg">
+              <i class="fas fa-chevron-right"></i>
+            </a>
+          </li>
+  <!-- Các nút điều hướng khác ở đây -->
+          </ul>
+        </div>
+      </div>
+      
+      <!-- Bảng -->
+        
+  <div class="table-responsive mt-2">
+    <table class="table table-hover table-borderless ">
+      <thead>
+        <tr>
+          <th class="border-bottom " >
+            <input type="checkbox" id="checkAll">
+          </th>
+          <th class="border-bottom" >STT <i class="fa-solid fa-sort"></i> </th>
+          <th class="border-bottom" >Tên sách <i class="fa-solid fa-sort"></i></th>
+          <th class="border-bottom" >Tác giả <i class="fa-solid fa-sort"></i></th>
+          <!-- <th class="border-bottom text-center" >Đánh giá <i class="fa-solid fa-sort"></i></th> -->
+          <th class="border-bottom" >Thể loại <i class="fa-solid fa-sort"></i></th>
+          <th class="border-bottom" >Nội dung <i class="fa-solid fa-sort"></i></th>
+          <th class="border-bottom " >Lượt xem <i class="fa-solid fa-sort"></i></th>
+          <th class="border-bottom text-center"  >Tình trạng <i class="fa-solid fa-sort"></i></th>
+        </tr>
+      </thead>
+      <tbody id="bookTableBody">
+        <% let count = 1; %>
+        <% Books.forEach((Book) => { %>
+        <tr>
+            <td><input type="checkbox" data-bookID="<%= Book.bookID %>" data-isPending="<%= Book.isPending %>" data-status="<%= Book.status %>" ></td>
+            <td><%= count %> </td>
+            <td>
+              <% const maxTitleLength = 30; %>
+              <% const displayedTitle = Book.title.length > maxTitleLength ? Book.title.slice(0, maxTitleLength) + "..." : Book.title; %>
+              <%= displayedTitle %>
+            </td>
+            <td><%= Book.authorName %></td>
+            <!-- <td class="text-center"><%= Book.rating %></td> -->
+            <td>
+              <% const maxGenresLength = 16; %>
+              <% const displayedGenres = Book.Genres.join(", "); %>
+              <% if (displayedGenres.length > maxGenresLength) { %>
+                <%= displayedGenres.slice(0, maxGenresLength) %> ...
+              <% } else { %>
+                <%= displayedGenres %>
+              <% } %>
+            </td>
+            <td><%= Book.summary %></td>
+            <td><%= Book.totalview %></td>
+            <td class="d-flex justify-content-center">
+                <% if (Book.isPending === 1) { %>
+                <span class="p-1 rounded" style="background-color: #FDE9B5;">Pending</span>
+                <% } else if (Book.status === 0) { %>
+                <span class="p-1 rounded" style="background-color: #E79BF4;">Stopped</span>
+                <% } else if (Book.status === 1) { %>
+                <span class="p-1 rounded" style="background-color: #67FF88;">In Process</span>
+                <% } else if (Book.status === 2) { %>
+                <span class="p-1 rounded" style="background-color: #848484;">Completed</span>
+                <% } 
+                else if (Book.status === 3) { %>
+                  <span class="p-1 rounded" style="background-color: #FF6767;">Deleted</span>
+                  <% }
+                else { %>
+                <span class="p-1 rounded" style="background-color: #FF6767;">Unknown</span>
+                <% } %>
+            </td>
+        </tr>
+        <% count++; %>
+        <% }) %>
+    </tbody>
+    </table>
+  </div>
+
+    </div> 
+    <div id="successMessage" style="display: none; color: green;"></div>
+  
+      <!-- Dòng container với 6 cột -->
+    
+      
+    
+      
+  </body>    
+    
+<style>
+  .btn-text {
+    cursor: default; /* Không thay đổi con trỏ chuột khi di chuột vào */
+    pointer-events: none; /* Vô hiệu hóa sự kiện chuột cho thẻ */
+    color: #6c757d; /* Màu chữ khi vô hiệu hóa */
+    text-decoration: none; /* Bỏ gạch chân */
+  }
+</style>
+<style>
+  .p-1 {
+    width: 90px; /* Đặt chiều rộng cố định cho các khung */
+    text-align: center; /* Căn giữa nội dung trong khung */
+  }
+</style>
+<script>
+  function getStatusFromText(statusText) {
+    const lowerCaseStatus = statusText.toLowerCase();
+    if (lowerCaseStatus.includes("pending")) {
+      return "Pending";
+    } else if (lowerCaseStatus.includes("stopped")) {
+      return "Stopped";
+    } else if (lowerCaseStatus.includes("in process")) {
+      return "In Process";
+    } else if (lowerCaseStatus.includes("completed")) {
+      return "Completed";
+    } else if (lowerCaseStatus.includes("deleted")) {
+      return "Deleted";
+    } else {
+      return "Unknown";
+    }
+  }
+  function removeAccentsAndLowerCase(str) {
+    return str.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase();
+  }
+
+  const searchInput = document.getElementById("search-input");
+  const filterSelect = document.getElementById("filter-select");
+  const tableRows = document.querySelectorAll("tbody tr");
+
+  function filterRows() {
+    const searchTerm = removeAccentsAndLowerCase(searchInput.value);
+    const selectedFilter = filterSelect.value;
+
+    tableRows.forEach((row) => {
+      const bookTitle = removeAccentsAndLowerCase(row.querySelector("td:nth-child(3)").textContent);
+      const authorName = removeAccentsAndLowerCase(row.querySelector("td:nth-child(4)").textContent);
+
+      const titleMatch = bookTitle.includes(searchTerm);
+      const authorMatch = authorName.includes(searchTerm);
+
+      // Lấy giá trị book.status từ cột thứ 8 (td:nth-child(8))
+      const status = row.querySelector("td:nth-child(8)").textContent;
+
+      // Kiểm tra trạng thái 'stopped'
+      const statusValue = getStatusFromText(status);
+
+      const statusMatch = (selectedFilter === "Tất cả") ||
+        (statusValue === selectedFilter);
+
+      if ((titleMatch || authorMatch) && statusMatch) {
+        row.style.display = "table-row";
+      } else {
+        row.style.display = "none";
+      }
+    });
+  }
+
+  searchInput.addEventListener("keyup", filterRows);
+  filterSelect.addEventListener("change", filterRows);
+</script>
+<script>
+  // Bắt sự kiện khi người dùng nhấn nút submit
+  document.getElementById("button-approve").addEventListener("click", function() {
+    // Lấy danh sách các checkbox đã chọn
+    const checkboxes = document.querySelectorAll("input[type=checkbox]:checked");
+
+    // Tạo một mảng chứa các bookID đã chọn
+    const selectedBookIDs = [];
+    checkboxes.forEach((checkbox) => {
+      selectedBookIDs.push({
+        bookID: checkbox.getAttribute("data-bookID"),
+        isPending: checkbox.getAttribute("data-isPending"),
+
+      });
+    });
+    
+    // Gửi dữ liệu lên server bằng 
+    const allArePending = selectedBookIDs.every(book => book.isPending == "1");
+
+    if (allArePending) {
+      fetch("/process-checkboxes", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json" 
+        },
+        body: JSON.stringify({ selectedBookIDs })
+      })
+      .then(response => response.text())
+      .then(result => {
+        console.log(result);
+        document.getElementById("successMessage").innerText = result;
+        document.getElementById("successMessage").style.display = "block";
+      })
+      .catch(error => {
+        console.log(error);
+      });
+    } else {
+      // Nếu không đủ điều kiện, hiển thị thông báo lỗi
+      document.getElementById("successMessage").innerText = "Tất cả các sách phải có isPending = 1 trước khi gửi!";
+      document.getElementById("successMessage").style.display = "block";
+    }
+  });
+</script>
+<script>
+  const checkAllButton = document.getElementById("checkAll");
+  const checkboxes = document.querySelectorAll("input[type=checkbox][data-bookID]");
+
+  // Bắt sự kiện khi click vào nút "Check All"
+  checkAllButton.addEventListener("click", function() {
+    checkboxes.forEach((checkbox) => {
+      checkbox.checked = checkAllButton.checked;
+    });
+  });
+
+  // Bắt sự kiện khi click vào một checkbox bất kỳ trong danh sách
+  checkboxes.forEach((checkbox) => {
+    checkbox.addEventListener("click", function() {
+      // Kiểm tra nếu có bất kỳ checkbox nào không được check thì không chọn "Check All"
+      checkAllButton.checked = checkboxes.length === document.querySelectorAll("input[type=checkbox][data-bookID]:checked").length;
+    });
+  });
+  
+  
+  document.getElementById("button-delete").addEventListener("click", function() {
+    // Lấy danh sách các checkbox đã chọn
+    const checkboxes = document.querySelectorAll("input[type=checkbox]:checked");
+
+    // Tạo một mảng chứa các bookID đã chọn
+    const selectedBookIDs = [];
+    checkboxes.forEach((checkbox) => {
+      selectedBookIDs.push({
+        bookID: checkbox.getAttribute("data-bookID"),
+        status: checkbox.getAttribute("data-status"),
+
+      });
+    });
+    
+    // Gửi dữ liệu lên server bằng AJAX
+    const allArePending = selectedBookIDs.every(book => book.status != "3");
+
+    if (allArePending) {
+      fetch("/delete-books", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({ selectedBookIDs })
+      })
+      .then(response => response.text())
+      .then(result => {
+        console.log(result);
+        document.getElementById("successMessage").innerText = result;
+        document.getElementById("successMessage").style.display = "block";
+      })
+      .catch(error => {
+        console.log(error);
+      });
+    } else {
+      // Nếu không đủ điều kiện, hiển thị thông báo lỗi
+      document.getElementById("successMessage").innerText = "Tất cả các sách phải có status != 3 trước khi gửi!";
+      document.getElementById("successMessage").style.display = "block";
+    }
+  });
+</script>
+
+
+
+    <!-- Footer -->
+    <footer class="fixed-bottom" id="footer">
+        <div class="container text-center">
+            <div class="row align-items-center">
+                <div class="col-md-6">
+                    <span>© 2023 - HappiNovel</span>
+                </div>
+                <div class="col-md-6">
+                    <span>Liên hệ: <a href="">contact@slavesteam.vn</a></span>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+
+</html>
+
