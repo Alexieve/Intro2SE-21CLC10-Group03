@@ -42,8 +42,16 @@
                                 <% } %>
                             <% }) %>
                         </div>
-						<p>Author: <%= book.author %></p>
-						<p>Status: <%= book.status %></p>
+						<p>Tác giả: <%= book.authorName %></p>
+						<p>Tình trạng: 
+							<% if (book.status === 0) { %>
+								Tạm ngưng
+							<% } else if (book.status === 1) { %>
+								Đang tiến hành 
+							<% } else if (book.status === 2) { %>
+								Hoàn thành 
+							<% } %>
+						</p>						
 						<div class="d-flex">
 							<a href="#"><i class="far fa-heart mr-2"></i></a>
 							<a href="#"><i class="far fa-star mr-2"></i></a>
