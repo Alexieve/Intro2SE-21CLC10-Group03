@@ -11,7 +11,7 @@ const { bookContainer } = require("../middleware/database");
 const Chapter = require("../models/Chapter");
 const ReadingHistory = require("../models/ReadingHistory");
 
-exports.readinghistory = async (req, res) => {
+exports.notification = async (req, res) => {
   // <-- Add 'async' here
   try {
     const token = req.cookies.jwt;
@@ -23,31 +23,13 @@ exports.readinghistory = async (req, res) => {
     const BookMId = await ReadingHistory.find({ userID: user.userID });
     const uniqueBookIds = new Set();
     // Loop through the bookmarks and find the unique book IDs
-    for (const readHis of BookMId) {
-      uniqueBookIds.add(readHis.bookID);
-    }
-    const matchedBooks = [];
-    for (const bookID of uniqueBookIds) {
-      try {
-        const book = await Book.findOne({ bookID }); // Assuming you have a 'Book' model
-
-        if (book) {
-          // Book with the given bookID found, add it to the array
-          matchedBooks.push(book);
-        }
-      } catch (err) {
-        console.error("Error finding book:", err);
-      }
-    }
-
+   
     if (!user) {
       throw new Error("User not found");
     }
 
-    const volumes = await Volume.find({});
-    const chapters = await Chapter.find({});
 
-    res.render("readinghistory", { matchedBooks, BookMId, chapters, volumes });
+    res.render("notification", {});
   } catch (err) {
     console.error(err.message);
     res.status(500).send("Internal Server Error");

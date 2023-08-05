@@ -7,6 +7,7 @@ const path = require('path');
 const Book = require('../models/Book');
 const bcrypt = require('bcrypt');
 const fs = require('fs');
+const Comment = require('../models/Comment');
 const {bookContainer} = require("../middleware/database");
 
 // Import the formatDate function from dateHelpers.js
@@ -43,10 +44,12 @@ exports.profilePage = async (req, res) => {
       throw new Error('User not found');
     }
 
+    const NumComment = await Comment.find({ userID: user.userID });
+
     // Helper function to get the full cover image path
     // Assuming you have a 'profile' view to render the profile page
     const chaptersCount = await countChapters(matchedBooks);
-    res.render('profile', {formatDate, matchedBooks, checkOldPassword, chaptersCount ,formatStatus, Makedbook});
+    res.render('profile', {formatDate, matchedBooks, checkOldPassword, chaptersCount ,formatStatus, Makedbook, NumComment});
   } catch (err) {
     console.error(err.message);
     res.status(500).send('Internal Server Error');

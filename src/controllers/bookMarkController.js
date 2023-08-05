@@ -58,12 +58,8 @@ exports.bookmark = async (req, res) => {
         return await findLatestVolume(book.bookID, bookContainer);
       })
     );
-    const volumes = await Volume.find({ bookID: { $in: bookIDs } });
+    const volumes = await Volume.find({});
     const chapters = await Chapter.find({
-      $or: matchedBooks.map((book) => ({
-        bookID: book.bookID,
-        // Add more conditions if needed
-      })),
     });
 
     const latestChapterID = await findLatestChapter(latestVolumeUrls);
