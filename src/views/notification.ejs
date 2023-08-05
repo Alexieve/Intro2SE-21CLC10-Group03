@@ -141,23 +141,21 @@
                                 <tbody>
                                     <!-- Dòng 1 -->
                                     <!-- Thông báo có chương mới -->
+                                    <% for (const notify of notifyData) { %>
                                     <tr class="thong-bao-chuong-moi ">
-                                        <!-- clickable -->
-                                        <!-- onclick="window.location.href='https://example.com/link2';" -->
-
+                                        <% const azureBlobBaseUrl = 'https://happinovel.blob.core.windows.net/bookcover'; %>
+                                        <% const fullImageUrl = `${azureBlobBaseUrl}/${notify.bookIMG}`; %>
                                         <td class="image-cell">
-                                            <img src="./Image/Hirohito.jpg" alt="Small Image " width="60" height="80">
+                                            <img src="<%=fullImageUrl%>" alt="Small Image " width="60" height="80">
                                             <div class="text-container">
-                                                <div class="text1"><a href="https://example.com/inner_link4">Thiên hoàng
-                                                        Minh Trị</a></div>
-                                                <div class="text2">Truyện bi kịch</div>
+                                                <div class="text1"><a href="https://example.com/inner_link4"><%=notify.bookName%></a></div>
+                                                <div class="text2"><%=notify.genreName%></div>
                                             </div>
                                         </td>
 
                                         <td class="text-right" style="direction: rtl; "><a
-                                                href="https://example.com/inner_link3">Chương 157 – Họp
-                                                chiến lược</a>
-                                            <p>WN Vol.4</p>
+                                                href="https://example.com/inner_link3"><%=notify.chapName%></a>
+                                            <p><%=notify.volName%></p>
                                         </td>
                                         <td class="small-column">
                                             <div class="inline-imagess " style="z-index: -1;">
@@ -171,8 +169,7 @@
                                             </div>
                                         </td>
                                     </tr>
-
-                                    <!-- Dòng 2 -->                            
+                                    <% } %>                                    <!-- Dòng 2 -->                            
                                     <tr class="thong-bao-sach-chap-thuan ">
 
                                         <td class="image-cell">
