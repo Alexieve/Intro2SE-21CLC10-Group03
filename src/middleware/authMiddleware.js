@@ -70,4 +70,26 @@ const checkUser = (req, res, next) => {
     }
 }
 
-module.exports = {requireAuth, checkUser, preventLoginAgain}
+const requirePermission = (requiredPermission) => {
+    return (req, res, next) => {
+        const token = req.cookies.jwt;
+        if (token) {
+            jwt.verify(token, 'information of user', async (err, decodedToken) => {
+                if (err) {
+                    console.log(err.message);
+                    res.redirect('/login');
+                } else {
+                    const user = await Account.findById(decodedToken.id);
+                    if (user && user.permission >= requiredPermission) {
+                        next();
+                    } else {
+                        res.status(404).render('error404')
+                    }
+                }
+            });
+        } else {
+            res.redirect('/login');
+        }
+    };
+};
+module.exports = {requireAuth, checkUser, preventLoginAgain,requirePermission};
