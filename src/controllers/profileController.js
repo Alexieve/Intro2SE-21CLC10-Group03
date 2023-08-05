@@ -9,6 +9,8 @@ const bcrypt = require('bcrypt');
 const fs = require('fs');
 const Comment = require('../models/Comment');
 const {bookContainer} = require("../middleware/database");
+const Genre = require("../models/Genre");
+const bookgenres = require("../models/BookGenre");
 
 // Import the formatDate function from dateHelpers.js
 const formatDate = require('../public/js/dateHelpers');
@@ -43,13 +45,26 @@ exports.profilePage = async (req, res) => {
     if (!user) {
       throw new Error('User not found');
     }
-
+    const genreNames =[]
     const NumComment = await Comment.find({ userID: user.userID });
+    for (const bookmark of BookMId) {
+      const bookID = bookmark.bookID;
+      
+    const genreIDs = await bookgenres.findOne({bookID})
+        const genreID = genreIDs ? genreIDs.genreID : 'Not found genre';
 
+        const genre = await Genre.findOne({genreID})
+        const genreName = genre ? genre.genreName : 'Not found genre';
+        
+        genreNames.push({genreName});
+    }
+    
+    const formattedGenreNames = genreNames.map(item => item.genreName);
+console.log(formattedGenreNames);
     // Helper function to get the full cover image path
     // Assuming you have a 'profile' view to render the profile page
     const chaptersCount = await countChapters(matchedBooks);
-    res.render('profile', {formatDate, matchedBooks, checkOldPassword, chaptersCount ,formatStatus, Makedbook, NumComment});
+    res.render('profile', {formatDate, matchedBooks, checkOldPassword, chaptersCount ,formatStatus, Makedbook, NumComment,formattedGenreNames});
   } catch (err) {
     console.error(err.message);
     res.status(500).send('Internal Server Error');
