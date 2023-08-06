@@ -22,7 +22,12 @@ exports.profilePage = async (req, res) => {
     if (!token) {
       throw new Error('No JWT token found');
     }
-
+    const userID = parseInt(req.params.id);
+    if(userID){
+    const users = await Account.findOne({userID});
+    console.log(users);
+    }
+    
     const decodedToken = jwt.verify(token, 'information of user');
     const user = await Account.findById(decodedToken.id);
     const matchedBooks = await Book.find({ author: user.userID });
@@ -60,7 +65,7 @@ exports.profilePage = async (req, res) => {
     }
     
     const formattedGenreNames = genreNames.map(item => item.genreName);
-console.log(formattedGenreNames);
+    console.log(formattedGenreNames);
     // Helper function to get the full cover image path
     // Assuming you have a 'profile' view to render the profile page
     const chaptersCount = await countChapters(matchedBooks);
