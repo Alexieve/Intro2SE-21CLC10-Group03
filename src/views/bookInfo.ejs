@@ -58,19 +58,33 @@
 							<a href="#chapter-list"><i class="fas fa-list mr-2"></i></a>
 							<a href="#comments"><i class="far fa-comments"></i></a>
 						</div>
-						<p class="mt-3"><%= book.description %></p>
 					</div>
+					
 				</div>
 				<hr>
 			</div>
+			<!-- Sidebar -->
+			<div class="col-md-4">
+				<div class="card">
+					<div class="card-header">
+						<h4>Author Information</h4>
+					</div>
+					<div class="card-body">
+						<img src="./Image/avatar.png" alt="Author Avatar" class="img-fluid rounded-circle" width="128" height="128">
+						<h5 class="mt-3"><%= book.authorName %></h5>
+						<p class="mt-2"><%= book.authorBio %></p>
+					</div>
+				</div>
+			</div>
 			<!-- Second Section -->
-			<div class="col-md-12 mt-5">
+			<div class="col-md-12">
 				<h3>Book Summary</h3>
 				<p><%= book.summary %></p>
+				<a href="https://happinovel.blob.core.windows.net/book/summary<%= book.bookID %>.docx" target="_blank">View Summary</a>
 				<hr>
 			</div>
 			<!-- Third Section -->
-			<div class="col-md-12 mt-5">
+			<div class="col-md-12">
 				<h3>Volume List</h3>
 				<div class="accordion" id="volume-list">
 					<% book.volumes.forEach((volume, index) => { %>
@@ -97,26 +111,13 @@
 				<hr>
 			</div>
 			<!-- Fourth Section -->
-			<div class="col-md-12 mt-5">
+			<div class="col-md-12">
 				<h3>Comments</h3>
 				<!-- Add comments section here using the book.comments data -->
 				<hr>
 			</div>
 			<!-- Add the comment form here -->
-		</div>
-		<!-- Sidebar -->
-		<div class="col-md-4">
-			<div class="card mt-5">
-				<div class="card-header">
-					<h4>Author Information</h4>
-				</div>
-				<div class="card-body">
-					<img src="./Image/avatar.png" alt="Author Avatar" class="img-fluid rounded-circle" width="128" height="128">
-					<h5 class="mt-3"><%= book.authorName %></h5>
-					<p class="mt-2"><%= book.authorBio %></p>
-				</div>
-			</div>
-		</div>
+	    </div>	
 	</div>
 </body>
 </html>
