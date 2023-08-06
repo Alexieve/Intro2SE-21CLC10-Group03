@@ -55,8 +55,10 @@ const checkUser = (req, res, next) => {
                 next();
             }
             else {
+
                 console.log('Current User: ' + decodedToken.id);
                 let user = await Account.findById(decodedToken.id);
+
                 user.avatarURL = avatarContainer.getBlobClient(user.avatarURL).url
                 user.coverURL = profilecoverContainer.getBlobClient(user.coverURL).url
                 res.locals.user = user;

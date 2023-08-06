@@ -5,47 +5,6 @@ const Chapter = require('../models/Chapter')
 const Genre = require('../models/Genre')
 const jwt = require('jsonwebtoken')
 
-
-const handleErrors = (err) => {
-    console.log(err.message, err.code);
-    let errors = {
-        profileName: '',
-        username: '',
-        password: '',
-        sdt: '',
-        dob: ''
-    }
-
-    if (err.message === 'Tên đăng nhập hoặc mật khẩu không chính xác') {
-        errors.password = 'Tên đăng nhập hoặc mật khẩu không chính xác';
-    }
-
-    if (err.message === 'Tên đăng nhập hoặc số điện thoại không chính xác') {
-        errors.password = 'Tên đăng nhập hoặc số điện thoại không chính xác';
-    }
-
-    //exists username error
-    if (err.code === 11000) {
-        errors.username = 'Tên đăng nhập đã tồn tại';
-        return errors;
-    }
-
-    // validation errors
-    if (err.message.includes('accounts validation failed')){
-        Object.values(err.errors).forEach(({properties}) => {
-            errors[properties.path] = properties.message;
-        });
-    }
-    return errors;
-}
-
-const maxAge = 3 * 24 * 60 * 60;
-const createToken = (id) => {
-    return jwt.sign({id}, 'information of user', {
-        expiresIn: maxAge
-    })
-}
-
 module.exports.upload_get = (req, res) => {
     const token = req.cookies.jwt;
 
@@ -56,12 +15,12 @@ module.exports.upload_get = (req, res) => {
             }
             else {
                 user = await Account.findById(decodedToken.id);
-                console.log(user)
+                // console.log(user)
                 let books = []
 
                 books = await Book.aggregate([
                   {
-                      $match: {author: user.userID, isPending: 0,},
+                      $match: {author: user.userID, isPending: 0},
                   },
                   {
                     $lookup: {
@@ -100,16 +59,23 @@ module.exports.upload_get = (req, res) => {
                       bookID: { $first: '$bookID' }, // Preserve the book's fields
                       title: { $first: '$title' },
                       author: { $first: '$author' },
+                      note: { $first: '$note' },
+                      summary: { $first: '$summary' },
+                      coverImg: { $first: '$coverImg' },
+                      authorName: { $first: '$authorName' },
+                      publishDate: { $first: '$publishDate' },
                       // Add other book fields here if needed
                       volumes: { $push: '$volumes' }, // Group volumes back into an array
                     },
                   },
-                ]).sort('bookID');
+                ]).sort('publishDate');
                 
-                genres = await Genre.find({}).sort('genreName');
-                res.locals.genres = genres;
+                const genres = await Genre.find({}).sort('genreName');
+                // res.locals.genres = genres;
                 // console.log(genres)
-                res.render('upload', {books})
+                // const formPath = "partials/upload/uploadBook"
+                // res.sendFile(formPath)
+                res.render('upload', {books, genres})
             }
         })
     }
@@ -117,18 +83,31 @@ module.exports.upload_get = (req, res) => {
 
 
 module.exports.upload_post = async (req, res) => {
-    // console.log(req.body)
-    // const username = req.body.username
-    // const password = req.body.password
-
-    // try {
-    //     const user = await Account.login(username, password);
-    //     const token = createToken(user._id)
-    //     res.cookie('jwt', token, {httpOnly: true, maxAge: maxAge * 1000})
-    //     res.status(200).json({user: user._id});
-    // }
-    // catch (err) {
-    //     const errors = handleErrors(err);
-    //     res.status(400).json({errors})
-    // }
+    console.log(req.body)
+    const postName = req.body.postName
+    const bookID = req.body.bookID
+    if (postName == "bookMenu") {
+      try {
+        const bookData = await Book.findById(bookID);
+        console.log(bookData)
+        res.status(200).json({data: bookData});
+      }
+      catch (err) {
+          console.log(err)
+          // const errors = handleErrors(err);
+          res.status(400).json({err})
+      }
+    }
+    else if (postName == "form3") {
+      try {
+        const volData = await Volume.find({bookID: bookID});
+        // console.log(volData)
+        res.status(200).json({data: volData});
+      }
+      catch (err) {
+          console.log(err)
+          // const errors = handleErrors(err);
+          res.status(400).json({err})
+      }
+    }
 }

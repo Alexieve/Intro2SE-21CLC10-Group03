@@ -1,0 +1,107 @@
+
+<form id="form4" style="display: none;">
+    <div class="d-flex justify-content-center rounded-2 section-title" style="margin-bottom: 20px;">
+        <span><i class="fa-solid fa-book-open"></i>  THÔNG TIN SÁCH</span>
+    </div>
+
+    <!-- Tên sách -->
+    <div class="row mb-3 me-3">
+        <div class="col-md-2 text-end align-self-md-center">
+            <b>Tên sách <span style="color: red;">*</span></b>
+        </div>
+        <div class="col-md-10">
+            <input type="text" class="form-control" placeholder="Tên sách">
+        </div>
+    </div>
+
+    <!-- Tác giả -->
+    <div class="row mb-3 me-3">
+        <div class="col-md-2 text-end align-self-md-center">
+            <b>Tác giả <span style="color: red;">*</span></b>
+        </div>
+        <div class="col-md-10">
+            <input type="text" class="form-control" placeholder="Tên tác giả">
+        </div>
+    </div>
+    
+    <!-- Thể loại -->
+    <div class="row mb-3 me-3">
+        <div class="col-md-2 text-end">
+            <b>Thể loại <span style="color: red;">*</span></b>
+        </div>
+        <div class="col-md-10">
+            <div class="container">
+                <div class="row mb-3">
+                <% for (let i = 0; i < genres.length; i++) { %>
+                    <div class="col-3 mb-2">
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="<%= genres[i].genreID%>" name="genre<%= genres[i].genreID%>" value="something">
+                            <label class="form-check-label" for="check1"><%= genres[i].genreName%></label>
+                        </div>
+                    </div>
+                <% }%>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Tình trạng & Chọn ảnh -->
+    <div class="row mb-3 me-3">
+        <div class="col-md-2 text-end mt-2">
+            <b>Tình trạng</b>
+        </div>
+        <div class="col-md-10">
+            <select class="form-select">
+                <option>Đang tiến hành</option>
+                <option>Tạm ngưng </option>
+                <option>Đã hoàn thành </option>
+            </select>
+        </div>
+    </div>
+
+    <div class="row mb-3 me-3">
+        <div class="col-md-2 text-end mt-2">
+            <b>Ảnh bìa</b>
+        </div>
+        <div class="col-md-2">
+            <input id="tmpBookImg" type="file" accept="image/*">
+        </div>
+    </div>
+
+    <!-- Tóm tắt -->
+    <div class="row mb-3 me-3">
+        <div class="col-md-2 text-end mt-2">
+            <b>Tóm tắt <span style="color: red;">*</span></b>
+        </div>
+        <div class="col-md-10">
+            <textarea>Welcome to HappiNovel!</textarea>
+            <script>
+                tinymce.init({
+                    selector: 'textarea'
+                });
+            </script>
+        </div>
+    </div>
+
+    <!-- Chú thích thêm -->
+    <div class="row mb-3 me-3">
+        <div class="col-md-2 text-end mt-2">
+            <b>Chú thích thêm</b>
+        </div>
+        <div class="col-md-10">
+            <textarea>Welcome to HappiNovel!</textarea>
+            <script>
+                tinymce.init({
+                    selector: 'textarea'
+                });
+            </script>
+        </div>
+    </div>
+    <div class="row mb-3 float-end me-5">
+        <button class="btn btn-success">Thêm sách</button>
+    </div>
+</form>
+
+<script>
+    
+</script>
