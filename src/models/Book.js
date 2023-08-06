@@ -47,6 +47,10 @@ const bookSchema = new mongoose.Schema ({
         default: 1,
         require: true,
     },
+    volumes: [{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'volumes',
+    }],
 });
 
 
