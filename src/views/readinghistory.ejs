@@ -63,7 +63,7 @@
             <div class="all-his">
 
                   <div class="page-top-group">
-                        <a href="/">
+                        <a href="">
                               <!-- Này để chuyển qua trang chủ khi click vào bìa -->
                               <div class="index-background d-none d-lg-block">
                                     <img src="./Image/BiaWeb.png">
@@ -92,7 +92,7 @@
                                                                               class="fas fa-chevron-down "></i></span>Bookmark</a>
                                                       </li>
                                                       <!-- Chữ Current cho nơi nào đó đang ở -->
-                                                      <li class="current navigator-board-font"><a href=""><span
+                                                      <li class="current navigator-board-font"><a href="/readinghistory"><span
                                                                         class="none inline-l"><i
                                                                               class="fas fa-chevron-left"></i></span><span
                                                                         class="float-right none-l"><i
@@ -173,6 +173,7 @@
                                           <div class="container ">
                                                 <section class="browse-section">
                                                     <main class="sect-body row">
+                                                      
                                                         <% matchedBooks.forEach((book, index) => { %>
                                                           <% const azureBlobBaseUrl = 'https://happinovel.blob.core.windows.net/bookcover'; %>
                                                           <% const fullImageUrl = `${azureBlobBaseUrl}/${book.coverImg}`; %>
@@ -208,6 +209,7 @@
                                                             </div>
                                                           </div>
                                                         <% }) %>
+                                                        
                                                       </main>
                                                       
                                                       

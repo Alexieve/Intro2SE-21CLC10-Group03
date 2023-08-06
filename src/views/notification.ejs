@@ -69,7 +69,7 @@
             
 
             <div class="page-top-group">
-                <a href="">
+                <a href="/">
                     <!-- Này để chuyển qua trang chủ khi click vào bìa -->
                     <div class="index-background d-none d-lg-block">
                         <img src="./Image/BiaWeb.png">
@@ -137,7 +137,13 @@
                                         <th class="small-column"></th>
                                     </tr>
                                 </thead>
-
+                                <% function truncateTitle(title, maxTitleLength) { %>
+                                    <% if (title.length> maxTitleLength) { %>
+                                        <%= title.slice(0, maxTitleLength) + '...' %>
+                                            <% } else { %>
+                                                <%= title %>
+                                                    <% } %>
+                                                        <% } %>
                                 <tbody>
                                     <!-- Dòng 1 -->
                                     <!-- Thông báo có chương mới -->
@@ -148,7 +154,8 @@
                                         <td class="image-cell">
                                             <img src="<%=fullImageUrl%>" alt="Small Image " width="60" height="80">
                                             <div class="text-container">
-                                                <div class="text1"><a href="https://example.com/inner_link4"><%=notify.bookName%></a></div>
+                                                <div class="text1"><a href="" title="<%=notify.bookName%>"><%= truncateTitle(notify.bookName,
+                                                    30) %></a></div>
                                                 <div class="text2"><%=notify.genreName%></div>
                                             </div>
                                         </td>
@@ -169,16 +176,17 @@
                                             </div>
                                         </td>
                                     </tr>
-                                    <% } %>                                    <!-- Dòng 2 -->                            
+                                    <% } %>     
+                                    <% for (const notify of notifyData2) { %>                               <!-- Dòng 2 -->                            
                                     <tr class="thong-bao-sach-chap-thuan ">
-
+                                        <% const azureBlobBaseUrl = 'https://happinovel.blob.core.windows.net/bookcover'; %>
+                                        <% const fullImageUrl = `${azureBlobBaseUrl}/${notify.bookIMG}`; %>
                                         <td class="image-cell">
-                                            <img src="./Image/Hirohito.jpg" alt="Small Image " width="60" height="80">
+                                            <img src="<%=fullImageUrl%>" alt="Small Image " width="60" height="80">
                                             <div class="text-container">
-                                                <div class="text1"><a href="https://example.com/inner_link4">Thiên hoàng
-                                                        Minh Trị</a></div>
-                                                <div class="text2">Truyện bi kịch</div>
-                                                <div class="text3">Quyển 5: Thằng nhỏ và thằng béo</div>
+                                                <div class="text1"><a href="" title="<%=notify.bookName%>"><%= truncateTitle(notify.bookName,
+                                                    30) %></a></div>
+                                                <div class="text2"><%=notify.genreName%></div>                                                
                                             </div>
 
                                         </td>
@@ -202,16 +210,19 @@
                                         </td>
 
                                     </tr>
+                                    <% } %> 
+                                    <% for (const notify of notifyData3) { %>  
                                     <tr class="thong-bao-sach-tu-choi ">
-
+                                        <% const azureBlobBaseUrl = 'https://happinovel.blob.core.windows.net/bookcover/defaultBook.jpg'; %>
+                                        
                                         <td class="image-cell">
-                                            <img src="./Image/kinh-van-hoa.jpg" alt="Small Image " width="60"
+                                            <img src="<%=azureBlobBaseUrl%>" alt="Small Image " width="60"
                                                 height="80">
                                             <div class="text-container">
-                                                <div class="text1"><a href="https://example.com/inner_link4">Kính vạn
-                                                        hoa</a></div>
-                                                <div class="text2">Truyện bi kịch</div>
-                                                <div class="text3">Quyển 10</div>
+                                                <div class="text1"><a href="" title="<%=notify.bookName%>"><%= truncateTitle(notify.bookName,
+                                                    30) %></a></div>
+                                                <div class="text2"></div>
+                                                
                                             </div>
 
                                         </td>
@@ -235,7 +246,8 @@
                                         </td>
 
                                     </tr>
-
+                                    <% } %> 
+                                    <% for (const notify of notifyData4) { %> 
                                     <tr class="thong-bao-binh-luan-report ">
 
                                         <td class="image-cell">
@@ -250,8 +262,8 @@
 
                                         <td class="text-right" style="direction: rtl; ">
                                             <div class="can-giua">
-                                                <a href="https://example.com/inner_link7">quynh2004 đã bình luận<br>như
-                                                    cc</a>
+                                                <a href=""><%=notify.userName%> đã bình luận<br><%= truncateTitle(notify.commentData,
+                                                    30) %></a>
                                             </div>
                                         </td>
                                         <td class="small-column">
@@ -267,15 +279,18 @@
                                         </td>
 
                                     </tr>
+                                    <% } %> 
+                                    <% for (const notify of notifyData5) { %> 
                                     <tr class="thong-bao-sach-muon-dang ">
-
+                                        <% const azureBlobBaseUrl = 'https://happinovel.blob.core.windows.net/bookcover'; %>
+                                        <% const fullImageUrl = `${azureBlobBaseUrl}/${notify.bookIMG}`; %>
                                         <td class="image-cell">
-                                            <img src="./Image/Hirohito.jpg" alt="Small Image " width="60" height="80">
+                                            <img src="<%=fullImageUrl%>" alt="Small Image " width="60" height="80">
                                             <div class="text-container">
-                                                <div class="text1"><a href="https://example.com/inner_link4">Thiên hoàng
-                                                        Minh Trị</a></div>
-                                                <div class="text2">Truyện bi kịch</div>
-                                                <div class="text3">Quyển 5: Thằng nhỏ và thằng béo</div>
+                                                <div class="text1"><a href="" title="<%=notify.bookName%>"><%= truncateTitle(notify.bookName,
+                                                    30) %></a></div>
+                                                <div class="text2"><%=notify.genreName%></div>
+                                               
                                             </div>
 
                                         </td>
@@ -299,6 +314,7 @@
                                         </td>
 
                                     </tr>
+                                    <% } %> 
                                 </tbody>
                             </table>
                         </div>
