@@ -1,5 +1,6 @@
 const Account = require('../models/Account')
 const Book = require('../models/Book')
+const BookGenre = require('../models/BookGenre')
 const Volume = require('../models/Volume')
 const Chapter = require('../models/Chapter')
 const Genre = require('../models/Genre')
@@ -86,11 +87,13 @@ module.exports.upload_post = async (req, res) => {
     console.log(req.body)
     const postName = req.body.postName
     const bookID = req.body.bookID
-    if (postName == "bookMenu") {
+    const volID = req.body.volID
+    const chapID = req.body.chapID
+    if (postName == "form3") {
       try {
-        const bookData = await Book.findById(bookID);
-        console.log(bookData)
-        res.status(200).json({data: bookData});
+        const volData = await Volume.find({bookID: bookID});
+        // console.log(volData)
+        res.status(200).json({data: volData});
       }
       catch (err) {
           console.log(err)
@@ -98,11 +101,39 @@ module.exports.upload_post = async (req, res) => {
           res.status(400).json({err})
       }
     }
-    else if (postName == "form3") {
+    else if (postName == "form4") {
       try {
-        const volData = await Volume.find({bookID: bookID});
+        const bookData = await Book.findById(bookID);
+        const bookGenres = await BookGenre.find({bookID: bookData.bookID})
+        // console.log(bookGenres)
+        res.status(200).json({book: bookData, genre: bookGenres});
+      }
+      catch (err) {
+          console.log(err)
+          // const errors = handleErrors(err);
+          res.status(400).json({err})
+      }
+    }
+    else if (postName == "form5") {
+      try {
+        const volData = await Volume.findById(volID);
+        const bookData = await Book.find({bookID: volData.bookID})
+        // console.log(bookData)
+        res.status(200).json({vol: volData, book: bookData});
+      }
+      catch (err) {
+          console.log(err)
+          // const errors = handleErrors(err);
+          res.status(400).json({err})
+      }
+    }
+    else if (postName == "form6") {
+      try {
+        const chapData = await Chapter.findById(chapID);
+        const bookData = await Book.find({bookID: chapData.bookID})
+        const volData = await Volume.find({bookID: chapData.bookID, volID: chapData.volID})
         // console.log(volData)
-        res.status(200).json({data: volData});
+        res.status(200).json({book: bookData, vol: volData, chap: chapData});
       }
       catch (err) {
           console.log(err)

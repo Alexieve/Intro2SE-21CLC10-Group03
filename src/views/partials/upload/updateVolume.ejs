@@ -1,5 +1,5 @@
 
-<form id="form6" style="display: none;">
+<form id="form5" style="display: none;">
     <div class="d-flex justify-content-center rounded-2 section-title" style="margin-bottom: 20px;">
         <span><i class="fa-solid fa-book-open"></i>  THÔNG TIN CHƯƠNG</span>
     </div>
@@ -10,11 +10,7 @@
             <b>Tên sách <span style="color: red;">*</span></b>
         </div>
         <div class="col-md-10">
-            <select id="bookSelect" class="form-select">
-                <% for (let b = 0; b < books.length; b++) {%>
-                    <option data-author="<%=books[b].authorName%>"><%=books[b].title%></option>
-                <%}%>
-            </select>
+            <input type="text" class="form-control" name="title" disabled>
         </div>
     </div>
 
@@ -24,7 +20,7 @@
             <b>Tác giả <span style="color: red;">*</span></b>
         </div>
         <div class="col-md-10">
-            <input id="authorSelect" type="text" class="form-control" disabled>
+            <input type="text" class="form-control" name="author" disabled>
         </div>
     </div>
 
@@ -34,12 +30,17 @@
             <b>Tên tập <span style="color: red;">*</span></b>
         </div>
         <div class="col-md-10">
-            <input type="text" class="form-control" placeholder="Tên tập">
+            <input type="text" class="form-control" placeholder="Tên tập" name="volName">
         </div>
     </div>
 
-    <div class="row mb-3 float-end me-5">
-        <button type="button" class="btn btn-success">Thêm tập</button>
+    <div class="row mb-3 me-3">
+        <div class="col-md-10 float-end">
+            <button class="btn btn-danger float-end"><b>Xoá tập</b></button>
+        </div>
+        <div class="col-md-2">
+            <button class="btn btn-success"><b>Cập nhật</b></button>
+        </div>
     </div>
     <div class="row" style="visibility: hidden;">space</div>
     <div class="row" style="visibility: hidden;">space</div>
@@ -51,5 +52,29 @@
 </form>
 
 <script>
-    
+    const volList = document.querySelectorAll(".bg-volume")
+    for (let i = 0; i < volList.length; i++) {
+        const vol = volList[i]
+        vol.addEventListener('click', async function(e) {
+            volID = vol.attributes[2].nodeValue
+            const postName = "form5"
+            try {
+                const res = await fetch('/upload', {
+                    method: 'post',
+                    body: JSON.stringify({postName, volID}),
+                    headers: {'Content-Type': 'application/json'}
+                });
+                let data = await res.json()
+                let volData = data.vol
+                let bookData = data.book[0]
+                form5.querySelector('[name="title"]').setAttribute("value", bookData.title)
+                form5.querySelector('[name="author"]').setAttribute("value", bookData.authorName)
+                form5.querySelector('[name="volName"]').setAttribute("value", volData.volName)
+                showContent("form5")
+            }
+            catch (err) {
+                console.log(err)
+            }
+        })
+    }
 </script>

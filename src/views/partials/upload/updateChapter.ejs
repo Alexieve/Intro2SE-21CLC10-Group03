@@ -1,5 +1,5 @@
 
-<form id="form5" style="display: none;">
+<form id="form6" style="display: none;">
     <div class="d-flex justify-content-center rounded-2 section-title" style="margin-bottom: 20px;">
         <span><i class="fa-solid fa-book-open"></i>  THÔNG TIN TẬP</span>
     </div>
@@ -10,11 +10,7 @@
             <b>Tên sách <span style="color: red;">*</span></b>
         </div>
         <div class="col-md-10">
-            <select id="bookSelect" class="form-select">
-                <% for (let b = 0; b < books.length; b++) {%>
-                    <option data-author="<%=books[b].authorName%>" data-bookID="<%=books[b].bookID%>"><%=books[b].title%></option>
-                <%}%>
-            </select>
+            <input type="text" class="form-control" placeholder="Tên sách" name="title" disabled>
         </div>
     </div>
 
@@ -24,7 +20,7 @@
             <b>Tác giả <span style="color: red;">*</span></b>
         </div>
         <div class="col-md-10">
-            <input id="authorSelect" type="text" class="form-control" disabled>
+            <input type="text" class="form-control" placeholder="Tên tác giả" name="author" disabled>
         </div>
     </div>
 
@@ -34,8 +30,7 @@
             <b>Tên tập <span style="color: red;">*</span></b>
         </div>
         <div class="col-md-10">
-            <select id="volumeSelect" class="form-select">
-            </select>
+            <input type="text" class="form-control" placeholder="Tên tập" name="volName" disabled>
         </div>
     </div>
 
@@ -45,7 +40,7 @@
             <b>Tên chương <span style="color: red;">*</span></b>
         </div>
         <div class="col-md-10">
-            <input type="text" class="form-control" placeholder="Tên chương">
+            <input type="text" class="form-control" placeholder="Tên chương" name="chapName">
         </div>
     </div>
 
@@ -55,12 +50,12 @@
             <b>Nội dung <span style="color: red;">*</span></b>
         </div>
         <div class="col-md-10">
-            <textarea>Welcome to HappiNovel!</textarea>
+            <textarea id="content" name="content">Welcome to HappiNovel!</textarea>
             <script>
                 tinymce.init({
-                    selector: 'textarea'
+                    selector: 'textarea#content'
                 });
-            </script>
+            </script>            
         </div>
     </div>
 
@@ -71,5 +66,32 @@
         
 </form>
 <script>
-    
+    const chapList = document.querySelectorAll(".bg-chap")
+    for (let i = 0; i < chapList.length; i++) {
+        const chap = chapList[i]
+        chap.addEventListener('click', async function(e) {
+            chapID = chap.attributes[2].nodeValue
+            const postName = "form6"
+            try {
+                const res = await fetch('/upload', {
+                    method: 'post',
+                    body: JSON.stringify({postName, chapID}),
+                    headers: {'Content-Type': 'application/json'}
+                });
+                let data = await res.json()
+                // console.log(data)
+                let bookData = data.book[0]
+                let volData = data.vol[0]
+                let chapData = data.chap
+                form6.querySelector('[name="title"]').setAttribute("value", bookData.title)
+                form6.querySelector('[name="author"]').setAttribute("value", bookData.authorName)
+                form6.querySelector('[name="volName"]').setAttribute("value", volData.volName)
+                form6.querySelector('[name="chapName"]').setAttribute("value", chapData.chapName)
+                showContent("form6")
+            }
+            catch (err) {
+                console.log(err)
+            }
+        })
+    }
 </script>

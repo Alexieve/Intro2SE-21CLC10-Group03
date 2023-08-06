@@ -10,7 +10,7 @@
             <b>Tên sách <span style="color: red;">*</span></b>
         </div>
         <div class="col-md-10">
-            <input type="text" class="form-control" placeholder="Tên sách">
+            <input type="text" class="form-control" placeholder="Tên sách" name="title">
         </div>
     </div>
 
@@ -20,7 +20,7 @@
             <b>Tác giả <span style="color: red;">*</span></b>
         </div>
         <div class="col-md-10">
-            <input type="text" class="form-control" placeholder="Tên tác giả">
+            <input type="text" class="form-control" placeholder="Tên tác giả" name="author">
         </div>
     </div>
     
@@ -35,7 +35,7 @@
                 <% for (let i = 0; i < genres.length; i++) { %>
                     <div class="col-3 mb-2">
                         <div class="form-check">
-                            <input class="form-check-input" type="checkbox" id="<%= genres[i].genreID%>" name="genre<%= genres[i].genreID%>" value="something">
+                            <input class="form-check-input" type="checkbox" id="<%= genres[i].genreID%>" name="genres" value="<%= genres[i].genreName%>">
                             <label class="form-check-label" for="check1"><%= genres[i].genreName%></label>
                         </div>
                     </div>
@@ -51,10 +51,10 @@
             <b>Tình trạng</b>
         </div>
         <div class="col-md-10">
-            <select class="form-select">
-                <option>Đang tiến hành</option>
-                <option>Tạm ngưng </option>
-                <option>Đã hoàn thành </option>
+            <select class="form-select" name="status">
+                <option value="0">Đang tiến hành</option>
+                <option value="1">Tạm ngưng </option>
+                <option value="2">Đã hoàn thành </option>
             </select>
         </div>
     </div>
@@ -64,7 +64,7 @@
             <b>Ảnh bìa</b>
         </div>
         <div class="col-md-2">
-            <input id="tmpBookImg" type="file" accept="image/*">
+            <input id="tmpBookImg" type="file" accept="image/*" name="bookCover">
         </div>
     </div>
 
@@ -74,10 +74,10 @@
             <b>Tóm tắt <span style="color: red;">*</span></b>
         </div>
         <div class="col-md-10">
-            <textarea>Welcome to HappiNovel!</textarea>
+            <textarea id="summary" name="summary">Welcome to HappiNovel!</textarea>
             <script>
                 tinymce.init({
-                    selector: 'textarea'
+                    selector: 'textarea#summary'
                 });
             </script>
         </div>
@@ -92,16 +92,59 @@
             <textarea>Welcome to HappiNovel!</textarea>
             <script>
                 tinymce.init({
-                    selector: 'textarea'
+                  selector: 'textarea',
+                  plugins: 'anchor autolink charmap codesample emoticons image link lists media searchreplace table visualblocks wordcount',
+                  toolbar: 'undo redo | blocks fontfamily fontsize | bold italic underline strikethrough | link image media table | align lineheight | numlist bullist indent outdent | emoticons charmap | removeformat',
                 });
             </script>
         </div>
     </div>
-    <div class="row mb-3 float-end me-5">
-        <button class="btn btn-success">Thêm sách</button>
+    <div class="row mb-3 me-3">
+        <div class="col-md-10 float-end">
+            <button class="btn btn-danger float-end"><b>Xoá sách</b></button>
+        </div>
+        <div class="col-md-2">
+            <button class="btn btn-success"><b>Cập nhật</b></button>
+        </div>
     </div>
 </form>
 
 <script>
-    
+    const bookList = document.querySelectorAll(".bg-book")
+    for (let i = 0; i < bookList.length; i++) {
+        const book = bookList[i]
+        book.addEventListener('click', async function(e) {
+            bookID = book.attributes[2].nodeValue
+            const postName = "form4"
+            try {
+                const res = await fetch('/upload', {
+                    method: 'post',
+                    body: JSON.stringify({postName, bookID}),
+                    headers: {'Content-Type': 'application/json'}
+                });
+                let data = await res.json()
+                let bookData = data.book
+                let bookGenres = []
+                for (let j = 0; j < data.genre.length; j++) {
+                    bookGenres.push(String(data.genre[j].genreID))
+                }
+                form4.querySelector('[name="title"]').setAttribute("value", bookData.title)
+                form4.querySelector('[name="author"]').setAttribute("value", bookData.authorName)
+                form4.querySelector('[name="status"]').options.selectedIndex = bookData.status
+                let selectedGenres = form4.querySelectorAll('[name="genres"]')
+                for (let j = 0; j < selectedGenres.length; j++) {
+                    if (bookGenres.includes(selectedGenres[j].attributes[2].value)) {
+                        selectedGenres[j].checked = true
+                    }
+                    else {
+                        selectedGenres[j].checked = false
+                    }
+                }
+                showContent("form4")
+            }
+            catch (err) {
+                console.log(err)
+            }
+        })
+    }
 </script>

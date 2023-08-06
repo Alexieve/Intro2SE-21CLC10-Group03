@@ -69,34 +69,7 @@
         </div>
     </div>
     <%- include("./partials/footer") -%>
-    <script>
-        const bookList = document.querySelectorAll(".bg-book")
-        const volList = document.querySelectorAll(".bg-volume")
-        const chapList = document.querySelectorAll(".bg-chap")
-        // console.log(bookList)
-        for (let i = 0; i < bookList.length; i++) {
-            const book = bookList[i]
-            book.addEventListener('dblclick', async function(e) {
-                bookID = book.attributes[2].nodeValue
-                const postName = "bookMenu"
-                try {
-                    const res = await fetch('/upload', {
-                        method: 'post',
-                        body: JSON.stringify({postName, bookID}),
-                        headers: {'Content-Type': 'application/json'}
-                    });
-                    let bookData = await res.json()
-                    bookData = bookData.data
-                    const form = document.querySelector("#form4")
-                    section = form.querySelectorAll('.updBook')
-                    console.log(section)
-                }
-                catch (err) {
-                    console.log(err)
-                }
-            })
-        }
-    </script>
+
     <script>
         const form1 = document.getElementById("form1");
         const form2 = document.getElementById("form2");
