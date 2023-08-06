@@ -145,23 +145,18 @@
                                                             <% } %>
                                                                 <% } %>
 
-                                                                    <% function getChapterName(latestChapterID,
-                                                                        volumeID, bookID) { %>
-
-                                                                        <% const chap=chapters.find(chap=>
-                                                                            chap.bookID === bookID && chap.volID ===
-                                                                            volumeID && chap.chapID ===
-                                                                            parseInt(latestChapterID, 10)
-                                                                            );
-
-                                                                            if (chap) {
-
-                                                                            return chap.chapName;
-                                                                            } else {
-                                                                            console.log('Chap not found');
-                                                                            return 'Chương mới nhất';
-                                                                            }
-                                                                            } %>
+                                                                <% function getChapterName(latestChapterID, volumeID, bookID) { %>
+                                                                    <% const chap = chapters.find(chap =>
+                                                                      chap.bookID === bookID && chap.volID === volumeID && chap.chapID === parseInt(latestChapterID, 10)
+                                                                    );
+                                                                  
+                                                                    if (chap) {
+                                                                      return chap.chapName;
+                                                                    } else {
+                                                                      console.log('Chap not found');
+                                                                      return 'Chương mới nhất';
+                                                                    }
+                                                                  } %>
 
 
 
@@ -220,12 +215,10 @@
                                                                                                                     %>
                                                                                                                     <td class="text-right"
                                                                                                                         style="direction: rtl; ">
-                                                                                                                        
                                                                                                                         <% if
                                                                                                                             (volume)
                                                                                                                             {
                                                                                                                             %>
-                                                                                                                            
                                                                                                                             <%= getChapterName(latestChapterID,
                                                                                                                                 volume.volID,
                                                                                                                                 book.bookID)

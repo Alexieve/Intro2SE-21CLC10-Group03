@@ -4,6 +4,7 @@ const express = require('express');
 const router = express.Router();
 const bookInfoControllers = require('../controllers/bookInfoControllers');
 
-router.get('/', bookInfoControllers.bookInfo_get);
+// Define a route to handle book information
+router.get('/:id', bookInfoControllers.bookInfo_get);
 
 module.exports = router;

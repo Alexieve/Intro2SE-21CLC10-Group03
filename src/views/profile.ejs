@@ -245,7 +245,7 @@
                                                                   <div class="statistic-name">Đang theo dõi</div>
                                                             </li>
                                                             <li class="col-12 mt-2">
-                                                                  <div class="statistic-value">16
+                                                                  <div class="statistic-value"><%=NumComment.length%>
                                                                   </div>
                                                                   <div class="statistic-name">Bình luận</div>
                                                             </li>
@@ -327,7 +327,7 @@
                                                             
                                                             <!-- Truyện 1 bắt đầu từ đây -->
                                                             
-                                                            <% matchedBooks.forEach(book=> { %>
+                                                            <% matchedBooks.forEach((book,index)=> { %>
                                                                   <% const azureBlobBaseUrl = 'https://happinovel.blob.core.windows.net/bookcover'; %>
                                                                   <div class="col-12 col-md-6">
                                                                         <div class="showcase-item">
@@ -349,10 +349,14 @@
                                                                                           <div class="series-info">
                                                                                                 <div
                                                                                                       class="series-type-wrapper">
+                                                                                                      <%if(formattedGenreNames[index]){ %>
                                                                                                       <small
-                                                                                                            class="series-type type-orinovel large-button-type-novel">Truyện
-                                                                                                            sáng
-                                                                                                            tác</small>
+                                                                                                            class="series-type type-orinovel large-button-type-novel"><%= formattedGenreNames[index] %></small>
+                                                                                                            <%}%>
+                                                                                                            <%if(!formattedGenreNames[index]){ %>
+                                                                                                                  <small
+                                                                                                                        class="series-type type-orinovel large-button-type-novel">Truyện sáng tác</small>
+                                                                                                                        <%}%>
                                                                                                 </div>
                                                                                                 <h5
                                                                                                       class="series-name text-base font-bold">

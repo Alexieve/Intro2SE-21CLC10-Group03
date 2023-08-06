@@ -7,7 +7,10 @@ const path = require('path');
 const Book = require('../models/Book');
 const bcrypt = require('bcrypt');
 const fs = require('fs');
+const Comment = require('../models/Comment');
 const {bookContainer} = require("../middleware/database");
+const Genre = require("../models/Genre");
+const bookgenres = require("../models/BookGenre");
 
 // Import the formatDate function from dateHelpers.js
 const formatDate = require('../public/js/dateHelpers');
@@ -19,7 +22,12 @@ exports.profilePage = async (req, res) => {
     if (!token) {
       throw new Error('No JWT token found');
     }
-
+    const userID = parseInt(req.params.id);
+    if(userID){
+    const users = await Account.findOne({userID});
+    console.log(users);
+    }
+    
     const decodedToken = jwt.verify(token, 'information of user');
     const user = await Account.findById(decodedToken.id);
     const matchedBooks = await Book.find({ author: user.userID });
@@ -42,12 +50,26 @@ exports.profilePage = async (req, res) => {
     if (!user) {
       throw new Error('User not found');
     }
+    const genreNames =[]
+    const NumComment = await Comment.find({ userID: user.userID });
+    for (const bookmark of BookMId) {
+      const bookID = bookmark.bookID;
+      
+    const genreIDs = await bookgenres.findOne({bookID})
+        const genreID = genreIDs ? genreIDs.genreID : 'Not found genre';
 
+        const genre = await Genre.findOne({genreID})
+        const genreName = genre ? genre.genreName : 'Not found genre';
+        
+        genreNames.push({genreName});
+    }
+    
+    const formattedGenreNames = genreNames.map(item => item.genreName);
+    console.log(formattedGenreNames);
     // Helper function to get the full cover image path
-    console.log(user.avatarURL)
     // Assuming you have a 'profile' view to render the profile page
     const chaptersCount = await countChapters(matchedBooks);
-    res.render('profile', {formatDate, matchedBooks, checkOldPassword, chaptersCount ,formatStatus, Makedbook});
+    res.render('profile', {formatDate, matchedBooks, checkOldPassword, chaptersCount ,formatStatus, Makedbook, NumComment,formattedGenreNames});
   } catch (err) {
     console.error(err.message);
     res.status(500).send('Internal Server Error');
@@ -73,7 +95,6 @@ async function countChapters(matchedBooks) {
 
   for (const book of matchedBooks) {
     const bookDirectory = `Book${book.bookID}`;
-    console.log('Accessing book directory:', bookContainer.url + '/' + bookDirectory);
 
     try {
       // Get the list of blobs (chapter files) in the book's directory
@@ -90,7 +111,6 @@ async function countChapters(matchedBooks) {
         }
       }
 
-      console.log('Accessing volume directories:', volumeDirectories);
     } catch (err) {
       console.error(`Error reading book directory: ${bookDirectory}`);
     }
