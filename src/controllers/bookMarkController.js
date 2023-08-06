@@ -9,6 +9,8 @@ const BookMark = require("../models/BookMark");
 const bcrypt = require("bcrypt");
 const fs = require("fs");
 const matchedBooks = [];
+const Genre = require("../models/Genre");
+const bookgenres = require("../models/BookGenre");
 const { findLatestVolume } = require("../public/js/LatestVolume");
 const { bookContainer } = require("../middleware/database");
 const azureBlobBaseUrl = "https://happinovel.blob.core.windows.net"; // Define the Azure Blob Storage base URL here
@@ -40,6 +42,7 @@ exports.bookmark = async (req, res) => {
 
         if (book) {
           // Book with the given bookID found, add it to the array
+        
           matchedBooks.push(book);
         }
       } catch (err) {
@@ -61,7 +64,7 @@ exports.bookmark = async (req, res) => {
     const volumes = await Volume.find({});
     const chapters = await Chapter.find({
     });
-
+    
     const latestChapterID = await findLatestChapter(latestVolumeUrls);
     res.render("bookmark", {
       matchedBooks,

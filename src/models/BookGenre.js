@@ -12,6 +12,6 @@ const bookgenreSchema = new mongoose.Schema({
   },
 });
 
-const bookGenre = mongoose.model("bookgenres", bookgenreSchema); // Use singular "BookMark" as the model name
+const BookGenre = mongoose.model("bookgenres", bookgenreSchema); // Use singular "BookMark" as the model name
 
-module.exports = bookGenre;
+module.exports = BookGenre;
