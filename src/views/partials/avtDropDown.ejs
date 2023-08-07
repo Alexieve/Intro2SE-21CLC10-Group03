@@ -24,9 +24,11 @@
     <li>
       <a href="/bookmark"><i class="far fa-bookmark"></i>Sách yêu thích</a>
     </li>
+    <% if(user.permission != 0){%>
     <li>
-      <a href="#"><i class="fa-solid fa-gear"></i>Quản lý</a>
+      <a href="/manage"><i class="fa-solid fa-gear"></i>Quản lý</a>
     </li>
+    <%}%>
     <li>
       <a href="/logout"><i class="fa-solid fa-arrow-right-from-bracket"></i>Thoát</a>
     </li>
