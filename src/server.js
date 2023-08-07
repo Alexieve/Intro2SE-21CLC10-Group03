@@ -42,13 +42,12 @@ app.use(bodyParser.urlencoded({extended: true}))
 app.get('*', checkUser);
 app.use(bookRoutes)
 app.use(authRoutes)
-app.use(profileRoutes)
 app.use(bookMarkRoutes)
 app.use(uploadRoutes)
 app.use(readingHistoryRoutes)
 app.use(notificationRoutes)
 app.get("/", (req, res) => res.render('home'));
-app.get("/profile", requireAuth, (req, res) => res.render('profile'));
+app.use('/profile',profileRoutes);
 app.get("/bookmark", requireAuth, (req, res) => res.render('bookmark'));
 app.use('/book_info', bookInfoRoutes); // Add the bookInfoRoutes
 app.get("/readinghistory", requireAuth, (req, res) => res.render('readinghistory'));
