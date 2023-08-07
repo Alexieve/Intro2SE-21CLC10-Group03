@@ -8,6 +8,7 @@ const Book = require('../models/Book');
 router.get('/manage', requirePermission(1), manageControllers.getBooks);
 router.post('/process-checkboxes', async (req, res) => {
     const selectedBookIDs = req.body.selectedBookIDs;
+    let isSuccess = true;
 
   try {
     for (const bookData of selectedBookIDs) {
@@ -22,10 +23,19 @@ router.post('/process-checkboxes', async (req, res) => {
         book.isPending = "0"; // Đặt isPending = 0
         await book.save(); // Lưu lại vào cơ sở dữ liệu
       }
+      else {
+        isSuccess = false; // Ghi nhận có lỗi xảy ra
+        break; // Dừng vòng lặp nếu có lỗi
+      }
+    }
+    if (isSuccess) {
+      // Gửi thông báo thành công
+      res.send('Done');
+    } else {
+      // Gửi thông báo lỗi
+      res.send('Error');
     }
 
-    // Phản hồi cho client khi hoàn thành
-    res.send('Data received and processed successfully!');
   } catch (err) {
     // Xử lý lỗi nếu có
     console.log(err);
