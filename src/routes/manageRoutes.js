@@ -44,22 +44,32 @@ router.post('/process-checkboxes', async (req, res) => {
 });
 router.post('/delete-books', async (req, res) => {
     const selectedBookIDs = req.body.selectedBookIDs;
-  
+    let isSuccess2 = true;
     try {
       for (const bookData of selectedBookIDs) {
         // Tìm và xóa sách có bookID tương ứng
         const bookID = bookData.bookID;
+        const status = bookData.status;
         const book = await Book.findOne({ bookID: bookID });
 
       // Nếu tìm thấy sách và isPending khác 0, thực hiện cập nhật
-        if (book ) {
+        if (book && status !== "3") {
         book.status = "3"; // Đặt isPending = 0
         await book.save(); // Lưu lại vào cơ sở dữ liệu
       }
+      else {
+        isSuccess2 = false; // Ghi nhận có lỗi xảy ra
+        break; // Dừng vòng lặp nếu có lỗi
       }
-  
-      // Phản hồi cho client khi hoàn thành
-      res.send('Books deleted successfully!');
+    }
+    if (isSuccess2) {
+      // Gửi thông báo thành công
+      res.send('Done');
+    } else {
+      // Gửi thông báo lỗi
+      res.send('Error');
+    }
+
     } catch (err) {
       // Xử lý lỗi nếu có
       console.log(err);

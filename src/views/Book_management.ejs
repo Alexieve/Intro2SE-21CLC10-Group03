@@ -290,7 +290,6 @@
           },
           body: JSON.stringify({ selectedBookIDs }),
         });
-  
         const result = await response.text();
         if (result === "Done") {
           // Nếu kết quả là "Done", hiển thị thông báo thành công
@@ -314,27 +313,21 @@
                   });
                   
                 };
-
-                
+                await modalConfirm()
         }
-
       } catch (error) {
         console.log(error);
       }
     } else {
       // Nếu không đủ điều kiện, hiển thị thông báo lỗi
             attachModal("Vui lòng kiểm tra lại!")
-            // $("#modal2btn").modal('show');
             var modalConfirm = function(){
               $("#modalerror1").on("click", function(){
                 location.assign('/manage')
-                //res.redirect('/manage');
                 $("#staticBackdrop").modal('hide');
               });
-              
             };
             await modalConfirm()
-           
     }
   });
 </script>
@@ -358,7 +351,7 @@
   });
   
   
-  document.getElementById("button-delete").addEventListener("click", function() {
+  document.getElementById("button-delete").addEventListener("click", async function() {
     // Lấy danh sách các checkbox đã chọn
     const checkboxes = document.querySelectorAll("input[type=checkbox]:checked");
 
@@ -373,30 +366,64 @@
     });
     
     // Gửi dữ liệu lên server bằng AJAX
-    const allArePending = selectedBookIDs.every(book => book.status != "3");
+    const allArePending = selectedBookIDs.length > 0 && selectedBookIDs.every(book => book.status != "3");
 
     if (allArePending) {
-      fetch("/delete-books", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify({ selectedBookIDs })
-      })
-      .then(response => response.text())
-      .then(result => {
-        console.log(result);
-        document.getElementById("successMessage").innerText = result;
-        document.getElementById("successMessage").style.display = "block";
-      })
-      .catch(error => {
+      try {
+        const response = await fetch("/delete-books", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ selectedBookIDs }),
+        });
+  
+        const result = await response.text();
+        if (result === "Done") {
+          // Nếu kết quả là "Done", hiển thị thông báo thành công
+          attachModal2("Cập nhật thành công!");
+          var modalConfirm22 = function () {
+            $("#modaldone1").on("click", function () {
+              location.assign('/manage');
+              $("#staticBackdrop2").modal('hide');
+            });
+          };
+          await modalConfirm22()
+         } else {
+          // Nếu không đủ điều kiện, hiển thị thông báo lỗi
+                attachModal("Đã có lỗi xảy ra!")
+                // $("#modal2btn").modal('show');
+                var modalConfirm = function(){
+                  $("#modalerror1").on("click", function(){
+                    location.assign('/manage')
+                    //res.redirect('/manage');
+                    $("#staticBackdrop").modal('hide');
+                  });
+                  
+                };
+                await modalConfirm()
+                
+        }
+
+      } catch (error) {
         console.log(error);
-      });
+      }
     } else {
       // Nếu không đủ điều kiện, hiển thị thông báo lỗi
-      document.getElementById("successMessage").innerText = "Tất cả các sách phải có status != 3 trước khi gửi!";
-      document.getElementById("successMessage").style.display = "block";
+            attachModal("Vui lòng kiểm tra lại!")
+            // $("#modal2btn").modal('show');
+            var modalConfirm3 = function(){
+              $("#modalerror1").on("click", function(){
+                location.assign('/manage')
+                //res.redirect('/manage');
+                $("#staticBackdrop").modal('hide');
+              });
+              
+            };
+            await modalConfirm3()
+           
     }
+
   });
 </script>
 
