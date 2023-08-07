@@ -103,6 +103,7 @@
                                             báo
                                             cá nhân</a></li>
                                     <!-- Nơi này của ADMIN -->
+                                    <% if(user.permission != 0){%>
                                     <li class="navigator-board-font"><a href="" style="color: #585858"><span
                                                 class="none inline-l"><i class="fas fa-chevron-left"></i></span><span
                                                 class="float-right none-l"><i
@@ -115,6 +116,7 @@
                                                     class="fas fa-chevron-down"></i></span>Quản
                                             lý
                                             Comment</a></li>
+                                            <%}%>
                                 </ul>
                             </section>
                             <!-- End of Navigator board -->
