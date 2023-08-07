@@ -2,6 +2,7 @@
 <html lang="en">
 
 <head>
+      <base href="http://localhost:3000/">
       <meta charset="UTF-8">
       <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
@@ -10,6 +11,7 @@
       <title>Happi Novel profile</title>
       <style data-tag="reset-style-sheet">
       </style>
+      
       <style>
             /* Custom CSS to remove the outline when content is editable */
             [contenteditable="true"] {
@@ -27,6 +29,7 @@
             href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&amp;display=swap"
             data-tag="font" />
       <link rel="stylesheet" href="./css/styleProfile.css">
+      <link rel="stylesheet" href="../public/css/styleProfile.css">
       <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css">
       <!-- Open Sans Font -->
       <link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
@@ -45,8 +48,10 @@
       <link rel="stylesheet" href="css/stylesUpload.css">
       <script src="/utils/dateHelpers.js"></script>
       <script src="/js/statusB.js"></script>
+      
       <!-- Tiny ediotr -->
       <%- include("./partials/head") -%>
+      
 
             <link rel="stylesheet" href="./css/ContextMenu.css" />
             <script
@@ -84,7 +89,7 @@
                                                       <div class="content img-in-ratio">
                                                             <div class="content img-in-ratio">
                                                                  
-                                                                        <img src="<%= user.coverURL %>"
+                                                                        <img src="<%= `https://happinovel.blob.core.windows.net/profilecover/${Anotheruser.coverURL}` %>"
                                                                               id="coverImage">
                                                                    
                                                                               <!-- Default cover picture if the user doesn't have one -->
@@ -93,7 +98,7 @@
                                                             </div>
 
                                                       </div>
-
+                                                      <% if(Anotheruser.userID == trueUser.userID){%>
                                                       <button id="uploadButton" href=""
                                                             class="buttonn to-contact button-daden button-anh-bia ">
                                                             <label for="imageInput" class="custom-button"><i
@@ -101,7 +106,9 @@
                                                                   <input type="file" class="form-control"
                                                                         id="coverImageInput" accept="image/*"
                                                                         style="display: none;">
+                                                                        
                                                                   <span>Chỉnh sửa ảnh bìa</span>
+                                                                  <%}%>
                                                             </label>
 
                                                       </button>
@@ -119,10 +126,11 @@
 
 
                                                             
-                                                                  <img src="<%= user.avatarURL %>"
+                                                                  <img src="<%= `https://happinovel.blob.core.windows.net/avatar/${Anotheruser.avatarURL}` %>"
                                                                         id="avaImage">
                                                                  
                                                       </div>
+                                                      <% if(Anotheruser.userID == trueUser.userID){%>
                                                       <button href="" id="uploadButtonAva"
                                                             class="buttonn to-contact button-nigga button-anh-dai-dien ">
                                                             <label for="imageInput" class="custom-button"><i
@@ -131,20 +139,23 @@
                                                                         id="avaImageInput" accept="image/*"
                                                                         style="display: none;"> </label>
                                                       </button>
+                                                      <%}%>
                                                 </div>
 
                                                 <div class="profile-intro">
                                                       <h3 class="profile-intro_name text-lg font-bold-ava">
 
-                                                            <%= user.profileName%>
+                                                            <%= Anotheruser.profileName%>
                                                       </h3>
                                                       <!-- badge -->
 
                                                       <div class="profile-function at-desktop none block-m  ">
+                                                            <% if(Anotheruser.userID == trueUser.userID){%>
                                                             <button href=""
                                                                   class="buttonn to-contact button-green big-link move-up-button"
                                                                   data-bs-toggle="modal" data-bs-target="#editModal">
                                                                   Cài đặt tài khoản</button>
+                                                                  <%}%>
                                                             <div class="modal fade" id="editModal" tabindex="-1"
                                                                   aria-labelledby="editModalLabel" aria-hidden="true">
                                                                   <div class="modal-dialog">
@@ -253,13 +264,15 @@
                                                       <main class="sect-body">
                                                             <div class="p-s_i-bio font-semibold " id="frameContent">
                                                                   <p>
-                                                                        <%= user.bio%>
+                                                                        <%= Anotheruser.bio%>
                                                                   </p>
                                                                   <!-- Button to toggle edit mode -->
+                                                                  <% if(Anotheruser.userID == trueUser.userID){%>
                                                                   <button id="editButton" href=""
                                                                         class="buttonn to-contact button-blu button-tieu-su "
                                                                         onclick="show('popup')">
                                                                         Chỉnh tiểu sử</button>
+                                                                        <%}%>
 
                                                             </div>
 
@@ -270,7 +283,7 @@
                                                                         sinh:
                                                                   </span><span contenteditable="false"
                                                                         class="info-value  editable-frame ">
-                                                                        <%=formatDate( user.dob)%>
+                                                                        <%=formatDate( Anotheruser.dob)%>
                                                                   </span>
                                                             </div>
                                                             <div class="profile-info-item">
@@ -280,7 +293,7 @@
                                                                         nghiệp:
                                                                   </span><span contenteditable="false"
                                                                         class="info-value  editable-frame">
-                                                                        <%= user.jobs%>
+                                                                        <%= Anotheruser.jobs%>
                                                                   </span>
                                                             </div>
                                                             <div class="profile-info-item">
@@ -289,7 +302,7 @@
                                                                         Sở thích:
                                                                   </span><span contenteditable="false"
                                                                         class="info-value  editable-frame">
-                                                                        <%= user.favorites%>
+                                                                        <%= Anotheruser.favorites%>
                                                                   </span>
                                                             </div>
                                                             <!-- Chỗ này tạo khoảng trống giữa content và cái đáy của frame, ở đó ta nhét một nút vào -->
@@ -304,10 +317,12 @@
                                                                         <%= formatDate( user.regdate)%>
                                                                   </span>
                                                             </div>
+                                                            <% if(Anotheruser.userID == trueUser.userID){%>
                                                             <button id="editButton2" href=""
                                                                   class="buttonn to-contact button-orange button-sua-thong-tin "
                                                                   onclick="show('popup')">
                                                                   Sửa thông tin</button>
+                                                                  <%}%>
                                                       </main>
                                                 </section>
                                           </div>
@@ -339,7 +354,7 @@
                                                                                                  <% const fullImageUrl = `${azureBlobBaseUrl}/${book.coverImg}`; %>
                                                                                                  
                                                                                                 <div class="content img-in-ratio"
-                                                                                                style="background-image: url('<%= fullImageUrl %>')">
+                                                                                                style="background-image: url('<%= fullImageUrl %>')"><a href="/book_info/<%= book.bookID %>"></a>
                                                                                                       
                                                                                                 </div>
                                                                                           </div>
@@ -363,7 +378,7 @@
                                                                                                       <!-- Ấn vào link bê dưới là sẽ dẫn đến trang sách -->
                                                                                                       <!-- Vá lỗi thủ công :))))) -->
                                                                                                       <a class="no-underline"
-                                                                                                            href="">
+                                                                                                            href="/book_info/<%= book.bookID %>">
                                                                                                             <%= book.title
                                                                                                                   %>
                                                                                                                   ㅤㅤㅤㅤㅤㅤㅤㅤ
