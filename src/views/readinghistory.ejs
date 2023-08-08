@@ -106,6 +106,7 @@
                                                                   báo
                                                                   cá nhân</a></li>
                                                       <!-- Nơi này của ADMIN -->
+                                                      <% if(user.permission != 0){%>
                                                       <li class="navigator-board-font"><a href=""
                                                                   style="color: #585858"><span class="none inline-l"><i
                                                                               class="fas fa-chevron-left"></i></span><span
@@ -120,6 +121,7 @@
                                                                               class="fas fa-chevron-down"></i></span>Quản
                                                                   lý
                                                                   Comment</a></li>
+                                                                  <%}%>
                                                 </ul>
                                           </section>
                                           <!-- End of Navigator board -->
@@ -179,7 +181,7 @@
                                                           <% const fullImageUrl = `${azureBlobBaseUrl}/${book.coverImg}`; %>
                                                           <div class="thumb-item-flow col-5 col-md-2 col-lg-3 type-original" id="frame<%= index + 1 %>">
                                                             <div class="thumb-wrapper ln-tooltip">
-                                                              <a href="#" title="<%= book.title %>">
+                                                              <a href="/book_info/<%= book.bookID %>" title="<%= book.title %>">
                                                                 <div class="a6-ratio">
                                                                   <div class="content img-in-ratio lazyloaded" data-bg="">
                                                                     <img src="<%= fullImageUrl %>">
@@ -190,7 +192,7 @@
                                                                 <div class="thumb_attr chapter-title" title="NoneC">
                                                                   <% const userHistory = BookMId.find(history => history.bookID === book.bookID); %>
                                                                   <% if (userHistory) { %>
-                                                                    <a href="#" title="<%= getChapterName(userHistory.chapID, userHistory.volID, book.bookID)  %>">
+                                                                    <a href="/book_info/<%= book.bookID %>" title="<%= getChapterName(userHistory.chapID, userHistory.volID, book.bookID)  %>">
                                                                       
                                                                       <%= getChapterName(userHistory.chapID, userHistory.volID, book.bookID)  %>
                                                                     </a>
@@ -205,7 +207,7 @@
                                                               </div>
                                                             </div>
                                                             <div class="thumb_attr series-title">
-                                                              <a href="" style="color: rgb(0, 0, 0);" title="<%= book.title %>"><%= truncateTitle(book.title, 30) %></a>
+                                                              <a href="/book_info/<%= book.bookID %>" style="color: rgb(0, 0, 0);" title="<%= book.title %>"><%= truncateTitle(book.title, 30) %></a>
                                                             </div>
                                                           </div>
                                                         <% }) %>

@@ -17,19 +17,22 @@ const formatDate = require('../public/js/dateHelpers');
 const formatStatus = require('../public/js/statusBook');
 
 exports.profilePage = async (req, res) => {
+  
   try {
     const token = req.cookies.jwt;
     if (!token) {
       throw new Error('No JWT token found');
     }
-    const userID = parseInt(req.params.id);
-    if(userID){
-    const users = await Account.findOne({userID});
-    console.log(users);
-    }
+    const IDuser = req.params.id;
     
-    const decodedToken = jwt.verify(token, 'information of user');
-    const user = await Account.findById(decodedToken.id);
+    trueIDuser = parseInt(IDuser);
+    const decodedToken = jwt.verify(token, 'information of user');// will use later
+    console.log(trueIDuser);
+    const user = await Account.findOne({userID:IDuser});
+    const Anotheruser = await Account.findOne({userID:IDuser});
+    const trueUser = await Account.findById(decodedToken.id);
+    console.log(trueUser);
+    console.log(user);
     const matchedBooks = await Book.find({ author: user.userID });
     const BookMId = await BookMark.find({ userID: user.userID });
     const Makedbook = [];
@@ -69,7 +72,7 @@ exports.profilePage = async (req, res) => {
     // Helper function to get the full cover image path
     // Assuming you have a 'profile' view to render the profile page
     const chaptersCount = await countChapters(matchedBooks);
-    res.render('profile', {formatDate, matchedBooks, checkOldPassword, chaptersCount ,formatStatus, Makedbook, NumComment,formattedGenreNames});
+    res.render('profile', {trueUser,Anotheruser,formatDate, matchedBooks, checkOldPassword, chaptersCount ,formatStatus, Makedbook, NumComment,formattedGenreNames});
   } catch (err) {
     console.error(err.message);
     res.status(500).send('Internal Server Error');
@@ -130,6 +133,7 @@ function getVolumeName(bookDirectory, blobName) {
   }
   return null;
 }
+
 
 
 
