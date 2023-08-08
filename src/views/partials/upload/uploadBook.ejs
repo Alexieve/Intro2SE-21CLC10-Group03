@@ -1,5 +1,5 @@
 
-<form id="form1">
+<form id="form1" enctype="multipart/form-data" action="/upload/addBook" method="post">
     <div class="d-flex justify-content-center rounded-2 section-title" style="margin-bottom: 20px;">
         <span><i class="fa-solid fa-book-open"></i>  THÔNG TIN SÁCH</span>
     </div>
@@ -10,7 +10,7 @@
             <b>Tên sách <span style="color: red;">*</span></b>
         </div>
         <div class="col-md-10">
-            <input type="text" class="form-control" placeholder="Tên sách" name="title">
+            <input type="text" class="form-control" placeholder="Tên sách" name="title" required>
         </div>
     </div>
 
@@ -20,7 +20,7 @@
             <b>Tác giả <span style="color: red;">*</span></b>
         </div>
         <div class="col-md-10">
-            <input type="text" class="form-control" placeholder="Tên tác giả" name="authorName">
+            <input type="text" class="form-control" placeholder="Tên tác giả" name="authorName" required>
         </div>
     </div>
     
@@ -35,7 +35,7 @@
                 <% for (let i = 0; i < genres.length; i++) { %>
                     <div class="col-3 mb-2">
                         <div class="form-check">
-                            <input class="form-check-input" type="checkbox" id="<%= genres[i].genreID%>" name="genres" value="<%= genres[i].genreName%>">
+                            <input class="form-check-input" type="checkbox" id="<%= genres[i].genreID%>" name="genres" value="<%= genres[i].genreID%>">
                             <label class="form-check-label" for="check1"><%= genres[i].genreName%></label>
                         </div>
                     </div>
@@ -51,10 +51,10 @@
             <b>Tình trạng</b>
         </div>
         <div class="col-md-10">
-            <select class="form-select">
-                <option>Đang tiến hành</option>
-                <option>Tạm ngưng </option>
-                <option>Đã hoàn thành </option>
+            <select class="form-select" name="status" required>
+                <option value="0">Tạm ngưng</option>
+                <option value="1" selected>Đang tiến hành</option>
+                <option value="2">Đã hoàn thành </option>
             </select>
         </div>
     </div>
@@ -64,7 +64,7 @@
             <b>Ảnh bìa</b>
         </div>
         <div class="col-md-2">
-            <input id="tmpBookImg" type="file" accept="image/*">
+            <input id="bookCover" type="file" accept="image/*" placeholder="Chọn ảnh" name="bookCover">
         </div>
     </div>
 
@@ -74,10 +74,10 @@
             <b>Tóm tắt <span style="color: red;">*</span></b>
         </div>
         <div class="col-md-10">
-            <textarea id="summary" name="summary">Welcome to HappiNovel!</textarea>
+            <textarea id="summary1" name="summary" required>Welcome to HappiNovel!</textarea>
             <script>
                 tinymce.init({
-                    selector: 'textarea#summary'
+                    selector: 'textarea#summary1'
                 });
             </script>
         </div>
@@ -89,34 +89,74 @@
             <b>Chú thích thêm</b>
         </div>
         <div class="col-md-10">
-            <textarea id="note" name="note">Welcome to HappiNovel!</textarea>
+            <textarea id="note1" name="note">Welcome to HappiNovel!</textarea>
             <script>
                 tinymce.init({
-                    selector: 'textarea#note'
+                    selector: 'textarea#note1'
                 });
             </script>
         </div>
     </div>
     <div class="row mb-3 float-end me-5">
-        <button class="btn btn-success">Thêm sách</button>
+        <button id="addButton" class="btn btn-success">Thêm sách</button>
     </div>
 </form>
-
+<%- include("../modal2btn") -%>
 <script>
-    // const imageInput = document.getElementById('tmpBookImg');
-    // const imageView = document.getElementById('imgView');
-    
-    // imageInput.addEventListener('change', function(e) {
-    //     const selectedFile = e.target.files[0];
+    form1 = document.querySelector("#form1")
+    form1.addEventListener('submit', async function(e) {
+        e.preventDefault()
+        const title = form1.title.value
+        const authorName = form1.authorName.value
+        const genres = []
+        for (let i = 0; i < form1.genres.length; i++) {
+            if (form1.genres[i].checked == true) {
+                genres.push(form1.genres[i].value)
+            }
+        }
+        const status = form1.status.value
+        const bookCover = form1.bookCover.files[0] || new Blob([new Uint8Array([])], { type: 'image/jpeg' })
+        let imageName = bookCover.name
+        if (bookCover.size == 0) imageName = ''
+
+        const summary = tinymce.get('summary1').getContent()
+        const note = tinymce.get('note1').getContent()
+
+        const formData = new FormData()
+        formData.append('title', title)
+        formData.append('authorName', authorName)
+        genres.forEach((value) => {
+            formData.append("genres[]", value)
+        })
+        formData.append('status', status)
+        formData.append('bookCover', bookCover, imageName)
+        formData.append('summary', summary)
+        formData.append('note', note)
         
-    //     if (selectedFile) {
-    //         const reader = new FileReader();
-            
-    //         reader.onload = function(event) {
-    //             imageView.src = event.target.result;
-    //         };
-            
-    //         reader.readAsDataURL(selectedFile);
-    //     }
-    // });
+        try {
+          const res = await fetch('/upload/addBook', {
+            method: 'post',
+            body: formData,
+          });
+          const data = await res.json()
+
+        //   console.log(tinymce.get('summary').getContent())
+          attachModal("Thêm sách thành công, vui lòng chờ kiểm duyệt.")
+            var modalConfirm = function(){
+                $("#modalbtn1").on("click", function(){
+                    location.reload()
+                    $("#modal2btn").modal('hide');
+                });
+                
+                $("#modalbtn2").on("click", function(){
+                    location.reload()
+                    $("#modal2btn").modal('hide');
+                });
+            };
+            await modalConfirm()
+        }
+        catch (err) {
+          console.log(err);
+        } 
+    })
 </script>

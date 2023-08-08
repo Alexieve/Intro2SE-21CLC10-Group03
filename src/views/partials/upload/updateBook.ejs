@@ -5,6 +5,7 @@
     </div>
 
     <!-- Tên sách -->
+    <input type="hidden" id="bookID" name="bookID">
     <div class="row mb-3 me-3">
         <div class="col-md-2 text-end align-self-md-center">
             <b>Tên sách <span style="color: red;">*</span></b>
@@ -20,7 +21,7 @@
             <b>Tác giả <span style="color: red;">*</span></b>
         </div>
         <div class="col-md-10">
-            <input type="text" class="form-control" placeholder="Tên tác giả" name="author">
+            <input type="text" class="form-control" placeholder="Tên tác giả" name="authorName">
         </div>
     </div>
     
@@ -35,7 +36,7 @@
                 <% for (let i = 0; i < genres.length; i++) { %>
                     <div class="col-3 mb-2">
                         <div class="form-check">
-                            <input class="form-check-input" type="checkbox" id="<%= genres[i].genreID%>" name="genres" value="<%= genres[i].genreName%>">
+                            <input class="form-check-input" type="checkbox" id="<%= genres[i].genreID%>" name="genres" value="<%= genres[i].genreID%>">
                             <label class="form-check-label" for="check1"><%= genres[i].genreName%></label>
                         </div>
                     </div>
@@ -51,9 +52,9 @@
             <b>Tình trạng</b>
         </div>
         <div class="col-md-10">
-            <select class="form-select" name="status">
-                <option value="0">Đang tiến hành</option>
-                <option value="1">Tạm ngưng </option>
+            <select class="form-select" name="status" required>
+                <option value="0">Tạm ngưng</option>
+                <option value="1">Đang tiến hành</option>
                 <option value="2">Đã hoàn thành </option>
             </select>
         </div>
@@ -74,10 +75,10 @@
             <b>Tóm tắt <span style="color: red;">*</span></b>
         </div>
         <div class="col-md-10">
-            <textarea id="summary" name="summary">Welcome to HappiNovel!</textarea>
+            <textarea id="summary4" name="summary">Welcome to HappiNovel!</textarea>
             <script>
                 tinymce.init({
-                    selector: 'textarea#summary'
+                    selector: 'textarea#summary4'
                 });
             </script>
         </div>
@@ -89,22 +90,20 @@
             <b>Chú thích thêm</b>
         </div>
         <div class="col-md-10">
-            <textarea>Welcome to HappiNovel!</textarea>
+            <textarea id="note4" name="note">Welcome to HappiNovel!</textarea>
             <script>
                 tinymce.init({
-                  selector: 'textarea',
-                  plugins: 'anchor autolink charmap codesample emoticons image link lists media searchreplace table visualblocks wordcount',
-                  toolbar: 'undo redo | blocks fontfamily fontsize | bold italic underline strikethrough | link image media table | align lineheight | numlist bullist indent outdent | emoticons charmap | removeformat',
+                    selector: 'textarea#note4'
                 });
             </script>
         </div>
     </div>
     <div class="row mb-3 me-3">
         <div class="col-md-10 float-end">
-            <button class="btn btn-danger float-end"><b>Xoá sách</b></button>
+            <button class="btn btn-danger float-end" value="delete"><b>Xoá sách</b></button>
         </div>
         <div class="col-md-2">
-            <button class="btn btn-success"><b>Cập nhật</b></button>
+            <button class="btn btn-success" value="update"><b>Cập nhật</b></button>
         </div>
     </div>
 </form>
@@ -115,11 +114,10 @@
         const book = bookList[i]
         book.addEventListener('click', async function(e) {
             bookID = book.attributes[2].nodeValue
-            const postName = "form4"
             try {
-                const res = await fetch('/upload', {
+                const res = await fetch('/upload/reviewBook', {
                     method: 'post',
-                    body: JSON.stringify({postName, bookID}),
+                    body: JSON.stringify({bookID}),
                     headers: {'Content-Type': 'application/json'}
                 });
                 let data = await res.json()
@@ -128,8 +126,9 @@
                 for (let j = 0; j < data.genre.length; j++) {
                     bookGenres.push(String(data.genre[j].genreID))
                 }
+                form4.querySelector('[name="bookID"]').setAttribute("value", bookData.bookID)
                 form4.querySelector('[name="title"]').setAttribute("value", bookData.title)
-                form4.querySelector('[name="author"]').setAttribute("value", bookData.authorName)
+                form4.querySelector('[name="authorName"]').setAttribute("value", bookData.authorName)
                 form4.querySelector('[name="status"]').options.selectedIndex = bookData.status
                 let selectedGenres = form4.querySelectorAll('[name="genres"]')
                 for (let j = 0; j < selectedGenres.length; j++) {
@@ -140,6 +139,8 @@
                         selectedGenres[j].checked = false
                     }
                 }
+                tinymce.get('summary4').setContent(bookData.summary);
+                tinymce.get('note4').setContent(bookData.note);
                 showContent("form4")
             }
             catch (err) {
@@ -147,4 +148,108 @@
             }
         })
     }
+</script>
+
+<script>
+    form4 = document.querySelector("#form4")
+    form4.addEventListener('submit', async function(e) {
+        e.preventDefault()
+        var clickedButtonValue = event.submitter.getAttribute('value');
+        if (clickedButtonValue == 'update') {
+            const bookID = form4.bookID.value
+            const title = form4.title.value
+            const authorName = form4.authorName.value
+            const genres = []
+            for (let i = 0; i < form4.genres.length; i++) {
+                if (form4.genres[i].checked == true) {
+                    genres.push(form4.genres[i].value)
+                }
+            }
+            const status = form4.status.value
+            const bookCover = form4.bookCover.files[0] || new Blob([new Uint8Array([])], { type: 'image/jpeg' })
+            let imageName = bookCover.name
+            if (bookCover.size == 0) imageName = ''
+
+            const summary = tinymce.get('summary4').getContent()
+            const note = tinymce.get('note4').getContent()
+
+            const formData = new FormData()
+            formData.append('bookID', bookID)
+            formData.append('title', title)
+            formData.append('authorName', authorName)
+            genres.forEach((value) => {
+                formData.append("genres[]", value)
+            })
+            formData.append('status', status)
+            formData.append('bookCover', bookCover, imageName)
+            formData.append('summary', summary)
+            formData.append('note', note)
+            
+            try {
+            const res = await fetch('/upload/updateBook', {
+                method: 'post',
+                body: formData,
+            });
+            const data = await res.json()
+
+            //   console.log(tinymce.get('summary').getContent())
+            attachModal("Cập nhật thông tin sách thành công.")
+                var modalConfirm = function(){
+                    $("#modalbtn1").on("click", function(){
+                        location.reload()
+                        $("#modal2btn").modal('hide');
+                    });
+                    
+                    $("#modalbtn2").on("click", function(){
+                        location.reload()
+                        $("#modal2btn").modal('hide');
+                    });
+                };
+                await modalConfirm()
+            }
+            catch (err) {
+                console.log(err);
+            } 
+        } else if (clickedButtonValue === 'delete') {
+            attachModal("Bạn chắc chắn muốn xoá sách này chứ.")
+            var modalConfirm = function(){
+                $("#modalbtn1").on("click", function(){
+                    $("#modal2btn").modal('hide');
+                    location.reload()
+                });
+                
+                $("#modalbtn2").on("click", async function(){
+                    $("#modal2btn").modal('hide');
+                    const bookID = form4.bookID.value
+                    try {
+                        const res = await fetch('/upload/deleteBook', {
+                            method: 'post',
+                            body: JSON.stringify({bookID}),
+                            headers: {'Content-Type': 'application/json'}
+                        });
+                        const data = await res.json()
+
+                        //   console.log(tinymce.get('summary').getContent())
+                        attachModal("Xoá sách thành công.")
+                        var modalConfirm = function(){
+                            $("#modalbtn1").on("click", function(){
+                                location.reload()
+                                $("#modal2btn").modal('hide');
+                            });
+                            
+                            $("#modalbtn2").on("click", function(){
+                                location.reload()
+                                $("#modal2btn").modal('hide');
+                            });
+                        };
+                        await modalConfirm()
+                    }
+                    catch (err) {
+                        console.log(err);
+                    }
+                });
+            };
+            await modalConfirm()
+        }
+    })
 </script>

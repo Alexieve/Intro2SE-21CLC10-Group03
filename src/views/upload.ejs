@@ -9,7 +9,6 @@
     <%- include("./partials/coverImg") -%>
 
 
-
     <!-- Sections -->
     <div class="container">
         <div class="row">
@@ -36,12 +35,13 @@
                         <div id="book<%=i%>" class="collapse">
                             <div class="list-group border-book-menu-mid">
                             <% for (let j = 0; j < books[i].volumes.length; j++) { %>
+                                <% if (books[i].volumes[j]._id == undefined) continue%>
                                 <a href="#vol<%=i%><%=j%>" class="bg-volume list-group-item collapsed" data-volID="<%=books[i].volumes[j]._id%>" data-bs-toggle="collapse" data-bs-parent="#book<%=i%>"><%=books[i].volumes[j].volName%><span class="float-end"><i class="fa-solid fa-caret-down"></i></span></a>
                                 <div id="vol<%=i%><%=j%>" class="collapse">
                                     <div class="list-group border-book-menu-mid">
                                     <% for (let k = 0; k < books[i].volumes[j].chapters.length; k++) { %>
                                         <a href="#chap<%=i%><%=j%><%=k%>" class=" bg-chap list-group-item collapsed" data-chapID="<%=books[i].volumes[j].chapters[k]._id%>" data-bs-toggle="collapse" data-bs-parent="#vol<%=i%><%=j%>">
-                                            <%=books[i].volumes[j].chapters[k].chapName%><span class="float-end"><i class="fa-solid fa-caret-left"></i></span> 
+                                            <b><%=books[i].volumes[j].chapters[k].chapName%><span class="float-end"><i class="fa-solid fa-caret-left"></i></span></b>
                                         </a>
                                         <div id="chap<%=i%><%=j%><%=k%>" class="collapse"></div>
                                     <%}%>

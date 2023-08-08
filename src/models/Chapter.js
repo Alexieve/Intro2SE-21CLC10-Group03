@@ -23,9 +23,13 @@ const chapterSchema = new mongoose.Schema ({
         default: Date(),
         require: true,
     },
-    contentFile: {
+    contentfile: {
         type: String,
         require: true,
+    },
+    updatefile: {
+        type: String,
+        default: "",
     },
     isPending: {
         type: Number,

@@ -12,7 +12,7 @@
         <div class="col-md-10">
             <select id="bookSelect" class="form-select">
                 <% for (let b = 0; b < books.length; b++) {%>
-                    <option data-author="<%=books[b].authorName%>"><%=books[b].title%></option>
+                    <option data-bookID="<%=books[b].bookID%>" data-author="<%=books[b].authorName%>"><%=books[b].title%></option>
                 <%}%>
             </select>
         </div>
@@ -24,7 +24,7 @@
             <b>Tác giả <span style="color: red;">*</span></b>
         </div>
         <div class="col-md-10">
-            <input id="authorSelect" type="text" class="form-control" disabled>
+            <input id="authorSelect" type="text" class="form-control" value="" disabled>
         </div>
     </div>
 
@@ -34,31 +34,65 @@
             <b>Tên tập <span style="color: red;">*</span></b>
         </div>
         <div class="col-md-10">
-            <input type="text" class="form-control" placeholder="Tên tập">
+            <input type="text" class="form-control" placeholder="Tên tập" name="volName" required>
         </div>
     </div>
 
     <div class="row mb-3 float-end me-5">
-        <button type="button" class="btn btn-success">Thêm tập</button>
+        <button class="btn btn-success">Thêm tập</button>
     </div>
+    <!-- <div class="row" style="visibility: hidden;">space</div>
     <div class="row" style="visibility: hidden;">space</div>
     <div class="row" style="visibility: hidden;">space</div>
     <div class="row" style="visibility: hidden;">space</div>
     <div class="row" style="visibility: hidden;">space</div>
-    <div class="row" style="visibility: hidden;">space</div>
-    <div class="row" style="visibility: hidden;">space</div>
+    <div class="row" style="visibility: hidden;">space</div> -->
         
 </form>
 
 <script>
-    var form = document.getElementById( "form2" );
-    var bookSelect = form.querySelector( "#bookSelect" );
-    var authorSelect = form.querySelector( "#authorSelect" );
-    function updateAuthorInput() {
-        const selectedOption = bookSelect.options[bookSelect.selectedIndex];
+    form2 = document.getElementById( "form2" );
+    bookSelect = form2.querySelector( "#bookSelect" );
+    authorSelect = form2.querySelector( "#authorSelect" );
+    async function updateAuthorInput() {
+        const selectedOption = bookSelect.options[$("#bookSelect").prop('selectedIndex')];
         const selectedAuthor = selectedOption.getAttribute('data-author');
-        authorSelect.value = selectedAuthor;
+        // console.log(selectedAuthor);
+        form2.querySelector( "#authorSelect" ).value = selectedAuthor;
     }
     updateAuthorInput()
     bookSelect.addEventListener('change', updateAuthorInput);
+</script>
+<script>
+    form2.addEventListener('submit', async function(e) {
+        e.preventDefault()
+        selectedOption = bookSelect.options[$("#bookSelect").prop('selectedIndex')];
+        bookID = selectedOption.getAttribute('data-bookID');
+        volName = form2.volName.value
+        try {
+          const res = await fetch('/upload/addVolume', {
+            method: 'post',
+            body: JSON.stringify({bookID, volName}),
+            headers: {'Content-Type': 'application/json'}
+          });
+          const data = await res.json()
+
+          attachModal("Thêm tập mới thành công.")
+            var modalConfirm = function(){
+                $("#modalbtn1").on("click", function(){
+                    location.reload()
+                    $("#modal2btn").modal('hide');
+                });
+                
+                $("#modalbtn2").on("click", function(){
+                    location.reload()
+                    $("#modal2btn").modal('hide');
+                });
+            };
+            await modalConfirm()
+        }
+        catch (err) {
+          console.log(err);
+        } 
+    })
 </script>

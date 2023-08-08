@@ -14,6 +14,10 @@ const volumeSchema = new mongoose.Schema ({
         type: String,
         required: [true, 'Vui lòng nhập tên chương!'],
     },
+    isDeleted: {
+        type: Number,
+        default: 0,
+    },
     chapters: [{
         type: mongoose.Schema.Types.ObjectId,
         ref: 'chapters',
