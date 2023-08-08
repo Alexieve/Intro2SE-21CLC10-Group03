@@ -15,11 +15,13 @@
     <!-- Bootstrap -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
- 
+    
     <!-- Tiny ediotr -->
     <script src="https://cdn.tiny.cloud/1/czhzadznx3qb12g2i4971xbviqsshfv65cbyuvs95fsi5021/tinymce/6/tinymce.min.js" referrerpolicy="origin"></script>
     <title>HappiNovel</title>
- 
+    
+
+
 </head>
 <body>
     <!-- Navigator bar -->
@@ -62,9 +64,9 @@
     </div>
     <div class="container border rounded p-3" style="margin-bottom: 50px;">
     <!-- Tiêu đề -->
-    <h2><i class="fa-solid fa-book"></i> <strong> Danh sách sách trong hệ thống</strong></h2>
+    <h2><i class="fa-solid fa-users"></i> <strong> Quản lý User</strong></h2>
       <div class="row">
-      <div class="col-md-4 mt-2  d-flex align-items-center ">
+      <div class="col-md-3 mt-2  d-flex align-items-center ">
         <div class="input-group "  style="max-width: 260px;"  >
           <span class="input-group-text" id="search-icon" style="background-color: #D9D9D9;"><i class="fa-solid fa-magnifying-glass"></i></span>
           <input type="text" class="form-control" style="background-color: #D9D9D9;" 
@@ -76,26 +78,26 @@
           <!-- Thêm biểu tượng vào đây, ví dụ: Font Awesome icon -->
           <i class="fa-solid fa-filter"></i>
           </span>
-          <select id="filter-select" class="form-select" style="max-width: 130px;background-color: #D9D9D9;">
+          <select id="filter-select" class="form-select" style="max-width: 110px;background-color: #D9D9D9;">
                     <option>Tất cả</option>
-                    <option>Stopped </option>
-                    <option>In Process </option>
-                    <option>Completed </option>
-                    <option>Pending </option>
-                    <option>Deleted </option>
+                    <option>Active</option>
+                    <option>Banned </option>
+                    <option>Admin </option>
+                    <option>Moderator </option>
+                    <option>User </option>
                     </select>
       </div>
-      <div class="col-md-2 mt-2 d-flex align-items-center ">
-        <button id="button-delete" class="btn btn-outline " style="background-color: #D9D9D9; margin-left: 40px;">Xóa </button>
+      <div class="col-md-3 mt-2 d-flex align-items-center ">
+        <button id="button-add-delete" class="btn btn-outline " style="background-color: #D9D9D9;">Thêm / Xóa Moderators</button>
       </div>
       <div class="col-md-2 mt-2 d-flex align-items-center">
-        <button  id="button-approve" class="btn btn-outline" style="background-color: #D9D9D9;">Duyệt</button>
+        <button id="button-ban-unban" class="btn btn-outline " style="background-color: #D9D9D9; margin-left: 30px;">Ban / Unban Users</button>
       </div>
       <div class="col-md-2 mt-4 d-flex justify-content-center">
       
          <ul class="pagination ">
             <li >
-          <div class="btn btn-outline btn-lg btn-text">1 of 7</div>
+          <div class="btn btn-outline btn-lg btn-text">1 of 10</div>
           </li>
            <li >
           <a href="#" aria-label="Trang trước" class="btn btn-outline btn-lg">
@@ -123,68 +125,62 @@
             <input type="checkbox" id="checkAll">
           </th>
           <th class="border-bottom" >STT <i class="fa-solid fa-sort"></i> </th>
-          <th class="border-bottom" >Tên sách <i class="fa-solid fa-sort"></i></th>
-          <th class="border-bottom" >Tác giả <i class="fa-solid fa-sort"></i></th>
-          <!-- <th class="border-bottom text-center" >Đánh giá <i class="fa-solid fa-sort"></i></th> -->
-          <th class="border-bottom" >Thể loại <i class="fa-solid fa-sort"></i></th>
-          <th class="border-bottom" >Nội dung <i class="fa-solid fa-sort"></i></th>
-          <th class="border-bottom " >Lượt xem <i class="fa-solid fa-sort"></i></th>
+          <th class="border-bottom" >Username <i class="fa-solid fa-sort"></i></th>
+          <th class="border-bottom" >Họ và tên <i class="fa-solid fa-sort"></i></th>
+          <th class="border-bottom" > Thẩm quyền <i class="fa-solid fa-sort"></i></th>
           <th class="border-bottom text-center"  >Tình trạng <i class="fa-solid fa-sort"></i></th>
         </tr>
       </thead>
       <tbody id="bookTableBody">
         <% let count = 1; %>
-        <% Books.forEach((Book) => { %>
+        <% Accounts.forEach((Account) => { %>
         <tr>
-            <td><input type="checkbox" data-bookID="<%= Book.bookID %>" data-isPending="<%= Book.isPending %>" data-status="<%= Book.status %>" ></td>
-            <td><%= count %> </td>
-            <td>
-              <% const maxTitleLength = 30; %>
-              <% const displayedTitle = Book.title.length > maxTitleLength ? Book.title.slice(0, maxTitleLength) + "..." : Book.title; %>
-              <%= displayedTitle %>
-            </td>
-            <td><%= Book.authorName %></td>
-            <!-- <td class="text-center"><%= Book.rating %></td> -->
-            <td>
-              <% const maxGenresLength = 16; %>
-              <% const displayedGenres = Book.Genres.join(", "); %>
-              <% if (displayedGenres.length > maxGenresLength) { %>
-                <%= displayedGenres.slice(0, maxGenresLength) %> ...
-              <% } else { %>
-                <%= displayedGenres %>
+          <td><input type="checkbox" data-temp = "<%= user.permission %>" data-userID="<%= Account.userID %>" data-permission="<%= Account.permission %>" data-status="<%= Account.status %>"></td>
+          <td> <%= count %> </td>
+          <td>
+            <%= Account.username %>
+          </td>
+          <td>
+            <%= Account.profileName %>
+          </td>
+          <td>
+            <% if (Account.permission === 0) { %>
+              <span >User</span>
+              <% } else if (Account.permission === 1) { %>
+              <span >Moderator</span>
+              <% } 
+              else if (Account.permission === 2) { %>
+              <span >Administrator</span>
+              <% }
+              else { %>
+              <span >Unknown</span>
               <% } %>
-            </td>
-            <td><%= Book.summary %></td>
-            <td><%= Book.totalview %></td>
-            <td class="d-flex justify-content-center">
-                <% if (Book.isPending === 1) { %>
-                <span class="p-1 rounded" style="background-color: #FDE9B5;">Pending</span>
-                <% } else if (Book.status === 0) { %>
-                <span class="p-1 rounded" style="background-color: #E79BF4;">Stopped</span>
-                <% } else if (Book.status === 1) { %>
-                <span class="p-1 rounded" style="background-color: #67FF88;">In Process</span>
-                <% } else if (Book.status === 2) { %>
-                <span class="p-1 rounded" style="background-color: #848484;">Completed</span>
-                <% } 
-                else if (Book.status === 3) { %>
-                  <span class="p-1 rounded" style="background-color: #FF6767;">Deleted</span>
-                  <% }
-                else { %>
-                <span class="p-1 rounded" style="background-color: #FF6767;">Unknown</span>
-                <% } %>
-            </td>
-        </tr>
-        <% count++; %>
+          </td>
+          <td class="d-flex justify-content-center">
+              <% if (Account.status === 0) { %>
+              <span class="p-1 rounded" style="background-color: #67FF88;">Active</span>
+              <% } 
+              else if (Account.status === 1) { %>
+              <span class="p-1 rounded" style="background-color: #FF6767;">Banned</span>
+              <% }
+              else { %>
+              <span class="p-1 rounded" style="background-color: #FF6767;">Unknown</span>
+              <% } %>
+          </td>
+          <% count++; %>
         <% }) %>
-    </tbody>
+        </tr>
+        
+        
+      </tbody>
     </table>
   </div>
 
     </div> 
-    
     <%- include("./partials/modal_error") -%>
     
-    <%- include("./partials/modal_done") -%>
+    <%- include("./partials/modal_done") -%>  
+  
       <!-- Dòng container với 6 cột -->
     
       
@@ -209,16 +205,16 @@
 <script>
   function getStatusFromText(statusText) {
     const lowerCaseStatus = statusText.toLowerCase();
-    if (lowerCaseStatus.includes("pending")) {
-      return "Pending";
-    } else if (lowerCaseStatus.includes("stopped")) {
-      return "Stopped";
-    } else if (lowerCaseStatus.includes("in process")) {
-      return "In Process";
-    } else if (lowerCaseStatus.includes("completed")) {
-      return "Completed";
-    } else if (lowerCaseStatus.includes("deleted")) {
-      return "Deleted";
+    if (lowerCaseStatus.includes("active")) {
+      return "Active";
+    } else if (lowerCaseStatus.includes("banned")) {
+      return "Banned";
+    } else if (lowerCaseStatus.includes("user")) {
+      return "User";
+    } else if (lowerCaseStatus.includes("moderator")) {
+      return "Moderator";
+    } else if (lowerCaseStatus.includes("admin")) {
+      return "Admin";
     } else {
       return "Unknown";
     }
@@ -236,22 +232,26 @@
     const selectedFilter = filterSelect.value;
 
     tableRows.forEach((row) => {
-      const bookTitle = removeAccentsAndLowerCase(row.querySelector("td:nth-child(3)").textContent);
-      const authorName = removeAccentsAndLowerCase(row.querySelector("td:nth-child(4)").textContent);
+      const username = removeAccentsAndLowerCase(row.querySelector("td:nth-child(3)").textContent);
+      const profileName = removeAccentsAndLowerCase(row.querySelector("td:nth-child(4)").textContent);
 
-      const titleMatch = bookTitle.includes(searchTerm);
-      const authorMatch = authorName.includes(searchTerm);
+      const usernameMatch = username.includes(searchTerm);
+      const profileNameMatch = profileName.includes(searchTerm);
 
       // Lấy giá trị book.status từ cột thứ 8 (td:nth-child(8))
-      const status = row.querySelector("td:nth-child(8)").textContent;
+      const permission = row.querySelector("td:nth-child(5)").textContent;
+      const status = row.querySelector("td:nth-child(6)").textContent;
 
       // Kiểm tra trạng thái 'stopped'
       const statusValue = getStatusFromText(status);
+      const permissionValue = getStatusFromText(permission);
 
       const statusMatch = (selectedFilter === "Tất cả") ||
-        (statusValue === selectedFilter);
+        (statusValue === selectedFilter) ||
+        (permissionValue === selectedFilter);
+     
 
-      if ((titleMatch || authorMatch) && statusMatch) {
+      if ((usernameMatch || profileNameMatch) && statusMatch ) {
         row.style.display = "table-row";
       } else {
         row.style.display = "none";
@@ -263,77 +263,8 @@
   filterSelect.addEventListener("change", filterRows);
 </script>
 <script>
-  // Bắt sự kiện khi người dùng nhấn nút appprove
-  document.getElementById("button-approve").addEventListener("click",async function() {
-    // Lấy danh sách các checkbox đã chọn
-    const checkboxes = document.querySelectorAll("input[type=checkbox]:checked");
-
-    // Tạo một mảng chứa các bookID đã chọn
-    const selectedBookIDs = [];
-    checkboxes.forEach((checkbox) => {
-      selectedBookIDs.push({
-        bookID: checkbox.getAttribute("data-bookID"),
-        isPending: checkbox.getAttribute("data-isPending"),
-
-      });
-    });
-    
-    // Gửi dữ liệu lên server bằng 
-    const allArePending = selectedBookIDs.length > 0 && selectedBookIDs.every(book => book.isPending == "1");
-
-    if (allArePending) {
-      try {
-        const response = await fetch("/process-checkboxes", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({ selectedBookIDs }),
-        });
-        const result = await response.text();
-        if (result === "Done") {
-          // Nếu kết quả là "Done", hiển thị thông báo thành công
-          attachModal2("Cập nhật thành công!");
-          var modalConfirm2 = function () {
-            $("#modaldone1").on("click", function () {
-              location.assign('/manage');
-              $("#staticBackdrop2").modal('hide');
-            });
-          };
-          await modalConfirm2()
-         } else {
-          // Nếu không đủ điều kiện, hiển thị thông báo lỗi
-                attachModal("Đã có lỗi xảy ra!")
-                // $("#modal2btn").modal('show');
-                var modalConfirm = function(){
-                  $("#modalerror1").on("click", function(){
-                    location.assign('/manage')
-                    //res.redirect('/manage');
-                    $("#staticBackdrop").modal('hide');
-                  });
-                  
-                };
-                await modalConfirm()
-        }
-      } catch (error) {
-        console.log(error);
-      }
-    } else {
-      // Nếu không đủ điều kiện, hiển thị thông báo lỗi
-            attachModal("Vui lòng kiểm tra lại!")
-            var modalConfirm = function(){
-              $("#modalerror1").on("click", function(){
-                location.assign('/manage')
-                $("#staticBackdrop").modal('hide');
-              });
-            };
-            await modalConfirm()
-    }
-  });
-</script>
-<script>
   const checkAllButton = document.getElementById("checkAll");
-  const checkboxes = document.querySelectorAll("input[type=checkbox][data-bookID]");
+  const checkboxes = document.querySelectorAll("input[type=checkbox][data-userID]");
 
   // Bắt sự kiện khi click vào nút "Check All"
   checkAllButton.addEventListener("click", function() {
@@ -346,36 +277,37 @@
   checkboxes.forEach((checkbox) => {
     checkbox.addEventListener("click", function() {
       // Kiểm tra nếu có bất kỳ checkbox nào không được check thì không chọn "Check All"
-      checkAllButton.checked = checkboxes.length === document.querySelectorAll("input[type=checkbox][data-bookID]:checked").length;
+      checkAllButton.checked = checkboxes.length === document.querySelectorAll("input[type=checkbox][data-userID]:checked").length;
     });
   });
   
   
-  document.getElementById("button-delete").addEventListener("click", async function() {
+  document.getElementById("button-ban-unban").addEventListener("click", async function() {
     // Lấy danh sách các checkbox đã chọn
     const checkboxes = document.querySelectorAll("input[type=checkbox]:checked");
 
-    // Tạo một mảng chứa các bookID đã chọn
-    const selectedBookIDs = [];
+    // Tạo một mảng chứa các AccountID đã chọn
+    const selectedAccountIDs = [];
     checkboxes.forEach((checkbox) => {
-      selectedBookIDs.push({
-        bookID: checkbox.getAttribute("data-bookID"),
+      selectedAccountIDs.push({
+        userID: checkbox.getAttribute("data-userID"),
         status: checkbox.getAttribute("data-status"),
-
+        permission: checkbox.getAttribute("data-permission"),
       });
     });
     
     // Gửi dữ liệu lên server bằng AJAX
-    const allArePending = selectedBookIDs.length > 0 && selectedBookIDs.every(book => book.status != "3");
+    const allArePending = selectedAccountIDs.length > 0 
+                          && selectedAccountIDs.every(Account => Account.permission == "0" );
 
     if (allArePending) {
       try {
-        const response = await fetch("/delete-books", {
+        const response = await fetch("/banunban-box", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
           },
-          body: JSON.stringify({ selectedBookIDs }),
+          body: JSON.stringify({ selectedAccountIDs }),
         });
   
         const result = await response.text();
@@ -384,18 +316,18 @@
           attachModal2("Cập nhật thành công!");
           var modalConfirm22 = function () {
             $("#modaldone1").on("click", function () {
-              location.assign('/manage');
+              location.assign('/manageUser');
               $("#staticBackdrop2").modal('hide');
             });
           };
           await modalConfirm22()
          } else {
           // Nếu không đủ điều kiện, hiển thị thông báo lỗi
-                attachModal("Đã có lỗi xảy ra!")
+                attachModal("Đã có lỗi xảy ra!!")
                 // $("#modal2btn").modal('show');
                 var modalConfirm = function(){
                   $("#modalerror1").on("click", function(){
-                    location.assign('/manage')
+                    location.assign('/manageUser')
                     //res.redirect('/manage');
                     $("#staticBackdrop").modal('hide');
                   });
@@ -414,7 +346,7 @@
             // $("#modal2btn").modal('show');
             var modalConfirm3 = function(){
               $("#modalerror1").on("click", function(){
-                location.assign('/manage')
+                location.assign('/manageUser')
                 //res.redirect('/manage');
                 $("#staticBackdrop").modal('hide');
               });
@@ -426,8 +358,78 @@
 
   });
 </script>
+<script>
+  // Bắt sự kiện khi người dùng nhấn nút appprove
+  document.getElementById("button-add-delete").addEventListener("click",async function() {
+    // Lấy danh sách các checkbox đã chọn
+    const checkboxes = document.querySelectorAll("input[type=checkbox]:checked");
 
+    // Tạo một mảng chứa các bookID đã chọn
+    const selectedAccountIDs = [];
+    checkboxes.forEach((checkbox) => {
+      selectedAccountIDs.push({
+        userID: checkbox.getAttribute("data-userID"),
+        status: checkbox.getAttribute("data-status"),
+        permission: checkbox.getAttribute("data-permission"),
+        temp: checkbox.getAttribute("data-temp"),
+      });
+    });
+    
+    // Gửi dữ liệu lên server bằng 
+    const allArePending = selectedAccountIDs.length > 0 
+            
+                          && selectedAccountIDs.every(Account => Account.permission != "2" && Account.temp =="2" );
 
+    if (allArePending) {
+      try {
+        const response = await fetch("/process-usercheckboxes", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ selectedAccountIDs }),
+        });
+        const result = await response.text();
+        if (result === "Done") {
+          // Nếu kết quả là "Done", hiển thị thông báo thành công
+          attachModal2("Cập nhật thành công!");
+          var modalConfirm2 = function () {
+            $("#modaldone1").on("click", function () {
+              location.assign('/manageUser');
+              $("#staticBackdrop2").modal('hide');
+            });
+          };
+          await modalConfirm2()
+         } else {
+          // Nếu không đủ điều kiện, hiển thị thông báo lỗi
+                attachModal("Đã có lỗi xảy ra!")
+                // $("#modal2btn").modal('show');
+                var modalConfirm = function(){
+                  $("#modalerror1").on("click", function(){
+                    location.assign('/manageUser')
+                    //res.redirect('/manage');
+                    $("#staticBackdrop").modal('hide');
+                  });
+                  
+                };
+                await modalConfirm()
+        }
+      } catch (error) {
+        console.log(error);
+      }
+    } else {
+      // Nếu không đủ điều kiện, hiển thị thông báo lỗi
+            attachModal("Vui lòng kiểm tra lại!")
+            var modalConfirm = function(){
+              $("#modalerror1").on("click", function(){
+                location.assign('/manageUser')
+                $("#staticBackdrop").modal('hide');
+              });
+            };
+            await modalConfirm()
+    }
+  });
+</script>
 
     <!-- Footer -->
     <footer class="fixed-bottom" id="footer">

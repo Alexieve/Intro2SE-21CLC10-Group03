@@ -83,6 +83,7 @@ const requirePermission = (requiredPermission) => {
                 } else {
                     const user = await Account.findById(decodedToken.id);
                     if (user && user.permission >= requiredPermission) {
+                        res.locals.user = user;
                         next();
                     } else {
                         res.status(404).render('error404')
