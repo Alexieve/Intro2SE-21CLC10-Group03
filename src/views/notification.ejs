@@ -186,7 +186,7 @@
                                         <td class="image-cell">
                                             <img src="<%=fullImageUrl%>" alt="Small Image " width="60" height="80">
                                             <div class="text-container">
-                                                <div class="text1"><a href="" title="<%=notify.bookName%>"><%= truncateTitle(notify.bookName,
+                                                <div class="text1"><a href="/book_info/<%= notify.bookID %>" title="<%=notify.bookName%>"><%= truncateTitle(notify.bookName,
                                                     30) %></a></div>
                                                 <div class="text2"><%=notify.genreName%></div>                                                
                                             </div>
@@ -195,7 +195,7 @@
 
                                         <td class="text-right" style="direction: rtl; ">
                                             <div class="can-giua">
-                                                <a href="https://example.com/inner_link7">Chúc mừng, sách của bạn đã
+                                                <a href="/book_info/<%= notify.bookID %>">Chúc mừng, sách của bạn đã
                                                     được chấp thuận</a>
                                             </div>
                                         </td>
