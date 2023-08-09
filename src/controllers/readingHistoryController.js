@@ -32,8 +32,11 @@ exports.readinghistory = async (req, res) => {
         const book = await Book.findOne({ bookID }); // Assuming you have a 'Book' model
 
         if (book) {
+          
+          if(book.status!=3){
           // Book with the given bookID found, add it to the array
           matchedBooks.push(book);
+        }
         }
       } catch (err) {
         console.error("Error finding book:", err);

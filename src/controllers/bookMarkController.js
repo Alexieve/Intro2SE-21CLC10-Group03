@@ -42,8 +42,8 @@ exports.bookmark = async (req, res) => {
 
         if (book) {
           // Book with the given bookID found, add it to the array
-        
-          matchedBooks.push(book);
+        if(book.status!=3){
+          matchedBooks.push(book);}
         }
       } catch (err) {
         console.error("Error finding book:", err);

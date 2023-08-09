@@ -185,19 +185,14 @@ exports.notification = async (req, res) => {
       const bookData = await Book.findOne({ bookID });
       const bookName = bookData ? bookData.title : "Book Name Not Found";
       const bookIMG = bookData ? bookData.coverImg : "Book Name Not Found";
-
+      if(bookData.status!=3){
       const genreIDs = await bookgenres.findOne({ bookID });
       const genreID = genreIDs ? genreIDs.genreID : "Not found genre";
 
       const genre = await Genre.findOne({ genreID });
       const genreName = genre ? genre.genreName : "Not found genre";
 
-      console.log(
-        `NotifyID: ${notifyID}, chapID: ${chapID}, volID: ${volID}, bookID: ${bookID}`
-      );
-      console.log(
-        `Chap Name: ${chapName}, Vol Name: ${volName}, Book Name: ${bookName}`
-      );
+    
       notifyData.push({
         notifyID,
         chapID,
@@ -210,6 +205,7 @@ exports.notification = async (req, res) => {
         genreName,
       });
     }
+    }
 
     for (const notify of notifyID2) {
       const notifyID = notify._id;
@@ -219,7 +215,7 @@ exports.notification = async (req, res) => {
       const bookData = await Book.findOne({ bookID });
       const bookName = bookData ? bookData.title : "Book Name Not Found";
       const bookIMG = bookData ? bookData.coverImg : "Book Name Not Found";
-      
+      if(bookData.status!=3){
       const genreIDs = await bookgenres.findOne({ bookID });
       const genreID = genreIDs ? genreIDs.genreID : "Not found genre";
       
@@ -234,6 +230,7 @@ exports.notification = async (req, res) => {
         genreName,
       });
     }
+    }
 
     for (const notify of notifyID3) {
         const notifyID = notify._id;
@@ -241,7 +238,7 @@ exports.notification = async (req, res) => {
   
         // Fetch bookName from the Book collection
         
-        console.log(bookName);
+     
         
         
         notifyData3.push({
@@ -262,7 +259,7 @@ exports.notification = async (req, res) => {
         
         const comment = await Comment.findOne({ commentID });
         const commentData = await readCommentfile(comment.commentID);
-        console.log(commentData)
+       
         
         notifyData4.push({
           notifyID,
@@ -279,7 +276,7 @@ exports.notification = async (req, res) => {
         const bookData = await Book.findOne({ bookID });
         const bookName = bookData ? bookData.title : "Book Name Not Found";
         const bookIMG = bookData ? bookData.coverImg : "Book Name Not Found";
-        
+        if(bookData.status!=3){
         const genreIDs = await bookgenres.findOne({ bookID });
         const genreID = genreIDs ? genreIDs.genreID : "Not found genre";
         
@@ -293,6 +290,7 @@ exports.notification = async (req, res) => {
           bookIMG,
           genreName,
         });
+      }
       }
 
     res.render("notification", { notifyData, notifyData2,notifyData3,notifyData5,notifyData4 });
@@ -366,7 +364,7 @@ async function readNotifyFile3(notifyID) {
       const result = words.join(' ');
   
       // You can access the result string as needed
-      console.log(`Content from Notify${notifyID}.txt:`, result);
+    
   
       return result;
     } catch (error) {
@@ -421,7 +419,7 @@ async function readNotifyFile3(notifyID) {
       const plainText = doc.getFullText();
   
       // You can access the plain text content as needed
-      console.log(`Content from cmt${commentID}.docx:`, plainText);
+     
   
       return plainText;
     } catch (error) {
