@@ -472,9 +472,10 @@ module.exports.updateChapter_post = async (req, res) => {
     let {chapObjID, chapName, chapContent} = req.body
 
     // update
-    chap = await Chapter.findByIdAndUpdate({_id: chapObjID}, {chapName: chapName, isPending: 2})
+    chap = await Chapter.findByIdAndUpdate({_id: chapObjID}, {chapName: chapName, isPending: 0}) // doi thanh 2
 
-    const newfile = "v2" + chap.contentfile
+    //const newfile = "v2" + chap.contentfile // lay cai nay
+    const newfile = chap.contentfile // xoa cai nay
     await Chapter.updateOne({_id: chapObjID,}, {$set: {updatefile: newfile}}, {upsert: true})
 
     // Generate summary and note

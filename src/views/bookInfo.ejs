@@ -2,8 +2,6 @@
 <html>
 <head> 
 	<!-- Update links to use correct format -->
-    <a href="/book_info/<%= book.bookID %>">View Book</a>
-
 	<title>View Book Information Page</title>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
@@ -22,6 +20,22 @@
 	<!-- Font Awesome -->
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
+
+<script>
+	$(document).ready(async function () {
+	  // Fetch the summary and note content
+	  const summaryResponse = await fetch('/api/summary');
+	  const noteResponse = await fetch('/api/note');
+	
+	  const summaryContent = await summaryResponse.text();
+	  const noteContent = await noteResponse.text();
+	
+	  // Update the DOM with the fetched content
+	  $('#summaryContent').html(summaryContent);
+	  $('#noteContent').html(noteContent);
+	});
+</script>
+
 <body>
 	<!-- Book Info -->
 	<div class="container">
@@ -67,52 +81,52 @@
 			<div class="col-md-4">
 				<div class="card">
 					<div class="card-header">
-						<h4>Author Information</h4>
+						<h4>Thông tin tác giả</h4>
 					</div>
 					<div class="card-body">
-						<img src="./Image/avatar.png" alt="Author Avatar" class="img-fluid rounded-circle" width="128" height="128">
+						<img src="<%= `https://happinovel.blob.core.windows.net/avatar/img${book.bookID}.jpg` %>" alt="Author Avatar" class="img-fluid rounded-circle" width="128" height="128">
 						<h5 class="mt-3"><%= book.authorName %></h5>
-						<p class="mt-2"><%= book.authorBio %></p>
+						<p class="mt-2" id="noteContent" ></p>
 					</div>
 				</div>
 			</div>
 			<!-- Second Section -->
 			<div class="col-md-12">
-				<h3>Book Summary</h3>
-				<p><%= book.summary %></p>
-				<a href="https://happinovel.blob.core.windows.net/book/summary<%= book.bookID %>.docx" target="_blank">View Summary</a>
-				<hr>
-			</div>
-			<!-- Third Section -->
-			<div class="col-md-12">
-				<h3>Volume List</h3>
-				<div class="accordion" id="volume-list">
-					<% book.volumes.forEach((volume, index) => { %>
-						<div class="card">
-							<div class="card-header" id="volume<%= index + 1 %>-heading">
-								<h5 class="mb-0">
-									<button class="btn btn-link" type="button" data-toggle="collapse" data-target="#volume<%= index + 1 %>-collapse" aria-expanded="true" aria-controls="volume<%= index + 1 %>-collapse">
-										Volume <%= index + 1 %>: <%= volume.title %>
-									</button>
-								</h5>
-							</div>
-							<div id="volume<%= index + 1 %>-collapse" class="collapse <%= index === 0 ? 'show' : '' %>" aria-labelledby="volume<%= index + 1 %>-heading" data-parent="#volume-list">
-								<div class="card-body">
-									<ul class="list-group" id="chapter-list-volume<%= index + 1 %>">
-										<% volume.chapters.forEach((chapter, cIndex) => { %>
-											<li class="list-group-item"><a href="#"><%= chapter.title %></a></li>
-										<% }) %>
-									</ul>
-								</div>
-							</div>
-						</div>
-					<% }) %>
+				<h3>Tóm tắt</h3>
+				<div class="card">
+				  <div class="card-body" id="summaryContent" ></div>
 				</div>
 				<hr>
-			</div>
+			  </div>
+			  
+			<!-- Third Section -->
+			<div class="col-md-12">
+				<h3>Mục lục</h3>
+				<div class="accordion" id="volume-list">
+				  <% book.volumes.forEach((volume, index) => { %>
+					<div class="card">
+					  <div class="card-header" id="volume<%= index + 1 %>-heading">
+						<h5 class="mb-0">
+						  <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#volume<%= index + 1 %>-collapse" aria-expanded="true" aria-controls="volume<%= index + 1 %>-collapse">
+							Volume <%= index + 1 %>: <%= volume.volName %>
+						  </button>
+						</h5>
+					  </div>
+					  <div id="volume<%= index + 1 %>-collapse" class="collapse <%= index === 0 ? 'show' : '' %>" aria-labelledby="volume<%= index + 1 %>-heading" data-parent="#volume-list">
+						<div class="card-body">
+						  <!-- Remove the <ul> and <li> elements for chapters -->
+						  <!-- You can add them back if you decide to display chapters later -->
+						</div>
+					  </div>
+					</div>
+				  <% }) %>
+				</div>
+				<hr>
+			  </div>
+			  
 			<!-- Fourth Section -->
 			<div class="col-md-12">
-				<h3>Comments</h3>
+				<h3>Bình luận</h3>
 				<!-- Add comments section here using the book.comments data -->
 				<hr>
 			</div>
