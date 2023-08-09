@@ -112,7 +112,7 @@ async function findLatestChapter(latestVolumeUrl) {
     const latestChapterFileName = chapterFiles[chapterFiles.length - 1];
 
     // Extract the chapID from the filename
-    const chapIDRegex = /chap(\d+)(?:_(\d+)_(\d+))?\.docx$/i;
+    const chapIDRegex = /chap(\d+)(?:_(\d+)_(\d+))?\.txt$/i;
     const chapIDMatch = latestChapterFileName.match(chapIDRegex);
 
     if (chapIDMatch) {
