@@ -20,22 +20,6 @@
 	<!-- Font Awesome -->
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
-
-<script>
-	$(document).ready(async function () {
-	  // Fetch the summary and note content
-	  const summaryResponse = await fetch('/api/summary');
-	  const noteResponse = await fetch('/api/note');
-	
-	  const summaryContent = await summaryResponse.text();
-	  const noteContent = await noteResponse.text();
-	
-	  // Update the DOM with the fetched content
-	  $('#summaryContent').html(summaryContent);
-	  $('#noteContent').html(noteContent);
-	});
-</script>
-
 <body>
 	<!-- Book Info -->
 	<div class="container">
@@ -86,7 +70,11 @@
 					<div class="card-body">
 						<img src="<%= `https://happinovel.blob.core.windows.net/avatar/img${book.bookID}.jpg` %>" alt="Author Avatar" class="img-fluid rounded-circle" width="128" height="128">
 						<h5 class="mt-3"><%= book.authorName %></h5>
-						<p class="mt-2" id="noteContent" ></p>
+						<p class="mt-2"><% if (noteContent) { %>
+							<p><%= noteContent %></p>
+						  <% } else { %>
+							<p>No  available.</p>
+						  <% } %></p>
 					</div>
 				</div>
 			</div>
@@ -94,7 +82,13 @@
 			<div class="col-md-12">
 				<h3>Tóm tắt</h3>
 				<div class="card">
-				  <div class="card-body" id="summaryContent" ></div>
+				  <div class="card-body">
+					<% if (summaryContent) { %>
+					  <p><%= summaryContent %></p>
+					<% } else { %>
+					  <p>No summary available.</p>
+					<% } %>
+				  </div>
 				</div>
 				<hr>
 			  </div>
