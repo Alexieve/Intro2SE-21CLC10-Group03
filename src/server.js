@@ -55,6 +55,10 @@ app.get("/readinghistory", requireAuth, (req, res) => res.render('readinghistory
 app.get("/notification", requireAuth, (req, res) => res.render('notification'));
 app.use(manageRoutes)
 app.use(manageUserRoutes)
+app.use((req, res, next) => {
+    // Set cache control headers to prevent caching for all responses
+    res.setHeader('Cache-Control', 'no-cache, no-store, must-revalidate');
+    next();});
 // Listen
 const port = 3000
 app.listen(port, function(){
