@@ -30,7 +30,7 @@ exports.notification = async (req, res) => {
     const decodedToken = jwt.verify(token, "information of user");
     const user = await Account.findById(decodedToken.id);
     // Loop through the bookmarks and find the unique book IDs
-    console.log(user.userID);
+
     if (!user) {
       throw new Error("User not found");
     }
@@ -258,8 +258,9 @@ exports.notification = async (req, res) => {
         const userName = userData ? userData.profileName : "User Not Found";
         
         const comment = await Comment.findOne({ commentID });
-        
-        
+    
+        const commentData = comment ? comment.contentfile : "Not found comment";
+
        
         
         notifyData4.push({
