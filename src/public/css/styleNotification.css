@@ -753,7 +753,7 @@ img {
 }
 .table th.small-column,
     .table td.small-column {
-      width: 68px; /* Adjust the width as needed */
+      width: 48px; /* Adjust the width as needed */
     }
 .moved-image {
         margin-top: 30px; /* Adjust the value as needed to move the image down */
