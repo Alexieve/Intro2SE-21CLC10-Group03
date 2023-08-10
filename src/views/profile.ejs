@@ -89,10 +89,10 @@
                                                       <div class="content img-in-ratio">
                                                             <div class="content img-in-ratio">
 
-                                                                  <img src="<%= `https://happinovel.blob.core.windows.net/profilecover/${Anotheruser.coverURL}` %>"
+                                                                  <img src="<%= `https://happinovel2021.blob.core.windows.net/profilecover/${Anotheruser.coverURL}` %>"
                                                                         id="coverImage">
                                                                   <%console.log(Anotheruser.coverURL)%>
-                                                                  <!-- Default cover picture if the user doesn't have one -->
+                                                                        <!-- Default cover picture if the user doesn't have one -->
 
 
                                                             </div>
@@ -100,12 +100,14 @@
                                                       </div>
                                                       <% if(Anotheruser.userID==trueUser.userID){%>
                                                             <button id="uploadButton"
-                                                            class="buttonn to-contact button-daden button-anh-bia">
-                                                            <label for="coverImageInput" class="custom-button">
-                                                            <i class="fas fa-camera"></i>
-                                                            <input type="file" class="form-control" id="coverImageInput" accept="image/*" style="display: none;">
-                                                            <span>Chỉnh sửa ảnh bìa</span>
-                                                            </label>
+                                                                  class="buttonn to-contact button-daden button-anh-bia">
+                                                                  <label for="coverImageInput" class="custom-button">
+                                                                        <i class="fas fa-camera"></i>
+                                                                        <input type="file" class="form-control"
+                                                                              id="coverImageInput" accept="image/*"
+                                                                              style="display: none;">
+                                                                        <span>Chỉnh sửa ảnh bìa</span>
+                                                                  </label>
                                                             </button>
                                                             <%}%>
 
@@ -121,7 +123,7 @@
 
 
 
-                                                            <img src="<%= `https://happinovel.blob.core.windows.net/avatar/${Anotheruser.avatarURL}` %>"
+                                                            <img src="<%= `https://happinovel2021.blob.core.windows.net/avatar/${Anotheruser.avatarURL}` %>"
                                                                   id="avaImage">
 
                                                       </div>
@@ -347,7 +349,7 @@
                                                             <% matchedBooks.forEach((book,index)=> { %>
 
                                                                   <% const
-                                                                        azureBlobBaseUrl='https://happinovel.blob.core.windows.net/bookcover'
+                                                                        azureBlobBaseUrl='https://happinovel2021.blob.core.windows.net/bookcover'
                                                                         ; %>
                                                                         <div class="col-12 col-md-6">
                                                                               <div class="showcase-item">
@@ -509,46 +511,84 @@
             </div>
       </footer>
 
-    
+
 
       <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
       <script>
             async function handleImageUpload(event) {
-              const file = event.target.files[0];
-              const reader = new FileReader();
-            
-              reader.onload = async function () {
-                const coverImage = document.getElementById("coverImage");
-                coverImage.src = reader.result;
-            
-                try {
-                  const formData = new FormData();
-                  formData.append('coverImage', file);
-                  console.log("50");
-                  const res = await fetch('/profile/update-cover', {
-                    method: 'POST',
-                    body: formData,
-                  });
-            
-                  const data = await res.text();
-                  console.log(data);
-                } catch (err) {
-                  console.log(err);
-                }
-              };
-            
-              if (file) {
-                reader.readAsDataURL(file);
-              }
+                  const file = event.target.files[0];
+                  const reader = new FileReader();
+
+                  reader.onload = async function () {
+                        const coverImage = document.getElementById("coverImage");
+                        coverImage.src = reader.result;
+
+                        try {
+                              const formData = new FormData();
+                              formData.append('coverImage', file);
+                              console.log("50");
+                              const res = await fetch('/profile/update-cover', {
+                                    method: 'POST',
+                                    body: formData,
+                              });
+
+                              const data = await res.text();
+                              console.log(data);
+                        
+                        } catch (err) {
+                              console.log(err);
+                        }
+                  };
+
+                  if (file) {
+                        reader.readAsDataURL(file);
+                  }
             }
-            
+
             document.getElementById("uploadButton").addEventListener("click", function () {
-              document.getElementById("coverImageInput").click();
+                  document.getElementById("coverImageInput").click();
             });
-            
+
             document.getElementById("coverImageInput").addEventListener("change", handleImageUpload);
-            </script>
-            
+      </script>
+      <script>
+            async function handleImageUpload2(event) {
+                  const file = event.target.files[0];
+                  const reader = new FileReader();
+
+                  reader.onload = async function () {
+                        const coverImage = document.getElementById("avaImage");
+                        coverImage.src = reader.result;
+
+                        try {
+                              const formData = new FormData();
+                              formData.append('avaImage', file);
+                              console.log("51");
+                              const res = await fetch('/profile/update-avatar', {
+                                    method: 'POST',
+                                    body: formData,
+                              });
+
+                              const data = await res.text();
+                              console.log(data);
+                        } catch (err) {
+                              console.log(err);
+                        }
+                  };
+
+                  if (file) {
+                        reader.readAsDataURL(file);
+                  }
+            }
+
+            document.getElementById("uploadButtonAva").addEventListener("click", function () {
+                  document.getElementById("avaImageInput").click();
+            });
+
+            // Add change event listener to the image input
+            document.getElementById("avaImageInput").addEventListener("change", handleImageUpload2);
+      </script>
+
       <script>
             // Function to toggle the editable state of the content
             function toggleEditable() {
@@ -593,7 +633,7 @@
             document.getElementById("editButton2").addEventListener("click", toggleEditableAll);
 
             // Function to handle the image upload
-            
+
 
 
 
@@ -613,12 +653,7 @@
             }
 
             // Add click event listener to the upload button
-            document.getElementById("uploadButtonAva").addEventListener("click", function () {
-                  document.getElementById("avaImageInput").click();
-            });
-
-            // Add change event listener to the image input
-            document.getElementById("avaImageInput").addEventListener("change", handleImageUpload2);
+            
 
 
       </script>

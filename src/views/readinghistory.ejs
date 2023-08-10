@@ -3,6 +3,7 @@
 
 <head>
       <meta charset="UTF-8">
+      
       <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
       <meta name="description" content="Đọc HappiNovel, trang web tốt nhất HCMUS" />
@@ -59,7 +60,8 @@
       <div class="history">
 
 
-            <button class="btn btn-danger  fixedd-button" onclick="deleteAllFrames()">Xóa lịch sử</button>
+            <button class="btn btn-danger  fixedd-button" onclick="deleteAllFrames(<%= matchedBooks.length %>)">Xóa lịch sử</button>
+            
             <div class="all-his">
 
                   <div class="page-top-group">
@@ -177,9 +179,10 @@
                                                     <main class="sect-body row">
                                                       
                                                         <% matchedBooks.forEach((book, index) => { %>
-                                                          <% const azureBlobBaseUrl = 'https://happinovel.blob.core.windows.net/bookcover'; %>
+                                                            <% if(book.status!=3){%>
+                                                          <% const azureBlobBaseUrl = 'https://happinovel2021.blob.core.windows.net/bookcover'; %>
                                                           <% const fullImageUrl = `${azureBlobBaseUrl}/${book.coverImg}`; %>
-                                                          <div class="thumb-item-flow col-5 col-md-2 col-lg-3 type-original" id="frame<%= index + 1 %>">
+                                                          <div class="thumb-item-flow col-5 col-md-2 col-lg-3 type-original" id="frame<%= index + 1 %>"  data-chap_id="<%=BookMId[index]._id%>">
                                                             <div class="thumb-wrapper ln-tooltip">
                                                               <a href="/book_info/<%= book.bookID %>" title="<%= book.title %>">
                                                                 <div class="a6-ratio">
@@ -192,7 +195,7 @@
                                                                 <div class="thumb_attr chapter-title" title="NoneC">
                                                                   <% const userHistory = BookMId.find(history => history.bookID === book.bookID); %>
                                                                   <% if (userHistory) { %>
-                                                                    <a href="/book_info/<%= book.bookID %>" title="<%= getChapterName(userHistory.chapID, userHistory.volID, book.bookID)  %>">
+                                                                    <a href="/book_info/<%= book.bookID %>" title="<%= getChapterName(userHistory.chapID, userHistory.volID, book.bookID)  %>" >
                                                                       
                                                                       <%= getChapterName(userHistory.chapID, userHistory.volID, book.bookID)  %>
                                                                     </a>
@@ -210,6 +213,7 @@
                                                               <a href="/book_info/<%= book.bookID %>" style="color: rgb(0, 0, 0);" title="<%= book.title %>"><%= truncateTitle(book.title, 30) %></a>
                                                             </div>
                                                           </div>
+                                                          <% } %>
                                                         <% }) %>
                                                         
                                                       </main>
@@ -246,36 +250,36 @@
       </footer>
       <script>
             // Function to delete the frame and rearrange remaining frames
-            function deleteFrame(frameId) {
-                  // Get the frame element by its ID
-                  var frame = document.getElementById(frameId);
-                  if (frame) {
-                        frame.remove();
-                  }
-            }
+            async function deleteFrame(frameId) {
+  // Get the frame element by its ID
+  var frame = document.getElementById(frameId);
+  const chap_id = frame.getAttribute('data-chap_id');
+  console.log(chap_id);
+  try {
+    const res = await fetch(`/readinghistory/delete`, {
+      method: 'DELETE', // Use DELETE method here
+      body: JSON.stringify({ chap_id }),
+      headers: { 'Content-Type': 'application/json' }
+    });
+    const data = await res.json();
+    console.log(data);
+  } catch (err) {
+    console.log(err);
+  }
+  if (frame) {
+    frame.remove();
+  }
+}
 
-            function deleteAllFrames() {
+            function deleteAllFrames(n) {
+                  console.log(n);
+                  for(let i=1;i<=n;i++){
                   // Get all frame elements with class "frame"
-                  frameId = 'frame1';
+                  frameId = 'frame'+i;
+                  console.log(frameId);
                   deleteFrame(frameId)
-                  frameId = 'frame2';
-                  deleteFrame(frameId)
-                  frameId = 'frame3';
-                  deleteFrame(frameId)
-                  frameId = 'frame4';
-                  deleteFrame(frameId)
-                  frameId = 'frame5';
-                  deleteFrame(frameId)
-                  frameId = 'frame6';
-                  deleteFrame(frameId)
-                  frameId = 'frame7';
-                  deleteFrame(frameId)
-                  frameId = 'frame8';
-                  deleteFrame(frameId)
-                  frameId = 'frame9';
-                  deleteFrame(frameId)
-                  frameId = 'frame10';
-                  deleteFrame(frameId)
+                  
+                  }
             }
       </script>
       <script>

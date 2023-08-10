@@ -151,7 +151,7 @@
                                     <!-- Thông báo có chương mới -->
                                     <% for (const notify of notifyData) { %>
                                     <tr class="thong-bao-chuong-moi ">
-                                        <% const azureBlobBaseUrl = 'https://happinovel.blob.core.windows.net/bookcover'; %>
+                                        <% const azureBlobBaseUrl = 'https://happinovel2021.blob.core.windows.net/bookcover'; %>
                                         <% const fullImageUrl = `${azureBlobBaseUrl}/${notify.bookIMG}`; %>
                                         <td class="image-cell">
                                             <img src="<%=fullImageUrl%>" alt="Small Image " width="60" height="80">
@@ -181,7 +181,7 @@
                                     <% } %>     
                                     <% for (const notify of notifyData2) { %>                               <!-- Dòng 2 -->                            
                                     <tr class="thong-bao-sach-chap-thuan ">
-                                        <% const azureBlobBaseUrl = 'https://happinovel.blob.core.windows.net/bookcover'; %>
+                                        <% const azureBlobBaseUrl = 'https://happinovel2021.blob.core.windows.net/bookcover'; %>
                                         <% const fullImageUrl = `${azureBlobBaseUrl}/${notify.bookIMG}`; %>
                                         <td class="image-cell">
                                             <img src="<%=fullImageUrl%>" alt="Small Image " width="60" height="80">
@@ -215,7 +215,7 @@
                                     <% } %> 
                                     <% for (const notify of notifyData3) { %>  
                                     <tr class="thong-bao-sach-tu-choi ">
-                                        <% const azureBlobBaseUrl = 'https://happinovel.blob.core.windows.net/bookcover/defaultBook.jpg'; %>
+                                        <% const azureBlobBaseUrl = 'https://happinovel2021.blob.core.windows.net/bookcover/defaultBook.jpg'; %>
                                         
                                         <td class="image-cell">
                                             <img src="<%=azureBlobBaseUrl%>" alt="Small Image " width="60"
@@ -284,7 +284,7 @@
                                     <% } %> 
                                     <% for (const notify of notifyData5) { %> 
                                     <tr class="thong-bao-sach-muon-dang ">
-                                        <% const azureBlobBaseUrl = 'https://happinovel.blob.core.windows.net/bookcover'; %>
+                                        <% const azureBlobBaseUrl = 'https://happinovel2021.blob.core.windows.net/bookcover'; %>
                                         <% const fullImageUrl = `${azureBlobBaseUrl}/${notify.bookIMG}`; %>
                                         <td class="image-cell">
                                             <img src="<%=fullImageUrl%>" alt="Small Image " width="60" height="80">
