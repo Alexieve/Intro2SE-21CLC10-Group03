@@ -58,7 +58,7 @@ exports.deleteHis = async (req, res) => {
 
   try {
     const { chap_id } = req.body; // Retrieve chap_id from request body
-
+    console.log(chap_id);
 
     await ReadingHistory.deleteOne({ _id: chap_id }); // Delete the reading history entry
     //    const read = await ReadingHistory.findOne({ _id: chap_id })
