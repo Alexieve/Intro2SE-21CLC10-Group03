@@ -258,7 +258,8 @@ exports.notification = async (req, res) => {
         const userName = userData ? userData.profileName : "User Not Found";
         
         const comment = await Comment.findOne({ commentID });
-        const commentData = await readCommentfile(comment.commentID);
+        
+        
        
         
         notifyData4.push({
@@ -292,7 +293,7 @@ exports.notification = async (req, res) => {
         });
       }
       }
-
+    
     res.render("notification", { notifyData, notifyData2,notifyData3,notifyData5,notifyData4 });
   } catch (err) {
     console.error(err.message);

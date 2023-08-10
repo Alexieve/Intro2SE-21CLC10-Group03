@@ -53,27 +53,39 @@ exports.bookmark = async (req, res) => {
     if (!user) {
       throw new Error("User not found");
     }
-
+    const bookMarkInfo= []
     // Helper function to get the full cover image path
-    const bookIDs = matchedBooks.map((book) => book.bookID);
-    const latestVolumeUrls = await Promise.all(
-      matchedBooks.map(async (book) => {
-        return await findLatestVolume(book.bookID, bookContainer);
-      })
-    );
-    const volumes = await Volume.find({});
-    const chapters = await Chapter.find({
-    });
+    const bookMarks = await BookMark.find({userID: user.userID})
+    const bookMarksID = bookMarks.map(BookMark => BookMark.bookID)
+    let chapName = []
+    let bookName = []
+    let volName = []
+    let bookmark = []
+    let bookIMG = []
+    let bookIDD = []
     
-    const latestChapterID = await findLatestChapter(latestVolumeUrls);
+    for (const book of bookMarksID){
+        const chapOfBookMark = await Chapter.find({bookID: book}).sort({'publishDate': 1}).limit(1);
+        
+        //chapName = chapOfBookMark.map(Chapter => Chapter.chapName);
+        chapName = chapOfBookMark[0].chapName;
+        const bookid = chapOfBookMark[0].bookID;
+        const bookH = await Book.findOne({bookID: bookid});
+        bookName = bookH.title;
+        const volid = chapOfBookMark[0].volID;
+        const vol = await Volume.findOne({volID : volid, bookID: bookid});
+        volName = vol.volName;        
+        bookIMG = bookH.coverImg;
+        bookIDD = bookH.bookID;
+        bookmark.push({chapName, volName, bookName,bookIMG,bookIDD})
+    }
+    
+    console.log(bookmark); 
+    
     res.render("bookmark", {
-      matchedBooks,
-      bookContainer,
-      latestVolumeUrls,
-      volumes,
-      latestChapterID,
-      chapters,
+      bookmark,
     });
+    console.log(bookMarkInfo.chapName);
   } catch (err) {
     console.error(err.message);
     res.status(500).send("Internal Server Error");

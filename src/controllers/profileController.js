@@ -150,7 +150,6 @@ function getVolumeName(bookDirectory, blobName) {
 const { profilecoverContainer } = require('../middleware/database');
 
 exports.updateCoverImage = async (req, res) => {
-  console.log('iiiii');
   try {
     
     const token = req.cookies.jwt;
@@ -182,3 +181,38 @@ exports.updateCoverImage = async (req, res) => {
     return res.status(500).send('Internal server error.');
   }
 };
+const { avatarContainer } = require('../middleware/database');
+exports.updateAvaImage = async (req, res) => {
+  
+  try {
+    
+    const token = req.cookies.jwt;
+    const decodedToken = jwt.verify(token, 'information of user'); // will use later
+    
+    const file = req.file; // Assuming you're using Multer middleware for file uploads
+    const trueUser = await Account.findById(decodedToken.id);
+    
+    
+    if (!file) {// Generate a unique image name
+      return res.status(400).send('No file uploaded.');
+    }
+    const coverImgName = `img${trueUser.userID}.jpg`
+    await Account.findOneAndUpdate(
+      {userID: trueUser.userID,},
+      {avatarURL: coverImgName,},
+    
+    )
+    const blockBlobClient = avatarContainer.getBlockBlobClient(coverImgName);
+
+    await blockBlobClient.uploadData(file.buffer, file.buffer.length);
+
+    // Update the user's cover image URL in the database
+    // You will need to implement this part based on your database schema
+
+    return res.status(200).send('Cover image uploaded successfully.');
+  } catch (error) {
+    console.error('Error uploading cover image:', error);
+    return res.status(500).send('Internal server error.');
+  }
+};
+
