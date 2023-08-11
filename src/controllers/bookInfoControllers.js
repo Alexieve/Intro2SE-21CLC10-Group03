@@ -4,10 +4,11 @@ const Volume = require('../models/Volume');
 const Chapter = require('../models/Chapter');
 const Genre = require('../models/Genre'); // Import the Genre model
 const blobServiceClient = require('../middleware/database');
+const mongoose = require('mongoose'); // Import the mongoose library
 const fs = require('fs').promises;
 const path = require('path'); // Import the 'path' module for file path operations
 
-const bookInfo_get = async (req, res) => {
+const renderBookInfoPage = async (req, res) => {
   try {
     const bookID = parseInt(req.params.id);
     const bookGenres = await BookGenre.find({ bookID });
@@ -63,6 +64,25 @@ const bookInfo_get = async (req, res) => {
           authorName: { $first: '$authorName' },
           volumes: { $push: '$volumes' }
         }
+      },
+      {
+        $lookup: {
+          from: 'chapters',
+          let: { volID: '$volumes.volID' },
+          pipeline: [
+            {
+              $match: {
+                $expr: { $eq: ['$volID', '$$volID'] }
+              }
+            },
+            {
+              $addFields: {
+                volName: '$$ROOT.volumes.volName' // Add the volume name to each chapter
+              }
+            }
+          ],
+          as: 'volumes.chapters'
+        }
       }
     ];
 
@@ -74,25 +94,7 @@ const bookInfo_get = async (req, res) => {
 
     const book = booksWithVolumesAndChapters[0];
 
-    // Construct the correct file paths for summary and note files
-    const summaryFilePath = path.join(__dirname, `https://happinovel.blob.core.windows.net/book/Book${bookID}/summary${bookID}.txt`);
-    const noteFilePath = path.join(__dirname, `https://happinovel.blob.core.windows.net/book/Book${bookID}/note${bookID}.txt`);
-
-    // Read the summary and note content files asynchronously
-    const [summaryContent, noteContent] = await Promise.all([
-      fs.readFile(summaryFilePath, 'utf-8').catch(err => 'Ko có tóm tắt'),
-      fs.readFile(noteFilePath, 'utf-8').catch(err => 'Ko có note'),
-    ]);
-
-    // Render the bookInfo view with all the data
-    res.render('bookInfo', {
-      book,
-      summaryContent,
-      noteContent,
-      bookGenres,
-      genres,
-      blobServiceClient,
-    });
+    res.render('bookInfo', { book, bookGenres, genres, blobServiceClient });
 
   } catch (err) {
     console.error(err);
@@ -100,6 +102,42 @@ const bookInfo_get = async (req, res) => {
   }
 };
 
+const renderReadingPage = async (req, res) => {
+  try {
+    const chapID = req.body.chapID;
+
+    // Find the chapter by its ID
+    const chapter = await Chapter.findById(chapID);
+
+    if (!chapter) {
+      return res.status(404).json({ message: 'Chapter not found' });
+    }
+
+    const bookData = await Book.find({ bookID: chapter.bookID });
+    const volData = await Volume.find({ bookID: chapter.bookID, volID: chapter.volID });
+
+    const path = 'https://happinovel2021.blob.core.windows.net/book/Book${bookData[0].bookID}/Volume${volData[0].volID}/${chapter.contentfile}';
+    const chapFile = bookContainer.getBlobClient(path);
+
+    try {
+      const resChap = await chapFile.download();
+      const chapContent = await streamToText(resChap.readableStreamBody);
+
+      res.render('readingPage', { chapter, book: bookData[0], volume: volData[0], content: chapContent });
+    } catch (error) {
+      console.error("Error retrieving blob content:", error);
+      res.status(500).send('Internal Server Error');
+    }
+
+  } catch (err) {
+    console.error(err);
+    res.status(500).send('Internal Server Error');
+  }
+};
+
+
+
 module.exports = {
-  bookInfo_get,
+  renderBookInfoPage,
+  renderReadingPage,
 };
