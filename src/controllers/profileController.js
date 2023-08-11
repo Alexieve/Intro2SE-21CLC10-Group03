@@ -216,3 +216,47 @@ exports.updateAvaImage = async (req, res) => {
   }
 };
 
+
+exports.chang_pass = async (req, res) => {
+  
+  try {
+    
+    const token = req.cookies.jwt;
+    const decodedToken = jwt.verify(token, 'information of user'); // will use later
+    const trueUser = await Account.findById(decodedToken.id);
+    const oldpass = req.body.inputValue;
+    const newpass = req.body.inputValue2;
+
+    const isPasswordValid = await bcrypt.compare(oldpass, trueUser.password);    
+    if(isPasswordValid){
+
+      if(newpass){
+
+        const hashedNewPassword = await bcrypt.hash(newpass, 10);
+
+        await Account.findByIdAndUpdate(trueUser._id, { password: hashedNewPassword });
+        return res.status(200).send('Password updated successfully.');
+      }
+    }
+  } catch (error) {
+    console.error('Error uploading cover image:', error);
+    return res.status(500).send('Internal server error.');
+  }
+};
+
+exports.bio = async (req, res) => {
+  
+  try {
+    
+    const token = req.cookies.jwt;
+    const decodedToken = jwt.verify(token, 'information of user'); // will use later
+    const trueUser = await Account.findById(decodedToken.id);
+    const newbio = req.body.cleanedContent
+    await Account.findByIdAndUpdate(trueUser._id, { bio: newbio });
+    console.log(newbio);
+  } catch (error) {
+    console.error('Error uploading cover image:', error);
+    return res.status(500).send('Internal server error.');
+  }
+};
+
