@@ -19,6 +19,8 @@ const notificationRoutes = require('./routes/notificationRoutes');
 const { requireAuth, checkUser} = require('./middleware/authMiddleware')
 const manageRoutes = require('./routes/manageRoutes')
 const manageUserRoutes = require('./routes/manageUserRoutes')
+const readingRoutes = require('./routes/readingPageRoutes')
+
 // Database connection
 mongoose.connect('mongodb+srv://admin:123@happinovel.4zvtpnj.mongodb.net/HappiNovel?retryWrites=true&w=majority', {
     useNewUrlParser: true,
@@ -51,6 +53,7 @@ app.get("/", (req, res) => res.render('home'));
 app.use('/profile',profileRoutes);
 app.get("/bookmark", requireAuth, (req, res) => res.render('bookmark'));
 app.use('/book_info', bookInfoRoutes); // Add the bookInfoRoutes
+app.use(readingRoutes);
 app.get("/notification", requireAuth, (req, res) => res.render('notification'));
 app.use(manageRoutes)
 app.use(manageUserRoutes)
