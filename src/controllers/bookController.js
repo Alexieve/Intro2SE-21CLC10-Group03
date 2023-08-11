@@ -43,8 +43,8 @@ const getNewestChapter = async () => {
     const newestChapters = await Chapter.aggregate([
       {
         $sort: {
-          bookID: 1, // Sort by bookID in ascending order (to group chapters of the same book together)
-          publishDate: -1 // Sort by publishDate in descending order (latest chapter first)
+          publishDate: -1,   // Sort by publishDate in descending order (latest chapter first)
+          bookID: 1          // Sort by bookID in ascending order (within chapters with the same publishDate)
         }
       },
       {
@@ -84,7 +84,6 @@ const getNewestBook = async() =>{
 const getReadingHistory = async (UserID) => {
   try {
     const readingHistory = await ReadingHistory.find({userID:UserID}).limit(3).exec();
-    console.log(readingHistory.length);
     return readingHistory;
   } catch (err) {
     console.error('Error fetching reading history:', err);
@@ -119,6 +118,7 @@ const getBooksAndReadingHistory = async (req, res) => {
     const newestChapter = await getNewestChapter()
     const finishedBooks = await getFinishedBooks()
     const books =  await Book.find()
+    const totalFollows = mostFollowedBooks.map(book => book.bookmarkCount)
     const bookHashMap = {};
     const bookCoverURL = {};
     books.forEach((book) => {
@@ -135,7 +135,7 @@ const getBooksAndReadingHistory = async (req, res) => {
         readingHistory = await getReadingHistory(user.userID); // Fetch reading history data if the user is logged in
       }
     }
-    res.render('home', { mostViewBooks,readingHistory,bookHashMap, newestBooks,mostFollowedBooks, newestChapter, finishedBooks, bookCoverURL }); // Pass both books and readingHistory to the home.ejs template
+    res.render('home', { mostViewBooks,readingHistory,bookHashMap, newestBooks,mostFollowedBooks, newestChapter, finishedBooks, bookCoverURL, totalFollows}); // Pass both books and readingHistory to the home.ejs template
   } catch (err) {
     console.error('Error fetching books and reading history:', err);
     res.status(500).send('Internal Server Error');

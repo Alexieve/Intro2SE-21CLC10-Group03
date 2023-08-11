@@ -20,7 +20,7 @@
     <link rel="stylesheet" href="/css/avtDropDown.css" type="text/css"/>
     <title>HappiNovel</title>
 </head>
-<body style = "height: 2600px;background-color:whitesmoke">
+<body style = "height: 3000px;background-color:whitesmoke">
     <%- include("./partials/navigation") -%>
     <%- include("./partials/coverImg") -%>
     <!-- Nổi bật -->
@@ -29,9 +29,11 @@
             <div class="col-12">
                 <div class="container">
                     <header class="title">
-                        <span class="container-view">
-                            <i class="fas fa-trophy" style = "padding-left: 15px; color: #f0bc00;"></i> Nổi bật
-                        </span>
+                      <span class="container-view">
+                          <span class = "sts-bold">
+                              <i class="fas fa-trophy" style = "padding-left: 0px; color: #f0bc00"></i> Nổi bật
+                          </span>
+                    </span>
                     </header>
                 </div>
                 <div class ="row">
@@ -41,9 +43,9 @@
                                 <!-- Indicators/dots -->
                                 <ol class="carousel-indicators">
                                   <% for (let i = 0; i < 3; i++) { %>
-                                    <button type="button" data-bs-target="#carousel1" data-bs-slide-to=<%= i %> <% if (i === 0) { %>class="active" style = "background-color:black""<% } %>></button>
+                                    <button type="button" data-bs-target="#carousel1" data-bs-slide-to="<%= i %>" class="<%= i === 0 ? 'active' : '' %>" style="background-color: black %>"></button>
                                   <% } %>
-                                </ol>
+                                </ol>                                   
                                 <!-- The slideshow/carousel -->
                                 <div class="carousel-inner">
                                   <% for (let i = 0; i < 3; i++) { %>
@@ -55,7 +57,7 @@
                                             <div class="card" style="height: 250px; width: 200px;">
                                                 <img class="card-img-top" src="<%= bookCoverURL[mostViewBooks[j].bookID] %>" alt="Book Cover">
                                                 <div class="card-img-overlay">
-                                                <div class="card-img-overlay d-flex align-items-end justify-content-center">
+                                                <div class="card-img-overlay d-flex align-items-end justify-content-center" style = " bottom: 0; background: linear-gradient(180deg,transparent 0,rgba(0,0,0,.8) 150%,rgba(0,0,0,.8))">
                                                   <div class="card-title" style="margin-bottom: -5px; text-align: center">
                                                     <a href="<%= mostViewBooks[j].link %>" class="hover-effect" style="text-decoration: none; font-weight: bolder; color: rgb(255, 255, 255)">
                                                       <span class="hover-effect"><%= mostViewBooks[j].title %></span>
@@ -114,7 +116,7 @@
         </div>
     </div>
     <!-- Sáng tác mới nhất -->
-    <div class = "container" style = "margin-top: 50px;">
+    <div class = "container" style = "margin-top: 10px;">
         <div class = "row">
             <div class="col-12">
                 <div class="container">
@@ -141,7 +143,7 @@
                                         <div class="card" style="height: 250px; width: 200px;">
                                             <img class="card-img-top" src="<%=bookCoverURL[newestBooks[j].bookID]%>" alt="Book Cover">
                                             <div class="card-img-overlay">
-                                                <div class="card-img-overlay d-flex align-items-end justify-content-center">
+                                                <div class="card-img-overlay d-flex align-items-end justify-content-center" style = " bottom: 0; background: linear-gradient(180deg,transparent 0,rgba(0,0,0,.8) 150%,rgba(0,0,0,.8))">
                                                     <div class="card-title" style="margin-bottom: -5px; text-align: center">
                                                         <a href="<%= newestBooks[j].link %>" class="hover-effect" style="text-decoration: none; font-weight: bolder; color: rgb(255, 255, 255)">
                                                             <span class="hover-effect"><%= newestBooks[j].title %></span>
@@ -184,7 +186,8 @@
                                       <div class="col-4" style="margin-left: 65px; margin-top: 12px">
                                         <a href="https://www.youtube.com/watch?v=tSBWmxwT8So" class="hover-effect" style="text-decoration: none;font-weight:bolder;font-size:10px; color:black">
                                             <span class="hover-effect"><%= bookHashMap[mostFollowedBooks[i].bookID].title %></span>
-                                        </a>  
+                                        </a>
+                                        <div class = "row" style = "font-size:10px; color:black;margin-left: 0px; margin-top:5px" ><%= totalFollows[i] %> theo dõi</div>
                                       </div>                                
                                     </div>
                                   <% } %>
@@ -225,7 +228,7 @@
                                             <div class="card" style="height: 250px; width: 200px;">
                                               <img class="card-img-top" src="<%=bookCoverURL[newestChapter[j].bookID] %>" style="height: 250px; width: 200px" alt="Book Cover">
                                               <div class="card-img-overlay">
-                                                <div class="card-img-overlay d-flex align-items-end justify-content-center">
+                                                <div class="card-img-overlay d-flex align-items-end justify-content-center" style = " bottom: 0; background: linear-gradient(180deg,transparent 0,rgba(0,0,0,.8) 150%,rgba(0,0,0,.8))">
                                                   <div class="card-title" style="margin-bottom: -5px; text-align: center">
                                                     <a href="<%= bookHashMap[newestChapter[j].bookID].link %>" class="hover-effect" style="text-decoration: none; font-weight: bolder; color: rgb(255, 255, 255)">
                                                       <span class="hover-effect"><%= bookHashMap[newestChapter[j].bookID].title %></span>
@@ -244,7 +247,7 @@
                                       </div>
                                     <% } %>
                                   </div>
-                                  
+                                </div> 
                             </div>
                           </div>
                         </div>
@@ -254,7 +257,7 @@
         </div>
     </div>
     <!-- Truyện đã hoàn thành -->
-    <div class = "container" style = "margin-top: 100px;">
+    <div class = "container" style = "margin-top: 10px;">
         <div class = "row">
             <div class="col-12">
                 <div class="container">
@@ -270,7 +273,7 @@
                 <div class="row">
                   <div class="col-9">
                     <div class="container" style="margin-bottom: 10px">
-                      <div id="demo" class="carousel slide" data-bs-ride="carousel">
+                      <div id="carousel2" class="carousel slide" data-bs-ride="carousel">
                         <!-- The slideshow/carousel -->
                         <div class="carousel-inner">
                           <% const numSlides = Math.ceil(finishedBooks.length / 4); %>
@@ -292,7 +295,7 @@
                                       <div class="card" style="height: 250px; width: 200px;">
                                         <img class="card-img-top" src="<%= bookCoverURL[booksInSlide[j].bookID] %>" alt="Book Cover">
                                         <div class="card-img-overlay">
-                                          <div class="card-img-overlay d-flex align-items-end justify-content-center">
+                                          <div class="card-img-overlay d-flex align-items-end justify-content-center" style = " bottom: 0; background: linear-gradient(180deg,transparent 0,rgba(0,0,0,.8) 150%,rgba(0,0,0,.8))">
                                             <div class="card-title" style="margin-bottom: -5px; text-align: center">
                                               <a href="<%= booksInSlide[j].link %>" class="hover-effect" style="text-decoration: none; font-weight: bolder; color: rgb(255, 255, 255)">
                                                 <span class="hover-effect"><%= booksInSlide[j].title %></span>
@@ -311,23 +314,23 @@
                 
                         <!-- Indicators/dots -->
                         <% if (numSlides > 1) { %>
-                          <ol class="carousel-indicators">
-                            <% for (let i = 0; i < numSlides; i++) { %>
-                              <button type="button" data-bs-target="#demo" data-bs-slide-to=<%= i %> <% if (i === 0) { %>class="active" style="background-color: black"<% } %>></button>
-                            <% } %>
-                          </ol>
+                          <div class="carousel-indicators">
+                            <ol>
+                              <% for (let i = 0; i < numSlides; i++) { %>
+                                <button type="button" data-bs-target="#carousel2" data-bs-slide-to="<%= i %>" class="<%= i === 0 ? 'active' : '' %>" style="background-color: black %>"></button>
+                              <% } %>
+                            </ol>
+                          </div>
                         <% } %>
                       </div>
                     </div>
                   </div>
                 </div>                
-                
             </div>
         </div>
     </div>
-    <div class = "row" style = "margin-top: 50px;"></div>
-    <%- include("./partials/footer") -%>
-
+   <!-- Footer -->
+   <%- include("./partials/footer") -%>  
 </body>
 </html>
 
