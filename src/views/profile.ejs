@@ -192,11 +192,13 @@
                                                                                                             style="margin-bottom: 20px;font-size: 20px; margin-top: 20px; height: 50px">
 
                                                                                                 </div>
+                                                                                                <div class="passwordError" style="color: red;"></div>
+                                                                                                <div class="passwordNError" style="color: rgb(0, 255, 76);"></div>
                                                                                           </div>
                                                                                           <div class="modal-footer">
                                                                                                 <!-- Save changes button -->
                                                                                                 <button type="button" id="getValueButton"
-                                                                                                      class="btn btn-primary "data-bs-dismiss="modal">Lưu lại</button>
+                                                                                                      class="btn btn-primary ">Lưu lại</button>
                                                                                                 <button type="button"
                                                                                                       class="btn btn-secondary"
                                                                                                       data-bs-dismiss="modal">Hủy</button>
@@ -638,7 +640,8 @@
       const inputElement = document.getElementById('oldPasswordInput');
       const inputElement2 = document.getElementById('confirmPasswordInput');
       const getValueButton = document.getElementById('getValueButton');
-  
+      const passwordError = document.querySelector('.passwordError');
+      const passwordNError = document.querySelector('.passwordNError');
       // Add a click event listener to the button
       getValueButton.addEventListener('click',async () => {
         // Get the value from the input element
@@ -647,13 +650,29 @@
   
         // Display the value in the console (you can do whatever you want with it)
         console.log('Input Value:', inputValue);
+        passwordError.innerHTML = '';
+        passwordNError.innerHTML = '';
         try {
           const res = await fetch('/profile/password', {
             method: 'post',
             body: JSON.stringify({inputValue, inputValue2}),
             headers: {'Content-Type': 'application/json'}
           });
-          const data = await res.json()
+         if (res.status === 200) {
+            passwordNError.innerHTML = 'Đã đổi mật khẩu !'
+        // Reload the page after a short delay
+        setTimeout(() => {
+          location.reload();
+        }, 1000); // Reload after 2 seconds
+      } else if (res.status === 400) {
+            
+        const errorMessage = await res.text();
+        passwordError.innerHTML = 'Mật khẩu cũ sai !'
+      }
+           
+          
+          
+          
           
         }
         catch (err) {
