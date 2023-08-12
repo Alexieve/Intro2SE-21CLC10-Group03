@@ -14,7 +14,7 @@ const commentSchema = new mongoose.Schema ({
         type: Number,
         require: true,
     },
-    contentFile: {
+    contentfile: {
         type: String,
         required: [true, 'Vui lòng nhập bình luận!'],
     },
