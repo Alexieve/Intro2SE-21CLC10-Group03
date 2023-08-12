@@ -21,7 +21,7 @@
     <link rel="stylesheet" href="/css/avtDropDown.css" type="text/css"/>
     <title>HappiNovel</title>
 </head>
-<body style = "height: auto;background-color:whitesmoke">
+<body style = "height:auto;background-color:whitesmoke">
     <%- include("./partials/navigation") -%>
     <%- include("./partials/coverImg") -%>
     
@@ -39,7 +39,7 @@
         <form class="row g-3" action="/filter" method="get">
             <div class="col-12" style="margin-top: 10px">
                 <div class="input-group">
-                    <input type="search" class="form-control rounded" placeholder="Ít nhất 2 kí tự" aria-label="Search" aria-describedby="search-addon" name="filterSearch">
+                    <input type="search" class="form-control rounded" placeholder="Có thể bỏ trống" aria-label="Search" aria-describedby="search-addon" name="filterSearch">
                     <button type="submit" class="btn btn-outline-primary" style="color: white; background-color: green">Tìm kiếm</button>
                 </div>
             </div>
@@ -112,7 +112,7 @@
                                 <div class="card-img-overlay">
                                   <div class="card-img-overlay d-flex align-items-end justify-content-center" style = " bottom: 0; background: linear-gradient(180deg,transparent 0,rgba(0,0,0,.8) 150%,rgba(0,0,0,.8))">
                                     <div class="card-title" style="margin-bottom: -5px; text-align: center">
-                                      <a href="<%= booksInSlide[j].link %>" class="hover-effect" style="text-decoration: none; font-weight: bolder; color: rgb(255, 255, 255)">
+                                      <a href="/book/<%=[booksInSlide[j].bookID]%>" class="hover-effect" style="text-decoration: none; font-weight: bolder; color: rgb(255, 255, 255)">
                                         <span class="hover-effect"><%= booksInSlide[j].title %></span>
                                       </a>
                                     </div>
