@@ -50,7 +50,7 @@ app.use(notificationRoutes)
 app.get("/", (req, res) => res.render('home'));
 app.use('/profile',profileRoutes);
 app.get("/bookmark", requireAuth, (req, res) => res.render('bookmark'));
-app.use('/book_info', bookInfoRoutes); // Add the bookInfoRoutes
+app.use('/book', bookInfoRoutes); // Add the bookInfoRoutes
 app.get("/readinghistory", requireAuth, (req, res) => res.render('readinghistory'));
 app.get("/notification", requireAuth, (req, res) => res.render('notification'));
 app.use(manageRoutes)

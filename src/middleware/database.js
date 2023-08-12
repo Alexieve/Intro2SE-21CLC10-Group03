@@ -1,8 +1,10 @@
 const { BlobServiceClient, StorageSharedKeyCredential } = require('@azure/storage-blob');
 
+
+
 // Storage connection
-const storageAccount = 'happinovel';
-const accountKey = 'I/AGF1f1XZdujaEiRdZ6IO+/zrbUsqTojIj9ozR1cydxVVt3T0VctGDWr46Gb6ZWrnwtGvbdRv6/+ASt45Rmew==';
+const storageAccount = 'happinovel2021';
+const accountKey = 'HgAgETD+yESSmViHECBYSTrT47erBuEOLvpIR9VvqBLGgLM3kwS5s4LkEFA4Sdoo3coeFLEHUzP4+AStK3hMrw==';
 const sharedKeyCredential = new StorageSharedKeyCredential(storageAccount, accountKey);
 const blobServiceClient = new BlobServiceClient(
   `https://${storageAccount}.blob.core.windows.net`, sharedKeyCredential
