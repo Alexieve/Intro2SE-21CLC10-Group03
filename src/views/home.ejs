@@ -20,7 +20,7 @@
     <link rel="stylesheet" href="/css/avtDropDown.css" type="text/css"/>
     <title>HappiNovel</title>
 </head>
-<body style = "height: 3000px;background-color:whitesmoke">
+<body style = "height:auto;background-color:whitesmoke">
     <%- include("./partials/navigation") -%>
     <%- include("./partials/coverImg") -%>
     <!-- Nổi bật -->
@@ -89,7 +89,7 @@
                                 <div class="row">
                                   <div class="col-1" style="margin-top: 20px;">
                                     <div class="card" style="height: 100px; width: 80px;">
-                                      <img class="card-img-top" src="<%=bookCoverURL[readingHistory[i].bookID]%>" alt="Card image">
+                                      <img class="card-img-top" style="height: 100px; width: 80px;" src="<%=bookCoverURL[readingHistory[i].bookID]%>" alt="Card image">
                                       <div class="card-img-overlay">
                                         <div class="card-img-overlay d-flex align-items-end">
                                           <div class="card-title" style="margin-bottom: -5px; text-align: center">
@@ -330,6 +330,7 @@
         </div>
     </div>
    <!-- Footer -->
+   <div class = "row" style = "margin-top:70px"></div>
    <%- include("./partials/footer") -%>  
 </body>
 </html>
