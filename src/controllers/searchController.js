@@ -56,21 +56,33 @@ const getBooksByGenres = async (selectedGenres) => {
       return await Book.find().exec();
     }
 
-    // Convert selectedGenres to an array of numbers if it's not an array
     const selectedGenreIDs = Array.isArray(selectedGenres) ? selectedGenres.map(Number) : [Number(selectedGenres)];
 
-    const booksWithSelectedGenres = await BookGenre.find({ genreID: { $in: selectedGenreIDs } }).exec();
-    const bookIDs = booksWithSelectedGenres.map(entry => entry.bookID);
+    // Find books that have all selected genres
+    const booksWithAllSelectedGenres = await BookGenre.aggregate([
+      {
+        $match: { genreID: { $in: selectedGenreIDs } }
+      },
+      {
+        $group: {
+          _id: "$bookID",
+          genres: { $addToSet: "$genreID" },
+          count: { $sum: 1 }
+        }
+      },
+      {
+        $match: { genres: { $size: selectedGenreIDs.length } }
+      },
+      {
+        $match: { count: selectedGenreIDs.length }
+      }
+    ]).exec();
+
+    const bookIDs = booksWithAllSelectedGenres.map(entry => entry._id);
 
     const books = await Book.find({ bookID: { $in: bookIDs } }).exec();
 
-    // Filter out books that do not have all selected genres
-    const filteredBooks = books.filter(book => {
-      const genresInBook = bookIDs.filter(id => book.bookID === id);
-      return selectedGenreIDs.every(id => genresInBook.includes(id));
-    });
-
-    return filteredBooks;
+    return books;
   } catch (err) {
     throw new Error("Error fetching books by genres: " + err.message);
   }
