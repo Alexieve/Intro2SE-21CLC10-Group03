@@ -13,14 +13,14 @@
                     <b><a class="nav-link" href="#">Thể loại</a></b>
                 </li>
                 <li class="nav-item rounded-3">
-                    <b><a class="nav-link" href="/upload">Sách của bạn</a></b>
+                    <b><a class="nav-link" href="/upload/book">Sách của bạn</a></b>
                 </li>
                 <li class="nav-item rounded-3">
-                    <b><a class="nav-link" href="/upload">Viết sách</a></b>
+                    <b><a class="nav-link" href="/upload/book">Viết sách</a></b>
                 </li>
             </ul>
-            <form class="d-flex w-auto" role="search">
-                <input class="form-control search-form me-4 " type="text" placeholder="Tìm kiếm..." aria-label="Search">
+            <form class="d-flex w-auto" action = "../filter" role="search" method = "get">
+                <input class="form-control search-form me-4 " type="text" placeholder="Tìm kiếm..." aria-label="Search" name="navSearch">
             </form>
             <ul class="navbar-nav">
                 <%- include("./avtDropDown") -%>

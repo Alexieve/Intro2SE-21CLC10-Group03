@@ -12,6 +12,7 @@ const { bookContainer } = require("../middleware/database");
 const Genre = require("../models/Genre");
 const bookgenres = require("../models/BookGenre");
 
+
 // Import the formatDate function from dateHelpers.js
 const formatDate = require("../public/js/dateHelpers");
 const formatStatus = require("../public/js/statusBook");
@@ -41,10 +42,10 @@ exports.profilePage = async (req, res) => {
         const book = await Book.findOne({ bookID }); // Assuming you have a 'Book' model
 
         if (book) {
-          if(book.status!=3){
+          
             // Book with the given bookID found, add it to the array
             Makedbook.push(book);
-        }
+        
           
         }
       } catch (err) {
@@ -56,9 +57,9 @@ exports.profilePage = async (req, res) => {
     }
     const genreNames = [];
     const NumComment = await Comment.find({ userID: user.userID });
-    for (const bookmark of BookMId) {
+    for (const bookmark of matchedBooks) {
       const bookID = bookmark.bookID;
-      
+
       
         const genreIDs = await bookgenres.findOne({ bookID });
         const genreID = genreIDs ? genreIDs.genreID : "Not found genre";
@@ -69,6 +70,8 @@ exports.profilePage = async (req, res) => {
         genreNames.push({ genreName });
       
     }
+
+  
 
     const formattedGenreNames = genreNames.map((item) => item.genreName);
 
@@ -143,3 +146,116 @@ function getVolumeName(bookDirectory, blobName) {
   }
   return null;
 }
+
+const { profilecoverContainer } = require('../middleware/database');
+
+exports.updateCoverImage = async (req, res) => {
+  try {
+    
+    const token = req.cookies.jwt;
+    const decodedToken = jwt.verify(token, 'information of user'); // will use later
+    
+    const file = req.file; // Assuming you're using Multer middleware for file uploads
+    const trueUser = await Account.findById(decodedToken.id);
+    
+    
+    if (!file) {// Generate a unique image name
+      return res.status(400).send('No file uploaded.');
+    }
+    const coverImgName = `pcover${trueUser.userID}.jpg`
+    await Account.findOneAndUpdate(
+      {userID: trueUser.userID,},
+      {coverURL: coverImgName,},
+    
+    )
+    const blockBlobClient = profilecoverContainer.getBlockBlobClient(coverImgName);
+
+    await blockBlobClient.uploadData(file.buffer, file.buffer.length);
+
+    // Update the user's cover image URL in the database
+    // You will need to implement this part based on your database schema
+
+    return res.status(200).send('Cover image uploaded successfully.');
+  } catch (error) {
+    console.error('Error uploading cover image:', error);
+    return res.status(500).send('Internal server error.');
+  }
+};
+const { avatarContainer } = require('../middleware/database');
+exports.updateAvaImage = async (req, res) => {
+  
+  try {
+    
+    const token = req.cookies.jwt;
+    const decodedToken = jwt.verify(token, 'information of user'); // will use later
+    
+    const file = req.file; // Assuming you're using Multer middleware for file uploads
+    const trueUser = await Account.findById(decodedToken.id);
+    
+    
+    if (!file) {// Generate a unique image name
+      return res.status(400).send('No file uploaded.');
+    }
+    const coverImgName = `img${trueUser.userID}.jpg`
+    await Account.findOneAndUpdate(
+      {userID: trueUser.userID,},
+      {avatarURL: coverImgName,},
+    
+    )
+    const blockBlobClient = avatarContainer.getBlockBlobClient(coverImgName);
+
+    await blockBlobClient.uploadData(file.buffer, file.buffer.length);
+
+    // Update the user's cover image URL in the database
+    // You will need to implement this part based on your database schema
+
+    return res.status(200).send('Cover image uploaded successfully.');
+  } catch (error) {
+    console.error('Error uploading cover image:', error);
+    return res.status(500).send('Internal server error.');
+  }
+};
+
+
+exports.chang_pass = async (req, res) => {
+  try {
+    const token = req.cookies.jwt;
+    const decodedToken = jwt.verify(token, 'information of user'); // will use later
+    const trueUser = await Account.findById(decodedToken.id);
+    const oldpass = req.body.inputValue;
+    const newpass = req.body.inputValue2;
+
+    const isPasswordValid = await bcrypt.compare(oldpass, trueUser.password);
+    
+    if (isPasswordValid) {
+      if (newpass) {
+        const hashedNewPassword = await bcrypt.hash(newpass, 10);
+        await Account.findByIdAndUpdate(trueUser._id, { password: hashedNewPassword });
+        return res.status(200).send('Password updated successfully.');
+      }
+    } else {
+      return res.status(400).send('Invalid old password.');
+    }
+  } catch (error) {
+    console.error('Error updating password:', error);
+    return res.status(500).send('Internal server error.');
+  }
+};
+
+
+exports.bio = async (req, res) => {
+  
+  try {
+    
+    const token = req.cookies.jwt;
+    const decodedToken = jwt.verify(token, 'information of user'); // will use later
+    const trueUser = await Account.findById(decodedToken.id);
+    const newbio = req.body.cleanedContent
+    await Account.findByIdAndUpdate(trueUser._id, { bio: newbio });
+
+  } catch (error) {
+    console.error('Error uploading cover image:', error);
+    return res.status(500).send('Internal server error.');
+  }
+};
+

@@ -30,7 +30,7 @@ exports.notification = async (req, res) => {
     const decodedToken = jwt.verify(token, "information of user");
     const user = await Account.findById(decodedToken.id);
     // Loop through the bookmarks and find the unique book IDs
-    console.log(user.userID);
+
     if (!user) {
       throw new Error("User not found");
     }
@@ -169,10 +169,16 @@ exports.notification = async (req, res) => {
 
     for (const notify of notifyIDs) {
       const notifyID = notify._id;
+      
+      const GeTnotify = await notifyofusers.findOne({userID:user.userID,notifyID:notifyID});
+      const IDnotify = GeTnotify.id;
+
+
       const { chapID, volID, bookID } = await readNotifyFile(notifyID);
       
       // Fetch chapName from the Chapter collection
       const chapterData = await Chapter.findOne({ bookID, volID, chapID });
+      const chap_id = chapterData._id;
       const chapName = chapterData
         ? chapterData.chapName
         : "Chap Name Not Found";
@@ -194,6 +200,8 @@ exports.notification = async (req, res) => {
 
     
       notifyData.push({
+        chap_id,
+        IDnotify,
         notifyID,
         chapID,
         volID,
@@ -210,7 +218,8 @@ exports.notification = async (req, res) => {
     for (const notify of notifyID2) {
       const notifyID = notify._id;
       const { bookID } = await readNotifyFile2n3(notifyID);
-        
+      const GeTnotify = await notifyofusers.findOne({userID:user.userID,notifyID:notifyID});
+      const IDnotify = GeTnotify.id;  
       // Fetch bookName from the Book collection
       const bookData = await Book.findOne({ bookID });
       const bookName = bookData ? bookData.title : "Book Name Not Found";
@@ -223,6 +232,7 @@ exports.notification = async (req, res) => {
       const genreName = genre ? genre.genreName : "Not found genre";
       
       notifyData2.push({
+        IDnotify,
         notifyID,
         bookID,
         bookName,
@@ -237,13 +247,14 @@ exports.notification = async (req, res) => {
         const  bookName  = await readNotifyFile3(notifyID);
   
         // Fetch bookName from the Book collection
-        
+        const GeTnotify = await notifyofusers.findOne({userID:user.userID,notifyID:notifyID});
+        const IDnotify = GeTnotify.id; 
      
         
         
         notifyData3.push({
           notifyID,
-          
+          IDnotify,
           bookName,
           
         });
@@ -252,16 +263,20 @@ exports.notification = async (req, res) => {
       for (const notify of notifyID4) {
         const notifyID = notify._id;
         const { userID,commentID } = await readNotifyFile4(notifyID);
-          
+        const GeTnotify = await notifyofusers.findOne({userID:user.userID,notifyID:notifyID});
+        const IDnotify = GeTnotify.id; 
         // Fetch bookName from the Book collection
         const userData = await Account.findOne({ userID });
         const userName = userData ? userData.profileName : "User Not Found";
         
         const comment = await Comment.findOne({ commentID });
-        const commentData = await readCommentfile(comment.commentID);
+    
+        const commentData = comment ? comment.contentfile : "Not found comment";
+
        
         
         notifyData4.push({
+          IDnotify,
           notifyID,
           userName,
           commentData,
@@ -271,7 +286,8 @@ exports.notification = async (req, res) => {
       for (const notify of notifyID5) {
         const notifyID = notify._id;
         const { bookID } = await readNotifyFile5(notifyID);
-          
+        const GeTnotify = await notifyofusers.findOne({userID:user.userID,notifyID:notifyID});
+        const IDnotify = GeTnotify.id;   
         // Fetch bookName from the Book collection
         const bookData = await Book.findOne({ bookID });
         const bookName = bookData ? bookData.title : "Book Name Not Found";
@@ -284,6 +300,7 @@ exports.notification = async (req, res) => {
         const genreName = genre ? genre.genreName : "Not found genre";
         
         notifyData5.push({
+          IDnotify,
           notifyID,
           bookID,
           bookName,
@@ -292,7 +309,7 @@ exports.notification = async (req, res) => {
         });
       }
       }
-
+    
     res.render("notification", { notifyData, notifyData2,notifyData3,notifyData5,notifyData4 });
   } catch (err) {
     console.error(err.message);
@@ -475,3 +492,20 @@ async function streamToString(readableStream) {
     readableStream.on("error", reject);
   });
 }
+
+exports.deleteNoti = async (req, res) => {
+
+  try {
+    const { chap_id } = req.body; // Retrieve chap_id from request body
+  
+
+    await notifyofusers.deleteOne({ _id: chap_id }); // Delete the reading history entry
+    //    const read = await ReadingHistory.findOne({ _id: chap_id })
+    // console.log(read);
+
+    return res.status(200).send("Notification entry deleted successfully.");
+  } catch (error) {
+    console.error("Error deletingNotification:", error);
+    return res.status(500).send("Internal server error.");
+  }
+};

@@ -63,7 +63,7 @@
         <div class="all-his">
 
             <div class="page-top-group">
-                <a href="">
+                <a href="/">
                     <!-- Này để chuyển qua trang chủ khi click vào bìa -->
                     <div class="index-background d-none d-lg-block">
                         <img src="./Image/BiaWeb.png">
@@ -85,38 +85,41 @@
                                 </header>
                                 <ul class="user-private-tabs ">
                                     <!-- Chèn link ở khu vực href -->
-                                    <li class="current navigator-board-font "><a href="/bookmark"><span class="none inline-l "><i
-                                                    class="fas fa-chevron-left"></i></span><span
+                                    <li class="current navigator-board-font "><a href="/bookmark"><span
+                                                class="none inline-l "><i class="fas fa-chevron-left"></i></span><span
                                                 class="float-right none-l "><i
                                                     class="fas fa-chevron-down "></i></span>Bookmark</a>
                                     </li>
                                     <!-- Chữ Current cho nơi nào đó đang ở -->
-                                    <li class=" navigator-board-font"><a href="/readinghistory"><span class="none inline-l"><i
-                                                    class="fas fa-chevron-left"></i></span><span
+                                    <li class=" navigator-board-font"><a href="/readinghistory"><span
+                                                class="none inline-l"><i class="fas fa-chevron-left"></i></span><span
                                                 class="float-right none-l"><i
                                                     class="fas fa-chevron-down"></i></span>Lịch
                                             sử</a></li>
-                                    <li class="navigator-board-font"><a href="/notification" style="color: #585858"><span
-                                                class="none inline-l"><i class="fas fa-chevron-left"></i></span><span
+                                    <li class="navigator-board-font"><a href="/notification"
+                                            style="color: #585858"><span class="none inline-l"><i
+                                                    class="fas fa-chevron-left"></i></span><span
                                                 class="float-right none-l"><i
                                                     class="fas fa-chevron-down"></i></span>Thông
                                             báo
                                             cá nhân</a></li>
                                     <!-- Nơi này của ADMIN -->
-                                    <% if(user.permission != 0){%>
-                                    <li class="navigator-board-font"><a href="" style="color: #585858"><span
-                                                class="none inline-l"><i class="fas fa-chevron-left"></i></span><span
-                                                class="float-right none-l"><i
-                                                    class="fas fa-chevron-down"></i></span>Quản
-                                            lý
-                                            User</a></li>
-                                    <li class="navigator-board-font"><a href="" style="color: #585858"><span
-                                                class="none inline-l"><i class="fas fa-chevron-left"></i></span><span
-                                                class="float-right none-l"><i
-                                                    class="fas fa-chevron-down"></i></span>Quản
-                                            lý
-                                            Comment</a></li>
-                                            <%}%>
+                                    <% if(user.permission !=0){%>
+                                        <li class="navigator-board-font"><a href="/manageUser" style="color: #585858"><span
+                                                    class="none inline-l"><i
+                                                        class="fas fa-chevron-left"></i></span><span
+                                                    class="float-right none-l"><i
+                                                        class="fas fa-chevron-down"></i></span>Quản
+                                                lý
+                                                User</a></li>
+                                        <li class="navigator-board-font"><a href="" style="color: #585858"><span
+                                                    class="none inline-l"><i
+                                                        class="fas fa-chevron-left"></i></span><span
+                                                    class="float-right none-l"><i
+                                                        class="fas fa-chevron-down"></i></span>Quản
+                                                lý
+                                                Comment</a></li>
+                                        <%}%>
                                 </ul>
                             </section>
                             <!-- End of Navigator board -->
@@ -147,123 +150,45 @@
                                                             <% } %>
                                                                 <% } %>
 
-                                                                    <% function getChapterName(latestChapterID,
-                                                                        volumeID, bookID) { %>
-
-                                                                        <% const chap=chapters.find(chap=>
-                                                                            chap.bookID === bookID && chap.volID ===
-                                                                            volumeID && chap.chapID ===
-                                                                            parseInt(latestChapterID, 10)
-                                                                            );
-
-                                                                            if (chap) {
-
-                                                                            return chap.chapName;
-                                                                            } else {
-                                                                            console.log('Chap not found');
-                                                                            return 'Chương mới nhất';
-                                                                            }
-                                                                            } %>
 
 
 
-                                                                            <% matchedBooks.forEach((book, index)=> { %>
-                                                                                <% const
-                                                                                    azureBlobBaseUrl='https://happinovel.blob.core.windows.net/bookcover'
-                                                                                    ; %>
-                                                                                    <% const
-                                                                                        fullImageUrl=`${azureBlobBaseUrl}/${book.coverImg}`;
-                                                                                        %>
-                                                                                        <tr class="">
-                                                                                            <td class="image-cell">
-                                                                                                <img src="<%= fullImageUrl %>"
-                                                                                                    alt="Small Image"
-                                                                                                    width="60"
-                                                                                                    height="80">
-                                                                                                <div
-                                                                                                    class="text-container">
-                                                                                                    <div class="text1">
-                                                                                                        <a href="/book_info/<%= book.bookID %>"
-                                                                                                            title="<%= book.title %>">
-                                                                                                            <%= truncateTitle(book.title,
-                                                                                                                30) %>
-                                                                                                        </a>
-                                                                                                    </div>
-                                                                                                    <div class="text2">
-                                                                                                        Truyện sáng tác
-                                                                                                    </div>
-                                                                                                </div>
-                                                                                            </td>
-                                                                                            <% const
-                                                                                                latestVolumeUrl=latestVolumeUrls[index];
-                                                                                                %>
-                                                                                                <% if (latestVolumeUrl)
-                                                                                                    { %>
-                                                                                                    <% const
-                                                                                                        urlObject=new
-                                                                                                        URL(latestVolumeUrl);
+
+                                                                    <% for(let i=0;i<bookmark.length;i++) {%>
+                                                                        <% const azureBlobBaseUrl='https://happinovel2021.blob.core.windows.net/bookcover' ; %>
+                                                                            <%fullImageUrl=`${azureBlobBaseUrl}/${bookmark[i].bookIMG}`;%>
+                                                                                <tr class="">
+                                                                                    <td class="image-cell">
+                                                                                        <img src="<%=fullImageUrl%>"
+                                                                                            alt="Small Image" width="60"
+                                                                                            height="80">
+                                                                                        <div class="text-container">
+                                                                                            <div class="text1">
+                                                                                                <a href="/book/<%=bookmark[i].bookIDD%>"
+                                                                                                    title="<%=bookmark[i].bookName%>">
+                                                                                                    <%= truncateTitle(bookmark[i].bookName,30)
                                                                                                         %>
-                                                                                                        <% const
-                                                                                                            folderName=urlObject.pathname.split('/').filter(Boolean).pop();
-                                                                                                            %>
-                                                                                                            <% const
-                                                                                                                volumeNumber=folderName.match(/\d+$/)[0];
-                                                                                                                %>
-                                                                                                                <% const
-                                                                                                                    volume=volumes.find(vol=>
-                                                                                                                    vol.bookID
-                                                                                                                    ===
-                                                                                                                    book.bookID
-                                                                                                                    &&
-                                                                                                                    vol.volID
-                                                                                                                    ===
-                                                                                                                    parseInt(volumeNumber,
-                                                                                                                    10));
-                                                                                                                    %>
-                                                                                                                    <td class="text-right"
-                                                                                                                        style="direction: rtl; ">
-                                                                                                                        
-                                                                                                                        <% if
-                                                                                                                            (volume)
-                                                                                                                            {
-                                                                                                                            %>
-                                                                                                                            
-                                                                                                                            <%= getChapterName(latestChapterID,
-                                                                                                                                volume.volID,
-                                                                                                                                book.bookID)
-                                                                                                                                %>
-                                                                                                                                <% }
-                                                                                                                                    %>
-                                                                                                                                    <p>
-                                                                                                                                        <% if
-                                                                                                                                            (volume)
-                                                                                                                                            {
-                                                                                                                                            %>
-                                                                                                                                            <a
-                                                                                                                                                href="/book_info/<%= book.bookID %>">
-                                                                                                                                                <%= volume.volName
-                                                                                                                                                    %>
-                                                                                                                                            </a>
-                                                                                                                                            <% } else
-                                                                                                                                                {
-                                                                                                                                                %>
-                                                                                                                                                Không
-                                                                                                                                                tìm
-                                                                                                                                                thấy
-                                                                                                                                                volume
-                                                                                                                                                mới
-                                                                                                                                                <% }
-                                                                                                                                                    %>
-                                                                                                                                    </p>
-                                                                                                                    </td>
-                                                                                                                    <% } else
-                                                                                                                        {
-                                                                                                                        %>
-                                                                                                                        <!-- Handle case when latestVolumeUrl is not available -->
-                                                                                                                        <% }
-                                                                                                                            %>
-                                                                                        </tr>
-                                                                                        <% }) %>
+                                                                                                </a>
+                                                                                            </div>
+                                                                                            <div class="text2">
+                                                                                                Truyện sáng tác
+                                                                                            </div>
+                                                                                        </div>
+                                                                                    </td>
+                                                                                    
+                                                                                    <td class="text-right"
+                                                                                        style="direction: rtl; ">
+                                                                                        <%= bookmark[i].volName %>ㅤ<br>                                                                                        
+                                                                                        <a
+                                                                                            href="/book/<%=bookmark[i].bookIDD%>/<%=bookmark[i].chap_id%>">
+                                                                                            <%= bookmark[i].chapName %>ㅤ
+                                                                                        </a>
+                                                                                        
+                                                                                        </p>
+                                                                                    </td>
+
+                                                                                </tr>
+                                                                                <% }%>
                                     </tbody>
 
 

@@ -32,11 +32,8 @@ exports.readinghistory = async (req, res) => {
         const book = await Book.findOne({ bookID }); // Assuming you have a 'Book' model
 
         if (book) {
-          
-          if(book.status!=3){
           // Book with the given bookID found, add it to the array
           matchedBooks.push(book);
-        }
         }
       } catch (err) {
         console.error("Error finding book:", err);
@@ -54,5 +51,22 @@ exports.readinghistory = async (req, res) => {
   } catch (err) {
     console.error(err.message);
     res.status(500).send("Internal Server Error");
+  }
+};
+
+exports.deleteHis = async (req, res) => {
+
+  try {
+    const { chap_id } = req.body; // Retrieve chap_id from request body
+    console.log(chap_id);
+
+    await ReadingHistory.deleteOne({ _id: chap_id }); // Delete the reading history entry
+    //    const read = await ReadingHistory.findOne({ _id: chap_id })
+    // console.log(read);
+
+    return res.status(200).send("Reading history entry deleted successfully.");
+  } catch (error) {
+    console.error("Error deleting reading history:", error);
+    return res.status(500).send("Internal server error.");
   }
 };
