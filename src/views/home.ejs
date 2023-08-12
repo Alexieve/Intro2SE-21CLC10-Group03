@@ -187,7 +187,12 @@
                                         <a href="/book/<%=mostFollowedBooks[i].bookID%>" class="hover-effect" style="text-decoration: none;font-weight:bolder;font-size:10px; color:black">
                                             <span class="hover-effect"><%= bookHashMap[mostFollowedBooks[i].bookID].title %></span>
                                         </a>
-                                        <div class = "row" style = "font-size:10px; color:black;margin-left: 0px; margin-top:5px" ><%= totalFollows[i] %> theo dõi</div>
+                                        <div class="row" style="font-size: 10px; margin-top: 5px;">
+                                          <span style="color: pink;"><%= totalFollows[i] %>
+                                            <span style="font-size: 10px; color: black;"> theo dõi</span>
+                                          </span>
+                                      </div>
+                                                                           
                                       </div>                                
                                     </div>
                                   <% } %>
