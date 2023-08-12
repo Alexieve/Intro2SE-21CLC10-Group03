@@ -68,7 +68,7 @@ const accountSchema = new mongoose.Schema ({
     },
     regdate: {
         type: Date,
-        default: Date(),
+        default: new Date(),
         required: true,
     },
     permission: {

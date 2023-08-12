@@ -9,6 +9,7 @@ const Comment = require('../models/Comment')
 const Rating = require('../models/Rating')
 
 const jwt = require('jsonwebtoken')
+const cheerio = require('cheerio');
 const {bookcoverContainer, bookContainer, commentContainer, ratingContainer, avatarContainer} = require('../middleware/database')
 
 async function streamToText(readableStream) {
@@ -22,6 +23,73 @@ async function streamToText(readableStream) {
     });
     readableStream.on('error', reject);
   });
+}
+
+async function countWordsInHtml(htmlString) {
+  const $ = cheerio.load(htmlString);
+  const textContent = $('body').text(); // Extract text content from the <body> element
+
+  // Split the text content into words using space as a delimiter
+  const words = textContent.split(/\s+/);
+
+  // Filter out any empty strings
+  const nonEmptyWords = words.filter(word => word.trim() !== '');
+
+  return nonEmptyWords.length;
+}
+
+module.exports.reading = async (req, res) => {
+  try{
+    chapObjID = req.params.chapID
+    bookID = Number(req.params.bookID)
+
+    let curChap = await Chapter.findById(chapObjID)
+    let curVol = await Volume.findOne({bookID: bookID, volID: curChap.volID})
+    let nextChap = ((await Chapter.findOne(
+      {bookID: bookID, volID: curChap.volID, chapID: curChap.chapID + 1}))
+      || (await Chapter.findOne(
+      {bookID: bookID, volID: curChap.volID + 1, chapID: 1})))
+      || ''
+    
+    let nextVol = ''
+    if (nextChap) nextVol = await Volume.findOne({bookID: bookID, volID: nextChap.volID})
+    
+    let prevChap = ''
+    let prevVol = ''
+    if (curChap.chapID != 1) {
+      prevChap = await Chapter.findOne({bookID: bookID, volID: curChap.volID, chapID: curChap.chapID - 1})
+      prevVol = curVol
+      // console.log(prevChap)
+    }
+    else if(curChap.chapID == 1 && curChap.volID != 1) {
+      prevVol = await Volume.findOne({bookID: bookID, volID: curChap.volID - 1})
+      prevChap = await Chapter.findOne({bookID: bookID, volID: curChap.volID - 1}).sort({chapID: -1}).lean().exec()
+      // console.log(prevChap)
+    }
+    // console.log(prevChap, curChap, nextChap)
+    // console.log(prevVol, curVol, nextVol)
+
+    const chapFile = bookContainer.getBlobClient(`Book${bookID}/Volume${curChap.volID}/${curChap.contentfile}`)
+
+    try {
+      const resChap = await chapFile.download();
+      const contentChap = await streamToText(resChap.readableStreamBody);
+      curChap.contentfile = contentChap
+    } catch (error) {
+      curChap.contentfile = ''
+    }
+
+    const wordCount = await countWordsInHtml(curChap.contentfile)
+    isPrevChap = true
+    isNextChap = true
+    if (prevChap == '') isPrevChap = false
+    if (nextChap == '') isNextChap = false
+
+    res.render('reading', {curVol, prevChap, curChap, nextChap, wordCount, isPrevChap, isNextChap})
+  } catch (err) {
+    console.error(err);
+    res.status(500).send('Internal Server Error');
+  }
 }
 
 module.exports.bookInfo_get = async (req, res) => {
@@ -166,7 +234,7 @@ module.exports.bookmark = async (req, res) => {
   try {
     objID = req.body.objID 
     // check = await BookMark.findById(objID)
-    console.log(req.body)
+    // console.log(req.body)
     if (objID != '') {
       await BookMark.findByIdAndDelete(objID)
       res.status(200).json('');

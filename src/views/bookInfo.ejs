@@ -27,7 +27,9 @@
 							<div class="row">
 								<div class="mb-2">
 									<% genresOfBook.forEach(genre => { %>
-										<button type="button" id="genreButton" class="btn btn-sm btn-secondary mb-1 rounded-5"><%= genre.genreName %></button>
+										<a href="/filter?genre=<%=genre.genreID%>" class="linkHref">
+											<button type="button" id="genreButton" class="btn btn-sm btn-secondary mb-1 rounded-5"><%= genre.genreName %></button>
+										</a>
 									<% }) %>
 								</div>
 							</div>
@@ -117,7 +119,13 @@
 								<span style="color: grey;"><b>Lần cuối</b></span>
 								<%const vol = book.volumes[book.volumes.length - 1]%>
 								<%const chap = vol.chapters[vol.chapters.length - 1]%>
-								<%const chapDate = new Date(chap.publishDate)%>
+								
+								
+								<%if (chap != undefined)  { %>
+									<%chapDate = new Date(chap.publishDate)%>
+								<%} else {%>
+									<%chapDate = new Date()%>
+								<%}%>
 								<%const curDate = new Date()%>
 								<%const timeDif = curDate - chapDate%>
 								<%const minutesAgo = Math.floor(timeDif / (60 * 1000));%>
@@ -209,9 +217,9 @@
 							<%const month = (date.getMonth() + 1).toString().padStart(2, '0');%>
 							<%const year = date.getFullYear().toString();%>
 							<% if (cntChap & 1) { %>
-								<a href="#" class="list-group-item list-group-item-action list-group-item-light" >Chapter <%=cntChap +": " + chap.chapName%><span class="float-end"><%=`${day}/${month}/${year}`%></span></a>
+								<a href="/book/<%=book.bookID%>/<%=chap._id%>" class="list-group-item list-group-item-action list-group-item-light" >Chapter <%=cntChap +": " + chap.chapName%><span class="float-end"><%=`${day}/${month}/${year}`%></span></a>
 							<% } else {%>
-								<a href="#" class="list-group-item list-group-item-action list-group-item-secondary" >Chapter <%=cntChap +": " + chap.chapName%><span class="float-end"><%=`${day}/${month}/${year}`%></span></a>
+								<a href="/book/<%=book.bookID%>/<%=chap._id%>" class="list-group-item list-group-item-action list-group-item-secondary" >Chapter <%=cntChap +": " + chap.chapName%><span class="float-end"><%=`${day}/${month}/${year}`%></span></a>
 							<%}%>
 						<%}%>
 					</div>
