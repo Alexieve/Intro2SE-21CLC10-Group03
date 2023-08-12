@@ -164,7 +164,7 @@
                                                                                             height="80">
                                                                                         <div class="text-container">
                                                                                             <div class="text1">
-                                                                                                <a href="/book_info/<%=bookmark[i].bookIDD%>"
+                                                                                                <a href="/book/<%=bookmark[i].bookIDD%>"
                                                                                                     title="<%=bookmark[i].bookName%>">
                                                                                                     <%= truncateTitle(bookmark[i].bookName,30)
                                                                                                         %>
@@ -178,11 +178,10 @@
                                                                                     
                                                                                     <td class="text-right"
                                                                                         style="direction: rtl; ">
-
-                                                                                        <%= bookmark[i].chapName %>ㅤ<br>
+                                                                                        <%= bookmark[i].volName %>ㅤ<br>                                                                                        
                                                                                         <a
-                                                                                            href="/book_info/<%=bookmark[i].bookIDD%>">
-                                                                                            <%= bookmark[i].volName %>ㅤ
+                                                                                            href="/book/<%=bookmark[i].bookIDD%>/<%=bookmark[i].chap_id%>">
+                                                                                            <%= bookmark[i].chapName %>ㅤ
                                                                                         </a>
                                                                                         
                                                                                         </p>

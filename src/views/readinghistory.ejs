@@ -162,6 +162,19 @@
                                                 return 'Chương đã đọc';
                                             }
                                             } %>
+
+                                            <% function getChapterID(latestChapterID, volumeID, bookID) { %>
+                                            <% const chap = chapters.find(chap =>
+                                                chap.bookID === bookID && chap.volID === volumeID && chap.chapID === parseInt(latestChapterID, 10)
+                                            );
+
+                                            if (chap) {
+                                                const decodedId = decodeURIComponent(chap._id); // Decode URL-encoded string
+                                                const cleanedId = decodedId.replace(/\s+/g, ''); // Remove all spaces                        
+                                                return cleanedId;
+                                            } 
+                                            } %>
+
                                             <% function getVolName(latestChapterID, volumeID, bookID) { %>
                                                 <% const vol = volumes.find(vol =>
                                                     vol.bookID === bookID && vol.volID === volumeID
@@ -184,7 +197,7 @@
                                                           <% const fullImageUrl = `${azureBlobBaseUrl}/${book.coverImg}`; %>
                                                           <div class="thumb-item-flow col-5 col-md-2 col-lg-3 type-original" id="frame<%= index + 1 %>"  data-chap_id="<%=BookMId[index]._id%>">
                                                             <div class="thumb-wrapper ln-tooltip">
-                                                              <a href="/book_info/<%= book.bookID %>" title="<%= book.title %>">
+                                                              <a href="/book/<%= book.bookID %>" title="<%= book.title %>">
                                                                 <div class="a6-ratio">
                                                                   <div class="content img-in-ratio lazyloaded" data-bg="">
                                                                     <img src="<%= fullImageUrl %>">
@@ -193,9 +206,10 @@
                                                               </a>
                                                               <div class="thumb-detail">
                                                                 <div class="thumb_attr chapter-title" title="NoneC">
-                                                                  <% const userHistory = BookMId.find(history => history.bookID === book.bookID); %>
+                                                                  <% const userHistory = BookMId.find(history => history.bookID === book.bookID); %>                                                                  
                                                                   <% if (userHistory) { %>
-                                                                    <a href="/book_info/<%= book.bookID %>" title="<%= getChapterName(userHistory.chapID, userHistory.volID, book.bookID)  %>" >
+                                                                        <% const chapid = getChapterID(userHistory.chapID, userHistory.volID, book.bookID) %>
+                                                                        <a href="/book/<%= book.bookID %>/<%= chapid %>"title="<%= getChapterName(userHistory.chapID, userHistory.volID, book.bookID)  %>" >
                                                                       
                                                                       <%= getChapterName(userHistory.chapID, userHistory.volID, book.bookID)  %>
                                                                     </a>
@@ -210,7 +224,7 @@
                                                               </div>
                                                             </div>
                                                             <div class="thumb_attr series-title">
-                                                              <a href="/book_info/<%= book.bookID %>" style="color: rgb(0, 0, 0);" title="<%= book.title %>"><%= truncateTitle(book.title, 30) %></a>
+                                                              <a href="/book/<%= book.bookID %>" style="color: rgb(0, 0, 0);" title="<%= book.title %>"><%= truncateTitle(book.title, 30) %></a>
                                                             </div>
                                                           </div>
                                                           <% } %>
