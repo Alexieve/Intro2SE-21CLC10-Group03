@@ -58,6 +58,7 @@ exports.bookmark = async (req, res) => {
     const bookMarks = await BookMark.find({userID: user.userID})
     const bookMarksID = bookMarks.map(BookMark => BookMark.bookID)
     let chapName = []
+    let chap_id = []
     let bookName = []
     let volName = []
     let bookmark = []
@@ -69,23 +70,26 @@ exports.bookmark = async (req, res) => {
         
         //chapName = chapOfBookMark.map(Chapter => Chapter.chapName);
         chapName = chapOfBookMark[0].chapName;
+        chap_id = chapOfBookMark[0]._id;
         const bookid = chapOfBookMark[0].bookID;
         const bookH = await Book.findOne({bookID: bookid});
+        if(bookH.status!=3){
         bookName = bookH.title;
         const volid = chapOfBookMark[0].volID;
         const vol = await Volume.findOne({volID : volid, bookID: bookid});
         volName = vol.volName;        
         bookIMG = bookH.coverImg;
         bookIDD = bookH.bookID;
-        bookmark.push({chapName, volName, bookName,bookIMG,bookIDD})
+        bookmark.push({chapName, volName, bookName, bookIMG, bookIDD, chap_id})
+        }
     }
     
-    console.log(bookmark); 
+
     
     res.render("bookmark", {
       bookmark,
     });
-    console.log(bookMarkInfo.chapName);
+
   } catch (err) {
     console.error(err.message);
     res.status(500).send("Internal Server Error");

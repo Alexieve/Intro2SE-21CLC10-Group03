@@ -178,6 +178,7 @@ exports.notification = async (req, res) => {
       
       // Fetch chapName from the Chapter collection
       const chapterData = await Chapter.findOne({ bookID, volID, chapID });
+      const chap_id = chapterData._id;
       const chapName = chapterData
         ? chapterData.chapName
         : "Chap Name Not Found";
@@ -199,6 +200,7 @@ exports.notification = async (req, res) => {
 
     
       notifyData.push({
+        chap_id,
         IDnotify,
         notifyID,
         chapID,
@@ -495,7 +497,7 @@ exports.deleteNoti = async (req, res) => {
 
   try {
     const { chap_id } = req.body; // Retrieve chap_id from request body
-    console.log(chap_id);
+  
 
     await notifyofusers.deleteOne({ _id: chap_id }); // Delete the reading history entry
     //    const read = await ReadingHistory.findOne({ _id: chap_id })

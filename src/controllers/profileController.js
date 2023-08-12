@@ -252,7 +252,7 @@ exports.bio = async (req, res) => {
     const trueUser = await Account.findById(decodedToken.id);
     const newbio = req.body.cleanedContent
     await Account.findByIdAndUpdate(trueUser._id, { bio: newbio });
-    console.log(newbio);
+
   } catch (error) {
     console.error('Error uploading cover image:', error);
     return res.status(500).send('Internal server error.');
