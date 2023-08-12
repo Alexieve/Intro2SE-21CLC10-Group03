@@ -5,9 +5,9 @@ const { bookcoverContainer } = require('../middleware/database');
 
 const getBooksByTitle = async (titleSearch) => {
   try {
-    let query = {};
+    let query = { status: { $ne: 3 }, isPending: { $ne: 1 } };
     if (titleSearch && titleSearch.trim() !== "") {
-      query = { title: { $regex: titleSearch, $options: "i" } };
+      query.title = { $regex: titleSearch, $options: "i" };
     }
     const books = await Book.find(query).exec();
     return books;
@@ -16,12 +16,11 @@ const getBooksByTitle = async (titleSearch) => {
   }
 };
 
-
 const getBooksByAuthor = async (authorSearch) => {
   try {
-    let query = {};
+    let query = { status: { $ne: 3 }, isPending: { $ne: 1 } };
     if (authorSearch && authorSearch.trim() !== "") {
-      query = { authorName: { $regex: authorSearch, $options: "i" } };
+      query.authorName = { $regex: authorSearch, $options: "i" };
     }
     const books = await Book.find(query).exec();
     return books;
@@ -30,18 +29,17 @@ const getBooksByAuthor = async (authorSearch) => {
   }
 };
 
-
 const getStatusBooks = async (req, res) => {
   const selectedStatus = req.query.status;
   try {
     if (!selectedStatus || isNaN(selectedStatus) || selectedStatus === '3') {
       // Return all books if no status is selected
-      const allBooks = await Book.find().exec();
+      const allBooks = await Book.find({ status: { $ne: 3 }, isPending: { $ne: 1 } }).exec();
       return allBooks;
     }
 
     const parsedStatus = parseInt(selectedStatus);
-    const statusBooks = await Book.find({ status: parsedStatus }).exec();
+    const statusBooks = await Book.find({ status: parsedStatus, isPending: { $ne: 1 } }).exec();
     return statusBooks;
   } catch (err) {
     console.error("Error fetching books by status: ", err);
@@ -49,11 +47,10 @@ const getStatusBooks = async (req, res) => {
   }
 };
 
-
 const getBooksByGenres = async (selectedGenres) => {
   try {
     if (!selectedGenres) {
-      return await Book.find().exec();
+      return await Book.find({ status: { $ne: 3 }, isPending: { $ne: 1 } }).exec();
     }
 
     const selectedGenreIDs = Array.isArray(selectedGenres) ? selectedGenres.map(Number) : [Number(selectedGenres)];
@@ -80,7 +77,7 @@ const getBooksByGenres = async (selectedGenres) => {
 
     const bookIDs = booksWithAllSelectedGenres.map(entry => entry._id);
 
-    const books = await Book.find({ bookID: { $in: bookIDs } }).exec();
+    const books = await Book.find({ bookID: { $in: bookIDs }, status: { $ne: 3 }, isPending: { $ne: 1 } }).exec();
 
     return books;
   } catch (err) {
@@ -96,9 +93,10 @@ const getSearchResult = async (req, res) => {
     //console.log(titleBooksNav);
     const titleBooksFilter = await getBooksByTitle(req.query.filterSearch);
     const authorBooks = await getBooksByAuthor(req.query.authorSearch);
-    const statusBooks = await getStatusBooks(req,res);
+    const statusBooks = await getStatusBooks(req, res);
     const genresBooks = await getBooksByGenres(req.query.genre);
-    const allBooks = await Book.find().exec();
+
+    const allBooks = await Book.find({ status: { $ne: 3 }, isPending: { $ne: 1 } }).exec();
     const intersectedBooks = allBooks.filter(book =>
       titleBooksNav.some(navBook => navBook._id.equals(book._id)) &&
       titleBooksFilter.some(filterBook => filterBook._id.equals(book._id)) &&
@@ -106,7 +104,6 @@ const getSearchResult = async (req, res) => {
       statusBooks.some(statusBook => statusBook._id.equals(book._id)) &&
       genresBooks.some(genresBook => genresBook._id.equals(book._id))
     );
-    
 
     const bookHashMap = {};
     const bookCoverURL = {};
