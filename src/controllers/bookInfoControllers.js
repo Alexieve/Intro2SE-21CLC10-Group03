@@ -1,105 +1,271 @@
-const Book = require('../models/Book');
-const BookGenre = require('../models/BookGenre');
-const Volume = require('../models/Volume');
-const Chapter = require('../models/Chapter');
-const Genre = require('../models/Genre'); // Import the Genre model
-const blobServiceClient = require('../middleware/database');
-const fs = require('fs').promises;
-const path = require('path'); // Import the 'path' module for file path operations
+const Account = require('../models/Account')
+const Book = require('../models/Book')
+const Genre = require('../models/Genre')
+const BookGenre = require('../models/BookGenre')
+const BookMark = require('../models/BookMark')
+const Volume = require('../models/Volume')
+const Chapter = require('../models/Chapter')
+const Comment = require('../models/Comment')
+const Rating = require('../models/Rating')
 
-const bookInfo_get = async (req, res) => {
-  try {
-    const bookID = parseInt(req.params.id);
-    const bookGenres = await BookGenre.find({ bookID });
-    const genres = await Genre.find();
+const jwt = require('jsonwebtoken')
+const {bookcoverContainer, bookContainer, commentContainer, ratingContainer, avatarContainer} = require('../middleware/database')
 
-    const pipeline = [
-      {
-        $match: {
-          bookID: bookID
-        }
-      },
-      {
-        $lookup: {
-          from: 'volumes',
-          localField: 'bookID',
-          foreignField: 'bookID',
-          as: 'volumes'
-        }
-      },
-      {
-        $unwind: {
-          path: '$volumes',
-          preserveNullAndEmptyArrays: true
-        }
-      },
-      {
-        $lookup: {
-          from: 'chapters',
-          let: { volID: '$volumes.volID' },
-          pipeline: [
-            {
-              $match: {
-                $expr: { $eq: ['$volID', '$$volID'] }
-              }
-            }
-          ],
-          as: 'volumes.chapters'
-        }
-      },
-      {
-        $group: {
-          _id: '$_id',
-          bookID: { $first: '$bookID' },
-          title: { $first: '$title' },
-          author: { $first: '$author' },
-          note: { $first: '$note' },
-          summary: { $first: '$summary' },
-          publishDate: { $first: '$publishDate' },
-          coverImg: { $first: '$coverImg' },
-          status: { $first: '$status' },
-          totalview: { $first: '$totalview' },
-          isPending: { $first: '$isPending' },
-          authorName: { $first: '$authorName' },
-          volumes: { $push: '$volumes' }
-        }
-      }
-    ];
-
-    const booksWithVolumesAndChapters = await Book.aggregate(pipeline);
-
-    if (!booksWithVolumesAndChapters.length) {
-      return res.status(404).render('404');
-    }
-
-    const book = booksWithVolumesAndChapters[0];
-
-    // Construct the correct file paths for summary and note files
-    const summaryFilePath = path.join(__dirname, `https://happinovel.blob.core.windows.net/book/Book${bookID}/summary${bookID}.txt`);
-    const noteFilePath = path.join(__dirname, `https://happinovel.blob.core.windows.net/book/Book${bookID}/note${bookID}.txt`);
-
-    // Read the summary and note content files asynchronously
-    const [summaryContent, noteContent] = await Promise.all([
-      fs.readFile(summaryFilePath, 'utf-8').catch(err => 'Ko có tóm tắt'),
-      fs.readFile(noteFilePath, 'utf-8').catch(err => 'Ko có note'),
-    ]);
-
-    // Render the bookInfo view with all the data
-    res.render('bookInfo', {
-      book,
-      summaryContent,
-      noteContent,
-      bookGenres,
-      genres,
-      blobServiceClient,
+async function streamToText(readableStream) {
+  return new Promise((resolve, reject) => {
+    const chunks = [];
+    readableStream.on('data', (data) => {
+      chunks.push(data.toString());
     });
+    readableStream.on('end', () => {
+      resolve(chunks.join(''));
+    });
+    readableStream.on('error', reject);
+  });
+}
 
+module.exports.bookInfo_get = async (req, res) => {
+  try {
+      const bookID = req.params.id;
+
+      let book = await Book.findOne({bookID: bookID,})
+      if (!book) {
+        return res.status(404).render('404');
+      }
+
+      book.volumes = await Volume.find({ bookID }).sort({volID: 1})
+
+      book.volumes.forEach(async element => {
+        element.chapters = await Chapter.find({bookID: bookID, volID: element.volID}).sort({chapID: 1});
+      })
+  
+      const bookGenres = await BookGenre.find({ bookID })
+      const genresID = bookGenres.map(BookGenre => BookGenre.genreID)
+      const genresOfBook = await Genre.find({genreID: {$in: genresID}})
+
+      let author = await Account.findOne({userID: book.author})
+
+      const summaryFile = bookContainer.getBlobClient(`Book${bookID}/${book.summary}`)
+      const noteFile = bookContainer.getBlobClient(`Book${bookID}/${book.note}`)
+
+      try {
+        const resSummary = await summaryFile.download();
+        const contentSummary = await streamToText(resSummary.readableStreamBody);
+        book.summary = contentSummary
+      } catch (error) {
+        book.summary = ''
+      }
+
+      try {
+        const resNote = await noteFile.download();
+        const contentNote = await streamToText(resNote.readableStreamBody);
+        book.note = contentNote
+      } catch (error) {
+        book.note = ''
+      }
+
+      author.avatarURL = avatarContainer.getBlobClient(author.avatarURL).url
+      book.coverImg = bookcoverContainer.getBlobClient(book.coverImg).url
+
+      let comments = await Comment.find({bookID: bookID}).sort('publishDate')
+      let userIDOfComments = comments.map(Comment => Comment.userID)
+      let usersOfComment = await Account.find({ userID: { $in: userIDOfComments } }).select({
+        _id: 1,
+        userID: 1,
+        profileName: 1,
+        avatarURL: 1
+      });
+
+      usersOfComment.forEach(async element => {
+        element.avatarURL = avatarContainer.getBlobClient(element.avatarURL).url
+      })
+
+      const userMap = new Map();
+      usersOfComment.forEach(user => {
+        userMap.set(user.userID, user);
+      });
+
+      // Combine comments with user information
+      const commentsList = comments.map(comment => {
+        const user = userMap.get(comment.userID);
+        const { _id, ...commentWithoutId } = comment._doc;
+      
+        return {
+          _id,
+          ...commentWithoutId,
+          user: {
+            userID: user.userID,
+            profileName: user.profileName,
+            avatarURL: user.avatarURL
+          }
+        };
+      })
+
+      commentsList.sort((a, b) => new Date(b.publishDate) - new Date(a.publishDate));
+
+      // console.log(commentsList)
+
+      const token = req.cookies.jwt;
+      let curUser
+      let checkbookmark
+      if (token) {
+        try {
+          const decodedToken = await new Promise((resolve, reject) => {
+              jwt.verify(token, 'information of user', (err, decoded) => {
+                  if (err) {
+                      reject(err);
+                  } else {
+                      resolve(decoded);
+                  }
+              });
+          });
+  
+          const findUser = await Account.findById(decodedToken.id)
+          curUser = findUser;
+          const userbookmark = await BookMark.findOne({bookID: bookID, userID: findUser.userID})
+          if (userbookmark) checkbookmark = userbookmark._id
+      } catch (error) {
+          console.error('Token verification error:', error);
+      }
+      }
+      else {
+        checkbookmark = ''
+        curUser = new Account
+        curUser.permission = 3
+      }
+
+      curUser.avatarURL = avatarContainer.getBlobClient(curUser.avatarURL).url
+
+
+      countbookmark = await BookMark.find({bookID: bookID}).countDocuments({})
+      await Book.updateOne({bookID: bookID}, {totalview: book.totalview + 1})
+
+      
+      let ratingCount = 0;
+      let ratingScore = 0;
+
+      ratingCount = await Rating.find({bookID: bookID}).countDocuments({})
+      if (ratingCount != 0) {
+        (await Rating.find({bookID: bookID})).forEach(rating => {
+          ratingScore += rating.score;
+        });
+        ratingScore /= ratingCount
+        ratingScore = ratingScore.toFixed(2)
+      }
+      // console.log(ratingScore)
+
+      res.render('bookInfo', { book, genresOfBook, author, commentsList, countbookmark, checkbookmark, curUser, ratingData: {ratingScore, ratingCount}}); // Pass genres to the view
   } catch (err) {
-    console.error(err);
-    res.status(500).send('Internal Server Error');
+      console.error(err);
+      res.status(500).send('Internal Server Error');
   }
 };
 
-module.exports = {
-  bookInfo_get,
-};
+
+module.exports.bookmark = async (req, res) => {
+  try {
+    objID = req.body.objID 
+    // check = await BookMark.findById(objID)
+    console.log(req.body)
+    if (objID != '') {
+      await BookMark.findByIdAndDelete(objID)
+      res.status(200).json('');
+    }
+    else {
+      curUserID = Number(req.body.curUserID)
+      const newBookMark = await BookMark.create({userID: curUserID, bookID: req.params.id})
+      // console.log(newBookMark)
+      res.status(200).json({objID: newBookMark._id});
+    }
+    // res.status(200).json('ok');
+  }
+  catch (err) {
+      console.log(err)
+      res.status(400).json({err})
+  }
+}
+
+module.exports.rating = async (req, res) => {
+  try {
+    
+    curUserID = Number(req.body.curUserID)
+    score = Number(req.body.score)
+    const newRating = await Rating.findOneAndUpdate(
+      {bookID: req.params.id, userID: curUserID},
+      {bookID: req.params.id, userID: curUserID, score: score},
+      {upsert: true}
+    )
+    // const newRating = await Rating.updateOne({bookID: req.params.id, userID: curUserID, score: score}, )
+    // console.log(newRating)
+    res.status(200).json('ok');
+  }
+  catch (err) {
+      console.log(err)
+      res.status(400).json({err})
+  }
+}
+
+module.exports.addComment = async (req, res) => {
+  try {
+    userID = Number(req.body.userID)
+    bookID = req.params.id
+    contentfile = req.body.commentContent
+    try {
+      const cmt = await Comment.create({bookID: bookID, userID: userID, contentfile: contentfile})
+      cmt.save()
+      res.status(200).json(cmt._id);
+    } catch (err) {
+      console.log(err)
+      res.status(400).json({err})
+    }
+    
+  }
+  catch (err) {
+      console.log(err)
+      res.status(400).json({err})
+  }
+}
+
+module.exports.deleteComment = async (req, res) => {
+  try {
+    cmtID = req.body.cmtID
+    try {
+      await Comment.findByIdAndDelete(cmtID)
+      res.status(200).json('ok');
+    } catch (err) {
+      console.log(error)
+      res.status(400).json({err})
+    }
+    
+  }
+  catch (err) {
+      console.log(err)
+      res.status(400).json({err})
+  }
+}
+
+module.exports.reportComment = async (req, res) => {
+  try {
+    cmtID = req.body.cmtID
+    await Comment.findOneAndUpdate({_id: cmtID}, {status: 1})
+    res.status(200).json('ok');
+  }
+  catch (err) {
+      console.log(err)
+      res.status(400).json({err})
+  }
+}
+
+module.exports.banUser = async (req, res) => {
+  try {
+    cmtID = req.body.cmtID
+    const cmt = await Comment.findOne({_id: cmtID})
+    await Account.findOneAndUpdate({userID: cmt.userID}, {status: 1})
+    res.status(200).json('ok');
+  }
+  catch (err) {
+      console.log(err)
+      res.status(400).json({err})
+  }
+}
+

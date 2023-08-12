@@ -12,6 +12,10 @@ const handleErrors = (err) => {
         dob: ''
     }
 
+    if (err.message === 'Tài khoản của bạn đã bị cấm') {
+        errors.password = 'Tài khoản của bạn đã bị cấm';
+    }
+
     if (err.message === 'Tên đăng nhập hoặc mật khẩu không chính xác') {
         errors.password = 'Tên đăng nhập hoặc mật khẩu không chính xác';
     }

@@ -53,7 +53,7 @@ app.use(searchRoutes)
 app.get("/", (req, res) => res.render('home'));
 app.use('/profile',profileRoutes);
 app.get("/bookmark", requireAuth, (req, res) => res.render('bookmark'));
-app.use('/book_info', bookInfoRoutes); // Add the bookInfoRoutes
+app.use('/book', bookInfoRoutes); // Add the bookInfoRoutes
 app.get("/filter",(req,res) => res.render('filter'));
 app.use(manageRoutes)
 app.use(manageUserRoutes)

@@ -1,5 +1,7 @@
 const { BlobServiceClient, StorageSharedKeyCredential } = require('@azure/storage-blob');
 
+
+
 // Storage connection
 const storageAccount = 'happinovel2021';
 const accountKey = 'HgAgETD+yESSmViHECBYSTrT47erBuEOLvpIR9VvqBLGgLM3kwS5s4LkEFA4Sdoo3coeFLEHUzP4+AStK3hMrw==';
