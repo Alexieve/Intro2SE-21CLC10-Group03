@@ -39,6 +39,10 @@ const handleErrors = (err) => {
     return errors;
 }
 
+async function generateUserID() {
+    return Account.find({}).select('userID').sort({'userID': -1}).limit(1) 
+}
+
 const maxAge = 3 * 24 * 60 * 60;
 const createToken = (id) => {
     return jwt.sign({id}, 'information of user', {
@@ -82,7 +86,9 @@ module.exports.register_post = async (req, res) => {
     const profileName = req.body.profileName
     const sdt = req.body.sdt
     const dob = req.body.dob
-    const userID = 100 + await Account.find().count();
+    maxID = await generateUserID()
+    console.log(maxID)
+    const userID = maxID[0].userID + 1
     
     try {
         const user = await Account.create({

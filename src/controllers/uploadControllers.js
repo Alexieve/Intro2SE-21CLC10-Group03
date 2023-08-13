@@ -20,81 +20,92 @@ module.exports.upload_get = (req, res) => {
                 // console.log(user)
                 let books = []
                 
-                books = await Book.aggregate([
-                  {
-                      $match: {author: user.userID, isPending: 0, status: { $ne: 3 }},
-                  },
-                  {
-                    $lookup: {
-                      from: 'volumes', // Replace 'volumes' with the name of the volumes collection
-                      localField: 'bookID',
-                      foreignField: 'bookID',
-                      as: 'volumes',
-                    },
-                  },
-                  {
-                    $unwind: {
-                      path: '$volumes',
-                      preserveNullAndEmptyArrays: true,
-                    } 
-                  },
-                  {
-                    $lookup: {
-                      from: 'chapters', // Replace 'chapters' with the name of the chapters collection
-                      let: { bookID: '$bookID', volID: '$volumes.volID' }, // Use 'bookID' and 'volID' as local fields
-                      pipeline: [
-                        {
-                          $match: {
-                            $expr: {
-                              $and: [
-                                { $eq: ['$bookID', '$$bookID'] },
-                                { $eq: ['$volID', '$$volID'] },
-                                { 
-                                  $or: [
-                                  { $eq: ['$isPending', 0] },
-                                  { $eq: ['$isPending', 2] }
-                                ]},
-                              ],
-                            },
-                          },
-                        },
-                        {
-                          $sort: { chapID: 1 }
-                        }
-                      ],
-                      as: 'volumes.chapters', // The matched chapters will be placed in the 'chapters' array within 'volumes'
-                    },
-                  },
-                  {
-                    $match: { 'volumes.isDeleted': 0 }, // Add this $match stage
-                  },
-                  {
-                    $group: {
-                      _id: '$_id', // Group back by the book's original _id
-                      bookID: { $first: '$bookID' }, // Preserve the book's fields
-                      title: { $first: '$title' },
-                      author: { $first: '$author' },
-                      note: { $first: '$note' },
-                      summary: { $first: '$summary' },
-                      coverImg: { $first: '$coverImg' },
-                      authorName: { $first: '$authorName' },
-                      publishDate: { $first: '$publishDate' },
-                      // Add other book fields here if needed
-                      volumes: { $push: '$volumes' }, // Group volumes back into an array
-                    },
-                  },
-                  {
-                    $sort: { bookID: 1 }
-                  }
-                ])
+                // books = await Book.aggregate([
+                //   {
+                //       $match: {author: user.userID, isPending: 0, status: { $ne: 3 }},
+                //   },
+                //   {
+                //     $lookup: {
+                //       from: 'volumes', // Replace 'volumes' with the name of the volumes collection
+                //       localField: 'bookID',
+                //       foreignField: 'bookID',
+                //       as: 'volumes',
+                //     },
+                //   },
+                //   {
+                //     $unwind: {
+                //       path: '$volumes',
+                //       preserveNullAndEmptyArrays: true,
+                //     } 
+                //   },
+                //   {
+                //     $lookup: {
+                //       from: 'chapters', // Replace 'chapters' with the name of the chapters collection
+                //       let: { bookID: '$bookID', volID: '$volumes.volID' }, // Use 'bookID' and 'volID' as local fields
+                //       pipeline: [
+                //         {
+                //           $match: {
+                //             $expr: {
+                //               $and: [
+                //                 { $eq: ['$bookID', '$$bookID'] },
+                //                 { $eq: ['$volID', '$$volID'] },
+                //                 { 
+                //                   $or: [
+                //                   { $eq: ['$isPending', 0] },
+                //                   { $eq: ['$isPending', 2] }
+                //                 ]},
+                //               ],
+                //             },
+                //           },
+                //         },
+                //         {
+                //           $sort: { chapID: 1 }
+                //         }
+                //       ],
+                //       as: 'volumes.chapters', // The matched chapters will be placed in the 'chapters' array within 'volumes'
+                //     },
+                //   },
+                //   {
+                //     $match: { 'volumes.isDeleted': 0 }, // Add this $match stage
+                //   },
+                //   {
+                //     $group: {
+                //       _id: '$_id', // Group back by the book's original _id
+                //       bookID: { $first: '$bookID' }, // Preserve the book's fields
+                //       title: { $first: '$title' },
+                //       author: { $first: '$author' },
+                //       note: { $first: '$note' },
+                //       summary: { $first: '$summary' },
+                //       coverImg: { $first: '$coverImg' },
+                //       authorName: { $first: '$authorName' },
+                //       publishDate: { $first: '$publishDate' },
+                //       // Add other book fields here if needed
+                //       volumes: { $push: '$volumes' }, // Group volumes back into an array
+                //     },
+                //   },
+                //   {
+                //     $sort: { bookID: 1 }
+                //   }
+                // ])
                 // .sort('publishDate');
-
+                const testBook = await Book.find({author: user.userID, isPending: 0, status: { $ne: 3 }}).sort({bookID: 1})
+                for (const demobook of testBook) {
+                  demobook.volumes = await Volume.find({ bookID: demobook.bookID, isDeleted: 0});
+                
+                  for (const demovol of demobook.volumes) {
+                    demovol.chapters = await Chapter.find({ bookID: demobook.bookID, volID: demovol.volID, $or: [
+                      { isPending: 0 },
+                      { isPending: 2 }
+                    ] }).sort({chapID: 1});
+                  }
+                }
+                console.log(testBook)
                 const genres = await Genre.find({}).sort('genreName');
                 // res.locals.genres = genres;
                 // console.log(books)
                 // const formPath = "partials/upload/uploadBook"
                 // res.sendFile(formPath)
-                res.render('upload', {books, genres})
+                res.render('upload', {books: testBook, genres})
             }
         })
     }
