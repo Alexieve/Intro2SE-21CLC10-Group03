@@ -235,12 +235,17 @@ module.exports.reviewBook_post = async (req, res) => {
     try {
       const resSummary = await summaryFile.download();
       const contentSummary = await streamToText(resSummary.readableStreamBody);
-      const resNote = await noteFile.download();
-      const contentNote = await streamToText(resNote.readableStreamBody);
       bookData.summary = contentSummary
-      bookData.note = contentNote
     } catch (error) {
       bookData.summary = ''
+      // console.error("Error retrieving blob content:", error);
+    }
+
+    try {
+      const resNote = await noteFile.download();
+      const contentNote = await streamToText(resNote.readableStreamBody);
+      bookData.note = contentNote
+    } catch (error) {
       bookData.note = ''
       // console.error("Error retrieving blob content:", error);
     }
@@ -458,11 +463,16 @@ module.exports.reviewChapter_post = async (req, res) => {
       const chapContent = await streamToText(resChap.readableStreamBody);
       chapData.contentfile = chapContent
 
+    } catch (error) {
+      chapData.contentfile = ''
+      // console.error("Error retrieving blob content:", error);
+    }
+
+    try {
       const resUpdate = await updateFile.download();
       const updateContent = await streamToText(resUpdate.readableStreamBody);
       chapData.updatefile = updateContent
     } catch (error) {
-      chapData.contentfile = ''
       chapData.updatefile = ''
       // console.error("Error retrieving blob content:", error);
     }
