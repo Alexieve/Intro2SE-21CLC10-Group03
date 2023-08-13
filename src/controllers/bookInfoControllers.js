@@ -11,6 +11,7 @@ const Rating = require('../models/Rating')
 const jwt = require('jsonwebtoken')
 const cheerio = require('cheerio');
 const {bookcoverContainer, bookContainer, commentContainer, ratingContainer, avatarContainer} = require('../middleware/database')
+const ReadingHistory = require('../models/ReadingHistory')
 
 async function streamToText(readableStream) {
   return new Promise((resolve, reject) => {
@@ -84,6 +85,38 @@ module.exports.reading = async (req, res) => {
     isNextChap = true
     if (prevChap == '') isPrevChap = false
     if (nextChap == '') isNextChap = false
+
+    const token = req.cookies.jwt;
+    let curUser
+    if (token) {
+      try {
+        const decodedToken = await new Promise((resolve, reject) => {
+            jwt.verify(token, 'information of user', (err, decoded) => {
+                if (err) {
+                    reject(err);
+                } else {
+                    resolve(decoded);
+                }
+            });
+        });
+
+        const findUser = await Account.findById(decodedToken.id)
+        const checkHistory = await ReadingHistory.findOne({userID: findUser.userID, bookID: curChap.bookID})
+        const deleted = await ReadingHistory.findOneAndDelete({userID: findUser.userID, bookID: curChap.bookID})
+        await ReadingHistory.create({userID: findUser.userID, bookID: curChap.bookID, volID: curChap.volID, chapID: curChap.chapID})
+        const cntHistory = await ReadingHistory.find({userID: findUser.userID}).countDocuments()
+        if (cntHistory == 11) {
+          await ReadingHistory.findOneAndDelete({userID: findUser.userID}, {sort: {_id: 1}})
+        }
+      } catch (error) {
+          console.error('Token verification error:', error);
+      }
+    }
+    else {
+      checkbookmark = ''
+      curUser = new Account
+      curUser.permission = 3
+    }
 
     res.render('reading', {curVol, prevChap, curChap, nextChap, wordCount, isPrevChap, isNextChap})
   } catch (err) {
