@@ -20,7 +20,7 @@ exports.readinghistory = async (req, res) => {
     }
     const decodedToken = jwt.verify(token, "information of user");
     const user = await Account.findById(decodedToken.id);
-    const BookMId = await ReadingHistory.find({ userID: user.userID });
+    const BookMId = await ReadingHistory.find({ userID: user.userID }).sort({ _id: -1 });
     const uniqueBookIds = new Set();
     // Loop through the bookmarks and find the unique book IDs
     for (const readHis of BookMId) {

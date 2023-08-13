@@ -59,7 +59,7 @@
                                                 <div class="card-img-overlay">
                                                 <div class="card-img-overlay d-flex align-items-end justify-content-center" style = " bottom: 0; background: linear-gradient(180deg,transparent 0,rgba(0,0,0,.8) 150%,rgba(0,0,0,.8))">
                                                   <div class="card-title" style="margin-bottom: -5px; text-align: center">
-                                                    <a href="<%= mostViewBooks[j].link %>" class="hover-effect" style="text-decoration: none; font-weight: bolder; color: rgb(255, 255, 255)">
+                                                    <a href="/book/<%=mostViewBooks[j].bookID %>" class="hover-effect" style="text-decoration: none; font-weight: bolder; color: rgb(255, 255, 255)">
                                                       <span class="hover-effect"><%= mostViewBooks[j].title %></span>
                                                     </a>
                                                   </div>
@@ -78,7 +78,7 @@
                     <div class="col-3">
                         <div class="container">
                           <header>
-                            <a href="https://www.youtube.com/watch?v=tSBWmxwT8So" style="text-decoration: none;">
+                            <a href="#" style="text-decoration: none;">
                               <span class="sts-bold">Truyện</span>
                               <span class="sts-empty">Vừa đọc</span>
                             </a>
@@ -93,14 +93,14 @@
                                       <div class="card-img-overlay">
                                         <div class="card-img-overlay d-flex align-items-end">
                                           <div class="card-title" style="margin-bottom: -5px; text-align: center">
-                                            <a href="https://www.youtube.com/watch?v=tSBWmxwT8So" style="text-decoration: none; color: white"></a>
+                                            <a href="/book/<%=readingHistory[i].bookID%>" style="text-decoration: none; color: white"></a>
                                           </div>
                                         </div>
                                       </div>
                                     </div>
                                   </div>
                                   <div class="col-4" style="margin-left: 65px; margin-top: 12px">
-                                    <a href="https://www.youtube.com/watch?v=tSBWmxwT8So" class="hover-effect" style="text-decoration: none;font-weight:bolder;font-size:10px; color:black">
+                                    <a href="/book/<%=readingHistory[i].bookID%>" class="hover-effect" style="text-decoration: none;font-weight:bolder;font-size:10px; color:black">
                                       <span class="hover-effect"><%= bookHashMap[readingHistory[i].bookID].title %></span>
                                     </a>  
                                   </div>                                
@@ -122,7 +122,7 @@
                 <div class="container">
                     <header class="title">
                         <span class="container-view">
-                            <a href = "https://www.youtube.com/watch?v=tSBWmxwT8So" style = "text-decoration: none; padding-left: 18px">
+                            <a href = "#" style = "text-decoration: none; padding-left: 18px">
                                 <span class = "sts-bold">Sáng tác</span>
                                 <span class = "sts-empty">Mới nhất</span>
                             </a>
@@ -145,7 +145,7 @@
                                             <div class="card-img-overlay">
                                                 <div class="card-img-overlay d-flex align-items-end justify-content-center" style = " bottom: 0; background: linear-gradient(180deg,transparent 0,rgba(0,0,0,.8) 150%,rgba(0,0,0,.8))">
                                                     <div class="card-title" style="margin-bottom: -5px; text-align: center">
-                                                        <a href="<%= newestBooks[j].link %>" class="hover-effect" style="text-decoration: none; font-weight: bolder; color: rgb(255, 255, 255)">
+                                                        <a href="/book/<%=newestBooks[j].bookID%>" class="hover-effect" style="text-decoration: none; font-weight: bolder; color: rgb(255, 255, 255)">
                                                             <span class="hover-effect"><%= newestBooks[j].title %></span>
                                                         </a>
                                                     </div>
@@ -162,7 +162,7 @@
                     <div class = "col-3">
                         <div class = "container">
                             <header>
-                                <a href = "https://www.youtube.com/watch?v=tSBWmxwT8So" style = "text-decoration: none;">
+                                <a href = "#" style = "text-decoration: none;">
                                     <span class = "sts-bold">Theo dõi</span>
                                     <span class = "sts-empty">Nhiều</span>
                                 </a>
@@ -177,17 +177,22 @@
                                           <div class="card-img-overlay">
                                             <div class="card-img-overlay d-flex align-items-end">
                                               <div class="card-title" style="margin-bottom: -5px; text-align: center">
-                                                <a href="https://www.youtube.com/watch?v=tSBWmxwT8So" style="text-decoration: none; color: white"></a>
+                                                <a href="/book/<%=mostFollowedBooks[i].bookID%>" style="text-decoration: none; color: white"></a>
                                               </div>
                                             </div>
                                           </div>
                                         </div>
                                       </div>
                                       <div class="col-4" style="margin-left: 65px; margin-top: 12px">
-                                        <a href="https://www.youtube.com/watch?v=tSBWmxwT8So" class="hover-effect" style="text-decoration: none;font-weight:bolder;font-size:10px; color:black">
+                                        <a href="/book/<%=mostFollowedBooks[i].bookID%>" class="hover-effect" style="text-decoration: none;font-weight:bolder;font-size:10px; color:black">
                                             <span class="hover-effect"><%= bookHashMap[mostFollowedBooks[i].bookID].title %></span>
                                         </a>
-                                        <div class = "row" style = "font-size:10px; color:black;margin-left: 0px; margin-top:5px" ><%= totalFollows[i] %> theo dõi</div>
+                                        <div class="row" style="font-size: 10px; margin-top: 5px;">
+                                          <span style="color: pink;font-weight:bolder"><%= totalFollows[i] %>
+                                            <span style="font-size: 10px; color: black;"> theo dõi</span>
+                                          </span>
+                                      </div>
+                                                                           
                                       </div>                                
                                     </div>
                                   <% } %>
@@ -207,7 +212,7 @@
                 <div class="container">
                     <header class="title">
                         <span class="container-view">
-                            <a href = "https://www.youtube.com/watch?v=tSBWmxwT8So" style = "text-decoration: none; padding-left: 18px">
+                            <a href = "#" style = "text-decoration: none; padding-left: 18px">
                                 <span class = "sts-bold">Chương</span>
                                 <span class = "sts-empty">Mới nhất</span>
                             </a>
@@ -230,7 +235,7 @@
                                               <div class="card-img-overlay">
                                                 <div class="card-img-overlay d-flex align-items-end justify-content-center" style = " bottom: 0; background: linear-gradient(180deg,transparent 0,rgba(0,0,0,.8) 150%,rgba(0,0,0,.8))">
                                                   <div class="card-title" style="margin-bottom: -5px; text-align: center">
-                                                    <a href="<%= bookHashMap[newestChapter[j].bookID].link %>" class="hover-effect" style="text-decoration: none; font-weight: bolder; color: rgb(255, 255, 255)">
+                                                    <a href="/book/<%=newestChapter[j].bookID %>" class="hover-effect" style="text-decoration: none; font-weight: bolder; color: rgb(255, 255, 255)">
                                                       <span class="hover-effect"><%= bookHashMap[newestChapter[j].bookID].title %></span>
                                                     </a>
                                                   </div>
@@ -263,7 +268,7 @@
                 <div class="container">
                     <header class="title">
                         <span class="container-view">
-                            <a href = "https://www.youtube.com/watch?v=tSBWmxwT8So" style = "text-decoration: none; padding-left: 18px">
+                            <a href = "#" style = "text-decoration: none; padding-left: 18px">
                                 <span class = "sts-bold">Truyện</span>
                                 <span class = "sts-empty">Đã hoàn thành</span>
                             </a>
@@ -297,7 +302,7 @@
                                         <div class="card-img-overlay">
                                           <div class="card-img-overlay d-flex align-items-end justify-content-center" style = " bottom: 0; background: linear-gradient(180deg,transparent 0,rgba(0,0,0,.8) 150%,rgba(0,0,0,.8))">
                                             <div class="card-title" style="margin-bottom: -5px; text-align: center">
-                                              <a href="<%= booksInSlide[j].link %>" class="hover-effect" style="text-decoration: none; font-weight: bolder; color: rgb(255, 255, 255)">
+                                              <a href="/book/<%=booksInSlide[j].bookID%>" class="hover-effect" style="text-decoration: none; font-weight: bolder; color: rgb(255, 255, 255)">
                                                 <span class="hover-effect"><%= booksInSlide[j].title %></span>
                                               </a>
                                             </div>

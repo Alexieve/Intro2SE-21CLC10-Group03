@@ -9,7 +9,7 @@ const jwt = require('jsonwebtoken');
 const getMostViewBooks = async (limit) => {
   try {
     const mostViewBooks = await Book.find({ status: { $ne: 3 }, isPending: { $ne: 1 } })
-      .sort({ views: -1 })
+      .sort({ totalview: -1 })
       .limit(limit)
       .exec();
     return mostViewBooks;
@@ -88,7 +88,8 @@ const getNewestChapters = async () => {
       {
         $match: {
           "book.status": { $ne: 3 }, // Filter out chapters with books having status equal to 3
-          "book.isPending": { $ne: 1 } // Filter out chapters with books having isPending equal to 3
+          "book.isPending": { $ne: 1 }, // Filter out chapters with books having isPending equal to 3
+          "isPending": { $ne: 1 } // Filter out chapters with isPending equal to 1
         }
       },
       {
