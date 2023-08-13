@@ -178,10 +178,12 @@
                                                                                     
                                                                                     <td class="text-right"
                                                                                         style="direction: rtl; ">
-                                                                                        <%= bookmark[i].volName %>ㅤ<br>                                                                                        
+                                                                                        <%= truncateTitle(bookmark[i].volName,40)
+                                                                                                        %>ㅤ<br>                                                                                        
                                                                                         <a
                                                                                             href="/book/<%=bookmark[i].bookIDD%>/<%=bookmark[i].chap_id%>">
-                                                                                            <%= bookmark[i].chapName %>ㅤ
+                                                                                            <%= truncateTitle(bookmark[i].chapName,25)
+                                                                                                        %>ㅤ
                                                                                         </a>
                                                                                         
                                                                                         </p>
