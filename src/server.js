@@ -19,10 +19,7 @@ const notificationRoutes = require('./routes/notificationRoutes');
 const { requireAuth, checkUser} = require('./middleware/authMiddleware')
 const manageRoutes = require('./routes/manageRoutes')
 const manageUserRoutes = require('./routes/manageUserRoutes')
-<<<<<<< HEAD
-=======
 const searchRoutes = require('./routes/searchRoutes')
->>>>>>> fcc6e07fac3727a8c1b627bc2af571319432f847
 
 // Database connection
 mongoose.connect('mongodb+srv://admin:123@happinovel.4zvtpnj.mongodb.net/HappiNovel?retryWrites=true&w=majority', {
