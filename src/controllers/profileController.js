@@ -20,9 +20,81 @@ const formatStatus = require("../public/js/statusBook");
 exports.profilePage = async (req, res) => {
   try {
     const token = req.cookies.jwt;
+
+    
     if (!token) {
-      throw new Error("No JWT token found");
+      const IDuser = req.params.id;    
+   
+    
+    const user = await Account.findOne({ userID: IDuser });
+    if (!user) {
+      return res.status(404).render('404');
     }
+    const Anotheruser = await Account.findOne({ userID: IDuser });
+    const trueUser = null;
+    
+    const matchedBooks = await Book.find({ author: user.userID, status: {$ne: 3} });
+    const BookMId = await BookMark.find({ userID: user.userID });
+    const Makedbook = [];
+
+    for (const bookmark of BookMId) {
+      try {
+        const bookID = bookmark.bookID;
+        const book = await Book.findOne({ bookID }); // Assuming you have a 'Book' model
+
+        if (book) {
+          
+            // Book with the given bookID found, add it to the array
+            Makedbook.push(book);
+        
+          
+        }
+      } catch (err) {
+        console.error("Error finding book:", err);
+      }
+    }
+    if (!user) {
+      throw new Error("User not found");
+    }
+    const genreNames = [];
+    const NumComment = await Comment.find({ userID: user.userID });
+    for (const bookmark of matchedBooks) {
+      const bookID = bookmark.bookID;
+
+      
+        const genreIDs = await bookgenres.findOne({ bookID });
+        const genreID = genreIDs ? genreIDs.genreID : "Not found genre";
+
+        const genre = await Genre.findOne({ genreID });
+        const genreName = genre ? genre.genreName : "Not found genre";
+
+        genreNames.push({ genreName });
+      
+    }
+
+  
+
+    const formattedGenreNames = genreNames.map((item) => item.genreName);
+
+    // Helper function to get the full cover image path
+    // Assuming you have a 'profile' view to render the profile page
+    const chaptersCount = await countChapters(matchedBooks);
+    res.render("profile", {
+      trueUser,
+      Anotheruser,
+      formatDate,
+      matchedBooks,
+      checkOldPassword,
+      chaptersCount,
+      formatStatus,
+      Makedbook,
+      NumComment,
+      formattedGenreNames,
+    });
+    }
+    
+    
+    else{
     
     const IDuser = req.params.id;
 
@@ -93,7 +165,7 @@ exports.profilePage = async (req, res) => {
       Makedbook,
       NumComment,
       formattedGenreNames,
-    });
+    });}
   } catch (err) {
     console.error(err.message);
     res.status(500).send("Internal Server Error");

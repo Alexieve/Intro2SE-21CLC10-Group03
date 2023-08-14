@@ -16,7 +16,7 @@ exports.readinghistory = async (req, res) => {
   try {
     const token = req.cookies.jwt;
     if (!token) {
-      throw new Error("No JWT token found");
+      return res.status(404).render('404');
     }
     const decodedToken = jwt.verify(token, "information of user");
     const user = await Account.findById(decodedToken.id);
