@@ -23,12 +23,16 @@ exports.profilePage = async (req, res) => {
     if (!token) {
       throw new Error("No JWT token found");
     }
+    
     const IDuser = req.params.id;
 
     trueIDuser = parseInt(IDuser);
     const decodedToken = jwt.verify(token, "information of user"); // will use later
     
     const user = await Account.findOne({ userID: IDuser });
+    if (!user) {
+      return res.status(404).render('404');
+    }
     const Anotheruser = await Account.findOne({ userID: IDuser });
     const trueUser = await Account.findById(decodedToken.id);
     
