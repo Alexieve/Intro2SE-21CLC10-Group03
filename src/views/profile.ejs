@@ -98,6 +98,7 @@
                                                             </div>
 
                                                       </div>
+                                                      <%if(trueUser){%>
                                                       <% if(Anotheruser.userID==trueUser.userID){%>
                                                             <button id="uploadButton"
                                                                   class="buttonn to-contact button-daden button-anh-bia">
@@ -109,6 +110,7 @@
                                                                         <span>Chỉnh sửa ảnh bìa</span>
                                                                   </label>
                                                             </button>
+                                                            <%}%>
                                                             <%}%>
 
                                                 </div>
@@ -127,6 +129,7 @@
                                                                   id="avaImage">
 
                                                       </div>
+                                                      <%if(trueUser){%>
                                                       <% if(Anotheruser.userID==trueUser.userID){%>
                                                             <button href="" id="uploadButtonAva"
                                                                   class="buttonn to-contact button-nigga button-anh-dai-dien ">
@@ -136,7 +139,7 @@
                                                                               id="avaImageInput" accept="image/*"
                                                                               style="display: none;"> </label>
                                                             </button>
-                                                            <%}%>
+                                                            <%}%><%}%>
                                                 </div>
 
                                                 <div class="profile-intro">
@@ -147,13 +150,14 @@
                                                       <!-- badge -->
 
                                                       <div class="profile-function at-desktop none block-m  ">
+                                                            <%if(trueUser){%>
                                                             <% if(Anotheruser.userID==trueUser.userID){%>
                                                                   <button href=""
                                                                         class="buttonn to-contact button-green big-link move-up-button"
                                                                         data-bs-toggle="modal"
                                                                         data-bs-target="#editModal">
                                                                         Cài đặt mật khẩu</button>
-                                                                  <%}%>
+                                                                  <%}%><%}%>
                                                                         <div class="modal fade" id="editModal"
                                                                               tabindex="-1"
                                                                               aria-labelledby="editModalLabel"
@@ -251,11 +255,13 @@
                                                                         </div> 
                                                                   </p>
                                                                   <!-- Button to toggle edit mode -->
+                                                                  <%if(trueUser){%>
                                                                   <% if(Anotheruser.userID==trueUser.userID){%>
                                                                         <button id="editButton" href=""
                                                                               class="buttonn to-contact button-blu button-tieu-su "
                                                                               onclick="show('popup')">
                                                                               Chỉnh tiểu sử</button>
+                                                                        <%}%>
                                                                         <%}%>
 
                                                             </div>
@@ -298,7 +304,7 @@
                                                                         gia:
                                                                   </span>
                                                                   <span class="info-value">
-                                                                        <%= formatDate( user.regdate)%>
+                                                                        <%= formatDate( Anotheruser.regdate)%>
                                                                   </span>
                                                             </div>
                                                             
