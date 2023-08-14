@@ -105,7 +105,7 @@
                                             cá nhân</a></li>
                                     <!-- Nơi này của ADMIN -->
                                     <% if(user.permission !=0){%>
-                                        <li class="navigator-board-font"><a href="" style="color: #585858"><span
+                                        <li class="navigator-board-font"><a href="/manageUser" style="color: #585858"><span
                                                     class="none inline-l"><i
                                                         class="fas fa-chevron-left"></i></span><span
                                                     class="float-right none-l"><i
@@ -164,7 +164,7 @@
                                                                                             height="80">
                                                                                         <div class="text-container">
                                                                                             <div class="text1">
-                                                                                                <a href="/book_info/<%=bookmark[i].bookIDD%>"
+                                                                                                <a href="/book/<%=bookmark[i].bookIDD%>"
                                                                                                     title="<%=bookmark[i].bookName%>">
                                                                                                     <%= truncateTitle(bookmark[i].bookName,30)
                                                                                                         %>
@@ -178,11 +178,12 @@
                                                                                     
                                                                                     <td class="text-right"
                                                                                         style="direction: rtl; ">
-
-                                                                                        <%= bookmark[i].chapName %>ㅤ<br>
+                                                                                        <%= truncateTitle(bookmark[i].volName,40)
+                                                                                                        %>ㅤ<br>                                                                                        
                                                                                         <a
-                                                                                            href="/book_info/<%=bookmark[i].bookIDD%>">
-                                                                                            <%= bookmark[i].volName %>ㅤ
+                                                                                            href="/book/<%=bookmark[i].bookIDD%>/<%=bookmark[i].chap_id%>">
+                                                                                            <%= truncateTitle(bookmark[i].chapName,25)
+                                                                                                        %>ㅤ
                                                                                         </a>
                                                                                         
                                                                                         </p>

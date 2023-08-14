@@ -110,7 +110,7 @@
                                             cá nhân</a></li>
                                     <!-- Nơi này của ADMIN -->
                                     <% if(user.permission != 0){%>
-                                    <li class="navigator-board-font"><a href="" style="color: #585858"><span
+                                    <li class="navigator-board-font"><a href="/manageUser" style="color: #585858"><span
                                                 class="none inline-l"><i class="fas fa-chevron-left"></i></span><span
                                                 class="float-right none-l"><i
                                                     class="fas fa-chevron-down"></i></span>Quản
@@ -150,20 +150,21 @@
                                     <!-- Dòng 1 -->
                                     <!-- Thông báo có chương mới -->
                                     <% for (const notify of notifyData) { %>
-                                    <tr class="thong-bao-chuong-moi ">
+                                    <tr class="thong-bao-chuong-moi "data-chap_id="<%=notify.IDnotify%>">
+                                        
                                         <% const azureBlobBaseUrl = 'https://happinovel2021.blob.core.windows.net/bookcover'; %>
                                         <% const fullImageUrl = `${azureBlobBaseUrl}/${notify.bookIMG}`; %>
                                         <td class="image-cell">
                                             <img src="<%=fullImageUrl%>" alt="Small Image " width="60" height="80">
                                             <div class="text-container">
-                                                <div class="text1"><a href="/book_info/<%= notify.bookID %>" title="<%=notify.bookName%>"><%= truncateTitle(notify.bookName,
+                                                <div class="text1"><a href="/book/<%= notify.bookID %>" title="<%=notify.bookName%>"><%= truncateTitle(notify.bookName,
                                                     30) %></a></div>
                                                 <div class="text2"><%=notify.genreName%></div>
                                             </div>
                                         </td>
 
                                         <td class="text-right" style="direction: rtl; "><a
-                                                href="/book_info/<%= notify.bookID %>"><%=notify.chapName%></a>
+                                                href="/book/<%= notify.bookID %>/<%= notify.chap_id %>"><%=notify.chapName%></a>
                                             <p><%=notify.volName%></p>
                                         </td>
                                         <td class="small-column">
@@ -176,13 +177,13 @@
                                     </tr>
                                     <% } %>     
                                     <% for (const notify of notifyData2) { %>                               <!-- Dòng 2 -->                            
-                                    <tr class="thong-bao-sach-chap-thuan ">
+                                    <tr class="thong-bao-sach-chap-thuan "data-chap_id="<%=notify.IDnotify%>">
                                         <% const azureBlobBaseUrl = 'https://happinovel2021.blob.core.windows.net/bookcover'; %>
                                         <% const fullImageUrl = `${azureBlobBaseUrl}/${notify.bookIMG}`; %>
                                         <td class="image-cell">
                                             <img src="<%=fullImageUrl%>" alt="Small Image " width="60" height="80">
                                             <div class="text-container">
-                                                <div class="text1"><a href="/book_info/<%= notify.bookID %>" title="<%=notify.bookName%>"><%= truncateTitle(notify.bookName,
+                                                <div class="text1"><a href="/book/<%= notify.bookID %>" title="<%=notify.bookName%>"><%= truncateTitle(notify.bookName,
                                                     30) %></a></div>
                                                 <div class="text2"><%=notify.genreName%></div>                                                
                                             </div>
@@ -191,7 +192,7 @@
 
                                         <td class="text-right" style="direction: rtl; ">
                                             <div class="can-giua">
-                                                <a href="/book_info/<%= notify.bookID %>">Chúc mừng, sách của bạn đã
+                                                <a href="/book/<%= notify.bookID %>">Chúc mừng, sách của bạn đã
                                                     được chấp thuận</a>
                                             </div>
                                         </td>
@@ -207,7 +208,7 @@
                                     </tr>
                                     <% } %> 
                                     <% for (const notify of notifyData3) { %>  
-                                    <tr class="thong-bao-sach-tu-choi ">
+                                    <tr class="thong-bao-sach-tu-choi "data-chap_id="<%=notify.IDnotify%>">
                                         <% const azureBlobBaseUrl = 'https://happinovel2021.blob.core.windows.net/bookcover/defaultBook.jpg'; %>
                                         
                                         <td class="image-cell">
@@ -224,7 +225,7 @@
 
                                         <td class="text-right" style="direction: rtl; ">
                                             <div class="can-giua">
-                                                <a href="https://example.com/inner_link7">Vì vi phạm tiêu chuẩn cộng
+                                                <a href="">Vì vi phạm tiêu chuẩn cộng
                                                     đồng, chúng tôi<br> từ chối cho đăng sách của bạn lên</a>
                                             </div>
                                         </td>
@@ -239,7 +240,7 @@
                                     </tr>
                                     <% } %> 
                                     <% for (const notify of notifyData4) { %> 
-                                    <tr class="thong-bao-binh-luan-report ">
+                                    <tr class="thong-bao-binh-luan-report "data-chap_id="<%=notify.IDnotify%>">
 
                                         <td class="image-cell">
                                             <img src="./Image/many-user.png" alt="Small Image " width="60" height="80">
@@ -269,7 +270,7 @@
                                     </tr>
                                     <% } %> 
                                     <% for (const notify of notifyData5) { %> 
-                                    <tr class="thong-bao-sach-muon-dang ">
+                                    <tr class="thong-bao-sach-muon-dang "data-chap_id="<%=notify.IDnotify%>">
                                         <% const azureBlobBaseUrl = 'https://happinovel2021.blob.core.windows.net/bookcover'; %>
                                         <% const fullImageUrl = `${azureBlobBaseUrl}/${notify.bookIMG}`; %>
                                         <td class="image-cell">
@@ -369,7 +370,7 @@
         }
     </script>
     <script>
-        function deleteRowAndImage(imageElement) {
+        async function deleteRowAndImage(imageElement) {
             // Get the parent div of the clicked image
             var div = imageElement.parentNode;
             // Get the parent row of the div
@@ -377,8 +378,20 @@
             // Get the parent tbody of the row
             var row = col.parentNode;
             var tbody = row.parentNode
-
+            const chap_id = row.getAttribute('data-chap_id');
+            
             // Remove the row from the table
+            try {
+                        const res = await fetch(`/notification/delete`, {
+                              method: 'DELETE', // Use DELETE method here
+                              body: JSON.stringify({ chap_id }),
+                              headers: { 'Content-Type': 'application/json' }
+                        });
+                        const data = await res.json();
+                        console.log(data);
+                  } catch (err) {
+                        console.log(err);
+                  }
             tbody.removeChild(row);
         }
     </script>

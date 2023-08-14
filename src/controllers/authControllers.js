@@ -12,6 +12,10 @@ const handleErrors = (err) => {
         dob: ''
     }
 
+    if (err.message === 'Tài khoản của bạn đã bị cấm') {
+        errors.password = 'Tài khoản của bạn đã bị cấm';
+    }
+
     if (err.message === 'Tên đăng nhập hoặc mật khẩu không chính xác') {
         errors.password = 'Tên đăng nhập hoặc mật khẩu không chính xác';
     }
@@ -33,6 +37,10 @@ const handleErrors = (err) => {
         });
     }
     return errors;
+}
+
+async function generateUserID() {
+    return Account.find({}).select('userID').sort({'userID': -1}).limit(1) 
 }
 
 const maxAge = 3 * 24 * 60 * 60;
@@ -78,7 +86,9 @@ module.exports.register_post = async (req, res) => {
     const profileName = req.body.profileName
     const sdt = req.body.sdt
     const dob = req.body.dob
-    const userID = 100 + await Account.find().count();
+    maxID = await generateUserID()
+    console.log(maxID)
+    const userID = maxID[0].userID + 1
     
     try {
         const user = await Account.create({

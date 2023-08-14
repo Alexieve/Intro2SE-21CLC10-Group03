@@ -68,7 +68,7 @@ const accountSchema = new mongoose.Schema ({
     },
     regdate: {
         type: Date,
-        default: Date(),
+        default: new Date(),
         required: true,
     },
     permission: {
@@ -89,6 +89,7 @@ accountSchema.pre('save', async function(next){
 accountSchema.statics.login = async function(username, password) {
     const user = await this.findOne({username});
     if (user) {
+        if (user.status == 1) throw Error('Tài khoản của bạn đã bị cấm')
         const auth = await bcrypt.compare(password, user.password);
         if (auth) {
             return user;

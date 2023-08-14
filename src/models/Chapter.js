@@ -20,7 +20,7 @@ const chapterSchema = new mongoose.Schema ({
     },
     publishDate: {
         type: Date,
-        default: Date(),
+        default: new Date(),
         require: true,
     },
     contentfile: {

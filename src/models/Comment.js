@@ -4,7 +4,6 @@ const {isAlphanumeric} = require('validator')
 const commentSchema = new mongoose.Schema ({
     commentID: {
         type: String,
-        require: true,
     },
     bookID: {
         type: Number,
@@ -14,18 +13,18 @@ const commentSchema = new mongoose.Schema ({
         type: Number,
         require: true,
     },
-    contentFile: {
+    contentfile: {
         type: String,
         required: [true, 'Vui lòng nhập bình luận!'],
     },
     publishDate: {
         type: Date,
-        default: Date(),
+        default: new Date(),
         require: true,
     },
     status: {
         type: Number,
-        default: 1,
+        default: 0,
         require: true,
     },
     

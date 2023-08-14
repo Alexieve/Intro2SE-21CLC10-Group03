@@ -6,9 +6,39 @@ const Chapter = require('../models/Chapter')
 const {bookcoverContainer} = require("../middleware/database");
 const jwt = require('jsonwebtoken');
 
-const getMostFollowedBook = async () => {
+const getMostViewBooks = async (limit) => {
+  try {
+    const mostViewBooks = await Book.find({ status: { $ne: 3 }, isPending: { $ne: 1 } })
+      .sort({ totalview: -1 })
+      .limit(limit)
+      .exec();
+    return mostViewBooks;
+  } catch (err) {
+    console.error("Error fetching most viewed books: ", err);
+    throw new Error("Error fetching most viewed books");
+  }
+};
+
+const getMostFollowedBooks = async () => {
   try {
     const mostFollowedBooks = await BookMark.aggregate([
+      {
+        $lookup: {
+          from: "books", // Replace with the actual collection name for books
+          localField: "bookID",
+          foreignField: "bookID",
+          as: "book"
+        }
+      },
+      {
+        $unwind: "$book"
+      },
+      {
+        $match: {
+          "book.status": { $ne: 3 }, // Filter out books with status equal to 3
+          "book.isPending": { $ne: 1 } // Filter out books with isPending equal to 1
+        }
+      },
       {
         $group: {
           _id: "$bookID",
@@ -31,94 +61,110 @@ const getMostFollowedBook = async () => {
         }
       }
     ]).exec();
+
     return mostFollowedBooks;
   } catch (err) {
-    console.error("Error fetching books: ", err);
-    res.status(500).send("Error fetching books");
+    console.error("Error fetching most followed books: ", err);
+    throw new Error("Error fetching most followed books");
   }
 };
 
-const getNewestChapter = async () => {
+
+
+const getNewestChapters = async () => {
   try {
     const newestChapters = await Chapter.aggregate([
       {
+        $lookup: {
+          from: "books",
+          localField: "bookID",
+          foreignField: "bookID",
+          as: "book"
+        }
+      },
+      {
+        $unwind: "$book"
+      },
+      {
+        $match: {
+          "book.status": { $ne: 3 }, // Filter out chapters with books having status equal to 3
+          "book.isPending": { $ne: 1 }, // Filter out chapters with books having isPending equal to 3
+          "isPending": { $ne: 1 } // Filter out chapters with isPending equal to 1
+        }
+      },
+      {
         $sort: {
-          bookID: 1, // Sort by bookID in ascending order (to group chapters of the same book together)
-          publishDate: -1 // Sort by publishDate in descending order (latest chapter first)
+          "publishDate": -1 // Sort by publishDate in descending order (latest chapter first)
         }
-      },
-      {
-        $group: {
-          _id: "$bookID",
-          latestChapter: { $first: "$$ROOT" } // Get the first document (latest chapter) for each bookID group
-        }
-      },
-      {
-        $replaceRoot: {
-          newRoot: "$latestChapter" // Replace the root document with the latestChapter document
-        }
-      },
-      {
-        $limit: 16 // Limit the results to the top 16 latest chapters
       }
     ]).exec();
-
-    return newestChapters;
+    const uniqueBookIDs = {};
+    const filteredBooks = newestChapters.filter(item => {
+      if (!uniqueBookIDs[item.bookID] && Object.keys(uniqueBookIDs).length < 16) {
+        uniqueBookIDs[item.bookID] = true;
+        return true;
+      }
+      return false;
+    });
+    return filteredBooks;
   } catch (err) {
     console.error("Error fetching chapters: ", err);
-    res.status(500).send("Error fetching chapters");
+    throw new Error("Error fetching chapters");
   }
 };
 
 
-const getNewestBook = async() =>{
+const getNewestBooks = async () => {
   try {
-    const newestBooks = await Book.find().sort({ Date: -1 }).limit(4).exec();
+    const newestBooks = await Book.find({ status: { $ne: 3 }, isPending: { $ne: 1 } })
+      .sort({ Date: -1 })
+      .limit(4)
+      .exec();
     return newestBooks;
   } catch (err) {
-    console.error("Error fetching books: ", err);
-    res.status(500).send("Error fetching books");
+    console.error("Error fetching newest books: ", err);
+    throw new Error("Error fetching newest books");
   }  
-}
+};
+
 
 const getReadingHistory = async (UserID) => {
   try {
-    const readingHistory = await ReadingHistory.find({userID:UserID}).limit(3).exec();
-    console.log(readingHistory.length);
+    const readingHistory = await ReadingHistory.find({
+      userID: UserID,
+      status: { $ne: 3 },
+      isPending: { $ne: 1 }
+    })
+    .limit(3)
+    .exec();
     return readingHistory;
   } catch (err) {
     console.error('Error fetching reading history:', err);
-    throw err;
-  }
-};
-const getMostViewBooks = async (limit) => {
-  try {
-    const mostViewBooks = await Book.find().sort({ views: -1 }).limit(limit).exec();
-    return mostViewBooks;
-  } catch (err) {
-    console.error("Error fetching books: ", err);
-    res.status(500).send("Error fetching books");
+    throw new Error('Error fetching reading history');
   }
 };
 
-const getFinishedBooks = async() =>{
+
+
+const getFinishedBooks = async() => {
   try {
-    const finishedBooks = await Book.find({status : 2}).limit(12).exec();
+    const finishedBooks = await Book.find({ status: 2, isPending: { $ne: 1 } }).limit(12).exec();
     return finishedBooks;
   } catch (err) {
     console.error("Error fetching books: ", err);
-    res.status(500).send("Error fetching books");
+    throw new Error("Error fetching books");
   }  
-}
+};
 
 const getBooksAndReadingHistory = async (req, res) => {
   try {
     const mostViewBooks = await getMostViewBooks(12); // Fetch most viewed books
-    const newestBooks = await getNewestBook();
-    const mostFollowedBooks = await getMostFollowedBook()
-    const newestChapter = await getNewestChapter()
+    const newestBooks = await getNewestBooks();
+    const mostFollowedBooks = await getMostFollowedBooks()
+    const newestChapter = await getNewestChapters()
     const finishedBooks = await getFinishedBooks()
     const books =  await Book.find()
+    const totalFollows = mostFollowedBooks.map(book => book.bookmarkCount)
     const bookHashMap = {};
     const bookCoverURL = {};
     books.forEach((book) => {
@@ -131,11 +177,10 @@ const getBooksAndReadingHistory = async (req, res) => {
       const decodedToken = jwt.verify(token, 'information of user');
       const user = await Account.findById(decodedToken.id);
       if (user) {
-        console.log(user.userID);
         readingHistory = await getReadingHistory(user.userID); // Fetch reading history data if the user is logged in
       }
     }
-    res.render('home', { mostViewBooks,readingHistory,bookHashMap, newestBooks,mostFollowedBooks, newestChapter, finishedBooks, bookCoverURL }); // Pass both books and readingHistory to the home.ejs template
+    res.render('home', { mostViewBooks,readingHistory,bookHashMap, newestBooks,mostFollowedBooks, newestChapter, finishedBooks, bookCoverURL, totalFollows}); // Pass both books and readingHistory to the home.ejs template
   } catch (err) {
     console.error('Error fetching books and reading history:', err);
     res.status(500).send('Internal Server Error');
