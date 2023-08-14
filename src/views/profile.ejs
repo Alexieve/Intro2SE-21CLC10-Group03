@@ -91,7 +91,7 @@
 
                                                                   <img src="<%= `https://happinovel2021.blob.core.windows.net/profilecover/${Anotheruser.coverURL}` %>"
                                                                         id="coverImage">
-                                                                  <%console.log(Anotheruser.coverURL)%>
+                                                              
                                                                         <!-- Default cover picture if the user doesn't have one -->
 
 
@@ -152,7 +152,7 @@
                                                                         class="buttonn to-contact button-green big-link move-up-button"
                                                                         data-bs-toggle="modal"
                                                                         data-bs-target="#editModal">
-                                                                        Cài đặt tài khoản</button>
+                                                                        Cài đặt mật khẩu</button>
                                                                   <%}%>
                                                                         <div class="modal fade" id="editModal"
                                                                               tabindex="-1"
@@ -164,66 +164,44 @@
                                                                                                 <h5 class="modal-title"
                                                                                                       style="font-weight: bold; font-size: 24px;"
                                                                                                       id="editModalLabel">
-                                                                                                      Edit
-                                                                                                      Information</h5>
+                                                                                                      Đổi mật khẩu ???</h5>
                                                                                                 <button type="button"
                                                                                                       class="btn-close"
                                                                                                       data-bs-dismiss="modal"
                                                                                                       aria-label="Close"></button>
                                                                                           </div>
                                                                                           <div class="modal-body">
-                                                                                                <!-- Input fields for the four rows -->
-                                                                                                <div class="mb-3">
-                                                                                                      <label for="usernameInput"
-                                                                                                            class="form-label"
-                                                                                                            style="font-size: 20px;color:black">Profilename</label>
-                                                                                                      <input type="text"
-                                                                                                            class="form-control"
-                                                                                                            id="usernameInput"
-                                                                                                            style="margin-bottom: 20px;font-size: 20px; margin-top: 20px; height: 50px">
-                                                                                                </div>
+                                                                                                <!-- Input fields for the four rows -->                                                                                          
                                                                                                 <div class="mb-3">
                                                                                                       <label for="oldPasswordInput"
                                                                                                             class="form-label"
-                                                                                                            style="font-size: 20px;color:black">Old
-                                                                                                            Password</label>
+                                                                                                            style="font-size: 20px;color:black">Mật khẩu cũ</label>
                                                                                                       <input type="password"
                                                                                                             class="form-control"
                                                                                                             id="oldPasswordInput"
                                                                                                             style="margin-bottom: 20px;font-size: 20px; margin-top: 20px; height: 50px">
 
-                                                                                                </div>
-                                                                                                <div class="mb-3">
-                                                                                                      <label for="newPasswordInput"
-                                                                                                            class="form-label"
-                                                                                                            style="font-size: 20px;color:black">New
-                                                                                                            Password</label>
-                                                                                                      <input type="password"
-                                                                                                            class="form-control"
-                                                                                                            id="newPasswordInput"
-                                                                                                            style="margin-bottom: 20px;font-size: 20px; margin-top: 20px; height: 50px">
-
-                                                                                                </div>
+                                                                                                </div>                                                                                          
                                                                                                 <div class="mb-3">
                                                                                                       <label for="confirmPasswordInput"
                                                                                                             class="form-label"
-                                                                                                            style="font-size: 20px;color:black">Confirm
-                                                                                                            Password</label>
+                                                                                                            style="font-size: 20px;color:black">Mật khẩu mới</label>
                                                                                                       <input type="password"
                                                                                                             class="form-control"
                                                                                                             id="confirmPasswordInput"
                                                                                                             style="margin-bottom: 20px;font-size: 20px; margin-top: 20px; height: 50px">
 
                                                                                                 </div>
+                                                                                                <div class="passwordError" style="color: red;"></div>
+                                                                                                <div class="passwordNError" style="color: rgb(0, 255, 76);"></div>
                                                                                           </div>
                                                                                           <div class="modal-footer">
                                                                                                 <!-- Save changes button -->
-                                                                                                <button type="button"
-                                                                                                      class="btn btn-primary ">Save
-                                                                                                      Changes</button>
+                                                                                                <button type="button" id="getValueButton"
+                                                                                                      class="btn btn-primary ">Lưu lại</button>
                                                                                                 <button type="button"
                                                                                                       class="btn btn-secondary"
-                                                                                                      data-bs-dismiss="modal">Close</button>
+                                                                                                      data-bs-dismiss="modal">Hủy</button>
                                                                                           </div>
                                                                                     </div>
                                                                               </div>
@@ -266,9 +244,11 @@
                                                             </li>
                                                       </ul>
                                                       <main class="sect-body">
-                                                            <div class="p-s_i-bio font-semibold " id="frameContent">
-                                                                  <p>
-                                                                        <%= Anotheruser.bio%>
+                                                            <div class="p-s_i-bio font-semibold " >
+                                                                  <p > 
+                                                                        <div id="frameContent">
+                                                                        <%=Anotheruser.bio%>
+                                                                        </div> 
                                                                   </p>
                                                                   <!-- Button to toggle edit mode -->
                                                                   <% if(Anotheruser.userID==trueUser.userID){%>
@@ -321,12 +301,7 @@
                                                                         <%= formatDate( user.regdate)%>
                                                                   </span>
                                                             </div>
-                                                            <% if(Anotheruser.userID==trueUser.userID){%>
-                                                                  <button id="editButton2" href=""
-                                                                        class="buttonn to-contact button-orange button-sua-thong-tin "
-                                                                        onclick="show('popup')">
-                                                                        Sửa thông tin</button>
-                                                                  <%}%>
+                                                            
                                                       </main>
                                                 </section>
                                           </div>
@@ -366,7 +341,7 @@
                                                                                                             <div class="content img-in-ratio"
                                                                                                                   style="background-image: url('<%= fullImageUrl %>')">
                                                                                                                   <a
-                                                                                                                        href="/book_info/<%= book.bookID %>"></a>
+                                                                                                                        href="/book/<%= book.bookID %>"></a>
 
                                                                                                             </div>
                                                                                                 </div>
@@ -398,7 +373,7 @@
                                                                                                             <!-- Ấn vào link bê dưới là sẽ dẫn đến trang sách -->
                                                                                                             <!-- Vá lỗi thủ công :))))) -->
                                                                                                             <a class="no-underline"
-                                                                                                                  href="/book_info/<%= book.bookID %>">
+                                                                                                                  href="/book/<%= book.bookID %>">
                                                                                                                   <%= book.title
                                                                                                                         %>
                                                                                                                         ㅤㅤㅤㅤㅤㅤㅤㅤ
@@ -526,14 +501,14 @@
                         try {
                               const formData = new FormData();
                               formData.append('coverImage', file);
-                              console.log("50");
+                 
                               const res = await fetch('/profile/update-cover', {
                                     method: 'POST',
                                     body: formData,
                               });
 
                               const data = await res.text();
-                              console.log(data);
+               
                         
                         } catch (err) {
                               console.log(err);
@@ -563,7 +538,6 @@
                         try {
                               const formData = new FormData();
                               formData.append('avaImage', file);
-                              console.log("51");
                               const res = await fetch('/profile/update-avatar', {
                                     method: 'POST',
                                     body: formData,
@@ -590,24 +564,7 @@
       </script>
 
       <script>
-            // Function to toggle the editable state of the content
-            function toggleEditable() {
-                  var frameContent = document.getElementById("frameContent");
-                  var editButton = document.getElementById("editButton");
-
-                  // Toggle the contenteditable attribute
-                  if (frameContent.getAttribute("contenteditable") === "true") {
-                        frameContent.setAttribute("contenteditable", "false");
-                        editButton.textContent = "Chỉnh tiểu sử";
-                  } else {
-                        frameContent.setAttribute("contenteditable", "true");
-                        editButton.textContent = "Lưu tiểu sử";
-                  }
-            }
-
-            // Add click event listener to the button
-            document.getElementById("editButton").addEventListener("click", toggleEditable);
-
+ 
             function toggleEditableAll() {
                   var frames = document.getElementsByClassName("editable-frame");
                   var editButton2 = document.getElementById("editButton2");
@@ -631,29 +588,6 @@
 
             // Add click event listener to the button
             document.getElementById("editButton2").addEventListener("click", toggleEditableAll);
-
-            // Function to handle the image upload
-
-
-
-
-
-            function handleImageUpload2(event) {
-                  const file = event.target.files[0];
-                  const reader = new FileReader();
-
-                  reader.onload = function () {
-                        const avaImage = document.getElementById("avaImage");
-                        avaImage.src = reader.result;
-                  };
-
-                  if (file) {
-                        reader.readAsDataURL(file);
-                  }
-            }
-
-            // Add click event listener to the upload button
-            
 
 
       </script>
@@ -700,6 +634,87 @@
                   }
             }
       </script>
+
+      <script>
+      // Get references to the input element and the button oldPasswordInput
+      const inputElement = document.getElementById('oldPasswordInput');
+      const inputElement2 = document.getElementById('confirmPasswordInput');
+      const getValueButton = document.getElementById('getValueButton');
+      const passwordError = document.querySelector('.passwordError');
+      const passwordNError = document.querySelector('.passwordNError');
+      // Add a click event listener to the button
+      getValueButton.addEventListener('click',async () => {
+        // Get the value from the input element
+        const inputValue = inputElement.value;
+        const inputValue2 = inputElement2.value;
+  
+        // Display the value in the console (you can do whatever you want with it)
+        console.log('Input Value:', inputValue);
+        passwordError.innerHTML = '';
+        passwordNError.innerHTML = '';
+        try {
+          const res = await fetch('/profile/password', {
+            method: 'post',
+            body: JSON.stringify({inputValue, inputValue2}),
+            headers: {'Content-Type': 'application/json'}
+          });
+         if (res.status === 200) {
+            passwordNError.innerHTML = 'Đã đổi mật khẩu !'
+        // Reload the page after a short delay
+        setTimeout(() => {
+          location.reload();
+        }, 1000); // Reload after 2 seconds
+      } else if (res.status === 400) {
+            
+        const errorMessage = await res.text();
+        passwordError.innerHTML = 'Mật khẩu cũ sai !'
+      }
+           
+          
+          
+          
+          
+        }
+        catch (err) {
+          console.log(err);
+        } 
+      });
+    </script>
+    <script>
+      async function toggleEditable() {
+                  var frameContent = document.getElementById("frameContent");
+                  const frameContenter = document.getElementById('frameContent').textContent;
+                  
+                  var editButton = document.getElementById("editButton");
+
+                  // Toggle the contenteditable attribute
+                  if (frameContent.getAttribute("contenteditable") === "true") {
+                        frameContent.setAttribute("contenteditable", "false");
+                        const cleanedContent = frameContenter.replace(/^\s+|\s+$/g, '');
+                        console.log(cleanedContent)
+                        editButton.textContent = "Chỉnh tiểu sử";
+                        try {
+                        const res = await fetch('/profile/bio', {
+                              method: 'post',
+                              body: JSON.stringify({cleanedContent}),
+                              headers: {'Content-Type': 'application/json'}
+                        });
+                        const data = await res.json()
+                        
+                        }
+                        catch (err) {
+                        console.log(err);
+                        } 
+                       
+                  } else {
+                        frameContent.setAttribute("contenteditable", "true");
+                        editButton.textContent = "Lưu tiểu sử";
+                  }
+            }
+
+            // Add click event listener to the button
+            document.getElementById("editButton").addEventListener("click", toggleEditable);
+    </script>
 
 </body>
 

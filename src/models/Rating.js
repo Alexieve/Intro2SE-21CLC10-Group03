@@ -10,12 +10,12 @@ const ratingSchema = new mongoose.Schema ({
         type: Number,
         require: true,
     },
-    contentFile: {
+    contentfile: {
         type: String,
-        required: [true, 'Vui lòng đánh giá!'],
+        default: '',
     },
     score: {
-        type: Float32Array,
+        type: Number,
         default: 0,
         require: true,
     },

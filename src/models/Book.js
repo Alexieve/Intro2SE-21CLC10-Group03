@@ -23,7 +23,7 @@ const bookSchema = new mongoose.Schema ({
     },
     publishDate: {
         type: Date,
-        default: Date(),
+        default: new Date(),
         required: true,
     },
     coverImg: {
