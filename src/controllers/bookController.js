@@ -117,7 +117,7 @@ const getNewestChapters = async () => {
 const getNewestBooks = async () => {
   try {
     const newestBooks = await Book.find({ status: { $ne: 3 }, isPending: { $ne: 1 } })
-      .sort({ Date: -1 })
+      .sort({ publishDate: -1 })
       .limit(4)
       .exec();
     return newestBooks;
