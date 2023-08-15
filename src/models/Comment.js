@@ -4,6 +4,7 @@ const {isAlphanumeric} = require('validator')
 const commentSchema = new mongoose.Schema ({
     commentID: {
         type: String,
+        default: ''
     },
     bookID: {
         type: Number,

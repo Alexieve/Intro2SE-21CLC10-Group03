@@ -10,8 +10,11 @@ const Rating = require('../models/Rating')
 
 const jwt = require('jsonwebtoken')
 const cheerio = require('cheerio');
-const {bookcoverContainer, bookContainer, commentContainer, ratingContainer, avatarContainer} = require('../middleware/database')
+const {bookcoverContainer, bookContainer, commentContainer, ratingContainer, avatarContainer, notifyContainer} = require('../middleware/database')
 const ReadingHistory = require('../models/ReadingHistory')
+const Notify = require('../models/Notify')
+const { notify } = require('../routes/authRoutes')
+const NotifyOfUser = require('../models/NotifyOfUser')
 
 async function streamToText(readableStream) {
   return new Promise((resolve, reject) => {
@@ -313,6 +316,7 @@ module.exports.addComment = async (req, res) => {
     contentfile = req.body.commentContent
     try {
       const cmt = await Comment.create({bookID: bookID, userID: userID, contentfile: contentfile})
+      cmt.commentID = cmt._id
       cmt.save()
       res.status(200).json(cmt._id);
     } catch (err) {
@@ -345,10 +349,53 @@ module.exports.deleteComment = async (req, res) => {
   }
 }
 
+function generateNotifyID() {
+  return Notify.find({}).select('notifyID').sort({'notifyID': -1}).limit(1) 
+}
+
+async function saveFileToAzure(fileName, content, container) {
+  const blobClient = container.getBlockBlobClient(fileName);
+  await blobClient.upload(content, Buffer.byteLength(content));
+}
+
 module.exports.reportComment = async (req, res) => {
   try {
     cmtID = req.body.cmtID
-    await Comment.findOneAndUpdate({_id: cmtID}, {status: 1})
+    
+    check = await Comment.findOne({_id: cmtID})
+    if (check.status == 0) {
+      const cmt = await Comment.findOneAndUpdate({_id: cmtID}, {status: 1})
+
+      notifyID = await generateNotifyID()
+      notifyID = notifyID[0].notifyID + 1
+      notiFile = `Noti${notifyID}.txt`
+
+      // Create Notify
+      await Notify.create({notifyID: notifyID, typeID: 4, content: notiFile})
+
+      // Create NotifyOfUsers
+      listUser = await Account.find({permission: {$ne: 0}}).select('userID')
+      listUser = listUser.map(Account => Account.userID)
+      for (const UID of listUser) {
+        await NotifyOfUser.create({notifyID: notifyID, userID: UID})
+      }
+
+      // console.log(listUser)
+      // noti file content
+      reportedUserID = cmt.userID
+      reportedcmtID = cmtID
+      notiContent = `${reportedUserID}` + '\n' + `${reportedcmtID}`
+
+      const path = `${notiFile}`
+      saveFileToAzure(path, notiContent, notifyContainer)
+      
+
+
+      console.log(notiFile)
+      console.log(reportedUserID)
+      console.log(reportedcmtID)
+      console.log(notiContent)
+    }
     res.status(200).json('ok');
   }
   catch (err) {
