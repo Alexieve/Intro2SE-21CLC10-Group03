@@ -268,11 +268,17 @@ exports.notification = async (req, res) => {
         // Fetch bookName from the Book collection
         const userData = await Account.findOne({ userID });
         const userName = userData ? userData.profileName : "User Not Found";
-        
-        const comment = await Comment.findOne({ commentID });
+        let comment;
+        if(commentID.length < 15){
+         comment = await Comment.findOne({ commentID });
+     
+        }
+        else{
+          comment = await Comment.findById( commentID );
+        }
     
         const commentData = comment ? comment.contentfile : "Not found comment";
-
+      
        
         
         notifyData4.push({
@@ -404,7 +410,7 @@ async function readNotifyFile3(notifyID) {
         return null;
       }
       const userID = parseInt(lines[0], 10);
-      const commentID = parseInt(lines[1], 10);
+      const commentID = lines[1];
       
       
       return { userID, commentID };
