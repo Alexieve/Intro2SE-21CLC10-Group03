@@ -118,12 +118,19 @@
 							<div class="row">
 								<span style="color: grey;"><b>Lần cuối</b></span>
 								<%const vol = book.volumes[book.volumes.length - 1]%>
-								<%const chap = vol.chapters[vol.chapters.length - 1]%>
+
+								<%if (vol != undefined)  { %>
+									<%chap = vol.chapters[vol.chapters.length - 1]%>
+								<%} else {%>
+									<%chap = ''%>
+								<%}%>
+
+								
 								
 								
 								<%if (chap != undefined)  { %>
 									<%chapDate = new Date(chap.publishDate)%>
-								<%} else {%>
+								<%} else if (chap == '')  {%>
 									<%chapDate = new Date()%>
 								<%}%>
 								<%const curDate = new Date()%>
