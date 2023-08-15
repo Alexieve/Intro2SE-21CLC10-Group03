@@ -130,7 +130,7 @@
       <tbody id="bookTableBody">
         <% let count = 1; %>
         <% Comments.forEach((Comment) => { %>
-        <tr>
+        <tr >
           <td><input type="checkbox" data-commentID = "<%= Comment.commentID %>" data-bookID = "<%= Comment.bookID %>" data-status = "<%= Comment.status %>" data-userID = "<%= Comment.userID %>"></td>
           <td> <%= count %> </td>
           <td>
@@ -193,6 +193,11 @@
     text-align: center; /* Căn giữa nội dung trong khung */
   }
 </style>
+<script>
+  function openYoutubeTab(commentID) {
+    window.open('https://www.youtube.com/watch?v=dQw4w9WgXcQ', '_blank');
+  }
+</script>
 <script>
   function getStatusFromText(statusText) {
     const lowerCaseStatus = statusText.toLowerCase();

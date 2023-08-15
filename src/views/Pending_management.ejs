@@ -133,7 +133,7 @@
         <% let count = 1; %>
         <% let combinedList = [...Books, ...Pendings]; %>
         <% combinedList.forEach((item) => { %>
-      <tr>
+      <tr onclick="openYoutubeTab(event);">
       <td>
           <input type="checkbox" data-bookID="<%= item.bookID %>" data-isPending="<%= item.isPending %>"
           <% if (item.chapID) { %>
@@ -226,6 +226,14 @@
     text-align: center; /* Căn giữa nội dung trong khung */
   }
 </style>
+<script>
+  function openYoutubeTab(event) {
+    if (event.target.tagName.toLowerCase() !== 'input') {
+      window.open('https://www.youtube.com/watch?v=dQw4w9WgXcQ', '_blank');
+    }
+
+  }
+</script>
 <script>
   function getStatusFromText(statusText) {
     const lowerCaseStatus = statusText.toLowerCase();
