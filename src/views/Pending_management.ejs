@@ -15,11 +15,11 @@
     <!-- Bootstrap -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
- 
+
     <!-- Tiny ediotr -->
     <script src="https://cdn.tiny.cloud/1/czhzadznx3qb12g2i4971xbviqsshfv65cbyuvs95fsi5021/tinymce/6/tinymce.min.js" referrerpolicy="origin"></script>
     <title>HappiNovel</title>
- 
+    
 </head>
 <body>
     <!-- Navigator bar -->
@@ -62,7 +62,7 @@
     </div>
     <div class="container border rounded p-3" style="margin-bottom: 50px;">
     <!-- Tiêu đề -->
-    <h2><i class="fa-solid fa-book"></i> <strong> Kho sách</strong></h2>
+    <h2><i class="fa-solid fa-book"></i> <strong> Quản lí Pending Book</strong></h2>
       <div class="row">
       <div class="col-md-4 mt-2  d-flex align-items-center ">
         <div class="input-group "  style="max-width: 260px;"  >
@@ -76,22 +76,20 @@
           <!-- Thêm biểu tượng vào đây, ví dụ: Font Awesome icon -->
           <i class="fa-solid fa-filter"></i>
           </span>
-          <select id="filter-select" class="form-select" style="max-width: 130px;background-color: #D9D9D9;">
+          <select id="filter-select" class="form-select" style="max-width: 110px;background-color: #D9D9D9;">
                     <option>Tất cả</option>
-                    <option>Stopped </option>
-                    <option>In Process </option>
-                    <option>Completed </option>
-                    <option>Pending </option>
-                    <option>Deleted </option>
+                    <option> Thêm</option>
+                    <option> Sửa </option>
                     </select>
       </div>
       <div class="col-md-2 mt-2 d-flex align-items-center ">
-        <button id="button-delete" class="btn btn-outline " style="background-color: #D9D9D9; margin-left: 40px;">Xóa </button>
+        <button id = "button-pass" class="btn btn-outline " style="background-color: #D9D9D9; margin-left: 40px;">Đồng ý </button>
       </div>
       <div class="col-md-2 mt-2 d-flex align-items-center">
-        <button  id="button-approve" class="btn btn-outline" style="background-color: #D9D9D9;">Duyệt</button>
-      </div>
-      <!-- <div class="col-md-2 mt-4 d-flex justify-content-center">
+        <button id = "button-reject" class="btn btn-outline " style="background-color: #D9D9D9;">Từ chối</button>
+        
+      <!-- </div>
+      <div class="col-md-2 mt-4 d-flex justify-content-center">
       
          <ul class="pagination ">
             <li >
@@ -109,8 +107,8 @@
             </a>
           </li>
           </ul>
-        </div>
-      </div> -->
+        </div>-->
+      </div> 
       
       <!-- Bảng -->
         
@@ -122,64 +120,88 @@
             <input type="checkbox" id="checkAll">
           </th>
           <th class="border-bottom" >STT <i class="fa-solid fa-sort"></i> </th>
+          <th class="border-bottom" >Username <i class="fa-solid fa-sort"></i> </th>
           <th class="border-bottom" >Tên sách <i class="fa-solid fa-sort"></i></th>
+          <th class="border-bottom text-center" >Volume <i class="fa-solid fa-sort"></i></th>
+          <th class="border-bottom text-center" >Chương <i class="fa-solid fa-sort"></i></th>
           <th class="border-bottom" >Tác giả <i class="fa-solid fa-sort"></i></th>
-          <!-- <th class="border-bottom text-center" >Đánh giá <i class="fa-solid fa-sort"></i></th> -->
-          <th class="border-bottom" >Thể loại <i class="fa-solid fa-sort"></i></th>
-          <th class="border-bottom " >Lượt xem <i class="fa-solid fa-sort"></i></th>
+          <th class="border-bottom " >Yêu cầu <i class="fa-solid fa-sort"></i></th>
           <th class="border-bottom text-center"  >Tình trạng <i class="fa-solid fa-sort"></i></th>
         </tr>
       </thead>
       <tbody id="bookTableBody">
         <% let count = 1; %>
-        <% Books.forEach((Book) => { %>
-        <tr>
-            <td><input type="checkbox" data-bookID="<%= Book.bookID %>" data-isPending="<%= Book.isPending %>" data-status="<%= Book.status %>" ></td>
-            <td><%= count %> </td>
-            <td>
-              <% const maxTitleLength = 30; %>
-              <% const displayedTitle = Book.title.length > maxTitleLength ? Book.title.slice(0, maxTitleLength) + "..." : Book.title; %>
-              <%= displayedTitle %>
-            </td>
-            <td><%= Book.authorName %></td>
-            <!-- <td class="text-center"><%= Book.rating %></td> -->
-            <td>
-              <% const maxGenresLength = 16; %>
-              <% const displayedGenres = Book.Genres.join(", "); %>
-              <% if (displayedGenres.length > maxGenresLength) { %>
-                <%= displayedGenres.slice(0, maxGenresLength) %> ...
-              <% } else { %>
-                <%= displayedGenres %>
-              <% } %>
-            </td>
-            <!-- <td><%= Book.summary %></td> -->
-            <td><%= Book.totalview %></td>
-            <td class="d-flex justify-content-center">
-                <% if (Book.isPending === 1) { %>
-                <span class="p-1 rounded" style="background-color: #FDE9B5;">Pending</span>
-                <% } else if (Book.status === 0) { %>
-                <span class="p-1 rounded" style="background-color: #E79BF4;">Stopped</span>
-                <% } else if (Book.status === 1) { %>
-                <span class="p-1 rounded" style="background-color: #67FF88;">In Process</span>
-                <% } else if (Book.status === 2) { %>
-                <span class="p-1 rounded" style="background-color: #848484;">Completed</span>
-                <% } 
-                else if (Book.status === 3) { %>
-                  <span class="p-1 rounded" style="background-color: #FF6767;">Deleted</span>
-                  <% }
-                else { %>
-                <span class="p-1 rounded" style="background-color: #FF6767;">Unknown</span>
-                <% } %>
-            </td>
-        </tr>
-        <% count++; %>
-        <% }) %>
-    </tbody>
+        <% let combinedList = [...Books, ...Pendings]; %>
+        <% combinedList.forEach((item) => { %>
+      <tr>
+      <td>
+          <input type="checkbox" data-bookID="<%= item.bookID %>" data-isPending="<%= item.isPending %>"
+          <% if (item.chapID) { %>
+            data-chapID="<%= item.chapID %>"
+          <% } else { %>
+            data-chapID=""
+          <% } %>
+          
+          <% if (item.volID) { %>
+            data-volID="<%= item.volID %>"
+          <% } else { %>
+            data-volID=""
+          <% } %>
+          
+          <% if (item.contentfile) { %>
+            data-contentfile="<%= item.contentfile %>"
+          <% } else { %>
+            data-volID=""
+          <% } %>
+          <% if (item.updatefile) { %>
+            data-updatefile="<%= item.updatefile %>"
+          <% } else { %>
+            data-updatefile=""
+          <% } %>
+          <% if (item.bookPending) { %>
+            data-bookPending="<%= item.bookPending %>"
+          <% } else { %>
+            data-bookPending=""
+          <% } %>
+            >
+      </td>
+      <td><%= count %></td>
+      <td><%= item.username %></td>
+      <td>
+        <% let displayedTitle = item.title || item.bookTitle; %>
+        <% const maxTitleLength = 30; %>
+        <% displayedTitle = displayedTitle && displayedTitle.length > maxTitleLength ? displayedTitle.slice(0, maxTitleLength) + "..." : displayedTitle; %>
+        <%= displayedTitle %>
+      </td>
+      <td class="text-center"><%= item.volID || '' %></td>
+      <td class="text-center"><%= item.chapID || '' %></td>
+      <td><%= item.authorName || item.bookauthor %></td>
+      <td>
+        <% if (item.isPending === 1) { %>
+          <span>Thêm</span>
+        <% } else if (item.isPending === 2) { %>
+          <span>Sửa</span>
+        <% } else { %>
+          <span></span>
+        <% } %>
+      </td>
+      <td class="d-flex justify-content-center">
+        <%  if (item.isPending === 1 || item.isPending === 2) { %>
+          <span class="p-1 rounded" style="background-color: #FDE9B5;">Pending</span>
+        <% } else { %>
+          <span class="p-1 rounded" style="background-color: #FF6767;">Unknown</span>
+        <% } %>
+      </td>
+    </tr>
+    <% count++; %>
+    <% }) %>
+        
+      </tbody>
     </table>
   </div>
 
     </div> 
-    
+
     <%- include("./partials/modal_error") -%>
     
     <%- include("./partials/modal_done") -%>
@@ -207,16 +229,10 @@
 <script>
   function getStatusFromText(statusText) {
     const lowerCaseStatus = statusText.toLowerCase();
-    if (lowerCaseStatus.includes("pending")) {
-      return "Pending";
-    } else if (lowerCaseStatus.includes("stopped")) {
-      return "Stopped";
-    } else if (lowerCaseStatus.includes("in process")) {
-      return "In Process";
-    } else if (lowerCaseStatus.includes("completed")) {
-      return "Completed";
-    } else if (lowerCaseStatus.includes("deleted")) {
-      return "Deleted";
+    if (lowerCaseStatus.includes("thêm")) {
+      return "Thêm";
+    } else if (lowerCaseStatus.includes("sửa")) {
+      return "Sửa";
     } else {
       return "Unknown";
     }
@@ -234,11 +250,11 @@
     const selectedFilter = filterSelect.value;
 
     tableRows.forEach((row) => {
-      const bookTitle = removeAccentsAndLowerCase(row.querySelector("td:nth-child(3)").textContent);
-      const authorName = removeAccentsAndLowerCase(row.querySelector("td:nth-child(4)").textContent);
+      const username = removeAccentsAndLowerCase(row.querySelector("td:nth-child(3)").textContent);
+      const bookname = removeAccentsAndLowerCase(row.querySelector("td:nth-child(4)").textContent);
 
-      const titleMatch = bookTitle.includes(searchTerm);
-      const authorMatch = authorName.includes(searchTerm);
+      const titleMatch = username.includes(searchTerm);
+      const authorMatch = bookname.includes(searchTerm);
 
       // Lấy giá trị book.status từ cột thứ 8 (td:nth-child(8))
       const status = row.querySelector("td:nth-child(8)").textContent;
@@ -262,31 +278,41 @@
 </script>
 <script>
   // Bắt sự kiện khi người dùng nhấn nút appprove
-  document.getElementById("button-approve").addEventListener("click",async function() {
+  document.getElementById("button-pass").addEventListener("click",async function() {
     // Lấy danh sách các checkbox đã chọn
     const checkboxes = document.querySelectorAll("input[type=checkbox]:checked");
 
     // Tạo một mảng chứa các bookID đã chọn
-    const selectedBookIDs = [];
+    const selectedIDs = [];
     checkboxes.forEach((checkbox) => {
-      selectedBookIDs.push({
+      selectedIDs.push({
         bookID: checkbox.getAttribute("data-bookID"),
+        chapID: checkbox.getAttribute("data-chapID"),
+        volID: checkbox.getAttribute("data-volID"),
         isPending: checkbox.getAttribute("data-isPending"),
-
+        bookPending: checkbox.getAttribute("data-bookPending"),
+        contentfile: checkbox.getAttribute("data-contentfile"),
+        updatefile: checkbox.getAttribute("data-updatefile"),
       });
     });
     
     // Gửi dữ liệu lên server bằng 
-    const allArePending = selectedBookIDs.length > 0 && selectedBookIDs.every(book => book.isPending == "1");
-
-    if (allArePending) {
+    const allArePending = selectedIDs.length > 0 && selectedIDs.every(item => {
+      if (item.chapID !== "") {
+        return item.bookPending === "" ;
+      } else {
+        return true; // Không kiểm tra nếu chapID trống
+      }
+    });
+    //const allAreSamePendingValue = selectedIDs.every(item => item.isPending === "1") || selectedIDs.every(item => item.isPending === "2");
+    if (allArePending ) {
       try {
-        const response = await fetch("/process-checkboxes", {
+        const response = await fetch("/pending-pass", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
           },
-          body: JSON.stringify({ selectedBookIDs }),
+          body: JSON.stringify({ selectedIDs }),
         });
         const result = await response.text();
         if (result === "Done") {
@@ -294,18 +320,18 @@
           attachModal2("Cập nhật thành công!");
           var modalConfirm2 = function () {
             $("#modaldone1").on("click", function () {
-              location.assign('/manage');
+              location.assign('/managePending');
               $("#staticBackdrop2").modal('hide');
             });
           };
           await modalConfirm2()
          } else {
           // Nếu không đủ điều kiện, hiển thị thông báo lỗi
-                attachModal("Đã có lỗi xảy ra!")
+                attachModal("Đã có lỗi xảy ra!1")
                 // $("#modal2btn").modal('show');
                 var modalConfirm = function(){
                   $("#modalerror1").on("click", function(){
-                    location.assign('/manage')
+                    location.assign('/managePending')
                     //res.redirect('/manage');
                     $("#staticBackdrop").modal('hide');
                   });
@@ -321,7 +347,7 @@
             attachModal("Vui lòng kiểm tra lại!")
             var modalConfirm = function(){
               $("#modalerror1").on("click", function(){
-                location.assign('/manage')
+                location.assign('/managePending')
                 $("#staticBackdrop").modal('hide');
               });
             };
@@ -349,31 +375,45 @@
   });
   
   
-  document.getElementById("button-delete").addEventListener("click", async function() {
+  document.getElementById("button-reject").addEventListener("click", async function() {
     // Lấy danh sách các checkbox đã chọn
     const checkboxes = document.querySelectorAll("input[type=checkbox]:checked");
 
-    // Tạo một mảng chứa các bookID đã chọn
-    const selectedBookIDs = [];
+    // Tạo một mảng chứa các bookID đã chọnselectedIDs
+    const selectedIDs = [];
     checkboxes.forEach((checkbox) => {
-      selectedBookIDs.push({
+      selectedIDs.push({
         bookID: checkbox.getAttribute("data-bookID"),
-        status: checkbox.getAttribute("data-status"),
-
+        chapID: checkbox.getAttribute("data-chapID"),
+        volID: checkbox.getAttribute("data-volID"),
+        isPending: checkbox.getAttribute("data-isPending"),
+        bookPending: checkbox.getAttribute("data-bookPending"),
+        contentfile: checkbox.getAttribute("data-contentfile"),
+        updatefile: checkbox.getAttribute("data-updatefile"),
       });
     });
     
     // Gửi dữ liệu lên server bằng AJAX
-    const allArePending = selectedBookIDs.length > 0 && selectedBookIDs.every(book => book.status != "3");
+    const allArePending = selectedIDs.length > 0 &&
+    selectedIDs.every((id) => {
+    // Nếu chapID rỗng và không có phần tử nào khác có cùng bookID
+    if (id.chapID === "") {
+      return !selectedIDs.some((otherID) => otherID !== id && otherID.bookID === id.bookID);
+    }
+    // Nếu chapID không rỗng và không có phần tử nào khác có cùng bookID và chapID rỗng
+    else {
+      return !selectedIDs.some((otherID) => otherID !== id && otherID.bookID === id.bookID && otherID.chapID === "");
+    }
+  });
 
     if (allArePending) {
       try {
-        const response = await fetch("/delete-books", {
+        const response = await fetch("/delete-pendings", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
           },
-          body: JSON.stringify({ selectedBookIDs }),
+          body: JSON.stringify({ selectedIDs }),
         });
   
         const result = await response.text();
@@ -382,7 +422,7 @@
           attachModal2("Cập nhật thành công!");
           var modalConfirm22 = function () {
             $("#modaldone1").on("click", function () {
-              location.assign('/manage');
+              location.assign('/managePending');
               $("#staticBackdrop2").modal('hide');
             });
           };
@@ -393,7 +433,7 @@
                 // $("#modal2btn").modal('show');
                 var modalConfirm = function(){
                   $("#modalerror1").on("click", function(){
-                    location.assign('/manage')
+                    location.assign('/managePending')
                     //res.redirect('/manage');
                     $("#staticBackdrop").modal('hide');
                   });
@@ -412,7 +452,7 @@
             // $("#modal2btn").modal('show');
             var modalConfirm3 = function(){
               $("#modalerror1").on("click", function(){
-                location.assign('/manage')
+                location.assign('/managePending')
                 //res.redirect('/manage');
                 $("#staticBackdrop").modal('hide');
               });
@@ -424,9 +464,6 @@
 
   });
 </script>
-
-
-
     <!-- Footer -->
     <footer class="fixed-bottom" id="footer">
         <div class="container text-center">
