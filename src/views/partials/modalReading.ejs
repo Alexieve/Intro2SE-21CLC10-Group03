@@ -1,12 +1,3 @@
-<button
-  type="button"
-  class="btn btn-primary"
-  data-bs-toggle="modal"
-  data-bs-target="#readingModal"
->
-  Launch demo modal
-</button>
-
 <!-- Modal -->
 <div
   class="modal fade"
@@ -61,7 +52,7 @@
   const fontSizeRange = document.getElementById('font-size-range');
   const chapterContent = document.getElementById('chapter-content');
 
-  console.log(fontSelect)
+  // console.log(fontSelect)
   fontSelect.addEventListener('change', () => {
     chapterContent.style.fontFamily = fontSelect.value;
   });
