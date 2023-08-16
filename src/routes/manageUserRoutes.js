@@ -20,15 +20,13 @@ router.post('/process-usercheckboxes', async (req, res) => {
       const account = await Account.findOne({ userID: userID }).select('userID permission');
         //console.log(account)
         const filter = { userID: userID };
-      if (account) {
-        if (permission !== "1") {
+      if (account && permission !== "1" && permission == account.permission ) {
           const update = { permission: 1 };
           await Account.updateOne(filter, update);
-        } else if (permission !== "0") {
+        } else if (account && permission !== "0" && permission == account.permission) {
           const update2 = { permission: 0 };
           await Account.updateOne(filter, update2);
         }
-      }
       else {
         isSuccess = false; // Ghi nhận có lỗi xảy ra
         break; // Dừng vòng lặp nếu có lỗi
@@ -61,14 +59,12 @@ router.post('/banunban-box', async (req, res) => {
         const account = await Account.findOne({ userID: userID }).select('userID status');
         //console.log(account)
         const filter = { userID: userID };
-      if (account) {
-        if (status !== "1") {
+      if (account && status !== "1" && status == account.status) {
           const update = { status: 1 };
           await Account.updateOne(filter, update);
-        } else if (status !== "0") {
+      } else if (account && status !== "0" && status == account.status) {
           const update2 = { status: 0 };
           await Account.updateOne(filter, update2);
-        }
       }
       else {
         isSuccess2 = false; // Ghi nhận có lỗi xảy ra

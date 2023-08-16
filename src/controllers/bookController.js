@@ -1,10 +1,11 @@
-const Book = require('../models/Book');
-const ReadingHistory = require('../models/ReadingHistory');
-const BookMark = require('../models/BookMark')
-const Account = require('../models/Account');
-const Chapter = require('../models/Chapter')
+const Book = require("../models/Book");
+const ReadingHistory = require("../models/ReadingHistory");
+const BookMark = require("../models/BookMark")
+const Account = require("../models/Account");
+const Chapter = require("../models/Chapter")
+const Rating = require("../models/Rating")
 const {bookcoverContainer} = require("../middleware/database");
-const jwt = require('jsonwebtoken');
+const jwt = require("jsonwebtoken");
 
 const getMostViewBooks = async (limit) => {
   try {
@@ -18,6 +19,54 @@ const getMostViewBooks = async (limit) => {
     throw new Error("Error fetching most viewed books");
   }
 };
+
+const getMostRatingBooks = async () => {
+  try {
+    const mostRatingBooks = await Rating.aggregate([
+      {
+        $group: {
+          _id: "$bookID",
+          averageScore: { $avg: "$score" }
+        }
+      },
+      {
+        $lookup: {
+          from: "books",
+          localField: "_id", // Change localField to "_id" to match with the bookID from the ratings collection
+          foreignField: "bookID",
+          as: "book"
+        }
+      },
+      {
+        $unwind: "$book"
+      },
+      {
+        $match: {
+          "book.status": { $ne: 3 }, // Filter out books with status equal to 3
+          "book.isPending": { $ne: 1 } // Filter out books with isPending equal to 1
+        }
+      },
+      {
+        $sort: { averageScore: -1 } // Sort by averageScore in descending order
+      },
+      {
+        $limit: 3
+      },
+      {
+        $project: {
+          _id: 0,
+          bookID: "$_id",
+          averageScore: 1 // Include the averageScore in the output
+        }
+      }
+    ]).exec();
+    return mostRatingBooks;
+  } catch (err) {
+    console.error("Error fetching most rating books: ", err);
+    throw new Error("Error fetching most rating books");
+  }
+};
+
 
 const getMostFollowedBooks = async () => {
   try {
@@ -68,7 +117,6 @@ const getMostFollowedBooks = async () => {
     throw new Error("Error fetching most followed books");
   }
 };
-
 
 
 const getNewestChapters = async () => {
@@ -135,12 +183,13 @@ const getReadingHistory = async (UserID) => {
       status: { $ne: 3 },
       isPending: { $ne: 1 }
     })
+    .sort({_id: -1})
     .limit(3)
     .exec();
     return readingHistory;
   } catch (err) {
-    console.error('Error fetching reading history:', err);
-    throw new Error('Error fetching reading history');
+    console.error("Error fetching reading history:", err);
+    throw new Error("Error fetching reading history");
   }
 };
 
@@ -160,10 +209,11 @@ const getBooksAndReadingHistory = async (req, res) => {
   try {
     const mostViewBooks = await getMostViewBooks(12); // Fetch most viewed books
     const newestBooks = await getNewestBooks();
-    const mostFollowedBooks = await getMostFollowedBooks()
-    const newestChapter = await getNewestChapters()
-    const finishedBooks = await getFinishedBooks()
-    const books =  await Book.find()
+    const mostFollowedBooks = await getMostFollowedBooks();
+    const newestChapter = await getNewestChapters();
+    const finishedBooks = await getFinishedBooks();
+    const mostRatingBooks = await getMostRatingBooks();
+    const books =  await Book.find();
     const totalFollows = mostFollowedBooks.map(book => book.bookmarkCount)
     const bookHashMap = {};
     const bookCoverURL = {};
@@ -174,16 +224,16 @@ const getBooksAndReadingHistory = async (req, res) => {
     const token = req.cookies.jwt;
     let readingHistory = [];
     if (token) {
-      const decodedToken = jwt.verify(token, 'information of user');
+      const decodedToken = jwt.verify(token, "information of user");
       const user = await Account.findById(decodedToken.id);
       if (user) {
         readingHistory = await getReadingHistory(user.userID); // Fetch reading history data if the user is logged in
       }
     }
-    res.render('home', { mostViewBooks,readingHistory,bookHashMap, newestBooks,mostFollowedBooks, newestChapter, finishedBooks, bookCoverURL, totalFollows}); // Pass both books and readingHistory to the home.ejs template
+    res.render("home", { mostViewBooks,readingHistory,bookHashMap, newestBooks,mostFollowedBooks, newestChapter, finishedBooks, bookCoverURL, totalFollows, mostRatingBooks}); // Pass both books and readingHistory to the home.ejs template
   } catch (err) {
-    console.error('Error fetching books and reading history:', err);
-    res.status(500).send('Internal Server Error');
+    console.error("Error fetching books and reading history:", err);
+    res.status(500).send("Internal Server Error");
   }
 };
 module.exports = {

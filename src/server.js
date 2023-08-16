@@ -20,8 +20,8 @@ const { requireAuth, checkUser} = require('./middleware/authMiddleware')
 const manageRoutes = require('./routes/manageRoutes')
 const manageBookRoutes = require('./routes/manageBookRoutes')
 const manageUserRoutes = require('./routes/manageUserRoutes')
-// const manageCommentRoutes = require('./routes/manageCommentRoutes')
-// const managePendingRoutes = require('./routes/managePendingRoutes')
+const manageCommentRoutes = require('./routes/manageCommentRoutes')
+const managePendingRoutes = require('./routes/managePendingRoutes')
 const searchRoutes = require('./routes/searchRoutes')
 
 // Database connection
@@ -61,8 +61,8 @@ app.get("/filter",(req,res) => res.render('filter'));
 app.use(manageRoutes)
 app.use(manageBookRoutes)
 app.use(manageUserRoutes)
-// app.use(manageCommentRoutes)
-// app.use(managePendingRoutes)
+app.use(manageCommentRoutes)
+app.use(managePendingRoutes)
 app.use((req, res, next) => {
     // Set cache control headers to prevent caching for all responses
     res.setHeader('Cache-Control', 'no-cache, no-store, must-revalidate');
