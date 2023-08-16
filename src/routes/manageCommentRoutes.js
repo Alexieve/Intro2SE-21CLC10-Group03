@@ -1,27 +1,27 @@
 const {Router} = require('express')
-const manageControllers = require('../controllers/manageControllers')
+const manageCommentControllers = require('../controllers/manageCommentControllers')
 const { requirePermission } = require('../middleware/authMiddleware')
 
 const router = Router()
-const Book = require('../models/Book');
+const Comment = require('../models/Comment');
 
-router.get('/manage', requirePermission(1), manageControllers.getBooks);
-router.post('/process-checkboxes', async (req, res) => {
-    const selectedBookIDs = req.body.selectedBookIDs;
+router.get('/manageComment', requirePermission(1), manageCommentControllers.getComments);
+router.post('/process-pass', async (req, res) => {
+    const selectedCommentIDs = req.body.selectedCommentIDs;
     let isSuccess = true;
 
   try {
-    for (const bookData of selectedBookIDs) {
-      const bookID = bookData.bookID;
-      const isPending = bookData.isPending;
-
+    for (const commentData of selectedCommentIDs) {
+      const bookID = commentData.bookID;
+      const commentID = commentData.commentID;
+      const status = commentData.status;
       // Tìm sách theo bookID trong cơ sở dữ liệu
-      const book = await Book.findOne({ bookID: bookID });
+      const comment = await Comment.findOne({ commentID: commentID });
 
       // Nếu tìm thấy sách và isPending khác 0, thực hiện cập nhật
-      if (book && isPending !== "0"  && book.isPending == isPending) {
-        book.isPending = "0"; // Đặt isPending = 0
-        await book.save(); // Lưu lại vào cơ sở dữ liệu
+      if (comment && status !== "0"  && comment.status == status) {
+        comment.status = "0"; // Đặt isPending = 0
+        await comment.save(); // Lưu lại vào cơ sở dữ liệu
       }
       else {
         isSuccess = false; // Ghi nhận có lỗi xảy ra
@@ -42,23 +42,24 @@ router.post('/process-checkboxes', async (req, res) => {
     res.status(500).send('An error occurred while processing data.');
   }
 });
-router.post('/delete-books', async (req, res) => {
-    const selectedBookIDs = req.body.selectedBookIDs;
-    //console.log(selectedBookIDs)
+router.post('/delete-comments', async (req, res) => {
+    const selectedCommentIDs = req.body.selectedCommentIDs;
+    //console.log(selectedCommentIDs)
     let isSuccess2 = true;
     try {
-      for (const bookData of selectedBookIDs) {
-        // Tìm và xóa sách có bookID tương ứng
-        const bookID = bookData.bookID;
-        const status = bookData.status;
-        const book = await Book.findOne({ bookID: bookID });
+      for (const commentData of selectedCommentIDs) {
+    
+        const bookID = commentData.bookID;
+        const commentID = commentData.commentID;
+        const status = commentData.status;
+       
+        const comment = await Comment.findOne({ commentID: commentID });
 
       // Nếu tìm thấy sách và isPending khác 0, thực hiện cập nhật
-        if (book && status !== "3" && book.status == status) {
-        book.status = "3"; // Đặt isPending = 0
-        await book.save(); // Lưu lại vào cơ sở dữ liệu
-      }
-      else {
+        if (comment && status !== "0"  && comment.status == status) {
+            await comment.deleteOne(); // Đặt isPending = 0
+        }
+        else {
         isSuccess2 = false; // Ghi nhận có lỗi xảy ra
         break; // Dừng vòng lặp nếu có lỗi
       }

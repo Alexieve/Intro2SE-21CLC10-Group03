@@ -9,7 +9,7 @@
 
 	<%- include("./partials/navigation") -%>
     
-    <%- include("./partials/coverImg") -%>\
+    <%- include("./partials/coverImg") -%>
 	<!-- Book Info -->
 	<div class="container ">
 		<div class="row clearfix">
@@ -117,22 +117,6 @@
 						<div class="col-3">
 							<div class="row">
 								<span style="color: grey;"><b>Lần cuối</b></span>
-								<%const vol = book.volumes[book.volumes.length - 1]%>
-
-								<%if (vol != undefined)  { %>
-									<%chap = vol.chapters[vol.chapters.length - 1]%>
-								<%} else {%>
-									<%chap = ''%>
-								<%}%>
-
-								
-								
-								
-								<%if (chap != undefined)  { %>
-									<%chapDate = new Date(chap.publishDate)%>
-								<%} else if (chap == '')  {%>
-									<%chapDate = new Date()%>
-								<%}%>
 								<%const curDate = new Date()%>
 								<%const timeDif = curDate - chapDate%>
 								<%const minutesAgo = Math.floor(timeDif / (60 * 1000));%>
@@ -325,9 +309,9 @@
 					
 				</div>
 			</div>
-			<!-- Add the comment form here -->
 	    </div>	
 	</div>
+	<%- include("./partials/footer") -%>
 
 	<script src="./js/star.js"></script>
 	
