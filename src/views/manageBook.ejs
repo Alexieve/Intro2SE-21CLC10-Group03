@@ -196,7 +196,7 @@
 		approveBook.addEventListener('click', async function(e) {
 			try {
 				const res = await fetch('/manage/approveBook', {
-					method: 'post',
+					method: 'put',
 					body: JSON.stringify({bookID}),
 					headers: {'Content-Type': 'application/json'}
 				});
@@ -210,7 +210,7 @@
 		rejectBook.addEventListener('click', async function(e) {
 			try {
 				const res = await fetch('/manage/rejectBook', { 
-					method: 'post',
+					method: 'delete',
 					body: JSON.stringify({bookID}),
 					headers: {'Content-Type': 'application/json'}
 				});
@@ -237,7 +237,7 @@
 
 			try {
 				const res = await fetch('/manage/approveChap', { // Chinh lai cai API
-					method: 'post',
+					method: 'put',
 					body: JSON.stringify({objIDList}),
 					headers: {'Content-Type': 'application/json'}
 				});
@@ -257,7 +257,7 @@
 			
 			try {
 				const res = await fetch('/manage/rejectChap', { // Chinh lai cai API
-					method: 'post',
+					method: 'delete',
 					body: JSON.stringify({objIDList}),
 					headers: {'Content-Type': 'application/json'}
 				});

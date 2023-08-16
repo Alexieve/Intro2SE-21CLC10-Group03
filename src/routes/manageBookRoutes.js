@@ -6,9 +6,9 @@ const router = Router()
 
 router.get('/manage/:id', requirePermission(1), manageBookController.viewBook);
 router.get('/manage/:bookID/:chapID', requirePermission(1), manageBookController.viewChapter);
-router.post('/manage/approveBook', requirePermission(1), manageBookController.approveBook);
-router.post('/manage/rejectBook', requirePermission(1), manageBookController.rejectBook);
-router.post('/manage/approveChap', requirePermission(1), manageBookController.approveChap);
-router.post('/manage/rejectChap', requirePermission(1), manageBookController.rejectChap);
+router.put('/manage/approveBook', requirePermission(1), manageBookController.approveBook);
+router.delete('/manage/rejectBook', requirePermission(1), manageBookController.rejectBook);
+router.put('/manage/approveChap', requirePermission(1), manageBookController.approveChap);
+router.delete('/manage/rejectChap', requirePermission(1), manageBookController.rejectChap);
 
 module.exports = router;
