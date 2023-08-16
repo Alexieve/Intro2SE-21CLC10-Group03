@@ -7,10 +7,11 @@
     <%- include("./partials/head") -%>
 	<link rel="stylesheet" href="./css/stylesBookInfo.css">
 	<link rel="stylesheet" href="./css/manageBook.css">
+
 </head>
 <body>
 
-	<%- include("./partials/navigation") -%>
+	<%- include("./partials/navigation2") -%>
     
     <%- include("./partials/coverImg") -%>\
 	<!-- Book Info -->
@@ -171,12 +172,12 @@
 							<%} %>
 
 							<% if (cntChap & 1) { %>
-								<a href="/manage/<%=book.bookID%>/<%=chap._id%>" class="list-group-item list-group-item-action list-group-item-light" >
+								<a href="/managePending/<%=book.bookID%>/<%=chap._id%>" class="list-group-item list-group-item-action list-group-item-light" >
 									<input class="form-check-input" type="checkbox" value="<%=chap._id%>">
 									Chapter <%=cntChap +": " + chap.chapName%><%-status%>
 								</a>
 							<% } else {%>
-								<a href="/manage/<%=book.bookID%>/<%=chap._id%>" class="list-group-item list-group-item-action list-group-item-secondary" >
+								<a href="/managePending/<%=book.bookID%>/<%=chap._id%>" class="list-group-item list-group-item-action list-group-item-secondary" >
 									<input class="form-check-input" type="checkbox" value="<%=chap._id%>">
 									Chapter <%=cntChap +": " + chap.chapName%><%-status%>
 								</a>
@@ -197,7 +198,7 @@
 		bookID = Number('<%=book.bookID%>') // Bien chua BookID
 		approveBook.addEventListener('click', async function(e) {
 			try {
-				const res = await fetch('/manage/approveBook', {
+				const res = await fetch('/managePending/approveBook', {
 					method: 'put',
 					body: JSON.stringify({bookID}),
 					headers: {'Content-Type': 'application/json'}
@@ -211,7 +212,7 @@
 
 		rejectBook.addEventListener('click', async function(e) {
 			try {
-				const res = await fetch('/manage/rejectBook', { 
+				const res = await fetch('/managePending/rejectBook', { 
 					method: 'delete',
 					body: JSON.stringify({bookID}),
 					headers: {'Content-Type': 'application/json'}
@@ -220,7 +221,7 @@
 			} catch(err) {
 				console.log(err)
 			}
-			location.assign('/manage')
+			location.assign('/managePending')
 		})
 
 	</script>
@@ -238,7 +239,7 @@
 			})
 
 			try {
-				const res = await fetch('/manage/approveChap', { // Chinh lai cai API
+				const res = await fetch('/managePending/approveChap', { // Chinh lai cai API
 					method: 'put',
 					body: JSON.stringify({objIDList}),
 					headers: {'Content-Type': 'application/json'}
@@ -258,7 +259,7 @@
 			})
 			
 			try {
-				const res = await fetch('/manage/rejectChap', { // Chinh lai cai API
+				const res = await fetch('/managePending/rejectChap', { // Chinh lai cai API
 					method: 'delete',
 					body: JSON.stringify({objIDList}),
 					headers: {'Content-Type': 'application/json'}

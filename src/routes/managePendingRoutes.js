@@ -2,11 +2,18 @@ const {Router} = require('express')
 const managePendingControllers = require('../controllers/managePendingControllers')
 const jwt = require('jsonwebtoken')
 const { requirePermission } = require('../middleware/authMiddleware')
-const { bookContainer} = require('../middleware/database')
+const { bookContainer,notifyContainer} = require('../middleware/database')
 const router = Router()
 const Chapter = require('../models/Chapter');
 const Book = require('../models/Book');
 const BookGenre = require('../models/BookGenre');
+const Notify = require('../models/Notify')
+
+const NotifyOfUser = require('../models/NotifyOfUser')
+
+function generateNotifyID() {
+  return Notify.find({}).select('notifyID').sort({'notifyID': -1}).limit(1) 
+}
 async function streamToText(readableStream) {
     return new Promise((resolve, reject) => {
       const chunks = [];
@@ -54,6 +61,21 @@ router.post('/pending-pass', async (req, res) => {
               if (book && book.isPending == isPending) {
                 book.isPending = 0;
                 await book.save();
+                notifyID = await generateNotifyID()
+                notifyID = notifyID[0].notifyID + 1
+                notiFile = `Noti${notifyID}.txt`
+
+                // Create Notify
+                await Notify.create({notifyID: notifyID, typeID: 2, content: notiFile})
+
+                // Create NotifyOfUsers
+        
+                 await NotifyOfUser.create({notifyID: notifyID, userID: book.author})
+      
+                  notiContent = `${book.bookID}`
+
+                const pathne = `${notiFile}`
+              saveFileToAzure(pathne, notiContent, notifyContainer)
               } else {
                 isSuccess = false; // Ghi nhận có lỗi xảy ra
                 break;
@@ -143,9 +165,21 @@ try {
     } else {
         const book = await Book.findOne({ bookID: bookID });
         if (book && book.isPending == isPending) {
-          // const chappath = `Book${bookID}`;
-          // const deleteBlobClient = bookContainer.getBlobClient(chappath);
-          // await deleteBlobClient.delete();
+          notifyID = await generateNotifyID()
+          notifyID = notifyID[0].notifyID + 1
+          notiFile = `Noti${notifyID}.txt`
+  
+          // Create Notify
+          await Notify.create({notifyID: notifyID, typeID: 3, content: notiFile})
+  
+        // Create NotifyOfUsers
+          
+          await NotifyOfUser.create({notifyID: notifyID, userID: book.author})
+        
+          notiContent = `${book.title}`
+  
+          const pathne = `${notiFile}`
+          saveFileToAzure(pathne, notiContent, notifyContainer)
           await BookGenre.deleteMany({ bookID: bookID });
           await Chapter.deleteMany({ bookID: bookID });
           await book.deleteOne();

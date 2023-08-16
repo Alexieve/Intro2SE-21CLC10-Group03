@@ -83,6 +83,8 @@ const requirePermission = (requiredPermission) => {
                 } else {
                     const user = await Account.findById(decodedToken.id);
                     if (user && user.permission >= requiredPermission) {
+                        user.avatarURL = avatarContainer.getBlobClient(user.avatarURL).url
+                        user.coverURL = profilecoverContainer.getBlobClient(user.coverURL).url
                         res.locals.user = user;
                         next();
                     } else {

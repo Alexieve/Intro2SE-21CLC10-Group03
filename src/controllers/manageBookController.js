@@ -7,8 +7,20 @@ const Chapter = require('../models/Chapter')
 
 const cheerio = require('cheerio');
 const jwt = require('jsonwebtoken')
-const {bookcoverContainer, bookContainer, avatarContainer} = require('../middleware/database')
+const {bookcoverContainer, bookContainer, avatarContainer,notifyContainer} = require('../middleware/database')
 
+
+const Notify = require('../models/Notify')
+
+const NotifyOfUser = require('../models/NotifyOfUser')
+
+function generateNotifyID() {
+  return Notify.find({}).select('notifyID').sort({'notifyID': -1}).limit(1) 
+}
+async function saveFileToAzure(fileName, content, container) {
+    const blobClient = container.getBlockBlobClient(fileName);
+    await blobClient.upload(content, Buffer.byteLength(content));
+  }
 async function streamToText(readableStream) {
     return new Promise((resolve, reject) => {
       const chunks = [];
@@ -175,7 +187,29 @@ module.exports.viewChapter = async (req, res) => {
 module.exports.approveBook = async (req, res) => {
     try {
         bookID = req.body.bookID
-        console.log(bookID)
+        const book = await Book.findOne({ bookID: bookID })
+        if (book && book.isPending == "1") {
+            book.isPending = 0;
+            await book.save();
+            notifyID = await generateNotifyID()
+        notifyID = notifyID[0].notifyID + 1
+        notiFile = `Noti${notifyID}.txt`
+
+        // Create Notify
+        await Notify.create({notifyID: notifyID, typeID: 2, content: notiFile})
+
+      // Create NotifyOfUsers
+        
+        await NotifyOfUser.create({notifyID: notifyID, userID: book.author})
+      
+        notiContent = `${book.bookID}`
+
+        const pathne = `${notiFile}`
+        saveFileToAzure(pathne, notiContent, notifyContainer)
+          } 
+        else {
+            res.status(400).json('error');
+          }
         res.status(200).json('ok');
     }
     catch (err) {
@@ -187,7 +221,31 @@ module.exports.approveBook = async (req, res) => {
 module.exports.rejectBook = async (req, res) => {
     try {
         bookID = req.body.bookID
-        console.log(bookID)
+        const book = await Book.findOne({ bookID: bookID });
+        if (book && book.isPending == "1") {
+
+            notifyID = await generateNotifyID()
+        notifyID = notifyID[0].notifyID + 1
+        notiFile = `Noti${notifyID}.txt`
+
+        // Create Notify
+        await Notify.create({notifyID: notifyID, typeID: 3, content: notiFile})
+
+      // Create NotifyOfUsers
+        
+        await NotifyOfUser.create({notifyID: notifyID, userID: book.author})
+      
+        notiContent = `${book.title}`
+
+        const pathne = `${notiFile}`
+        saveFileToAzure(pathne, notiContent, notifyContainer)
+        await BookGenre.deleteMany({ bookID: bookID });
+        await Chapter.deleteMany({ bookID: bookID });
+        await book.deleteOne();
+        } else {
+        res.status(400).json('error');
+        }
+
         res.status(200).json('ok');
     }
     catch (err) {
@@ -199,6 +257,39 @@ module.exports.rejectBook = async (req, res) => {
 module.exports.approveChap = async (req, res) => {
     try {
         chapList = req.body.objIDList
+        for (const id of chapList) {
+        const chap = await Chapter.findByID({ id})
+        if( chap && chap.isPending == "1")
+        {
+            chap.isPending = 0;
+            await chap.save();
+        }
+        else if (chap && chap.isPending == "2")
+        {
+            
+          
+           const updatePath = `Book${bookID}/Volume${volID}/${chap.updatefile}`;
+           //console.log(updatePath)
+           const contentPath = `Book${bookID}/Volume${volID}/${chap.contentfile}`;
+           //console.log(contentPath)
+           // Step 1: Read content of updatefile
+           const updateBlobClient = bookContainer.getBlobClient(updatePath);
+           //console.log(updateBlobClient)
+           const updateStream = await updateBlobClient.download();
+           const updateContent = await streamToText(updateStream.readableStreamBody);
+   
+           await saveFileToAzure(contentPath, updateContent, bookContainer);
+           await updateBlobClient.delete();
+           chap.isPending = 0;
+           chap.updatefile = "";
+           await chap.save();
+        }
+        else
+        {
+            res.status(400).json('error');
+            break;
+        }
+        }
         console.log(chapList)
         res.status(200).json('ok');
     }
@@ -211,7 +302,32 @@ module.exports.approveChap = async (req, res) => {
 module.exports.rejectChap = async (req, res) => {
     try {
         chapList = req.body.objIDList
-        console.log(chapList)
+        
+        for (const id of chapList) {
+            const chap = await Chapter.findByID({ id})
+            if( chap && chap.isPending == "1")
+        {
+            const chappath = `Book${bookID}/Volume${volID}/${chap.contentfile}`;
+            const deleteBlobClient = bookContainer.getBlobClient(chappath);
+            await deleteBlobClient.delete();
+            await chap.deleteOne()
+        }
+        else if (chap && chap.isPending == "2")
+        {
+            
+            const chappath = `Book${bookID}/Volume${volID}/${chap.updatefile}`;
+            const deleteBlobClient = bookContainer.getBlobClient(chappath);
+            await deleteBlobClient.delete();
+            chap.updatefile = "";
+            chap.isPending = 0;
+            await chap.save();
+        }
+        else
+        {
+            res.status(400).json('error');
+            break;
+        }
+        }
         res.status(200).json('ok');
     }
     catch (err) {
