@@ -18,6 +18,7 @@ const readingHistoryRoutes = require('./routes/readingHistoryRoutes');
 const notificationRoutes = require('./routes/notificationRoutes');
 const { requireAuth, checkUser} = require('./middleware/authMiddleware')
 const manageRoutes = require('./routes/manageRoutes')
+const manageBookRoutes = require('./routes/manageBookRoutes')
 const manageUserRoutes = require('./routes/manageUserRoutes')
 // const manageCommentRoutes = require('./routes/manageCommentRoutes')
 // const managePendingRoutes = require('./routes/managePendingRoutes')
@@ -58,6 +59,7 @@ app.get("/bookmark", requireAuth, (req, res) => res.render('bookmark'));
 app.use('/book', bookInfoRoutes); // Add the bookInfoRoutes
 app.get("/filter",(req,res) => res.render('filter'));
 app.use(manageRoutes)
+app.use(manageBookRoutes)
 app.use(manageUserRoutes)
 // app.use(manageCommentRoutes)
 // app.use(managePendingRoutes)

@@ -140,7 +140,7 @@ module.exports.bookInfo_get = async (req, res) => {
       book.volumes = await Volume.find({ bookID }).sort({volID: 1})
 
       book.volumes.forEach(async element => {
-        element.chapters = await Chapter.find({bookID: bookID, volID: element.volID}).sort({chapID: 1});
+        element.chapters = await Chapter.find({bookID: bookID, volID: element.volID, isPending: { $in: [0, 2] }}).sort({chapID: 1});
       })
   
       const bookGenres = await BookGenre.find({ bookID })
@@ -258,14 +258,29 @@ module.exports.bookInfo_get = async (req, res) => {
       }
       // console.log(ratingScore)
 
-      res.render('bookInfo', { book, genresOfBook, author, commentsList, countbookmark, checkbookmark, curUser, ratingData: {ratingScore, ratingCount}}); // Pass genres to the view
+      chapDate = new Date()
+      for (bookElement of book.volumes) {
+        if (bookElement.chapters.length == 0) {
+          continue
+        }
+        else {
+          for (chapElement of bookElement.chapters) {
+            if (chapElement.isPending == 0 || chapElement.isPending == 2){
+              chapDate = new Date(chapElement.publishDate)
+            }
+          }
+        }
+      }
+      
+
+      res.render('bookInfo', { book, genresOfBook, author, commentsList, countbookmark, checkbookmark, curUser, chapDate, ratingData: {ratingScore, ratingCount}}); // Pass genres to the view
   } catch (err) {
       console.error(err);
       res.status(500).send('Internal Server Error');
   }
 };
 
-
+  
 module.exports.bookmark = async (req, res) => {
   try {
     objID = req.body.objID 
