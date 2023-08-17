@@ -11,6 +11,17 @@ nav {
 .nav-item {
     padding: 0 20px;
 }
+
+.search-form {
+    width: 500px;
+}
+@media (max-width: 1024px) {
+    .search-form {
+        width: 200px;
+    }
+}
+
+
 #footer {
     /* position: fixed;
     height: 60px;

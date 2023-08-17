@@ -8,7 +8,7 @@
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse col-12" id="navbarSupportedContent">
-            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <ul class="navbar-nav d-flex align-items-center justify-content-center justify-content-lg-start mb-2 mb-lg-0">
                 <li class="nav-item rounded-3">
                     <b><a class="nav-link" href="../filter">Thể loại</a></b>
                 </li>
@@ -18,13 +18,20 @@
                 <li class="nav-item rounded-3">
                     <b><a class="nav-link" href="/upload">Viết sách</a></b>
                 </li>
+                <form class="nav-item rounded-3" action = "../filter" role="search" method = "get">
+                    <input class="form-control search-form me-4 " type="text" placeholder="Tìm kiếm..." aria-label="Search" name="navSearch">
+                </form>
+                <li class="nav-item ml-auto rounded-3">
+                    <%- include("./avtDropDown") -%>
+                </li>
+
             </ul>
-            <form class="d-flex w-auto" action = "../filter" role="search" method = "get">
+            <!-- <form class="d-flex w-auto" action = "../filter" role="search" method = "get">
                 <input class="form-control search-form me-4 " type="text" placeholder="Tìm kiếm..." aria-label="Search" name="navSearch">
-            </form>
-            <ul class="navbar-nav">
+            </form> -->
+            <!-- <ul class="navbar-nav">
                 <%- include("./avtDropDown") -%>
-            </ul>
+            </ul> -->
         </div>
     </div>
 </nav>
