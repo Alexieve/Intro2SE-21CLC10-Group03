@@ -116,7 +116,7 @@ module.exports.addBook_post = async (req, res) => {
         coverImg = "bookCover" + bookID + ".jpg"
         blobClient = bookcoverContainer.getBlockBlobClient(coverImg);
         await blobClient.uploadData(req.file.buffer, req.file.buffer.length);
-        console.log(`Image uploaded to Azure Blob Storage.`);
+        // console.log(`Image uploaded to Azure Blob Storage.`);
         // return res.status(200).json({ message: 'Image uploaded successfully' });
       } catch (error) {
         console.error('Error uploading image:', error);
@@ -134,6 +134,7 @@ module.exports.addBook_post = async (req, res) => {
       coverImg: coverImg,
       status: status,
       authorName: authorName,
+      publishDate: new Date(),
     })
     if (genres) genres.forEach(async element  => {
       await BookGenre.create({
@@ -228,7 +229,7 @@ module.exports.updateBook_post = async (req, res) => {
         )
         blobClient = bookcoverContainer.getBlockBlobClient(coverImg);
         await blobClient.uploadData(req.file.buffer, req.file.buffer.length);
-        console.log(`Image uploaded to Azure Blob Storage.`);
+        // console.log(`Image uploaded to Azure Blob Storage.`);
         // return res.status(200).json({ message: 'Image uploaded successfully' });
       } catch (error) {
         console.error('Error uploading image:', error);
@@ -365,6 +366,7 @@ module.exports.addChapter_post = async (req, res) => {
       chapID: chapID,
       chapName: chapName,
       contentfile: chapFile,
+      publishDate: new Date(),
     })
     
     res.status(200).json({check: 'ok'});

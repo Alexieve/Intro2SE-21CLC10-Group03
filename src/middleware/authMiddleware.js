@@ -33,7 +33,7 @@ const preventLoginAgain = (req, res, next) => {
                 next();
             }
             else {
-                console.log('Prevent Login Success');
+                // console.log('Prevent Login Success');
                 res.redirect('/');
             }
         })
@@ -56,7 +56,7 @@ const checkUser = (req, res, next) => {
             }
             else {
 
-                console.log('Current User: ' + decodedToken.id);
+                // console.log('Current User: ' + decodedToken.id);
                 let user = await Account.findById(decodedToken.id);
 
                 user.avatarURL = avatarContainer.getBlobClient(user.avatarURL).url

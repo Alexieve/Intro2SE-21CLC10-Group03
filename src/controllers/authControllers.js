@@ -63,7 +63,7 @@ module.exports.forgetPassword_get = (req, res) => {
 }
 
 module.exports.login_post = async (req, res) => {
-    console.log(req.body)
+    // console.log(req.body)
     const username = req.body.username
     const password = req.body.password
 
@@ -80,14 +80,14 @@ module.exports.login_post = async (req, res) => {
 }
 
 module.exports.register_post = async (req, res) => {
-    console.log(req.body)
+    // console.log(req.body)
     const username = req.body.username
     const password = req.body.password
     const profileName = req.body.profileName
     const sdt = req.body.sdt
     const dob = req.body.dob
     maxID = await generateUserID()
-    console.log(maxID)
+    // console.log(maxID)
     const userID = maxID[0].userID + 1
     
     try {
@@ -98,6 +98,7 @@ module.exports.register_post = async (req, res) => {
             password: password,
             sdt: sdt,
             dob: dob,
+            regdate: new Date()
         })
         const token = createToken(user._id)
         res.cookie('jwt', token, {httpOnly: true, maxAge: maxAge * 1000})
@@ -110,7 +111,7 @@ module.exports.register_post = async (req, res) => {
 }
 
 module.exports.forgetPassword_post = async (req, res) => {
-    console.log(req.body)
+    // console.log(req.body)
     const username = req.body.username
     const sdt = req.body.sdt
     const newpassword = req.body.password

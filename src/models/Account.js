@@ -102,7 +102,7 @@ accountSchema.statics.login = async function(username, password) {
 accountSchema.statics.forgetPassword = async function(username, sdt, password) {
     const user = await Account.findOne({username: username, sdt: sdt})
     if (user) {
-        console.log(user)
+        // console.log(user)
         const salt = await bcrypt.genSalt();
         password = await bcrypt.hash(password, salt);
         await Account.updateOne({username: username, sdt: sdt}, {password: password})

@@ -330,7 +330,7 @@ module.exports.addComment = async (req, res) => {
     bookID = req.params.id
     contentfile = req.body.commentContent
     try {
-      const cmt = await Comment.create({bookID: bookID, userID: userID, contentfile: contentfile})
+      const cmt = await Comment.create({bookID: bookID, userID: userID, contentfile: contentfile, publishDate: new Date()})
       cmt.commentID = cmt._id
       cmt.save()
       res.status(200).json(cmt._id);
@@ -406,10 +406,10 @@ module.exports.reportComment = async (req, res) => {
       
 
 
-      console.log(notiFile)
-      console.log(reportedUserID)
-      console.log(reportedcmtID)
-      console.log(notiContent)
+      // console.log(notiFile)
+      // console.log(reportedUserID)
+      // console.log(reportedcmtID)
+      // console.log(notiContent)
     }
     res.status(200).json('ok');
   }
