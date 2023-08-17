@@ -2,25 +2,11 @@
 <html lang="vi">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <!-- Open Sans Font -->
-    <link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
-    <!-- FontAweSome -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <!-- jquery -->
-    <script src="https://code.jquery.com/jquery-3.7.0.js" integrity="sha256-JlqSTELeR4TLqP0OG9dxM7yDPqX1ox/HfgiSLBj8+kM=" crossorigin="anonymous"></script>
-    <!-- Bootstrap -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="/css/stylesHome.css" type="text/css"/>
-    <link rel="stylesheet" href="/css/styleManage.css" type="text/css"/>
-    <link rel="stylesheet" href="/css/avtDropDown.css" type="text/css"/>
-    <!-- Tiny ediotr -->
-    <script src="https://cdn.tiny.cloud/1/czhzadznx3qb12g2i4971xbviqsshfv65cbyuvs95fsi5021/tinymce/6/tinymce.min.js" referrerpolicy="origin"></script>
-    <title>HappiNovel</title>
+  <link rel="icon" href="/Image/logo-circle.png" style="border-radius: 50%;">
+  <!-- <title>Trang chủ - Cổng đọc truyện số 1 Việt Nam</title> -->
+  <title>Kho sách</title>
+  <%- include("./partials/head") -%>
+    
  
 </head>
 <body>
@@ -52,10 +38,10 @@
                     <option>Deleted </option>
                     </select>
       </div>
-      <div class="col-md-2 mt-2 d-flex align-items-center ">
+      <div class="col-md-3 mt-2 d-flex align-items-center ">
         <button id="button-delete" class="btn btn-outline " style="background-color: #D9D9D9; margin-left: 40px;">Xóa </button>
       </div>
-      <div class="col-md-2 mt-2 d-flex align-items-center">
+      <div class="col-md-3 mt-2 d-flex align-items-center">
         <button  id="button-approve" class="btn btn-outline" style="background-color: #D9D9D9;">Duyệt</button>
       </div>
       <!-- <div class="col-md-2 mt-4 d-flex justify-content-center">
@@ -172,6 +158,24 @@
   }
 </style>
 <script>
+  function setFixedColumnWidths() {
+    const table = document.querySelector(".table");
+    const headerCells = table.querySelectorAll("thead th");
+    const dataRows = table.querySelectorAll("tbody tr");
+
+    headerCells.forEach((headerCell, index) => {
+      const width = getComputedStyle(headerCell).width;
+      dataRows.forEach((dataRow) => {
+        const cell = dataRow.querySelectorAll("td")[index];
+        cell.style.width = width;
+      });
+    });
+  }
+
+  // Gọi hàm setFixedColumnWidths() khi trang được tải
+  window.addEventListener("load", setFixedColumnWidths);
+</script>
+<script>
   function getStatusFromText(statusText) {
     const lowerCaseStatus = statusText.toLowerCase();
     if (lowerCaseStatus.includes("pending")) {
@@ -208,7 +212,7 @@
       const authorMatch = authorName.includes(searchTerm);
 
       // Lấy giá trị book.status từ cột thứ 8 (td:nth-child(8))
-      const status = row.querySelector("td:nth-child(8)").textContent;
+      const status = row.querySelector("td:nth-child(7)").textContent;
 
       // Kiểm tra trạng thái 'stopped'
       const statusValue = getStatusFromText(status);
