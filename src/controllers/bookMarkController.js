@@ -64,20 +64,36 @@ exports.bookmark = async (req, res) => {
     let bookmark = []
     let bookIMG = []
     let bookIDD = []
+    let volid = []
+    let vol = []
     
     for (const book of bookMarksID){
         const chapOfBookMark = await Chapter.find({bookID: book}).sort({'publishDate': 1}).limit(1);
         
         //chapName = chapOfBookMark.map(Chapter => Chapter.chapName);
+        if (chapOfBookMark.length > 0) {
         chapName = chapOfBookMark[0].chapName;
         chap_id = chapOfBookMark[0]._id;
-        const bookid = chapOfBookMark[0].bookID;
-        const bookH = await Book.findOne({bookID: bookid});
+      } else {
+        chapName = 'Không có chương mới';
+        // You might want to set chap_id to a default value here as well
+        chap_id = ' ';
+      }
+        
+        
+        const bookH = await Book.findOne({bookID: book});
         if(bookH.status!=3){
         bookName = bookH.title;
-        const volid = chapOfBookMark[0].volID;
-        const vol = await Volume.findOne({volID : volid, bookID: bookid});
-        volName = vol.volName;        
+
+        if (chapOfBookMark.length > 0) {
+          volid = chapOfBookMark[0].volID;
+          vol = await Volume.findOne({volID : volid, bookID: book});
+          volName = vol.volName; 
+        } else {
+          volName = 'Không có vol mới';
+        }
+        
+               
         bookIMG = bookH.coverImg;
         bookIDD = bookH.bookID;
         bookmark.push({chapName, volName, bookName, bookIMG, bookIDD, chap_id})

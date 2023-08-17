@@ -206,11 +206,12 @@ module.exports.approveBook = async (req, res) => {
 
         const pathne = `${notiFile}`
         saveFileToAzure(pathne, notiContent, notifyContainer)
+        res.status(200).json('ok');
           } 
         else {
             res.status(400).json('error');
           }
-        res.status(200).json('ok');
+        
     }
     catch (err) {
         console.log(err)
@@ -242,11 +243,12 @@ module.exports.rejectBook = async (req, res) => {
         await BookGenre.deleteMany({ bookID: bookID });
         await Chapter.deleteMany({ bookID: bookID });
         await book.deleteOne();
+        res.status(200).json('ok');
         } else {
         res.status(400).json('error');
         }
 
-        res.status(200).json('ok');
+        
     }
     catch (err) {
         console.log(err)
@@ -257,8 +259,10 @@ module.exports.rejectBook = async (req, res) => {
 module.exports.approveChap = async (req, res) => {
     try {
         chapList = req.body.objIDList
+        //console.log(chapList);
+        let chek = true;
         for (const id of chapList) {
-        const chap = await Chapter.findByID({ id})
+        const chap = await Chapter.findById( id)
         if( chap && chap.isPending == "1")
         {
             chap.isPending = 0;
@@ -268,9 +272,9 @@ module.exports.approveChap = async (req, res) => {
         {
             
           
-           const updatePath = `Book${bookID}/Volume${volID}/${chap.updatefile}`;
+           const updatePath = `Book${chap.bookID}/Volume${chap.volID}/${chap.updatefile}`;
            //console.log(updatePath)
-           const contentPath = `Book${bookID}/Volume${volID}/${chap.contentfile}`;
+           const contentPath = `Book${chap.bookID}/Volume${chap.volID}/${chap.contentfile}`;
            //console.log(contentPath)
            // Step 1: Read content of updatefile
            const updateBlobClient = bookContainer.getBlobClient(updatePath);
@@ -286,12 +290,20 @@ module.exports.approveChap = async (req, res) => {
         }
         else
         {
-            res.status(400).json('error');
+            chek = false;
+            
             break;
         }
         }
-        console.log(chapList)
-        res.status(200).json('ok');
+        if (chek)
+        {
+            res.status(200).json('ok');
+        }
+        else
+        {
+            res.status(400).json('error');
+        }
+        
     }
     catch (err) {
         console.log(err)
@@ -302,12 +314,12 @@ module.exports.approveChap = async (req, res) => {
 module.exports.rejectChap = async (req, res) => {
     try {
         chapList = req.body.objIDList
-        
+        let chek2 = true;
         for (const id of chapList) {
-            const chap = await Chapter.findByID({ id})
+            const chap = await Chapter.findById( id)
             if( chap && chap.isPending == "1")
         {
-            const chappath = `Book${bookID}/Volume${volID}/${chap.contentfile}`;
+            const chappath = `Book${chap.bookID}/Volume${chap.volID}/${chap.contentfile}`;
             const deleteBlobClient = bookContainer.getBlobClient(chappath);
             await deleteBlobClient.delete();
             await chap.deleteOne()
@@ -315,7 +327,7 @@ module.exports.rejectChap = async (req, res) => {
         else if (chap && chap.isPending == "2")
         {
             
-            const chappath = `Book${bookID}/Volume${volID}/${chap.updatefile}`;
+            const chappath = `Book${chap.bookID}/Volume${chap.volID}/${chap.updatefile}`;
             const deleteBlobClient = bookContainer.getBlobClient(chappath);
             await deleteBlobClient.delete();
             chap.updatefile = "";
@@ -324,11 +336,20 @@ module.exports.rejectChap = async (req, res) => {
         }
         else
         {
-            res.status(400).json('error');
+            chek2 = false;
+            
             break;
         }
         }
-        res.status(200).json('ok');
+        if(chek2)
+        {
+            res.status(200).json('ok');
+        }
+        else
+        {
+            res.status(400).json('error');
+        }
+        
     }
     catch (err) {
         console.log(err)
