@@ -69,6 +69,11 @@ const getBooks = async (req, res) => {
               $unwind: "$userInfo"
             },
             {
+              $match: {
+                $or: [{ isPending: 1 }, { isPending: 2 }],
+              },
+            },
+            {
               $group: {
                 _id: {
                   chapID: "$chapID",
@@ -89,11 +94,7 @@ const getBooks = async (req, res) => {
                 bookauthor: { $first: "$bookInfo.authorName" },
               }
             },
-            {
-              $match: {
-                $or: [{ isPending: 1 }, { isPending: 2 }],
-              },
-            },
+            
             {
               $sort: { bookID: 1 } // Sắp xếp theo bookID tăng dần (1) hoặc giảm dần (-1)
             }
