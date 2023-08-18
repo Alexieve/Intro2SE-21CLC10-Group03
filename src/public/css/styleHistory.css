@@ -725,11 +725,11 @@ a {
     cursor: default
 }
 
-img {
+.all-his img {
     display: block;
 }
 
-img {
+.all-his img {
     height: auto;
     max-width: 100%
 }
