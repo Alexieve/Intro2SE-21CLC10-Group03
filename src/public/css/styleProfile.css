@@ -1017,10 +1017,19 @@
 	--tw-shadow-colored: 0 0 #000 0;
 }
 
+.allll .containerP {
+	margin-left: auto;
+	margin-right: auto;
+	width: 100%;
+	margin-top: -70px;
+	
+}
+
 .allll .container {
 	margin-left: auto;
 	margin-right: auto;
 	width: 100%;
+	margin-top: 10px;
 }
 
 @media (min-width: 640px) {
