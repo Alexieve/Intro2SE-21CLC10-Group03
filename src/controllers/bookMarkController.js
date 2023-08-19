@@ -68,7 +68,7 @@ exports.bookmark = async (req, res) => {
     let vol = []
     
     for (const book of bookMarksID){
-        const chapOfBookMark = await Chapter.find({bookID: book}).sort({'publishDate': 1}).limit(1);
+        const chapOfBookMark = await Chapter.find({bookID: book}).sort({'publishDate': -1}).limit(1);
         
         //chapName = chapOfBookMark.map(Chapter => Chapter.chapName);
         if (chapOfBookMark.length > 0) {
