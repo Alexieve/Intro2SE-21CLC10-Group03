@@ -63,10 +63,15 @@ exports.profilePage = async (req, res) => {
 
       
         const genreIDs = await bookgenres.findOne({ bookID });
-        const genreID = genreIDs ? genreIDs.genreID : "Not found genre";
-
-        const genre = await Genre.findOne({ genreID });
-        const genreName = genre ? genre.genreName : "Not found genre";
+        
+        let genreName;
+        if(!genreIDs){
+          genreName = "Not found genre";
+        }else{
+          const genreID = genreIDs.genreID;
+          const genre = await Genre.findOne({ genreID });
+        genreName = genre ? genre.genreName : "Not found genre";
+        }
 
         genreNames.push({ genreName });
       
@@ -138,10 +143,15 @@ exports.profilePage = async (req, res) => {
 
       
         const genreIDs = await bookgenres.findOne({ bookID });
-        const genreID = genreIDs ? genreIDs.genreID : "Not found genre";
-
-        const genre = await Genre.findOne({ genreID });
-        const genreName = genre ? genre.genreName : "Not found genre";
+        
+        let genreName;
+        if(!genreIDs){
+          genreName = "Not found genre";
+        }else{
+          const genreID = genreIDs.genreID;
+          const genre = await Genre.findOne({ genreID });
+        genreName = genre ? genre.genreName : "Not found genre";
+        }
 
         genreNames.push({ genreName });
       

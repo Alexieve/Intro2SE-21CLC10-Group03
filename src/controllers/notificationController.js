@@ -192,11 +192,16 @@ exports.notification = async (req, res) => {
       const bookName = bookData ? bookData.title : "Book Name Not Found";
       const bookIMG = bookData ? bookData.coverImg : "Book Name Not Found";
       if(bookData.status!=3){
-      const genreIDs = await bookgenres.findOne({ bookID });
-      const genreID = genreIDs ? genreIDs.genreID : "Not found genre";
-
-      const genre = await Genre.findOne({ genreID });
-      const genreName = genre ? genre.genreName : "Not found genre";
+        const genreIDs = await bookgenres.findOne({ bookID });
+        let genreName;
+        if(!genreIDs){
+          genreName =  "Not found genre";
+        }else{
+        const genreID =  genreIDs.genreID ;
+        
+        const genre = await Genre.findOne({ genreID });
+        genreName = genre.genreName;
+      }
 
     
       notifyData.push({
@@ -225,11 +230,16 @@ exports.notification = async (req, res) => {
       const bookName = bookData ? bookData.title : "Book Name Not Found";
       const bookIMG = bookData ? bookData.coverImg : "Book Name Not Found";
       if(bookData.status!=3){
-      const genreIDs = await bookgenres.findOne({ bookID });
-      const genreID = genreIDs ? genreIDs.genreID : "Not found genre";
-      
-      const genre = await Genre.findOne({ genreID });
-      const genreName = genre ? genre.genreName : "Not found genre";
+        const genreIDs = await bookgenres.findOne({ bookID });
+        let genreName;
+        if(!genreIDs){
+          genreName =  "Not found genre";
+        }else{
+        const genreID =  genreIDs.genreID ;
+        
+        const genre = await Genre.findOne({ genreID });
+        genreName = genre.genreName;
+      }
       
       notifyData2.push({
         IDnotify,
@@ -300,10 +310,15 @@ exports.notification = async (req, res) => {
         const bookIMG = bookData ? bookData.coverImg : "Book Name Not Found";
         if(bookData.status!=3){
         const genreIDs = await bookgenres.findOne({ bookID });
-        const genreID = genreIDs ? genreIDs.genreID : "Not found genre";
+        let genreName;
+        if(!genreIDs){
+          genreName =  "Not found genre";
+        }else{
+        const genreID =  genreIDs.genreID ;
         
         const genre = await Genre.findOne({ genreID });
-        const genreName = genre ? genre.genreName : "Not found genre";
+        genreName = genre.genreName;
+      }
         
         notifyData5.push({
           IDnotify,
