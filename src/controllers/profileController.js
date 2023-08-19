@@ -33,7 +33,7 @@ exports.profilePage = async (req, res) => {
     const Anotheruser = await Account.findOne({ userID: IDuser });
     const trueUser = null;
     
-    const matchedBooks = await Book.find({ author: user.userID, status: {$ne: 3} });
+    const matchedBooks = await Book.find({ author: user.userID, status: {$ne: 3} ,isPending: {$ne: 1}});
     const BookMId = await BookMark.find({ userID: user.userID });
     const Makedbook = [];
 
@@ -113,7 +113,7 @@ exports.profilePage = async (req, res) => {
     const Anotheruser = await Account.findOne({ userID: IDuser });
     const trueUser = await Account.findById(decodedToken.id);
     
-    const matchedBooks = await Book.find({ author: user.userID, status: {$ne: 3} });
+    const matchedBooks = await Book.find({ author: user.userID, status: {$ne: 3}, isPending: {$ne: 1}});
     const BookMId = await BookMark.find({ userID: user.userID });
     const Makedbook = [];
 
