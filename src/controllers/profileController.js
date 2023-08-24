@@ -33,7 +33,7 @@ exports.profilePage = async (req, res) => {
     const Anotheruser = await Account.findOne({ userID: IDuser });
     const trueUser = null;
     
-    const matchedBooks = await Book.find({ author: user.userID, status: {$ne: 3} });
+    const matchedBooks = await Book.find({ author: user.userID, status: {$ne: 3} ,isPending: {$ne: 1}});
     const BookMId = await BookMark.find({ userID: user.userID });
     const Makedbook = [];
 
@@ -63,10 +63,15 @@ exports.profilePage = async (req, res) => {
 
       
         const genreIDs = await bookgenres.findOne({ bookID });
-        const genreID = genreIDs ? genreIDs.genreID : "Not found genre";
-
-        const genre = await Genre.findOne({ genreID });
-        const genreName = genre ? genre.genreName : "Not found genre";
+        
+        let genreName;
+        if(!genreIDs){
+          genreName = "Not found genre";
+        }else{
+          const genreID = genreIDs.genreID;
+          const genre = await Genre.findOne({ genreID });
+        genreName = genre ? genre.genreName : "Not found genre";
+        }
 
         genreNames.push({ genreName });
       
@@ -108,7 +113,7 @@ exports.profilePage = async (req, res) => {
     const Anotheruser = await Account.findOne({ userID: IDuser });
     const trueUser = await Account.findById(decodedToken.id);
     
-    const matchedBooks = await Book.find({ author: user.userID, status: {$ne: 3} });
+    const matchedBooks = await Book.find({ author: user.userID, status: {$ne: 3}, isPending: {$ne: 1}});
     const BookMId = await BookMark.find({ userID: user.userID });
     const Makedbook = [];
 
@@ -138,10 +143,15 @@ exports.profilePage = async (req, res) => {
 
       
         const genreIDs = await bookgenres.findOne({ bookID });
-        const genreID = genreIDs ? genreIDs.genreID : "Not found genre";
-
-        const genre = await Genre.findOne({ genreID });
-        const genreName = genre ? genre.genreName : "Not found genre";
+        
+        let genreName;
+        if(!genreIDs){
+          genreName = "Not found genre";
+        }else{
+          const genreID = genreIDs.genreID;
+          const genre = await Genre.findOne({ genreID });
+        genreName = genre ? genre.genreName : "Not found genre";
+        }
 
         genreNames.push({ genreName });
       
