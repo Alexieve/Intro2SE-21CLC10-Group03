@@ -137,7 +137,7 @@ module.exports.bookInfo_get = async (req, res) => {
         return res.status(404).render('404');
       }
 
-      book.volumes = await Volume.find({ bookID }).sort({volID: 1})
+      book.volumes = await Volume.find({bookID: bookID, isDeleted: 0}).sort({volID: 1})
 
       book.volumes.forEach(async element => {
         element.chapters = await Chapter.find({bookID: bookID, volID: element.volID, isPending: { $in: [0, 2] }}).sort({chapID: 1});

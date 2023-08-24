@@ -11,7 +11,7 @@
             <b>Tên sách <span style="color: red;">*</span></b>
         </div>
         <div class="col-md-10">
-            <input type="text" class="form-control" placeholder="Tên sách" name="title">
+            <input type="text" class="form-control" placeholder="Tên sách" name="title" required pattern="\S(.*\S)?" title="This field is required">
         </div>
     </div>
 
@@ -21,7 +21,7 @@
             <b>Tác giả <span style="color: red;">*</span></b>
         </div>
         <div class="col-md-10">
-            <input type="text" class="form-control" placeholder="Tên tác giả" name="authorName">
+            <input type="text" class="form-control" placeholder="Tên tác giả" name="authorName" required pattern="\S(.*\S)?" title="This field is required">
         </div>
     </div>
     
@@ -165,12 +165,22 @@
                     genres.push(form4.genres[i].value)
                 }
             }
+            if (!genres.length) {
+                alert("Vui lòng chọn thể loại của sách.");
+                return false;
+            }
+
             const status = form4.status.value
             const bookCover = form4.bookCover.files[0] || new Blob([new Uint8Array([])], { type: 'image/jpeg' })
             let imageName = bookCover.name
             if (bookCover.size == 0) imageName = ''
 
             const summary = tinymce.get('summary4').getContent()
+            checked = tinymce.get('summary4').getContent({format: 'text'})
+            if(checked.trim() === '') {
+                alert("Vui lòng nhập nội dung tóm tắt")
+                return false
+            }
             const note = tinymce.get('note4').getContent()
 
             const formData = new FormData()

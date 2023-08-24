@@ -4,8 +4,10 @@ const BookGenre = require('../models/BookGenre')
 const Volume = require('../models/Volume')
 const Chapter = require('../models/Chapter')
 const Genre = require('../models/Genre')
+const Notify = require('../models/Notify')
+const NotifyOfUser = require('../models/NotifyOfUser')
 const jwt = require('jsonwebtoken')
-const {bookcoverContainer, bookContainer} = require('../middleware/database')
+const {bookcoverContainer, bookContainer, notifyContainer} = require('../middleware/database')
 
 module.exports.upload_get = (req, res) => {
     const token = req.cookies.jwt;
@@ -70,6 +72,9 @@ function generateVolID(bookID) {
 }
 function generateChapID(bookID, volID) {
   return Chapter.find({bookID: bookID, volID: volID}).select('chapID').sort({'chapID': -1}).limit(1) 
+}
+function generateNotifyID() {
+  return Notify.find({}).select('notifyID').sort({'notifyID': -1}).limit(1) 
 }
 
 async function streamToText(readableStream) {
@@ -142,6 +147,24 @@ module.exports.addBook_post = async (req, res) => {
           genreID: element,
       })
     });
+
+      notifyID = await generateNotifyID()
+      notifyID = notifyID[0].notifyID + 1
+      notiFile = `Noti${notifyID}.txt`
+
+      // Create Notify
+      await Notify.create({notifyID: notifyID, typeID: 5, content: notiFile})
+
+      // Create NotifyOfUsers
+      listUser = await Account.find({permission: {$ne: 0}}).select('userID')
+      listUser = listUser.map(Account => Account.userID)
+      for (const UID of listUser) {
+        await NotifyOfUser.create({notifyID: notifyID, userID: UID})
+      }
+      notiContent = `${bookID}`
+      const path = `${notiFile}`
+      saveFileToAzure(path, notiContent, notifyContainer)
+
     
     res.status(200).json({check: 'ok'});
   } catch (error) {

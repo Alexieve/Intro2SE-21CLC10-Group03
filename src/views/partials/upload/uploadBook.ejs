@@ -10,7 +10,7 @@
             <b>Tên sách <span style="color: red;">*</span></b>
         </div>
         <div class="col-md-10">
-            <input type="text" class="form-control" placeholder="Tên sách" name="title" required>
+            <input type="text" class="form-control" placeholder="Tên sách" name="title" required pattern="\S(.*\S)?" title="This field is required">
         </div>
     </div>
 
@@ -20,7 +20,7 @@
             <b>Tác giả <span style="color: red;">*</span></b>
         </div>
         <div class="col-md-10">
-            <input type="text" class="form-control" placeholder="Tên tác giả" name="authorName" required>
+            <input type="text" class="form-control" placeholder="Tên tác giả" name="authorName" required pattern="\S(.*\S)?" title="This field is required">
         </div>
     </div>
     
@@ -74,7 +74,7 @@
             <b>Tóm tắt <span style="color: red;">*</span></b>
         </div>
         <div class="col-md-10">
-            <textarea id="summary1" name="summary" required>Welcome to HappiNovel!</textarea>
+            <textarea id="summary1" name="summary">Welcome to HappiNovel!</textarea>
             <script>
                 tinymce.init({
                     selector: 'textarea#summary1'
@@ -114,12 +114,23 @@
                 genres.push(form1.genres[i].value)
             }
         }
+        if (!genres.length) {
+            alert("Vui lòng chọn thể loại của sách.");
+            return false;
+        }
+
         const status = form1.status.value
         const bookCover = form1.bookCover.files[0] || new Blob([new Uint8Array([])], { type: 'image/jpeg' })
         let imageName = bookCover.name
         if (bookCover.size == 0) imageName = ''
 
         const summary = tinymce.get('summary1').getContent()
+        checked = tinymce.get('summary1').getContent({format: 'text'})
+        if(checked.trim() === '') {
+            alert("Vui lòng nhập nội dung tóm tắt")
+            return false
+        }
+
         const note = tinymce.get('note1').getContent()
 
         const formData = new FormData()

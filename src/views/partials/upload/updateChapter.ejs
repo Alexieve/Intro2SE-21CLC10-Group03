@@ -41,7 +41,7 @@
             <b>Tên chương <span style="color: red;">*</span></b>
         </div>
         <div class="col-md-10">
-            <input type="text" class="form-control" placeholder="Tên chương" name="chapName">
+            <input type="text" class="form-control" placeholder="Tên chương" name="chapName" required pattern="\S(.*\S)?" title="This field is required">
         </div>
     </div>
 
@@ -120,6 +120,11 @@
             const chapObjID= form6.chapObjID.value
             const chapName = form6.chapName.value
             const chapContent = tinymce.get('content2').getContent()
+            checked = tinymce.get('content2').getContent({format: 'text'})
+            if(checked.trim() === '') {
+                alert("Vui lòng nhập nội dung tóm tắt")
+                return false
+            }
             
             try {
             const res = await fetch('/upload/updateChapter', {
