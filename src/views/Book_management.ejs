@@ -110,14 +110,14 @@
             <td class="d-flex justify-content-center">
                 <% if (Book.isPending === 1) { %>
                 <span class="p-1 rounded" style="background-color: #FDE9B5;">Pending</span>
-                <% } else if (Book.status === 0) { %>
+                <% } else if (Book.status === 0 && Book.isPending === 0 ) { %>
                 <span class="p-1 rounded" style="background-color: #E79BF4;">Stopped</span>
-                <% } else if (Book.status === 1) { %>
+                <% } else if (Book.status === 1 && Book.isPending === 0) { %>
                 <span class="p-1 rounded" style="background-color: #67FF88;">In Process</span>
-                <% } else if (Book.status === 2) { %>
+                <% } else if (Book.status === 2 && Book.isPending === 0) { %>
                 <span class="p-1 rounded" style="background-color: #848484;">Completed</span>
                 <% } 
-                else if (Book.status === 3) { %>
+                else if (Book.status === 3 && Book.isPending === 0) { %>
                   <span class="p-1 rounded" style="background-color: #FF6767;">Deleted</span>
                   <% }
                 else { %>
@@ -335,7 +335,7 @@
     });
     
     // Gửi dữ liệu lên server bằng AJAX
-    const allArePending = selectedBookIDs.length > 0 && selectedBookIDs.every(book => book.status != "3");
+    const allArePending = selectedBookIDs.length > 0 && selectedBookIDs.every(book => book.status != "3" && book.isPending!="1" );
 
     if (allArePending) {
       try {
