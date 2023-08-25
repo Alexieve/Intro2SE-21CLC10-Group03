@@ -84,19 +84,19 @@
                                 <div class="row">
                                   <div class="col-1" style="margin-top: 20px;">
                                     <div class="card" style="height: 100px; width: 80px;">
-                                      <img class="card-img-top" style="height: 100px; width: 80px;" src="<%=bookCoverURL[readingHistory[i].bookID]%>" alt="Card image">
+                                      <img class="card-img-top" style="height: 100px; width: 80px;" src="<%=bookCoverURL[readingHistory[i].book.bookID]%>" alt="Card image">
                                       <div class="card-img-overlay">
                                         <div class="card-img-overlay d-flex align-items-end">
                                           <div class="card-title" style="margin-bottom: -5px; text-align: center">
-                                            <a href="/book/<%=readingHistory[i].bookID%>" style="text-decoration: none; color: white"></a>
+                                            <a href="/book/<%=readingHistory[i].book.bookID%>" style="text-decoration: none; color: white"></a>
                                           </div>
                                         </div>
                                       </div>
                                     </div>
                                   </div>
                                   <div class="col-4" style="margin-left: 65px; margin-top: 12px">
-                                    <a href="/book/<%=readingHistory[i].bookID%>" class="hover-effect" style="text-decoration: none;font-weight:bolder;font-size:10px; color:black">
-                                      <span class="hover-effect"><%= bookHashMap[readingHistory[i].bookID].title %></span>
+                                    <a href="/book/<%=readingHistory[i].book.bookID%>" class="hover-effect" style="text-decoration: none;font-weight:bolder;font-size:10px; color:black">
+                                      <span class="hover-effect"><%= bookHashMap[readingHistory[i].book.bookID].title %></span>
                                     </a>  
                                   </div>                                
                                 </div>

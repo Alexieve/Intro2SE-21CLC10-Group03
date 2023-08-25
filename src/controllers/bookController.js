@@ -178,22 +178,49 @@ const getNewestBooks = async () => {
 
 const getReadingHistory = async (UserID) => {
   try {
-    const readingHistory = await ReadingHistory.find({
-      userID: UserID,
-      status: { $ne: 3 },
-      isPending: { $ne: 1 }
-    })
-    .sort({_id: -1})
-    .limit(4)
-    .exec();
+    const readingHistory = await ReadingHistory.aggregate([
+      {
+        $match: {
+          userID: UserID
+        }
+      },
+      {
+        $lookup: {
+          from: "books", // Replace with the actual collection name for books
+          localField: "bookID",
+          foreignField: "bookID",
+          as: "book"
+        }
+      },
+      {
+        $unwind: "$book"
+      },
+      {
+        $match: {
+          "book.status": { $ne: 3 }, // Filter out books with status equal to 3
+        }
+      },
+      {
+        $sort: {
+          _id: -1 // Sorting by _id in descending order
+        }
+      },
+      {
+        $limit: 4
+      },
+      {
+        $project: {
+          _id: 0,
+          book: 1 // Project the entire "book" object
+        }
+      }
+    ]).exec();
     return readingHistory;
   } catch (err) {
     console.error("Error fetching reading history:", err);
     throw new Error("Error fetching reading history");
   }
 };
-
-
 
 const getFinishedBooks = async() => {
   try {
