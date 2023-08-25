@@ -50,7 +50,7 @@ const getMostRatingBooks = async () => {
         $sort: { averageScore: -1 } // Sort by averageScore in descending order
       },
       {
-        $limit: 3
+        $limit: 4
       },
       {
         $project: {
@@ -100,7 +100,7 @@ const getMostFollowedBooks = async () => {
         }
       },
       {
-        $limit: 3 // Limit the results to the top three books
+        $limit: 4 // Limit the results to the top three books
       },
       {
         $project: {
@@ -166,7 +166,7 @@ const getNewestBooks = async () => {
   try {
     const newestBooks = await Book.find({ status: { $ne: 3 }, isPending: { $ne: 1 } })
       .sort({ publishDate: -1 })
-      .limit(4)
+      .limit(8)
       .exec();
     return newestBooks;
   } catch (err) {
@@ -184,7 +184,7 @@ const getReadingHistory = async (UserID) => {
       isPending: { $ne: 1 }
     })
     .sort({_id: -1})
-    .limit(3)
+    .limit(4)
     .exec();
     return readingHistory;
   } catch (err) {
@@ -207,7 +207,7 @@ const getFinishedBooks = async() => {
 
 const getBooksAndReadingHistory = async (req, res) => {
   try {
-    const mostViewBooks = await getMostViewBooks(12); // Fetch most viewed books
+    const mostViewBooks = await getMostViewBooks(24); // Fetch most viewed books
     const newestBooks = await getNewestBooks();
     const mostFollowedBooks = await getMostFollowedBooks();
     const newestChapter = await getNewestChapters();
