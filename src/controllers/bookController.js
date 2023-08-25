@@ -50,7 +50,7 @@ const getMostRatingBooks = async () => {
         $sort: { averageScore: -1 } // Sort by averageScore in descending order
       },
       {
-        $limit: 3
+        $limit: 4
       },
       {
         $project: {
@@ -100,7 +100,7 @@ const getMostFollowedBooks = async () => {
         }
       },
       {
-        $limit: 3 // Limit the results to the top three books
+        $limit: 4 // Limit the results to the top three books
       },
       {
         $project: {
@@ -166,7 +166,7 @@ const getNewestBooks = async () => {
   try {
     const newestBooks = await Book.find({ status: { $ne: 3 }, isPending: { $ne: 1 } })
       .sort({ publishDate: -1 })
-      .limit(4)
+      .limit(8)
       .exec();
     return newestBooks;
   } catch (err) {
@@ -178,22 +178,49 @@ const getNewestBooks = async () => {
 
 const getReadingHistory = async (UserID) => {
   try {
-    const readingHistory = await ReadingHistory.find({
-      userID: UserID,
-      status: { $ne: 3 },
-      isPending: { $ne: 1 }
-    })
-    .sort({_id: -1})
-    .limit(3)
-    .exec();
+    const readingHistory = await ReadingHistory.aggregate([
+      {
+        $match: {
+          userID: UserID
+        }
+      },
+      {
+        $lookup: {
+          from: "books", // Replace with the actual collection name for books
+          localField: "bookID",
+          foreignField: "bookID",
+          as: "book"
+        }
+      },
+      {
+        $unwind: "$book"
+      },
+      {
+        $match: {
+          "book.status": { $ne: 3 }, // Filter out books with status equal to 3
+        }
+      },
+      {
+        $sort: {
+          _id: -1 // Sorting by _id in descending order
+        }
+      },
+      {
+        $limit: 4
+      },
+      {
+        $project: {
+          _id: 0,
+          book: 1 // Project the entire "book" object
+        }
+      }
+    ]).exec();
     return readingHistory;
   } catch (err) {
     console.error("Error fetching reading history:", err);
     throw new Error("Error fetching reading history");
   }
 };
-
-
 
 const getFinishedBooks = async() => {
   try {
@@ -207,7 +234,7 @@ const getFinishedBooks = async() => {
 
 const getBooksAndReadingHistory = async (req, res) => {
   try {
-    const mostViewBooks = await getMostViewBooks(12); // Fetch most viewed books
+    const mostViewBooks = await getMostViewBooks(24); // Fetch most viewed books
     const newestBooks = await getNewestBooks();
     const mostFollowedBooks = await getMostFollowedBooks();
     const newestChapter = await getNewestChapters();
