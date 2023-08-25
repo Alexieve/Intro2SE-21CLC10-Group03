@@ -92,10 +92,11 @@
             <%= Comment.username %>
           </td>
           <td>
+            <span class="hover-content" title="<%= Comment.bookTitle %>">
               <% const maxTitleLengthh = 30; %>
               <% const displayedTitlee = Comment.bookTitle && Comment.bookTitle.length > maxTitleLengthh ? Comment.bookTitle.slice(0, maxTitleLengthh) + "..." : Comment.bookTitle; %>
               <%= displayedTitlee %>
-  
+            </span>
           </td>
           <td>
             <span class="hover-content" title="<%= Comment.contentfile %>">

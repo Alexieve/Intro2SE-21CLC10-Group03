@@ -90,13 +90,16 @@
             <td><input type="checkbox" data-bookID="<%= Book.bookID %>" data-isPending="<%= Book.isPending %>" data-status="<%= Book.status %>" ></td>
             <td><%= count %> </td>
             <td>
+              <span class="hover-content" title="<%= Book.title %>">
               <% const maxTitleLength = 30; %>
               <% const displayedTitle = Book.title.length > maxTitleLength ? Book.title.slice(0, maxTitleLength) + "..." : Book.title; %>
               <%= displayedTitle %>
+              </span>
             </td>
             <td><%= Book.authorName %></td>
             <!-- <td class="text-center"><%= Book.rating %></td> -->
             <td>
+              <span class="hover-content" title="<%= Book.Genres.join(', ') %>">
               <% const maxGenresLength = 16; %>
               <% const displayedGenres = Book.Genres.join(", "); %>
               <% if (displayedGenres.length > maxGenresLength) { %>
@@ -104,6 +107,7 @@
               <% } else { %>
                 <%= displayedGenres %>
               <% } %>
+              </span>
             </td>
             <!-- <td><%= Book.summary %></td> -->
             <td><%= Book.totalview %></td>
