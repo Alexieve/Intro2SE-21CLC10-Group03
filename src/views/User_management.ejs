@@ -267,12 +267,13 @@
         userID: checkbox.getAttribute("data-userID"),
         status: checkbox.getAttribute("data-status"),
         permission: checkbox.getAttribute("data-permission"),
+        temp: checkbox.getAttribute("data-temp"),
       });
     });
     
     // Gửi dữ liệu lên server bằng AJAX
     const allArePending = selectedAccountIDs.length > 0 
-                          && selectedAccountIDs.every(Account => Account.permission == "0" );
+                          && selectedAccountIDs.every(Account => Account.permission == "0" || (Account.permission == "1" && Account.temp =="2")  );
 
     if (allArePending) {
       try {
