@@ -121,6 +121,9 @@ module.exports.reading = async (req, res) => {
       curUser.permission = 3
     }
 
+    countbookmark = await BookMark.find({bookID: bookID}).countDocuments({})
+    await Book.findOneAndUpdate({bookID: bookID}, {$inc: {totalview: 1}})
+
     res.render('reading', {curVol, prevChap, curChap, nextChap, wordCount, isPrevChap, isNextChap})
   } catch (err) {
     console.error(err);
@@ -241,8 +244,8 @@ module.exports.bookInfo_get = async (req, res) => {
       curUser.avatarURL = avatarContainer.getBlobClient(curUser.avatarURL).url
 
 
-      countbookmark = await BookMark.find({bookID: bookID}).countDocuments({})
-      await Book.updateOne({bookID: bookID}, {totalview: book.totalview + 1})
+      // countbookmark = await BookMark.find({bookID: bookID}).countDocuments({})
+      // await Book.updateOne({bookID: bookID}, {totalview: book.totalview + 1})
 
       
       let ratingCount = 0;
