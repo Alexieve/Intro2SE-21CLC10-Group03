@@ -244,7 +244,7 @@ module.exports.bookInfo_get = async (req, res) => {
       curUser.avatarURL = avatarContainer.getBlobClient(curUser.avatarURL).url
 
 
-      // countbookmark = await BookMark.find({bookID: bookID}).countDocuments({})
+      countbookmark = await BookMark.find({bookID: bookID}).countDocuments({})
       // await Book.updateOne({bookID: bookID}, {totalview: book.totalview + 1})
 
       
