@@ -7,7 +7,8 @@ const getBooksByTitle = async (titleSearch) => {
   try {
     let query = { status: { $ne: 3 }, isPending: { $ne: 1 } };
     if (titleSearch && titleSearch.trim() !== "") {
-      query.title = { $regex: titleSearch, $options: "i" };
+      const escapedTitleSearch = titleSearch.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');                 // Escape question mark
+    query.title = { $regex: escapedTitleSearch, $options: "i" };      query.title = { $regex: escapedTitleSearch, $options: "i" };
     }
     const books = await Book.find(query).exec();
     return books;
