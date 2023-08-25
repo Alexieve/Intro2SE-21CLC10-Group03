@@ -24,10 +24,10 @@
                 </div>
                 <div class ="row">
                     <div class = "col-9">
-                        <div class = "container" style ="margin-bottom:10px">
+                        <div class = "container" style ="margin-bottom:100px">
                             <div id="carousel1" class="carousel slide" data-bs-ride="carousel">
                                 <!-- Indicators/dots -->
-                                <ol class="carousel-indicators">
+                                <ol class="carousel-indicators" style = "margin-bottom: 30px;">
                                   <% for (let i = 0; i < 3; i++) { %>
                                     <button type="button" data-bs-target="#carousel1" data-bs-slide-to="<%= i %>" class="<%= i === 0 ? 'active' : '' %>" style="background-color: black"></button>
                                   <% } %>
