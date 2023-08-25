@@ -308,6 +308,7 @@ exports.notification = async (req, res) => {
         const bookData = await Book.findOne({ bookID });
         const bookName = bookData ? bookData.title : "Book Name Not Found";
         const bookIMG = bookData ? bookData.coverImg : "Book Name Not Found";
+        if(bookData){
         if(bookData.status!=3){
         const genreIDs = await bookgenres.findOne({ bookID });
         let genreName;
@@ -329,7 +330,7 @@ exports.notification = async (req, res) => {
           genreName,
         });
       }
-      }
+      }}
     
     res.render("notification", { notifyData, notifyData2,notifyData3,notifyData5,notifyData4 });
   } catch (err) {
