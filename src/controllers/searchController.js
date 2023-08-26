@@ -21,7 +21,8 @@ const getBooksByAuthor = async (authorSearch) => {
   try {
     let query = { status: { $ne: 3 }, isPending: { $ne: 1 } };
     if (authorSearch && authorSearch.trim() !== "") {
-      query.authorName = { $regex: authorSearch, $options: "i" };
+      const escapedTitleSearch = authorSearch.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');                 // Escape question mark
+      query.authorName = { $regex: escapedTitleSearch, $options: "i" };
     }
     const books = await Book.find(query).exec();
     return books;
